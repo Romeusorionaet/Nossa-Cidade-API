@@ -10,7 +10,7 @@ import {
   text,
 } from 'drizzle-orm/pg-core';
 import { createId } from '@paralleldrive/cuid2';
-import { statusEnum } from './enums';
+import { roleEnum, statusEnum } from './enums';
 
 export const users = pgTable('users', {
   id: text('id')
@@ -21,7 +21,7 @@ export const users = pgTable('users', {
   email: varchar('email', { length: 255 }).notNull().unique(),
   passwordHash: varchar('password_hash', { length: 255 }),
   avatar: varchar('avatar', { length: 500 }),
-  role: varchar('role', { length: 50 }).default('novato'),
+  role: roleEnum('role').default('BEGINNER'),
   emailVerified: boolean('email_verified').default(false),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
@@ -48,7 +48,7 @@ export const businessPoints = pgTable(
       srid: 4326,
     }).notNull(),
     menu: jsonb('menu').notNull(),
-    status: statusEnum('status').default('ativo'),
+    status: statusEnum('status').default('ACTIVE'),
     openingHours: jsonb('opening_hours'),
     images: jsonb('images'),
     website: varchar('website', { length: 500 }),
