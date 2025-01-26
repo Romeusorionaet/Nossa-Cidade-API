@@ -9,8 +9,12 @@ import {
   index,
   text,
 } from 'drizzle-orm/pg-core';
+import {
+  businessPointStatusEnum,
+  staffStatusEnum,
+  usersRoleEnum,
+} from './enums';
 import { createId } from '@paralleldrive/cuid2';
-import { roleEnum, statusEnum } from './enums';
 
 export const users = pgTable('users', {
   id: text('id')
@@ -21,7 +25,6 @@ export const users = pgTable('users', {
   email: varchar('email', { length: 255 }).notNull().unique(),
   passwordHash: varchar('password_hash', { length: 255 }),
   avatar: varchar('avatar', { length: 500 }),
-  role: roleEnum('role').default('BEGINNER'),
   emailVerified: boolean('email_verified').default(false),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
@@ -29,6 +32,17 @@ export const users = pgTable('users', {
   updatedAt: timestamp('updated_at', { withTimezone: true })
     .notNull()
     .defaultNow(),
+});
+
+export const staff = pgTable('staff', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  role: usersRoleEnum('role').notNull(),
+  status: staffStatusEnum('status').default('ACTIVE'),
+  userId: text('user_id')
+    .notNull()
+    .references(() => users.id),
 });
 
 export const businessPoints = pgTable(
@@ -48,7 +62,7 @@ export const businessPoints = pgTable(
       srid: 4326,
     }).notNull(),
     menu: jsonb('menu').notNull(),
-    status: statusEnum('status').default('ACTIVE'),
+    status: businessPointStatusEnum('status').default('ACTIVE'),
     openingHours: jsonb('opening_hours'),
     images: jsonb('images'),
     website: varchar('website', { length: 500 }),
