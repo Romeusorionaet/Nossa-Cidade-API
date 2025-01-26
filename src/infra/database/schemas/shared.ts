@@ -1,63 +1,63 @@
 import { pgTable, text, varchar } from 'drizzle-orm/pg-core';
 import { createId } from '@paralleldrive/cuid2';
 
-export const pets = pgTable('pets', {
+export const sharedPets = pgTable('pets', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
-export const planning = pgTable('planning', {
+export const sharedPlanning = pgTable('planning', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
-export const accessibility = pgTable('accessibility', {
+export const sharedAccessibility = pgTable('accessibility', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
-export const parking = pgTable('parking', {
+export const sharedParking = pgTable('parking', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
-export const payments = pgTable('payments', {
+export const sharedPayments = pgTable('payments', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
-export const audience = pgTable('audience', {
+export const sharedAudience = pgTable('audience', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
-export const amenities = pgTable('amenities', {
+export const sharedAmenities = pgTable('amenities', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
-export const menu = pgTable('menu', {
+export const sharedMenu = pgTable('menu', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
-export const serviceOptions = pgTable('service_options', {
+export const sharedServiceOptions = pgTable('service_options', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),

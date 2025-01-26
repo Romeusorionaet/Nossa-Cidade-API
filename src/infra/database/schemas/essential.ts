@@ -54,16 +54,15 @@ export const businessPoints = pgTable(
     name: varchar('name', { length: 255 }).notNull(),
     description: varchar('description', { length: 250 }),
     categoryId: text('category_id')
-      .references(() => categories.id)
+      .references(() => businessPointCategories.id)
       .notNull(),
     location: geometry('location', {
       type: 'point',
       mode: 'xy',
       srid: 4326,
     }).notNull(),
-    menu: jsonb('menu').notNull(),
     status: businessPointStatusEnum('status').default('ACTIVE'),
-    openingHours: jsonb('opening_hours'),
+    openingHours: jsonb('opening_hours').notNull(),
     images: jsonb('images'),
     website: varchar('website', { length: 500 }),
     tags: jsonb('tags'),
@@ -86,8 +85,15 @@ export const businessPoints = pgTable(
   ],
 );
 
-export const favorites = pgTable(
-  'favorites',
+export const businessPointCategories = pgTable('business_point_categories', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  name: varchar('name', { length: 100 }).notNull().unique(),
+});
+
+export const businessPointFavorites = pgTable(
+  'business_point_favorites',
   {
     userId: text('user_id')
       .notNull()
@@ -95,9 +101,6 @@ export const favorites = pgTable(
     businessPointId: text('business_point_id')
       .notNull()
       .references(() => businessPoints.id),
-    createdAt: timestamp('created_at', { withTimezone: true })
-      .notNull()
-      .defaultNow(),
   },
   (t) => [
     {
@@ -105,14 +108,3 @@ export const favorites = pgTable(
     },
   ],
 );
-
-export const categories = pgTable('categories', {
-  id: text('id')
-    .primaryKey()
-    .$defaultFn(() => createId()),
-  name: varchar('name', { length: 100 }).notNull().unique(),
-  description: varchar('description', { length: 255 }),
-  createdAt: timestamp('created_at', { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-});

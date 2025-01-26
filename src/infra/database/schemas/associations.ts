@@ -1,13 +1,13 @@
 import {
-  serviceOptions,
-  accessibility,
-  amenities,
-  payments,
-  audience,
-  planning,
-  parking,
-  menu,
-  pets,
+  sharedServiceOptions,
+  sharedAccessibility,
+  sharedAmenities,
+  sharedPayments,
+  sharedAudience,
+  sharedPlanning,
+  sharedParking,
+  sharedMenu,
+  sharedPets,
 } from './shared';
 import { pgTable, primaryKey, text } from 'drizzle-orm/pg-core';
 import { businessPoints } from './essential';
@@ -19,7 +19,7 @@ export const businessPointToPetsAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     petsId: text('pets_id')
-      .references(() => pets.id)
+      .references(() => sharedPets.id)
       .notNull(),
   },
   (t) => [
@@ -36,7 +36,7 @@ export const businessPointToPlanningAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     planningId: text('planning_id')
-      .references(() => planning.id)
+      .references(() => sharedPlanning.id)
       .notNull(),
   },
   (t) => [
@@ -53,7 +53,7 @@ export const businessPointToAccessibilityAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     accessibilityId: text('accessibility_id')
-      .references(() => accessibility.id)
+      .references(() => sharedAccessibility.id)
       .notNull(),
   },
   (t) => [
@@ -70,7 +70,7 @@ export const businessPointToParkingAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     parkingId: text('parking_id')
-      .references(() => parking.id)
+      .references(() => sharedParking.id)
       .notNull(),
   },
   (t) => [
@@ -87,7 +87,7 @@ export const businessPointToPaymentsAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     paymentsId: text('payments_id')
-      .references(() => payments.id)
+      .references(() => sharedPayments.id)
       .notNull(),
   },
   (t) => [
@@ -104,7 +104,7 @@ export const businessPointToAudienceAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     audienceId: text('audience_id')
-      .references(() => audience.id)
+      .references(() => sharedAudience.id)
       .notNull(),
   },
   (t) => [
@@ -121,7 +121,7 @@ export const businessPointToAmenitiesAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     amenitiesId: text('amenities_id')
-      .references(() => amenities.id)
+      .references(() => sharedAmenities.id)
       .notNull(),
   },
   (t) => [
@@ -138,7 +138,7 @@ export const businessPointToMenuAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     menuId: text('menu_id')
-      .references(() => menu.id)
+      .references(() => sharedMenu.id)
       .notNull(),
   },
   (t) => [
@@ -155,7 +155,7 @@ export const businessPointToServiceOptionAssociation = pgTable(
       .references(() => businessPoints.id)
       .notNull(),
     serviceOptionId: text('service_option_id')
-      .references(() => serviceOptions.id)
+      .references(() => sharedServiceOptions.id)
       .notNull(),
   },
   (t) => [
