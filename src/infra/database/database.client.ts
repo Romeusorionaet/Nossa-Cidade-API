@@ -1,7 +1,7 @@
-import * as schema from './schemas/schema';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { EnvService } from '../env/env.service';
 import { Injectable } from '@nestjs/common';
+import * as schema from './schemas/index';
 import * as postgres from 'postgres';
 
 @Injectable()
