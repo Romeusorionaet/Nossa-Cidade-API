@@ -1,0 +1,76 @@
+import { InvalidCredentialsError } from '../../errors/invalid-credentials-errors';
+import { HashComparer } from '../../../repositories/cryptography/hash-comparer';
+import { EmailNotVerifiedError } from '../../errors/email-not-verified-error';
+import { UsersRepository } from '../../../repositories/users-repository';
+import { StaffRepository } from '../../../repositories/staff-repository';
+import { Encrypt } from '../../../repositories/cryptography/encrypt';
+import { Either, left, right } from 'src/core/either';
+import { Injectable } from '@nestjs/common';
+
+interface AuthenticateUserUseCaseRequest {
+  email: string;
+  password: string;
+}
+
+type AuthenticateUserUseCaseResponse = Either<
+  InvalidCredentialsError | EmailNotVerifiedError,
+  {
+    accessToken: string;
+    refreshToken: string;
+  }
+>;
+
+@Injectable()
+export class AuthenticateUserUseCase {
+  constructor(
+    private usersRepository: UsersRepository,
+    private staffRepository: StaffRepository,
+    private hashComparer: HashComparer,
+    private encrypt: Encrypt,
+  ) {}
+
+  async execute({
+    email,
+    password,
+  }: AuthenticateUserUseCaseRequest): Promise<AuthenticateUserUseCaseResponse> {
+    const user = await this.usersRepository.findByEmail(email);
+
+    if (!user) {
+      return left(new InvalidCredentialsError());
+    }
+
+    const isPasswordValid = await this.hashComparer.compare(
+      password,
+      user.passwordHash,
+    );
+
+    if (!isPasswordValid) {
+      return left(new InvalidCredentialsError());
+    }
+
+    if (!user.emailVerified) {
+      return left(new EmailNotVerifiedError());
+    }
+
+    const staff = await this.staffRepository.findByUserId(user.id.toString());
+
+    const accessToken = await this.encrypt.encryptAccessToken({
+      sub: user.id.toString(),
+      staffId: staff?.id.toString() || '',
+      role: staff?.role || '',
+      publicId: user.publicId.toString(),
+    });
+
+    const refreshToken = await this.encrypt.encryptRefreshToken({
+      sub: user.id.toString(),
+      staffId: staff?.id.toString() || '',
+      role: staff?.role || '',
+      publicId: user.publicId.toString(),
+    });
+
+    return right({
+      accessToken,
+      refreshToken,
+    });
+  }
+}
