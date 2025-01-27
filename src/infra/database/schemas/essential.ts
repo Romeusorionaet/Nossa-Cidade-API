@@ -15,6 +15,7 @@ import {
   usersRoleEnum,
 } from './enums';
 import { createId } from '@paralleldrive/cuid2';
+import { InferSelectModel } from 'drizzle-orm';
 
 export const users = pgTable('users', {
   id: text('id')
@@ -33,6 +34,7 @@ export const users = pgTable('users', {
     .notNull()
     .defaultNow(),
 });
+export type UsersInsertType = InferSelectModel<typeof users>;
 
 export const staff = pgTable('staff', {
   id: text('id')
@@ -44,6 +46,7 @@ export const staff = pgTable('staff', {
     .notNull()
     .references(() => users.id),
 });
+export type StaffInsertType = InferSelectModel<typeof staff>;
 
 export const businessPoints = pgTable(
   'business_points',
@@ -84,6 +87,7 @@ export const businessPoints = pgTable(
     },
   ],
 );
+export type BusinessPointInsertType = InferSelectModel<typeof businessPoints>;
 
 export const businessPointCategories = pgTable('business_point_categories', {
   id: text('id')
@@ -91,6 +95,9 @@ export const businessPointCategories = pgTable('business_point_categories', {
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
+export type BusinessPointCategoriesInsertType = InferSelectModel<
+  typeof businessPointCategories
+>;
 
 export const businessPointFavorites = pgTable(
   'business_point_favorites',
@@ -108,3 +115,6 @@ export const businessPointFavorites = pgTable(
     },
   ],
 );
+export type BusinessPointFavorites = InferSelectModel<
+  typeof businessPointFavorites
+>;
