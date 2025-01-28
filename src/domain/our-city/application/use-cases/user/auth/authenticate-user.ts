@@ -1,9 +1,9 @@
+import { HashComparerRepository } from '../../../repositories/cryptography/hash-comparer-repository';
+import { EncryptRepository } from '../../../repositories/cryptography/encrypt-repository';
 import { InvalidCredentialsError } from '../../errors/invalid-credentials-errors';
-import { HashComparer } from '../../../repositories/cryptography/hash-comparer';
 import { EmailNotVerifiedError } from '../../errors/email-not-verified-error';
 import { UsersRepository } from '../../../repositories/users-repository';
 import { StaffRepository } from '../../../repositories/staff-repository';
-import { Encrypt } from '../../../repositories/cryptography/encrypt';
 import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 
@@ -25,8 +25,8 @@ export class AuthenticateUserUseCase {
   constructor(
     private usersRepository: UsersRepository,
     private staffRepository: StaffRepository,
-    private hashComparer: HashComparer,
-    private encrypt: Encrypt,
+    private hashComparer: HashComparerRepository,
+    private encrypt: EncryptRepository,
   ) {}
 
   async execute({

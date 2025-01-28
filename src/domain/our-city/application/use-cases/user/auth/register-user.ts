@@ -1,4 +1,4 @@
-import { HashGenerator } from '../../../repositories/cryptography/hash-generator';
+import { HashGeneratorRepository } from '../../../repositories/cryptography/hash-generator-repository';
 import { UserAlreadyExistsError } from '../../errors/user-already-exists-error';
 import { UsersRepository } from '../../../repositories/users-repository';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
@@ -24,7 +24,7 @@ type RegisterUserUseCaseResponse = Either<
 export class RegisterUserUseCase {
   constructor(
     private usersRepository: UsersRepository,
-    private hashGenerator: HashGenerator,
+    private hashGenerator: HashGeneratorRepository,
   ) {}
 
   async execute({

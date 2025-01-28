@@ -1,5 +1,5 @@
+import { EncryptRepository } from '../../../repositories/cryptography/encrypt-repository';
 import { StaffRepository } from '../../../repositories/staff-repository';
-import { Encrypt } from '../../../repositories/cryptography/encrypt';
 import { InvalidTokenError } from '../../errors/invalid-token-error';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
@@ -20,7 +20,7 @@ type RefreshTokenUseCaseResponse = Either<
 @Injectable()
 export class RefreshTokenUseCase {
   constructor(
-    private encrypt: Encrypt,
+    private encrypt: EncryptRepository,
     private staffRepository: StaffRepository,
   ) {}
 
