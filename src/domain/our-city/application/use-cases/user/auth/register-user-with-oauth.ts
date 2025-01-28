@@ -8,7 +8,6 @@ interface RegisterUserWithOAuthUseCaseRequest {
   email: string;
   username: string;
   avatar: string;
-  emailVerified: boolean;
 }
 
 type RegisterUserWithOAuthUseCaseResponse = {
@@ -23,7 +22,6 @@ export class RegisterUserWithOAuthUseCase {
     email,
     username,
     avatar,
-    emailVerified,
   }: RegisterUserWithOAuthUseCaseRequest): Promise<RegisterUserWithOAuthUseCaseResponse> {
     const user = await this.usersRepository.findByEmail(email);
 
@@ -33,21 +31,13 @@ export class RegisterUserWithOAuthUseCase {
         username,
         passwordHash: await hash('123456', 8), // TODO for while
         avatar,
-        emailVerified,
+        emailVerified: true,
         publicId: new UniqueEntityID(),
       });
 
       await this.usersRepository.create(user);
 
       return { user };
-    }
-
-    if (!user.emailVerified) {
-      const userUpdated = user.update({
-        emailVerified: true,
-      });
-
-      await this.usersRepository.update(userUpdated);
     }
 
     return { user };
