@@ -20,7 +20,7 @@ type RefreshTokenUseCaseResponse = Either<
 @Injectable()
 export class RefreshTokenUseCase {
   constructor(
-    private encrypt: EncryptRepository,
+    private encryptRepository: EncryptRepository,
     private staffRepository: StaffRepository,
   ) {}
 
@@ -30,17 +30,19 @@ export class RefreshTokenUseCase {
   }: RefreshTokenUseCaseRequest): Promise<RefreshTokenUseCaseResponse> {
     const staff = await this.staffRepository.findByUserId(userId);
 
-    const accessToken = await this.encrypt.encryptAccessToken({
+    const accessToken = await this.encryptRepository.encryptAccessToken({
       sub: userId,
       staffId: staff?.id.toString() || '',
       role: staff?.role || '',
+      status: staff?.status || '',
       publicId,
     });
 
-    const refreshToken = await this.encrypt.encryptRefreshToken({
+    const refreshToken = await this.encryptRepository.encryptRefreshToken({
       sub: userId,
       staffId: staff?.id.toString() || '',
       role: staff?.role || '',
+      status: staff?.status || '',
       publicId,
     });
 
