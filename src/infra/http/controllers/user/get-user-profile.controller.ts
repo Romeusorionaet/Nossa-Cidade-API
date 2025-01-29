@@ -1,8 +1,9 @@
-import { BadRequestException, Controller, HttpCode, Get } from '@nestjs/common';
-import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/current-user-decorator';
+import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error';
+import { BadRequestException, Controller, HttpCode, Get } from '@nestjs/common';
 import { UserPayload } from 'src/infra/http/middlewares/auth/jwt.strategy';
+import { UserProfilePresenter } from '../../presenters/user-profile-presenter';
 
 @Controller('/auth/profile')
 export class GetUserProfileController {
@@ -28,6 +29,8 @@ export class GetUserProfileController {
             throw new BadRequestException(err.message);
         }
       }
+
+      return UserProfilePresenter.toHTTP(result.value.userProfile);
     } catch (err) {
       throw new BadRequestException(err.message);
     }

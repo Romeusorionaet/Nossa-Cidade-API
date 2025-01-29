@@ -13,9 +13,8 @@ export class JwtEncrypt implements EncryptRepository {
       payload.permissions = ['read', 'write', 'delete', 'restricted_read'];
     }
 
-    const accessToken = this.jwtService.signAsync(payload, {
+    const accessToken = await this.jwtService.signAsync(payload, {
       expiresIn: '60m',
-      algorithm: 'HS512',
     });
 
     return accessToken;
@@ -24,7 +23,6 @@ export class JwtEncrypt implements EncryptRepository {
   async encryptRefreshToken(payload: Record<string, unknown>): Promise<string> {
     const refreshToken = this.jwtService.signAsync(payload, {
       expiresIn: '120m',
-      algorithm: 'HS512',
     });
 
     return refreshToken;

@@ -1,6 +1,5 @@
 import { HttpModule } from './http/http.module';
 import { ConfigModule } from '@nestjs/config';
-import { EnvModule } from './env/env.module';
 import { Module } from '@nestjs/common';
 import { envSchema } from './env/env';
 
@@ -11,7 +10,6 @@ import { envSchema } from './env/env';
       isGlobal: true,
     }),
     HttpModule,
-    EnvModule,
   ],
 })
 export class AppModule {}

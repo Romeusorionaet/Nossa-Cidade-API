@@ -7,6 +7,9 @@ import { z } from 'zod';
 const tokenPayloadSchema = z.object({
   sub: z.string().uuid('Não autorizado'),
   publicId: z.string().uuid('Não autorizado'),
+  staffId: z.string().optional(),
+  role: z.string().optional(),
+  status: z.string().optional(),
 });
 
 export type UserPayload = z.infer<typeof tokenPayloadSchema>;
@@ -19,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: Buffer.from(publicKey, 'base64'),
-      algorithms: ['HS512'],
+      algorithms: ['RS256'],
     });
   }
 

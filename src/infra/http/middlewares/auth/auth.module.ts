@@ -19,7 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
         const publicKey = env.get('JWT_PUBLIC_KEY');
 
         return {
-          signOptions: { algorithm: 'HS512' },
+          signOptions: { algorithm: 'RS256' },
           privateKey: Buffer.from(privateKey, 'base64'),
           publicKey: Buffer.from(publicKey, 'base64'),
         };

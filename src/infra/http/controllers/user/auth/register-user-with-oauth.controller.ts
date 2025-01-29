@@ -6,13 +6,13 @@ import {
   Body,
   Res,
 } from '@nestjs/common';
-import { FastifyReply } from 'fastify';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cases/errors/invalid-credentials-errors';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { ZodValidationPipe } from 'src/infra/http/pipes/zod-validation-pipe';
 import { Public } from 'src/infra/http/middlewares/auth/public';
 import { EnvService } from 'src/infra/env/env.service';
+import { FastifyReply } from 'fastify';
 import { z } from 'zod';
 
 export const profileFromOAuthSchema = z.object({
@@ -35,7 +35,7 @@ export class RegisterWidthOAuthController {
 
   @Public()
   @Post()
-  @HttpCode(200)
+  @HttpCode(302)
   async handle(
     @Body(bodyValidationPipe) body: ProfileFromOAuthSchema,
     @Res() res: FastifyReply,
@@ -71,7 +71,7 @@ export class RegisterWidthOAuthController {
       const result = resultRefreshToken.value;
       const redirectUrl = `${this.envService.get('NOSSA_CIDADE_HOST')}?access_token=${result.accessToken}&refresh_token=${result.refreshToken}`;
 
-      return res.status(302).redirect(redirectUrl);
+      return res.redirect(redirectUrl);
     } catch (err) {
       throw new BadRequestException(err.message);
     }
