@@ -16,3 +16,4 @@ export const usersRoleEnum = pgEnum('users_role', [
   'MERCHANT',
   'ADMIN',
 ]);
+export type UserRoleEnum = keyof typeof usersRoleEnum;

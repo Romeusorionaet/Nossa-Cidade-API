@@ -2,8 +2,8 @@ import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases
 import { CurrentUser } from 'src/infra/http/middlewares/auth/current-user-decorator';
 import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error';
 import { BadRequestException, Controller, HttpCode, Get } from '@nestjs/common';
-import { UserPayload } from 'src/infra/http/middlewares/auth/jwt.strategy';
 import { UserProfilePresenter } from '../../presenters/user-profile-presenter';
+import { UserPayload } from 'src/infra/http/middlewares/auth/jwt.strategy';
 
 @Controller('/auth/profile')
 export class GetUserProfileController {

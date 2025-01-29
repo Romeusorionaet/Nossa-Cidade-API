@@ -1,4 +1,5 @@
 import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt-repository';
+import { UserRoleEnum } from '../database/schemas';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
@@ -10,7 +11,15 @@ export class JwtEncrypt implements EncryptRepository {
     if (payload.staffId === '') {
       payload.permissions = ['read'];
     } else {
-      payload.permissions = ['read', 'write', 'delete', 'restricted_read'];
+      const permissionsMap: Record<string, string[]> = {
+        ADMIN: ['read', 'write', 'delete', 'restricted_read'],
+        MERCHANT: ['read', 'write', 'restricted_read'],
+        MEMBER: ['read', 'write'],
+      };
+
+      const role = payload.role as UserRoleEnum;
+
+      payload.permissions = permissionsMap[role] || ['read'];
     }
 
     const accessToken = await this.jwtService.signAsync(payload, {
