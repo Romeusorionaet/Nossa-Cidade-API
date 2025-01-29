@@ -10,6 +10,7 @@ const tokenPayloadSchema = z.object({
   staffId: z.string().optional(),
   role: z.string().optional(),
   status: z.string().optional(),
+  permissions: z.string().array(),
 });
 
 export type UserPayload = z.infer<typeof tokenPayloadSchema>;

@@ -1,4 +1,5 @@
 import { EnvService } from '../../../env/env.service';
+import { PermissionGuard } from './permission-guard';
 import { EnvModule } from '../../../env/env.module';
 import { PassportModule } from '@nestjs/passport';
 import { JWTAuthGuard } from './jwt-auth-guard';
@@ -32,6 +33,10 @@ import { JwtModule } from '@nestjs/jwt';
     {
       provide: APP_GUARD,
       useClass: JWTAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
     },
   ],
 })
