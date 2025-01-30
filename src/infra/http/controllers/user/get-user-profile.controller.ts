@@ -3,7 +3,7 @@ import { CurrentUser } from 'src/infra/http/middlewares/auth/current-user-decora
 import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error';
 import { BadRequestException, Controller, HttpCode, Get } from '@nestjs/common';
 import { UserProfilePresenter } from '../../presenters/user-profile-presenter';
-import { UserPayload } from 'src/infra/http/middlewares/auth/jwt.strategy';
+import { UserPayload } from 'src/domain/authentication/token-schema';
 
 @Controller('/auth/profile')
 export class GetUserProfileController {

@@ -6,24 +6,16 @@ import {
   Body,
   Res,
 } from '@nestjs/common';
+import {
+  userProfileFromAuthValidationPipe,
+  UserProfileFromAuth,
+} from 'src/infra/http/schemas/user-profile-schema';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cases/errors/invalid-credentials-errors';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
-import { ZodValidationPipe } from 'src/infra/http/pipes/zod-validation-pipe';
 import { Public } from 'src/infra/http/middlewares/auth/public';
 import { EnvService } from 'src/infra/env/env.service';
 import { FastifyReply } from 'fastify';
-import { z } from 'zod';
-
-export const profileFromOAuthSchema = z.object({
-  email: z.string(),
-  username: z.string(),
-  picture: z.string(),
-});
-
-const bodyValidationPipe = new ZodValidationPipe(profileFromOAuthSchema);
-
-type ProfileFromOAuthSchema = z.infer<typeof profileFromOAuthSchema>;
 
 @Controller('/auth/register/oauth/callback')
 export class RegisterWidthOAuthController {
@@ -37,7 +29,7 @@ export class RegisterWidthOAuthController {
   @Post()
   @HttpCode(302)
   async handle(
-    @Body(bodyValidationPipe) body: ProfileFromOAuthSchema,
+    @Body(userProfileFromAuthValidationPipe) body: UserProfileFromAuth,
     @Res() res: FastifyReply,
   ) {
     try {
