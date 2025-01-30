@@ -17,8 +17,8 @@ import { Public } from 'src/infra/http/middlewares/auth/public';
 import { EnvService } from 'src/infra/env/env.service';
 import { FastifyReply } from 'fastify';
 
-@Controller('/auth/register/oauth/callback')
-export class RegisterWidthOAuthController {
+@Controller('/auth/authenticate/oauth/callback')
+export class AuthenticateWidthOAuthController {
   constructor(
     private registerUserWithOAuthUseCase: RegisterUserWithOAuthUseCase,
     private refreshTokenUseCase: RefreshTokenUseCase,

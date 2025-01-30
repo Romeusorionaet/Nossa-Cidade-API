@@ -1,5 +1,5 @@
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
-import { RegisterWidthOAuthController } from './controllers/user/auth/register-user-with-oauth.controller';
+import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
@@ -25,7 +25,7 @@ import { Module } from '@nestjs/common';
   ],
   controllers: [
     GetUserProfileController,
-    RegisterWidthOAuthController,
+    AuthenticateWidthOAuthController,
     RegisterUserController,
     ConfirmEmailController,
   ],
