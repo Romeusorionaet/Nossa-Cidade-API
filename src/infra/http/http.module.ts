@@ -1,9 +1,11 @@
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
+import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
 import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
+import { AuthenticateUserController } from './controllers/user/auth/authenticate-user.controller';
 import { GetUserProfileController } from './controllers/user/get-user-profile.controller';
 import { RegisterUserController } from './controllers/user/auth/register-user.controller';
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
@@ -28,6 +30,7 @@ import { Module } from '@nestjs/common';
     AuthenticateWidthOAuthController,
     RegisterUserController,
     ConfirmEmailController,
+    AuthenticateUserController,
   ],
   providers: [
     GetUserProfileUseCase,
@@ -36,6 +39,7 @@ import { Module } from '@nestjs/common';
     RegisterUserUseCase,
     ValidationEmail,
     ConfirmEmailUseCase,
+    AuthenticateUserUseCase,
   ],
 })
 export class HttpModule {}
