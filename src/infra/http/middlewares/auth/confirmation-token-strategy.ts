@@ -1,0 +1,25 @@
+import {
+  ConfirmationTokenPayload,
+  confirmationTokenSchema,
+} from 'src/domain/authentication/token-schema';
+import { EnvService } from 'src/infra/env/env.service';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class ConfirmationTokenStrategy extends PassportStrategy(Strategy) {
+  constructor(envService: EnvService) {
+    const publicKey = envService.get('JWT_PUBLIC_KEY');
+
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: Buffer.from(publicKey, 'base64'),
+      algorithms: ['RS256'],
+    });
+  }
+
+  async validate(payload: ConfirmationTokenPayload) {
+    return confirmationTokenSchema.parse(payload);
+  }
+}
