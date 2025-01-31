@@ -4,10 +4,10 @@ import {
   HttpCode,
   Post,
 } from '@nestjs/common';
+import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cases/errors/invalid-credentials-errors';
 import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/current-user-decorator';
 import { ConfirmationTokenPayload } from 'src/domain/authentication/token-schema';
-import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error';
 
 @Controller('/auth/confirm-email')
 export class ConfirmEmailController {
@@ -24,7 +24,7 @@ export class ConfirmEmailController {
       if (result.isLeft()) {
         const err = result.value;
         switch (err.constructor) {
-          case ResourceNotFoundError:
+          case InvalidCredentialsError:
             throw new BadRequestException(err.message);
 
           default:
