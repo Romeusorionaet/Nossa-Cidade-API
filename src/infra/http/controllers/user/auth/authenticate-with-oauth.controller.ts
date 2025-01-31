@@ -11,7 +11,6 @@ import {
   UserProfileFromAuth,
 } from 'src/infra/http/schemas/user-profile-schema';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
-import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cases/errors/invalid-credentials-errors';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { Public } from 'src/infra/http/middlewares/auth/public';
 import { EnvService } from 'src/infra/env/env.service';
@@ -48,17 +47,6 @@ export class AuthenticateWidthOAuthController {
         userId: user.id.toString(),
         publicId: user.publicId.toString(),
       });
-
-      if (resultRefreshToken.isLeft()) {
-        const err = resultRefreshToken.value;
-        switch (err.constructor) {
-          case InvalidCredentialsError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
-      }
 
       const result = resultRefreshToken.value;
       const redirectUrl = `${this.envService.get('NOSSA_CIDADE_HOST')}?access_token=${result.accessToken}&refresh_token=${result.refreshToken}`;

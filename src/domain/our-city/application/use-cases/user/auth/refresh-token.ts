@@ -1,6 +1,5 @@
 import { EncryptRepository } from '../../../repositories/cryptography/encrypt-repository';
 import { StaffRepository } from '../../../repositories/staff-repository';
-import { InvalidTokenError } from '../../errors/invalid-token-error';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 
@@ -10,7 +9,7 @@ interface RefreshTokenUseCaseRequest {
 }
 
 type RefreshTokenUseCaseResponse = Either<
-  InvalidTokenError,
+  null,
   {
     accessToken: string;
     refreshToken: string;
