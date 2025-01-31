@@ -11,7 +11,7 @@ import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error'
 
 @Controller('/auth/confirm-email')
 export class ConfirmEmailController {
-  constructor(private ConfirmEmailUseCase: ConfirmEmailUseCase) {}
+  constructor(private confirmEmailUseCase: ConfirmEmailUseCase) {}
 
   @Post()
   @HttpCode(200)
@@ -19,7 +19,7 @@ export class ConfirmEmailController {
     try {
       const { email } = user;
 
-      const result = await this.ConfirmEmailUseCase.execute({ email });
+      const result = await this.confirmEmailUseCase.execute({ email });
 
       if (result.isLeft()) {
         const err = result.value;
