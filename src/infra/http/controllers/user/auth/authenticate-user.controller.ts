@@ -48,7 +48,7 @@ export class AuthenticateUserController {
         accessToken: result.value.accessToken,
         refreshToken: result.value.refreshToken,
       };
-    } catch (err) {
+    } catch (err: any) {
       throw new BadRequestException(err.message);
     }
   }

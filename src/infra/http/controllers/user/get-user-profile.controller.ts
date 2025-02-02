@@ -39,7 +39,7 @@ export class GetUserProfileController {
       }
 
       return UserProfilePresenter.toHTTP(result.value.userProfile);
-    } catch (err) {
+    } catch (err: any) {
       throw new BadRequestException(err.message);
     }
   }

@@ -36,7 +36,7 @@ export class ConfirmEmailController {
       }
 
       return { message: 'Email confirmado!' };
-    } catch (err) {
+    } catch (err: any) {
       throw new BadRequestException(err.message);
     }
   }

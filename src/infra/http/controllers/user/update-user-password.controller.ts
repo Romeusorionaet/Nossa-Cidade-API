@@ -44,7 +44,7 @@ export class UpdateUserPasswordController {
       }
 
       return { message: 'Senha atualizada.' };
-    } catch (err) {
+    } catch (err: any) {
       throw new BadRequestException(err.message);
     }
   }

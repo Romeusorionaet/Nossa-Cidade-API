@@ -52,7 +52,7 @@ export class AuthenticateWidthOAuthController {
       const redirectUrl = `${this.envService.get('NOSSA_CIDADE_HOST')}?access_token=${result.accessToken}&refresh_token=${result.refreshToken}`;
 
       return res.redirect(redirectUrl);
-    } catch (err) {
+    } catch (err: any) {
       throw new BadRequestException(err.message);
     }
   }

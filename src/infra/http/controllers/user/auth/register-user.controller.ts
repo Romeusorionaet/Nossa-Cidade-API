@@ -52,7 +52,7 @@ export class RegisterUserController {
         message:
           'Enviamos um email de confirmação. Por favor, verifique sua caixa de entrada e siga as instruções para confirmar seu endereço de email.',
       };
-    } catch (err) {
+    } catch (err: any) {
       throw new BadRequestException(err.message);
     }
   }

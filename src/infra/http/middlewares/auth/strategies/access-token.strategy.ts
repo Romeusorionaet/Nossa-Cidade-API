@@ -25,7 +25,7 @@ export class AccessTokenStrategy extends PassportStrategy(
   async validate(payload: UserPayload) {
     try {
       return accessTokenSchema.parse(payload);
-    } catch (err) {
+    } catch (err: any) {
       throw new BadRequestException(err.err);
     }
   }

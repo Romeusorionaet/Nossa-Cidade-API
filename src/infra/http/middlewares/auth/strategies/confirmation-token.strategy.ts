@@ -25,7 +25,7 @@ export class ConfirmationTokenStrategy extends PassportStrategy(
   async validate(payload: ConfirmationTokenPayload) {
     try {
       return confirmationTokenSchema.parse(payload);
-    } catch (err) {
+    } catch (err: any) {
       throw new BadRequestException(err.err);
     }
   }
