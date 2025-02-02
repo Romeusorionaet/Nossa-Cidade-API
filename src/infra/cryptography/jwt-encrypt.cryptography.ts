@@ -36,4 +36,14 @@ export class JwtEncrypt implements EncryptRepository {
 
     return refreshToken;
   }
+
+  async encryptValidationEmailToken(
+    payload: Record<string, unknown>,
+  ): Promise<string> {
+    const token = await this.jwtService.signAsync(payload, {
+      expiresIn: '10m',
+    });
+
+    return token;
+  }
 }

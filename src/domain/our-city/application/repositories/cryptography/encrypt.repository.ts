@@ -5,4 +5,7 @@ export abstract class EncryptRepository {
   abstract encryptRefreshToken(
     payload: Record<string, unknown>,
   ): Promise<string>;
+  abstract encryptValidationEmailToken(
+    payload: Record<string, unknown>,
+  ): Promise<string>;
 }
