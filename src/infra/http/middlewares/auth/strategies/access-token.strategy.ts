@@ -2,10 +2,10 @@ import {
   accessTokenSchema,
   UserPayload,
 } from 'src/infra/http/schemas/access-token.schema';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { EnvService } from 'src/infra/env/env.service';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AccessTokenStrategy extends PassportStrategy(
@@ -23,6 +23,10 @@ export class AccessTokenStrategy extends PassportStrategy(
   }
 
   async validate(payload: UserPayload) {
-    return accessTokenSchema.parse(payload);
+    try {
+      return accessTokenSchema.parse(payload);
+    } catch (err) {
+      throw new BadRequestException(err.err);
+    }
   }
 }

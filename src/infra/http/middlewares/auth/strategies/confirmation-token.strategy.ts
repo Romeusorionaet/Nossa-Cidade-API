@@ -1,7 +1,7 @@
 import { EnvService } from 'src/infra/env/env.service';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { Injectable } from '@nestjs/common';
 import {
   ConfirmationTokenPayload,
   confirmationTokenSchema,
@@ -23,6 +23,10 @@ export class ConfirmationTokenStrategy extends PassportStrategy(
   }
 
   async validate(payload: ConfirmationTokenPayload) {
-    return confirmationTokenSchema.parse(payload);
+    try {
+      return confirmationTokenSchema.parse(payload);
+    } catch (err) {
+      throw new BadRequestException(err.err);
+    }
   }
 }
