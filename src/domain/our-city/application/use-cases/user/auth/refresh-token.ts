@@ -1,5 +1,5 @@
-import { EncryptRepository } from '../../../repositories/cryptography/encrypt-repository';
-import { StaffRepository } from '../../../repositories/staff-repository';
+import { EncryptRepository } from '../../../repositories/cryptography/encrypt.repository';
+import { StaffRepository } from '../../../repositories/staff.repository';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 

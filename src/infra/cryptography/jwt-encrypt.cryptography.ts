@@ -1,4 +1,4 @@
-import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt-repository';
+import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
 import { UserRoleEnum } from '../database/schemas';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';

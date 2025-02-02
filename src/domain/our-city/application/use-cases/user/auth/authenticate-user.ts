@@ -1,9 +1,9 @@
-import { HashComparerRepository } from '../../../repositories/cryptography/hash-comparer-repository';
-import { EncryptRepository } from '../../../repositories/cryptography/encrypt-repository';
+import { HashComparerRepository } from '../../../repositories/cryptography/hash-comparer.repository';
+import { EncryptRepository } from '../../../repositories/cryptography/encrypt.repository';
 import { InvalidCredentialsError } from '../../errors/invalid-credentials-errors';
 import { EmailNotVerifiedError } from '../../errors/email-not-verified-error';
-import { UsersRepository } from '../../../repositories/users-repository';
-import { StaffRepository } from '../../../repositories/staff-repository';
+import { UsersRepository } from '../../../repositories/users.repository';
+import { StaffRepository } from '../../../repositories/staff.repository';
 import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 

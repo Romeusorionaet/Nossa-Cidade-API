@@ -1,6 +1,6 @@
-import { UsersRepository } from 'src/domain/our-city/application/repositories/users-repository';
+import { UsersRepository } from 'src/domain/our-city/application/repositories/users.repository';
 import { User } from 'src/domain/our-city/enterprise/entities/user';
-import { DrizzleUserMapper } from '../mappers/drizzle-user-mapper';
+import { DrizzleUserMapper } from '../mappers/drizzle-user.mapper';
 import { users, UsersInsertType } from '../schemas';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';

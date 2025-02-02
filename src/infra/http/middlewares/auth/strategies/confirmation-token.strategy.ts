@@ -1,14 +1,17 @@
-import {
-  ConfirmationTokenPayload,
-  confirmationTokenSchema,
-} from 'src/domain/authentication/token-schema';
 import { EnvService } from 'src/infra/env/env.service';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable } from '@nestjs/common';
+import {
+  ConfirmationTokenPayload,
+  confirmationTokenSchema,
+} from 'src/infra/http/schemas/confirmation-token.schema';
 
 @Injectable()
-export class ConfirmationTokenStrategy extends PassportStrategy(Strategy) {
+export class ConfirmationTokenStrategy extends PassportStrategy(
+  Strategy,
+  'confirmation-token',
+) {
   constructor(envService: EnvService) {
     const publicKey = envService.get('JWT_PUBLIC_KEY');
 

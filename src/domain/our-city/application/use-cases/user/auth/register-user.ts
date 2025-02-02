@@ -1,6 +1,6 @@
-import { HashGeneratorRepository } from '../../../repositories/cryptography/hash-generator-repository';
+import { HashGeneratorRepository } from '../../../repositories/cryptography/hash-generator.repository';
 import { UserAlreadyExistsError } from '../../errors/user-already-exists-error';
-import { UsersRepository } from '../../../repositories/users-repository';
+import { UsersRepository } from '../../../repositories/users.repository';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { User } from 'src/domain/our-city/enterprise/entities/user';
 import { Either, left, right } from 'src/core/either';

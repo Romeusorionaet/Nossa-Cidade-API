@@ -8,9 +8,9 @@ import {
   sharedParking,
   sharedMenu,
   sharedPets,
-} from './shared';
+} from './shared.schema';
 import { pgTable, primaryKey, text } from 'drizzle-orm/pg-core';
-import { businessPoints } from './essential';
+import { businessPoints } from './essential.schema';
 
 export const businessPointToPetsAssociation = pgTable(
   'business_point_to_pets_association',

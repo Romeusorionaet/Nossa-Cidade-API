@@ -1,11 +1,9 @@
-import { ConfirmationTokenStrategy } from './confirmation-token-strategy';
-import { AccessTokenStrategy } from './access-token-strategy';
+import { ConfirmationTokenStrategy } from './strategies/confirmation-token.strategy';
+import { AccessTokenStrategy } from './strategies/access-token.strategy';
+import { PermissionGuard } from './guards/permission.guard';
 import { EnvService } from '../../../env/env.service';
-import { PermissionGuard } from './permission-guard';
 import { EnvModule } from '../../../env/env.module';
 import { PassportModule } from '@nestjs/passport';
-import { JWTAuthGuard } from './jwt-auth-guard';
-import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
@@ -29,17 +27,10 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   ],
   providers: [
-    AccessTokenStrategy,
     ConfirmationTokenStrategy,
+    AccessTokenStrategy,
+    PermissionGuard,
     EnvService,
-    {
-      provide: APP_GUARD,
-      useClass: JWTAuthGuard,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: PermissionGuard,
-    },
   ],
 })
 export class AuthModule {}

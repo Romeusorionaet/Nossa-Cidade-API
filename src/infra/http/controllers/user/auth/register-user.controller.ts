@@ -8,11 +8,11 @@ import {
 import {
   userProfileValidationPipe,
   UserProfile,
-} from 'src/infra/http/schemas/user-profile-schema';
-import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
+} from 'src/infra/http/schemas/user-profile.schema';
 import { UserAlreadyExistsError } from 'src/domain/our-city/application/use-cases/errors/user-already-exists-error';
-import { ValidationEmail } from 'src/infra/services/email/validation-email';
-import { Public } from 'src/infra/http/middlewares/auth/public';
+import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
+import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
+import { ValidationEmail } from 'src/infra/services/email/validation.email';
 
 @Controller('/auth/register')
 export class RegisterUserController {

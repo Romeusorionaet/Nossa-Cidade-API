@@ -1,5 +1,5 @@
-import { ZodValidationPipe } from '../pipes/zod-validation-pipe';
 import { z } from 'zod';
+import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
 
 const baseUserProfileSchema = z.object({
   email: z.string(),

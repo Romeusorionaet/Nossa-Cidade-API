@@ -1,4 +1,4 @@
-import { UsersRepository } from '../../../repositories/users-repository';
+import { UsersRepository } from '../../../repositories/users.repository';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { User } from 'src/domain/our-city/enterprise/entities/user';
 import { Injectable } from '@nestjs/common';

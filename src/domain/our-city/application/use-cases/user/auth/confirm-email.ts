@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from '../../errors/invalid-credentials-errors';
-import { UsersRepository } from '../../../repositories/users-repository';
+import { UsersRepository } from '../../../repositories/users.repository';
 import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 

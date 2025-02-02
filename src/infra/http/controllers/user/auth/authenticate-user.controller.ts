@@ -8,11 +8,11 @@ import {
 import {
   authenticateSchemaValidationPipe,
   AuthenticationRequest,
-} from 'src/infra/http/schemas/authenticate-schema';
-import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
+} from 'src/infra/http/schemas/authenticate.schema';
 import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cases/errors/invalid-credentials-errors';
 import { EmailNotVerifiedError } from 'src/domain/our-city/application/use-cases/errors/email-not-verified-error';
-import { Public } from 'src/infra/http/middlewares/auth/public';
+import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
+import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
 
 @Controller('/auth/authenticate')
 export class AuthenticateUserController {

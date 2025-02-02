@@ -13,7 +13,7 @@ import {
   businessPointStatusEnum,
   staffStatusEnum,
   usersRoleEnum,
-} from './enums';
+} from './enums.schema';
 import { createId } from '@paralleldrive/cuid2';
 import { InferSelectModel } from 'drizzle-orm';
 

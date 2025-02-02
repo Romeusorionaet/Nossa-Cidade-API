@@ -1,9 +1,9 @@
+import { HashGeneratorRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-generator.repository';
+import { HashComparerRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-comparer.repository';
+import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
+import { JwtEncrypt } from './jwt-encrypt.cryptography';
+import { BcryptHash } from './bcrypt-hash.cryptography';
 import { Module } from '@nestjs/common';
-import { JwtEncrypt } from './jwt-encrypt';
-import { BcryptHash } from './bcrypt-hash';
-import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt-repository';
-import { HashComparerRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-comparer-repository';
-import { HashGeneratorRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-generator-repository';
 
 @Module({
   providers: [

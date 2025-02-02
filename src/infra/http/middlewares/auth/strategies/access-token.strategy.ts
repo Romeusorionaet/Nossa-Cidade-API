@@ -1,14 +1,17 @@
 import {
-  tokenPayloadSchema,
+  accessTokenSchema,
   UserPayload,
-} from 'src/domain/authentication/token-schema';
-import { EnvService } from '../../../env/env.service';
+} from 'src/infra/http/schemas/access-token.schema';
+import { EnvService } from 'src/infra/env/env.service';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AccessTokenStrategy extends PassportStrategy(Strategy) {
+export class AccessTokenStrategy extends PassportStrategy(
+  Strategy,
+  'access-token',
+) {
   constructor(envService: EnvService) {
     const publicKey = envService.get('JWT_PUBLIC_KEY');
 
@@ -20,6 +23,6 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: UserPayload) {
-    return tokenPayloadSchema.parse(payload);
+    return accessTokenSchema.parse(payload);
   }
 }

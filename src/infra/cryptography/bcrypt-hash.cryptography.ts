@@ -1,5 +1,5 @@
-import { HashGeneratorRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-generator-repository';
-import { HashComparerRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-comparer-repository';
+import { HashGeneratorRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-generator.repository';
+import { HashComparerRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-comparer.repository';
 import { Injectable } from '@nestjs/common';
 import { compare, hash } from 'bcryptjs';
 

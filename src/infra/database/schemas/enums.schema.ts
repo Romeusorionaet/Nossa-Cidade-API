@@ -12,7 +12,7 @@ export const businessPointStatusEnum = pgEnum('staff_status', [
 ]);
 
 export const usersRoleEnum = pgEnum('users_role', [
-  'MEMBER',
+  'MEMBER', //TODO remover member
   'MERCHANT',
   'ADMIN',
 ]);

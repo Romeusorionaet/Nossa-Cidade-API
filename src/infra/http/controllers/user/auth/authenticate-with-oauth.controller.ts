@@ -9,10 +9,10 @@ import {
 import {
   userProfileFromAuthValidationPipe,
   UserProfileFromAuth,
-} from 'src/infra/http/schemas/user-profile-schema';
+} from 'src/infra/http/schemas/user-profile.schema';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
-import { Public } from 'src/infra/http/middlewares/auth/public';
+import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
 import { EnvService } from 'src/infra/env/env.service';
 import { FastifyReply } from 'fastify';
 
