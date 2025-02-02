@@ -1,6 +1,7 @@
 import { HashComparerRepository } from '../../../repositories/cryptography/hash-comparer.repository';
 import { EncryptRepository } from '../../../repositories/cryptography/encrypt.repository';
 import { InvalidCredentialsError } from '../../errors/invalid-credentials-errors';
+import { calculatePermissions } from '../../../utils/calculate-permissions.util';
 import { EmailNotVerifiedError } from '../../errors/email-not-verified-error';
 import { UsersRepository } from '../../../repositories/users.repository';
 import { StaffRepository } from '../../../repositories/staff.repository';
@@ -54,18 +55,29 @@ export class AuthenticateUserUseCase {
 
     const staff = await this.staffRepository.findByUserId(user.id.toString());
 
+    const permissions = calculatePermissions(
+      staff?.role || null,
+      staff?.id.toString() || null,
+    );
+
     const accessToken = await this.encrypt.encryptAccessToken({
       sub: user.id.toString(),
-      staffId: staff?.id.toString() || '',
-      role: staff?.role || '',
       publicId: user.publicId.toString(),
+      staffId: staff?.id.toString() || null,
+      role: staff?.role || null,
+      status: staff?.status || null,
+      purpose: 'access-token',
+      permissions,
     });
 
     const refreshToken = await this.encrypt.encryptRefreshToken({
       sub: user.id.toString(),
-      staffId: staff?.id.toString() || '',
-      role: staff?.role || '',
       publicId: user.publicId.toString(),
+      staffId: staff?.id.toString() || null,
+      role: staff?.role || null,
+      status: staff?.status || null,
+      purpose: 'access-token',
+      permissions,
     });
 
     return right({

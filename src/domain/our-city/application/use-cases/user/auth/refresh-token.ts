@@ -1,4 +1,5 @@
 import { EncryptRepository } from '../../../repositories/cryptography/encrypt.repository';
+import { calculatePermissions } from '../../../utils/calculate-permissions.util';
 import { StaffRepository } from '../../../repositories/staff.repository';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
@@ -29,20 +30,29 @@ export class RefreshTokenUseCase {
   }: RefreshTokenUseCaseRequest): Promise<RefreshTokenUseCaseResponse> {
     const staff = await this.staffRepository.findByUserId(userId);
 
+    const permissions = calculatePermissions(
+      staff?.role || null,
+      staff?.id.toString() || null,
+    );
+
     const accessToken = await this.encryptRepository.encryptAccessToken({
       sub: userId,
-      staffId: staff?.id.toString() || '',
-      role: staff?.role || '',
-      status: staff?.status || '',
       publicId,
+      staffId: staff?.id.toString() || null,
+      role: staff?.role || null,
+      status: staff?.status || null,
+      purpose: 'access-token',
+      permissions,
     });
 
     const refreshToken = await this.encryptRepository.encryptRefreshToken({
       sub: userId,
-      staffId: staff?.id.toString() || '',
-      role: staff?.role || '',
-      status: staff?.status || '',
       publicId,
+      staffId: staff?.id.toString() || null,
+      role: staff?.role || null,
+      status: staff?.status || null,
+      purpose: 'access-token',
+      permissions,
     });
 
     return right({ accessToken, refreshToken });

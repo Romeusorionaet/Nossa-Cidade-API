@@ -1,11 +1,14 @@
+import { ValidationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
+import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
+
 export abstract class EncryptRepository {
   abstract encryptAccessToken(
-    payload: Record<string, unknown>,
+    payload: AccessTokenPayload<'access-token'>,
   ): Promise<string>;
   abstract encryptRefreshToken(
-    payload: Record<string, unknown>,
+    payload: AccessTokenPayload<'access-token'>,
   ): Promise<string>;
   abstract encryptValidationEmailToken(
-    payload: Record<string, unknown>,
+    payload: ValidationEmailTokenPayload<'confirmation-token'>,
   ): Promise<string>;
 }

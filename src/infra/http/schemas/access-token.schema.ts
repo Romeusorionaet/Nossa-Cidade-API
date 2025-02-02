@@ -3,9 +3,10 @@ import { z } from 'zod';
 export const accessTokenSchema = z.object({
   sub: z.string().uuid('Não autorizado'),
   publicId: z.string().uuid('Não autorizado'),
-  staffId: z.string().optional(),
-  role: z.string().optional(),
-  status: z.string().optional(),
+  staffId: z.string().optional().nullable(),
+  role: z.string().optional().nullable(),
+  status: z.string().optional().nullable(),
   permissions: z.string().array(),
+  purpose: z.string(),
 });
 export type UserPayload = z.infer<typeof accessTokenSchema>;

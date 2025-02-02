@@ -12,7 +12,10 @@ export class ValidationEmail {
   ) {}
 
   async sendValidationEmail({ email }: { email: string }): Promise<void> {
-    const token = await this.encrypt.encryptValidationEmailToken({ email });
+    const token = await this.encrypt.encryptValidationEmailToken({
+      email,
+      purpose: 'confirmation-token',
+    });
 
     const validationLinkUrl = `${this.envService.get('CONFIRM_EMAIL_NOSSA_CIDADE_HOST')}?token=${token}`;
     const html = `<p>Clique no link a seguir para verificar seu email:</p><a href="${validationLinkUrl}">Verificar Email</a>`;
