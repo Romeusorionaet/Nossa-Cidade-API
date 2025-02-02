@@ -24,6 +24,24 @@ export class DrizzleAuthRepository implements AuthRepository {
     return DrizzleUserMapper.toDomain(user);
   }
 
+  async confirmEmail(email: string): Promise<object | null> {
+    const [user] = await this.drizzle.database
+      .select()
+      .from(users)
+      .where(eq(users.email, email));
+
+    if (!user) {
+      return null;
+    }
+
+    await this.drizzle.database
+      .update(users)
+      .set({ emailVerified: true } as Partial<UsersInsertType>)
+      .where(eq(users.email, email));
+
+    return {};
+  }
+
   async updatePassword({
     hashedNewPassword,
     email,

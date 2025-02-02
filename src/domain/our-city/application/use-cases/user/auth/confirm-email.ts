@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from '../../errors/invalid-credentials-errors';
-import { UsersRepository } from '../../../repositories/users.repository';
+import { AuthRepository } from '../../../repositories/auth.repository';
 import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 
@@ -11,12 +11,12 @@ type ConfirmEmailUseCaseResponse = Either<InvalidCredentialsError, object>;
 
 @Injectable()
 export class ConfirmEmailUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private authRepository: AuthRepository) {}
 
   async execute({
     email,
   }: ConfirmEmailUseCaseRequest): Promise<ConfirmEmailUseCaseResponse> {
-    const result = await this.usersRepository.confirmEmail(email);
+    const result = await this.authRepository.confirmEmail(email);
 
     if (!result) {
       return left(new InvalidCredentialsError());

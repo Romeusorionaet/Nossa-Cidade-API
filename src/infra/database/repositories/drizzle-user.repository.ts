@@ -1,9 +1,9 @@
 import { UsersRepository } from 'src/domain/our-city/application/repositories/users.repository';
 import { User } from 'src/domain/our-city/enterprise/entities/user';
 import { DrizzleUserMapper } from '../mappers/drizzle-user.mapper';
-import { users, UsersInsertType } from '../schemas';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
+import { users } from '../schemas';
 import { eq } from 'drizzle-orm';
 
 @Injectable()
@@ -39,24 +39,6 @@ export class DrizzleUserRepository implements UsersRepository {
     }
 
     return DrizzleUserMapper.toDomain(user);
-  }
-
-  async confirmEmail(email: string): Promise<object | null> {
-    const [user] = await this.drizzle.database
-      .select()
-      .from(users)
-      .where(eq(users.email, email));
-
-    if (!user) {
-      return null;
-    }
-
-    await this.drizzle.database
-      .update(users)
-      .set({ emailVerified: true } as Partial<UsersInsertType>)
-      .where(eq(users.email, email));
-
-    return {};
   }
 
   async update(user: User): Promise<void> {

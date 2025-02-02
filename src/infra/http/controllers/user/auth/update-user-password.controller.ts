@@ -14,7 +14,7 @@ import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-c
 import { UserNotFoundError } from 'src/domain/our-city/application/use-cases/errors/user-not-found-error';
 import { AccessTokenGuard } from '../../../middlewares/auth/guards/access-token.guard';
 
-@Controller('/user/update/password')
+@Controller('/auth/update/password')
 export class UpdateUserPasswordController {
   constructor(private updateUserPassword: UpdateUserPasswordUseCase) {}
   @Put()
