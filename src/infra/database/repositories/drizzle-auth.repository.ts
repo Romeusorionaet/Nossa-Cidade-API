@@ -1,7 +1,5 @@
-import {
-  AuthRepository,
-  UpdatePasswordProps,
-} from 'src/domain/our-city/application/repositories/auth.repository';
+import { AuthRepository } from 'src/domain/our-city/application/repositories/auth.repository';
+import { UpdatePasswordAuth } from 'src/core/@types/update-password-auth';
 import { User } from 'src/domain/our-city/enterprise/entities/user';
 import { DrizzleUserMapper } from '../mappers/drizzle-user.mapper';
 import { users, UsersInsertType } from '../schemas';
@@ -29,7 +27,7 @@ export class DrizzleAuthRepository implements AuthRepository {
   async updatePassword({
     hashedNewPassword,
     email,
-  }: UpdatePasswordProps): Promise<void> {
+  }: UpdatePasswordAuth): Promise<void> {
     await this.drizzle.database
       .update(users)
       .set({ passwordHash: hashedNewPassword } as Partial<UsersInsertType>)
