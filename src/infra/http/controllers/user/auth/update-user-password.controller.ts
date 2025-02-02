@@ -9,10 +9,10 @@ import {
 import {
   updatePasswordSchemaValidationPipe,
   UpdatePasswordRequest,
-} from '../../schemas/update-password.schema';
-import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/update-user-password';
+} from '../../../schemas/update-password.schema';
+import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
 import { UserNotFoundError } from 'src/domain/our-city/application/use-cases/errors/user-not-found-error';
-import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
+import { AccessTokenGuard } from '../../../middlewares/auth/guards/access-token.guard';
 
 @Controller('/user/update/password')
 export class UpdateUserPasswordController {

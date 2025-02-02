@@ -26,10 +26,12 @@ export class RegisterUserWithOAuthUseCase {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
+      const randomPassword = Math.random();
+
       const user = User.create({
         email,
         username,
-        passwordHash: await hash('123456', 8), // TODO for while
+        passwordHash: await hash(randomPassword.toString(), 8),
         avatar,
         emailVerified: true,
         publicId: new UniqueEntityID(),

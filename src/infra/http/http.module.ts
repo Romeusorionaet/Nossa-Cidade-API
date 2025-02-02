@@ -1,13 +1,13 @@
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
+import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
 import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
-import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/update-user-password';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
 import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
+import { UpdateUserPasswordController } from './controllers/user/auth/update-user-password.controller';
 import { AuthenticateUserController } from './controllers/user/auth/authenticate-user.controller';
-import { UpdateUserPasswordController } from './controllers/user/update-user-password.controller';
 import { GetUserProfileController } from './controllers/user/get-user-profile.controller';
 import { RegisterUserController } from './controllers/user/auth/register-user.controller';
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
