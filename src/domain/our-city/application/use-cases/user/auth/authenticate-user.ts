@@ -3,6 +3,7 @@ import { EncryptRepository } from '../../../repositories/cryptography/encrypt.re
 import { InvalidCredentialsError } from '../../errors/invalid-credentials-errors';
 import { calculatePermissions } from '../../../utils/calculate-permissions.util';
 import { EmailNotVerifiedError } from '../../errors/email-not-verified-error';
+import { TokenPurposeEnum } from '../../../shared/enums/token-purpose.enum';
 import { UsersRepository } from '../../../repositories/users.repository';
 import { StaffRepository } from '../../../repositories/staff.repository';
 import { Either, left, right } from 'src/core/either';
@@ -67,7 +68,7 @@ export class AuthenticateUserUseCase {
       staffId: staff?.id.toString() || null,
       role: staff?.role || null,
       status: staff?.status || null,
-      purpose: 'access-token',
+      purpose: TokenPurposeEnum.ACCESS_TOKEN,
       permissions,
     });
 
@@ -78,7 +79,7 @@ export class AuthenticateUserUseCase {
       staffId: staff?.id.toString() || null,
       role: staff?.role || null,
       status: staff?.status || null,
-      purpose: 'access-token',
+      purpose: TokenPurposeEnum.ACCESS_TOKEN,
       permissions,
     });
 

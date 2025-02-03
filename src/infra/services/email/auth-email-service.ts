@@ -1,5 +1,6 @@
 import { AuthEmailServiceRepository } from 'src/domain/our-city/application/repositories/services/email/auth-email-service.repository';
 import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
+import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
 import { EnvService } from 'src/infra/env/env.service';
 import { EmailService } from './email.service';
 import { Injectable } from '@nestjs/common';
@@ -15,7 +16,7 @@ export class AuthEmailService implements AuthEmailServiceRepository {
   async sendValidationEmail({ email }: { email: string }): Promise<void> {
     const token = await this.encrypt.encryptValidationEmailToken({
       email,
-      purpose: 'confirmation-token',
+      purpose: TokenPurposeEnum.CONFIRMATION_TOKEN,
     });
 
     const linkUrl = `${this.envService.get('CONFIRM_EMAIL_NOSSA_CIDADE_HOST')}/validate-email?token=${token}`;
@@ -27,7 +28,7 @@ export class AuthEmailService implements AuthEmailServiceRepository {
   async sendForgotPassword({ email }: { email: string }): Promise<void> {
     const token = await this.encrypt.encryptForgotPasswordToken({
       email,
-      purpose: 'forgot-password-token',
+      purpose: TokenPurposeEnum.FORGOT_PASSWORD_TOKEN,
     });
 
     const linkUrl = `${this.envService.get('CONFIRM_EMAIL_NOSSA_CIDADE_HOST')}/forgot-password?token=${token}`;

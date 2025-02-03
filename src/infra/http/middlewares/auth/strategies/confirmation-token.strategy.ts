@@ -1,3 +1,4 @@
+import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
 import { confirmationEmailTokenSchema } from 'src/infra/http/schemas/confirmation-token.schema';
 import { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
 import { BadRequestException, Injectable } from '@nestjs/common';
@@ -8,7 +9,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 @Injectable()
 export class ConfirmationTokenStrategy extends PassportStrategy(
   Strategy,
-  'confirmation-token',
+  TokenPurposeEnum.CONFIRMATION_TOKEN,
 ) {
   constructor(envService: EnvService) {
     const publicKey = envService.get('JWT_PUBLIC_KEY');

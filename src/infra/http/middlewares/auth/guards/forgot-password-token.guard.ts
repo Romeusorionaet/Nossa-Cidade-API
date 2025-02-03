@@ -1,3 +1,4 @@
+import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -5,7 +6,7 @@ import { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class ForgotPasswordTokenGuard extends AuthGuard(
-  'forgot-password-token',
+  TokenPurposeEnum.FORGOT_PASSWORD_TOKEN,
 ) {
   constructor(private reflector: Reflector) {
     super();

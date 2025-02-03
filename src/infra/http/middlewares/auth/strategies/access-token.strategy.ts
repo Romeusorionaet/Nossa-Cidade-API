@@ -1,3 +1,4 @@
+import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
 import { accessTokenSchema } from 'src/infra/http/schemas/access-token.schema';
 import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 import { BadRequestException, Injectable } from '@nestjs/common';
@@ -8,7 +9,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 @Injectable()
 export class AccessTokenStrategy extends PassportStrategy(
   Strategy,
-  'access-token',
+  TokenPurposeEnum.ACCESS_TOKEN,
 ) {
   constructor(envService: EnvService) {
     const publicKey = envService.get('JWT_PUBLIC_KEY');

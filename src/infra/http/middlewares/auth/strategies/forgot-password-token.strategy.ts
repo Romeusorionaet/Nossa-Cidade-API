@@ -1,3 +1,4 @@
+import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
 import { forgotPasswordTokenSchema } from 'src/infra/http/schemas/forgot-password-token.schema';
 import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
 import { BadRequestException, Injectable } from '@nestjs/common';
@@ -8,7 +9,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 @Injectable()
 export class ForgotPasswordTokenStrategy extends PassportStrategy(
   Strategy,
-  'forgot-password-token',
+  TokenPurposeEnum.FORGOT_PASSWORD_TOKEN,
 ) {
   constructor(envService: EnvService) {
     const publicKey = envService.get('JWT_PUBLIC_KEY');

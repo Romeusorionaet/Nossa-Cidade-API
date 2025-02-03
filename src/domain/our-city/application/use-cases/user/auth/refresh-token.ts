@@ -1,5 +1,6 @@
 import { EncryptRepository } from '../../../repositories/cryptography/encrypt.repository';
 import { calculatePermissions } from '../../../utils/calculate-permissions.util';
+import { TokenPurposeEnum } from '../../../shared/enums/token-purpose.enum';
 import { StaffRepository } from '../../../repositories/staff.repository';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
@@ -44,7 +45,7 @@ export class RefreshTokenUseCase {
       staffId: staff?.id.toString() || null,
       role: staff?.role || null,
       status: staff?.status || null,
-      purpose: 'access-token',
+      purpose: TokenPurposeEnum.ACCESS_TOKEN,
       permissions,
     });
 
@@ -55,7 +56,7 @@ export class RefreshTokenUseCase {
       staffId: staff?.id.toString() || null,
       role: staff?.role || null,
       status: staff?.status || null,
-      purpose: 'access-token',
+      purpose: TokenPurposeEnum.ACCESS_TOKEN,
       permissions,
     });
 
