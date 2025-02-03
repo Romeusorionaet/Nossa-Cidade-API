@@ -5,6 +5,7 @@ export type AccessTokenPayload<T extends string> = {
   sub: string;
   publicId: string;
   purpose: T;
+  email: string;
   permissions: string[];
   staffId?: string | null;
   role?: UsersRole | null;

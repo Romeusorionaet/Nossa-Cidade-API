@@ -46,6 +46,7 @@ export class AuthenticateWidthOAuthController {
       const resultRefreshToken = await this.refreshTokenUseCase.execute({
         userId: user.id.toString(),
         publicId: user.publicId.toString(),
+        email,
       });
 
       const result = resultRefreshToken.value;

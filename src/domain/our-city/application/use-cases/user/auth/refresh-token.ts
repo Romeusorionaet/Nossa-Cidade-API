@@ -6,6 +6,7 @@ import { Injectable } from '@nestjs/common';
 
 interface RefreshTokenUseCaseRequest {
   userId: string;
+  email: string;
   publicId: string;
 }
 
@@ -26,6 +27,7 @@ export class RefreshTokenUseCase {
 
   async execute({
     userId,
+    email,
     publicId,
   }: RefreshTokenUseCaseRequest): Promise<RefreshTokenUseCaseResponse> {
     const staff = await this.staffRepository.findByUserId(userId);
@@ -38,6 +40,7 @@ export class RefreshTokenUseCase {
     const accessToken = await this.encryptRepository.encryptAccessToken({
       sub: userId,
       publicId,
+      email,
       staffId: staff?.id.toString() || null,
       role: staff?.role || null,
       status: staff?.status || null,
@@ -48,6 +51,7 @@ export class RefreshTokenUseCase {
     const refreshToken = await this.encryptRepository.encryptRefreshToken({
       sub: userId,
       publicId,
+      email,
       staffId: staff?.id.toString() || null,
       role: staff?.role || null,
       status: staff?.status || null,
