@@ -1,7 +1,5 @@
-import {
-  ConfirmationTokenPayload,
-  confirmationTokenSchema,
-} from 'src/infra/http/schemas/confirmation-token.schema';
+import { confirmationEmailTokenSchema } from 'src/infra/http/schemas/confirmation-token.schema';
+import { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { EnvService } from 'src/infra/env/env.service';
 import { PassportStrategy } from '@nestjs/passport';
@@ -22,9 +20,9 @@ export class ConfirmationTokenStrategy extends PassportStrategy(
     });
   }
 
-  async validate(payload: ConfirmationTokenPayload) {
+  async validate(payload: ConfirmationEmailTokenPayload) {
     try {
-      return confirmationTokenSchema.parse(payload);
+      return confirmationEmailTokenSchema.parse(payload);
     } catch (err: any) {
       throw new BadRequestException(err.err);
     }

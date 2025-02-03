@@ -9,7 +9,7 @@ import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cas
 import { ConfirmationTokenGuard } from 'src/infra/http/middlewares/auth/guards/confirmation-token.guard';
 import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
-import { ConfirmationTokenPayload } from 'src/infra/http/schemas/confirmation-token.schema';
+import { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
 
 @Controller('/auth/confirm-email')
 export class ConfirmEmailController {
@@ -18,7 +18,7 @@ export class ConfirmEmailController {
   @Post()
   @UseGuards(ConfirmationTokenGuard)
   @HttpCode(200)
-  async handle(@CurrentUser() user: ConfirmationTokenPayload) {
+  async handle(@CurrentUser() user: ConfirmationEmailTokenPayload) {
     try {
       const { email } = user;
 

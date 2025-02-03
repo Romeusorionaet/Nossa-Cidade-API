@@ -12,8 +12,8 @@ import {
 } from 'src/infra/http/schemas/forgot-user-password.schema';
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
 import { ForgotPasswordTokenGuard } from 'src/infra/http/middlewares/auth/guards/forgot-password-token.guard';
-import { ForgotPasswordTokenPayload } from 'src/infra/http/schemas/forgot-password-token.schema';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
+import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
 
 @Controller('/auth/reset/password')
 export class ResetUserPasswordController {

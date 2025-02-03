@@ -1,10 +1,10 @@
 import { StaffStatus } from 'src/domain/our-city/enterprise/entities/enums/staff-status';
 import { UsersRole } from 'src/domain/our-city/enterprise/entities/enums/users-role';
 
-export type AccessTokenPayload<T extends string> = {
+export type AccessTokenPayload = {
   sub: string;
   publicId: string;
-  purpose: T;
+  purpose: string;
   email: string;
   permissions: string[];
   staffId?: string | null;

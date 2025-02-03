@@ -1,7 +1,5 @@
-import {
-  accessTokenSchema,
-  UserPayload,
-} from 'src/infra/http/schemas/access-token.schema';
+import { accessTokenSchema } from 'src/infra/http/schemas/access-token.schema';
+import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { EnvService } from 'src/infra/env/env.service';
 import { PassportStrategy } from '@nestjs/passport';
@@ -22,7 +20,7 @@ export class AccessTokenStrategy extends PassportStrategy(
     });
   }
 
-  async validate(payload: UserPayload) {
+  async validate(payload: AccessTokenPayload) {
     try {
       return accessTokenSchema.parse(payload);
     } catch (err: any) {

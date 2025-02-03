@@ -8,7 +8,7 @@ import {
 import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from 'src/infra/http/middlewares/auth/guards/access-token.guard';
-import { UserPayload } from 'src/infra/http/schemas/access-token.schema';
+import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 
 @Controller('/auth/forgot-password')
 export class ForgotUserPasswordController {
@@ -17,7 +17,7 @@ export class ForgotUserPasswordController {
   @Post()
   @UseGuards(AccessTokenGuard)
   @HttpCode(200)
-  async handle(@CurrentUser() user: UserPayload) {
+  async handle(@CurrentUser() user: AccessTokenPayload) {
     try {
       const { email } = user;
 

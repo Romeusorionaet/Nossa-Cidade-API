@@ -1,7 +1,5 @@
-import {
-  ForgotPasswordTokenPayload,
-  forgotPasswordTokenSchema,
-} from 'src/infra/http/schemas/forgot-password-token.schema';
+import { forgotPasswordTokenSchema } from 'src/infra/http/schemas/forgot-password-token.schema';
+import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { EnvService } from 'src/infra/env/env.service';
 import { PassportStrategy } from '@nestjs/passport';

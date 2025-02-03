@@ -10,4 +10,3 @@ export const accessTokenSchema = z.object({
   permissions: z.string().array(),
   purpose: z.string(),
 });
-export type UserPayload = z.infer<typeof accessTokenSchema>;

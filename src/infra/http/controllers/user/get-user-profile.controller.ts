@@ -10,7 +10,7 @@ import { CurrentUser } from '../../middlewares/auth/decorators/current-user.deco
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
 import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error';
 import { UserProfilePresenter } from '../../presenters/user-profile.presenter';
-import { UserPayload } from '../../schemas/access-token.schema';
+import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 
 @Controller('/auth/profile')
 export class GetUserProfileController {
@@ -19,7 +19,7 @@ export class GetUserProfileController {
   @Get()
   @UseGuards(AccessTokenGuard)
   @HttpCode(200)
-  async handle(@CurrentUser() user: UserPayload) {
+  async handle(@CurrentUser() user: AccessTokenPayload) {
     try {
       const { sub: id } = user;
 

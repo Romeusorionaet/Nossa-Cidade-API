@@ -1,4 +1,4 @@
-export type ValidationEmailTokenPayload<T extends string> = {
+export type ConfirmationEmailTokenPayload = {
   email: string;
-  purpose: T;
+  purpose: string;
 };
