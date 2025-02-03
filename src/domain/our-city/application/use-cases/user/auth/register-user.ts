@@ -1,3 +1,4 @@
+import { AuthEmailServiceRepository } from '../../../repositories/services/email/auth-email-service.repository';
 import { HashGeneratorRepository } from '../../../repositories/cryptography/hash-generator.repository';
 import { UserAlreadyExistsError } from '../../errors/user-already-exists-error';
 import { UsersRepository } from '../../../repositories/users.repository';
@@ -25,6 +26,7 @@ export class RegisterUserUseCase {
   constructor(
     private usersRepository: UsersRepository,
     private hashGenerator: HashGeneratorRepository,
+    private authEmailService: AuthEmailServiceRepository,
   ) {}
 
   async execute({
@@ -51,6 +53,8 @@ export class RegisterUserUseCase {
     });
 
     await this.usersRepository.create(user);
+
+    await this.authEmailService.sendValidationEmail({ email });
 
     return right({ user });
   }

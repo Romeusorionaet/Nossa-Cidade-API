@@ -12,14 +12,10 @@ import {
 import { UserAlreadyExistsError } from 'src/domain/our-city/application/use-cases/errors/user-already-exists-error';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
 import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
-import { ValidationEmail } from 'src/infra/services/email/validation.email';
 
 @Controller('/auth/register')
 export class RegisterUserController {
-  constructor(
-    private registerUserUseCase: RegisterUserUseCase,
-    private validationEmail: ValidationEmail,
-  ) {}
+  constructor(private registerUserUseCase: RegisterUserUseCase) {}
 
   @Public()
   @Post()
@@ -45,8 +41,6 @@ export class RegisterUserController {
             throw new BadRequestException(err.message);
         }
       }
-
-      await this.validationEmail.sendValidationEmail({ email });
 
       return {
         message:
