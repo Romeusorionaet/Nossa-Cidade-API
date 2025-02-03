@@ -63,6 +63,7 @@ export class AuthenticateUserUseCase {
     const accessToken = await this.encrypt.encryptAccessToken({
       sub: user.id.toString(),
       publicId: user.publicId.toString(),
+      email: user.email,
       staffId: staff?.id.toString() || null,
       role: staff?.role || null,
       status: staff?.status || null,
@@ -73,6 +74,7 @@ export class AuthenticateUserUseCase {
     const refreshToken = await this.encrypt.encryptRefreshToken({
       sub: user.id.toString(),
       publicId: user.publicId.toString(),
+      email: user.email,
       staffId: staff?.id.toString() || null,
       role: staff?.role || null,
       status: staff?.status || null,

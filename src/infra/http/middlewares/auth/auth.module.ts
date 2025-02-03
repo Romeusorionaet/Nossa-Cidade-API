@@ -1,3 +1,4 @@
+import { ForgotPasswordTokenStrategy } from './strategies/forgot-password-token.strategy';
 import { ConfirmationTokenStrategy } from './strategies/confirmation-token.strategy';
 import { AccessTokenStrategy } from './strategies/access-token.strategy';
 import { PermissionGuard } from './guards/permission.guard';
@@ -27,6 +28,7 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   ],
   providers: [
+    ForgotPasswordTokenStrategy,
     ConfirmationTokenStrategy,
     AccessTokenStrategy,
     PermissionGuard,

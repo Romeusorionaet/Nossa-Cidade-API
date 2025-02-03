@@ -1,5 +1,6 @@
 import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
 import { ValidationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
+import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
 import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -28,7 +29,15 @@ export class JwtEncrypt implements EncryptRepository {
     payload: ValidationEmailTokenPayload<'confirmation-token'>,
   ): Promise<string> {
     return await this.jwtService.signAsync(payload, {
-      expiresIn: '10m',
+      expiresIn: '5m',
+    });
+  }
+
+  async encryptForgotPasswordToken(
+    payload: ForgotPasswordTokenPayload<'forgot-password-token'>,
+  ): Promise<string> {
+    return await this.jwtService.signAsync(payload, {
+      expiresIn: '5m',
     });
   }
 }
