@@ -1,11 +1,11 @@
-import { EnvService } from 'src/infra/env/env.service';
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
 import {
   ConfirmationTokenPayload,
   confirmationTokenSchema,
 } from 'src/infra/http/schemas/confirmation-token.schema';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { EnvService } from 'src/infra/env/env.service';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 
 @Injectable()
 export class ConfirmationTokenStrategy extends PassportStrategy(
