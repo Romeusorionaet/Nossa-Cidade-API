@@ -1,7 +1,11 @@
+import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
+import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
+import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
 import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
 import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
+import { RegisterBusinessPointController } from './controllers/business-point/register-business-point.controller';
 import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
@@ -32,6 +36,7 @@ import { Module } from '@nestjs/common';
   ],
   controllers: [
     AuthenticateWidthOAuthController,
+    RegisterBusinessPointController,
     UpdateUserPasswordController,
     ForgotUserPasswordController,
     ResetUserPasswordController,
@@ -42,6 +47,9 @@ import { Module } from '@nestjs/common';
   ],
   providers: [
     RegisterUserWithOAuthUseCase,
+    RegisterBusinessPointUseCase,
+    ValidateBusinessPointUseCase,
+    PromoteUserToMerchantUseCase,
     UpdateUserPasswordUseCase,
     ForgotUserPasswordUseCase,
     ResetUserPasswordUseCase,

@@ -5,8 +5,8 @@ import { Optional } from 'src/core/@types/optional';
 import { Entity } from 'src/core/entities/entity';
 
 export interface BusinessPointProps {
-  categoryId: string;
-  ownerId: string;
+  categoryId: UniqueEntityID;
+  ownerId: UniqueEntityID;
   name: string;
   location: GeometryPoint;
   status: BusinessPointStatus;
@@ -17,7 +17,7 @@ export interface BusinessPointProps {
   website?: string | null;
   tags?: string[] | null;
   highlight?: string | null;
-  createdAt: Date | null;
+  createdAt?: Date | null;
   updatedAt?: Date | null;
 }
 

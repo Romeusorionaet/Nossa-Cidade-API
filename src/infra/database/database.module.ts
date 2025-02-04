@@ -1,4 +1,6 @@
 import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
+import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
+import { DrizzleBusinessPointRepository } from './repositories/drizzle-business-point.repository';
 import { UsersRepository } from 'src/domain/our-city/application/repositories/users.repository';
 import { StaffRepository } from 'src/domain/our-city/application/repositories/staff.repository';
 import { AuthRepository } from 'src/domain/our-city/application/repositories/auth.repository';
@@ -32,8 +34,13 @@ import { Module } from '@nestjs/common';
       provide: AuthRepository,
       useClass: DrizzleAuthRepository,
     },
+    {
+      provide: BusinessPointRepository,
+      useClass: DrizzleBusinessPointRepository,
+    },
   ],
   exports: [
+    BusinessPointRepository,
     EncryptRepository,
     DatabaseService,
     UsersRepository,
