@@ -71,7 +71,7 @@ export const businessPoints = pgTable(
     images: jsonb('images'),
     website: varchar('website', { length: 500 }),
     tags: jsonb('tags'),
-    awaitingApproval: boolean('awaiting_approval').default(false),
+    awaitingApproval: boolean('awaiting_approval').default(true),
     censorship: boolean('censorship').default(false),
     highlight: varchar('highlight', { length: 100 }),
     ownerId: text('owner_id')

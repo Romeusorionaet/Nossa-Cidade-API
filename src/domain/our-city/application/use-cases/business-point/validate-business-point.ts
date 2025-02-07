@@ -1,13 +1,17 @@
+import { BusinessPointAlreadyExistsError } from '../errors/business-point-already-exists-error';
 import { BusinessPointRepository } from '../../repositories/business-point.repository';
 import { GeometryPoint } from 'src/core/@types/geometry';
-import { Either, right } from 'src/core/either';
+import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 
 interface ValidateBusinessPointUseCaseRequest {
   location: GeometryPoint;
 }
 
-type ValidateBusinessPointUseCaseResponse = Either<null, object>;
+type ValidateBusinessPointUseCaseResponse = Either<
+  BusinessPointAlreadyExistsError,
+  object
+>;
 
 @Injectable()
 export class ValidateBusinessPointUseCase {
@@ -16,9 +20,12 @@ export class ValidateBusinessPointUseCase {
   async execute({
     location,
   }: ValidateBusinessPointUseCaseRequest): Promise<ValidateBusinessPointUseCaseResponse> {
-    await this.businessPointRepository.findByCoordinate(location);
+    const existBusinessPoint =
+      await this.businessPointRepository.findByCoordinate(location);
 
-    //TODO do validation
+    if (existBusinessPoint) {
+      return left(new BusinessPointAlreadyExistsError());
+    }
 
     return right({});
   }

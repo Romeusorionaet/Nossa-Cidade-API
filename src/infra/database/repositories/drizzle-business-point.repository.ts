@@ -16,7 +16,10 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   async create(businessPoint: BusinessPoint): Promise<void> {
     const data = DrizzleBusinessPointMapper.toDrizzle(businessPoint);
 
-    await this.drizzle.database.insert(businessPoints).values(data);
+    await this.drizzle.database.insert(businessPoints).values({
+      ...data,
+      location: sql`ST_SetSRID(ST_MakePoint(${data.location.x}, ${data.location.y}), 4326)`,
+    });
   }
   async findByCoordinate(
     location: GeometryPoint,
@@ -24,7 +27,11 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     const [businessPoint] = await this.drizzle.database
       .select()
       .from(businessPoints).where(sql`
-        ST_DWithin(location, ST_SetSRID(ST_MakePoint(${location.coordinates[0]}, ${location.coordinates[1]}), 4326), 0)
+        ST_DWithin(
+          location, 
+          ST_Transform(ST_SetSRID(ST_MakePoint(${location.coordinates[0]}, ${location.coordinates[1]}), 4326), 4326),
+          0
+        )
       `);
 
     if (!businessPoint) {
@@ -44,7 +51,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
         longitude: sql<number>`ST_X(location)`,
       })
       .from(businessPoints)
-      .where(eq(businessPoints.awaitingApproval, true));
+      .where(eq(businessPoints.awaitingApproval, false));
 
     return result.map((row) => ({
       id: new UniqueEntityID(row.id),
