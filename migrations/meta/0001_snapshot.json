@@ -1,6 +1,6 @@
 {
-  "id": "51510a8e-3dcf-4d73-80f2-f11bd2d21508",
-  "prevId": "7bc2a798-700f-43a2-a135-1cc6db4946fc",
+  "id": "b7898e09-67f7-4812-ad51-f88d4c03e616",
+  "prevId": "8cca989a-0c6e-4109-acf4-e1bdc7bd49ec",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -623,6 +623,13 @@
           "primaryKey": false,
           "notNull": false
         },
+        "awaiting_approval": {
+          "name": "awaiting_approval",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
         "censorship": {
           "name": "censorship",
           "type": "boolean",
@@ -687,7 +694,15 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "business_points_location_unique": {
+          "name": "business_points_location_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "location"
+          ]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

@@ -67,11 +67,13 @@ CREATE TABLE "business_points" (
 	"images" jsonb,
 	"website" varchar(500),
 	"tags" jsonb,
+	"awaiting_approval" boolean DEFAULT false,
 	"censorship" boolean DEFAULT false,
 	"highlight" varchar(100),
 	"owner_id" text NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
+	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+	CONSTRAINT "business_points_location_unique" UNIQUE("location")
 );
 --> statement-breakpoint
 CREATE TABLE "staff" (
