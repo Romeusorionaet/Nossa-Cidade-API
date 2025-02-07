@@ -11,9 +11,7 @@ interface RegisterBusinessPointUseCaseRequest {
   ownerId: string;
   name: string;
   location: GeometryPoint;
-  status: BusinessPointStatus;
-  openingHours: string;
-  censorship: boolean;
+  openingHours;
 }
 
 type RegisterBusinessPointUseCaseResponse = Either<null, object>;
@@ -27,18 +25,16 @@ export class RegisterBusinessPointUseCase {
     ownerId,
     name,
     location,
-    status,
     openingHours,
-    censorship,
   }: RegisterBusinessPointUseCaseRequest): Promise<RegisterBusinessPointUseCaseResponse> {
     const businessPoint = BusinessPoint.create({
       categoryId: new UniqueEntityID(categoryId),
       ownerId: new UniqueEntityID(ownerId),
       name,
       location,
-      status,
-      openingHours: JSON.parse(openingHours),
-      censorship,
+      status: BusinessPointStatus.ACTIVE,
+      openingHours: openingHours ? JSON.parse(openingHours) : '',
+      censorship: false,
     });
 
     await this.businessPointRepository.create(businessPoint);

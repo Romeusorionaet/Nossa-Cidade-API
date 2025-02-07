@@ -11,7 +11,6 @@ import {
   businessPointRequest,
 } from '../../schemas/business-point.schema';
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
-import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
 import { CurrentUser } from '../../middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
@@ -21,7 +20,6 @@ import { GeometryPoint } from 'src/core/@types/geometry';
 @Controller('/business-point/register')
 export class RegisterBusinessPointController {
   constructor(
-    private validateBusinessPointUseCase: ValidateBusinessPointUseCase,
     private registerBusinessPointUseCase: RegisterBusinessPointUseCase,
     private promoterUserToMerchantUseCase: PromoteUserToMerchantUseCase,
   ) {}
@@ -35,7 +33,7 @@ export class RegisterBusinessPointController {
   ) {
     try {
       const businessPoint = body;
-      const { sub: userId } = user;
+      const { sub: userId, staffId } = user;
 
       const location: GeometryPoint = {
         type: 'Point',
@@ -45,23 +43,21 @@ export class RegisterBusinessPointController {
         ],
       };
 
-      await this.validateBusinessPointUseCase.execute({
-        location,
-      });
-
       await this.registerBusinessPointUseCase.execute({
         categoryId: businessPoint.categoryId,
-        censorship: businessPoint.censorship,
         location,
         name: businessPoint.name,
         openingHours: businessPoint.openingHours,
-        ownerId: businessPoint.ownerId,
-        status: businessPoint.status,
+        ownerId: userId,
       });
 
-      await this.promoterUserToMerchantUseCase.execute({ id: userId });
+      if (!staffId) {
+        await this.promoterUserToMerchantUseCase.execute({ id: userId });
 
-      return { message: 'Você se tornou um comerciante' };
+        return { message: 'Local registrado. Você se tornou um comerciante!' };
+      }
+
+      return { message: 'Local registrado.' };
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }

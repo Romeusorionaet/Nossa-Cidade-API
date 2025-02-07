@@ -12,6 +12,7 @@ export interface BusinessPointProps {
   status: BusinessPointStatus;
   openingHours: Record<string, any>;
   censorship: boolean;
+  awaitingApproval?: boolean | null;
   description?: string | null;
   images?: Record<string, any> | null;
   website?: string | null;
@@ -84,6 +85,10 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   get censorship() {
     return this.props.censorship;
+  }
+
+  get awaitingApproval() {
+    return this.props.awaitingApproval;
   }
 
   get highlight() {

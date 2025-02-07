@@ -63,12 +63,15 @@ export const businessPoints = pgTable(
       type: 'point',
       mode: 'xy',
       srid: 4326,
-    }).notNull(),
+    })
+      .notNull()
+      .unique(),
     status: businessPointStatusEnum('status').default('ACTIVE'),
     openingHours: jsonb('opening_hours').notNull(),
     images: jsonb('images'),
     website: varchar('website', { length: 500 }),
     tags: jsonb('tags'),
+    awaitingApproval: boolean('awaiting_approval').default(false),
     censorship: boolean('censorship').default(false),
     highlight: varchar('highlight', { length: 100 }),
     ownerId: text('owner_id')

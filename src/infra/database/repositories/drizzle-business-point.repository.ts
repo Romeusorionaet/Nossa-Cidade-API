@@ -1,15 +1,18 @@
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
+import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
+import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { businessPoints } from '../schemas';
-import { sql } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   constructor(private drizzle: DatabaseClient) {}
+
   async create(businessPoint: BusinessPoint): Promise<void> {
     const data = DrizzleBusinessPointMapper.toDrizzle(businessPoint);
 
@@ -21,7 +24,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     const [businessPoint] = await this.drizzle.database
       .select()
       .from(businessPoints).where(sql`
-        ST_Equals(location, ST_SetSRID(ST_MakePoint(${location.coordinates[0]}, ${location.coordinates[1]}), 4326))
+        ST_DWithin(location, ST_SetSRID(ST_MakePoint(${location.coordinates[0]}, ${location.coordinates[1]}), 4326), 0)
       `);
 
     if (!businessPoint) {
@@ -29,5 +32,28 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     }
 
     return DrizzleBusinessPointMapper.toDomain(businessPoint);
+  }
+
+  async findAllForMapping(): Promise<BusinessPointForMappingType[]> {
+    const result = await this.drizzle.database
+      .select({
+        id: businessPoints.id,
+        name: businessPoints.name,
+        categoryId: businessPoints.categoryId,
+        latitude: sql<number>`ST_Y(location)`,
+        longitude: sql<number>`ST_X(location)`,
+      })
+      .from(businessPoints)
+      .where(eq(businessPoints.awaitingApproval, true));
+
+    return result.map((row) => ({
+      id: new UniqueEntityID(row.id),
+      categoryId: new UniqueEntityID(row.categoryId),
+      name: row.name,
+      location: {
+        latitude: row.latitude,
+        longitude: row.longitude,
+      },
+    }));
   }
 }

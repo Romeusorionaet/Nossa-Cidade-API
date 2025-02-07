@@ -1,5 +1,7 @@
+import { GetBusinessPointsForMappingUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-points-for-mapping';
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
+import { GetBusinessPointsForMappingController } from './controllers/business-point/get-business-points-for-mapping.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
 import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
@@ -22,9 +24,9 @@ import { ConfirmEmailController } from './controllers/user/auth/confirm-email.co
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { EmailModule } from '../services/email/email.module';
 import { DatabaseModule } from '../database/database.module';
-import { AuthModule } from './middlewares/auth/auth.module';
 import { EnvModule } from '../env/env.module';
 import { Module } from '@nestjs/common';
+import { AuthModule } from './middlewares/auth/auth.module';
 
 @Module({
   imports: [
@@ -35,6 +37,7 @@ import { Module } from '@nestjs/common';
     EnvModule,
   ],
   controllers: [
+    GetBusinessPointsForMappingController,
     AuthenticateWidthOAuthController,
     RegisterBusinessPointController,
     UpdateUserPasswordController,
@@ -46,6 +49,7 @@ import { Module } from '@nestjs/common';
     ConfirmEmailController,
   ],
   providers: [
+    GetBusinessPointsForMappingUseCase,
     RegisterUserWithOAuthUseCase,
     RegisterBusinessPointUseCase,
     ValidateBusinessPointUseCase,
