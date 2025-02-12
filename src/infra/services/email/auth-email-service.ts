@@ -19,7 +19,7 @@ export class AuthEmailService implements AuthEmailServiceRepository {
       purpose: TokenPurposeEnum.CONFIRMATION_TOKEN,
     });
 
-    const linkUrl = `${this.envService.get('CONFIRM_EMAIL_NOSSA_CIDADE_HOST')}/validate-email?token=${token}`;
+    const linkUrl = `${this.envService.get('CONFIRM_EMAIL_NOSSA_CIDADE_HOST')}?token=${token}`;
     const html = `<p>Clique no link a seguir para verificar seu email:</p><a href="${linkUrl}">Verificar Email.</a>`;
 
     await this.emailService.sendEmail(email, 'Verificação de Email.', html);
@@ -31,7 +31,7 @@ export class AuthEmailService implements AuthEmailServiceRepository {
       purpose: TokenPurposeEnum.FORGOT_PASSWORD_TOKEN,
     });
 
-    const linkUrl = `${this.envService.get('CONFIRM_EMAIL_NOSSA_CIDADE_HOST')}/forgot-password?token=${token}`;
+    const linkUrl = `${this.envService.get('FORGOT_PASSWORD_NOSSA_CIDADE_HOST')}?token=${token}`;
     const html = `<p>Clique no link a seguir para trocar sua senha:</p><a href="${linkUrl}">Trocar senha.</a>`;
 
     await this.emailService.sendEmail(email, 'Recuperação de senha.', html);

@@ -12,7 +12,7 @@ import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error'
 import { UserProfilePresenter } from '../../presenters/user-profile.presenter';
 import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 
-@Controller('/auth/profile')
+@Controller('/user/profile')
 export class GetUserProfileController {
   constructor(private getUserProfiler: GetUserProfileUseCase) {}
 
