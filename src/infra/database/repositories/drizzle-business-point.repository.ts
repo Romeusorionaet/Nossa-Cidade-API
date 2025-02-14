@@ -6,8 +6,12 @@ import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
-import { businessPoints } from '../schemas';
-import { eq, sql } from 'drizzle-orm';
+import {
+  businessPointCategories,
+  BusinessPointCategoriesInsertType,
+  businessPoints,
+} from '../schemas';
+import { eq, sql, and, ilike } from 'drizzle-orm';
 
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
@@ -62,5 +66,52 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
         longitude: row.longitude,
       },
     }));
+  }
+
+  async findByQuery(query: string): Promise<BusinessPointForMappingType[]> {
+    const removeAccents = (str: string) =>
+      str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    const normalizedQuery = removeAccents(query);
+
+    const result = await this.drizzle.database
+      .select({
+        id: businessPoints.id,
+        name: businessPoints.name,
+        categoryId: businessPoints.categoryId,
+        latitude: sql<number>`ST_Y(location)`,
+        longitude: sql<number>`ST_X(location)`,
+      })
+      .from(businessPoints)
+      .where(
+        and(
+          eq(businessPoints.awaitingApproval, false),
+          ilike(
+            sql<string>`unaccent(${businessPoints.name})`,
+            `%${normalizedQuery}%`,
+          ),
+        ),
+      );
+
+    return result.map((row) => ({
+      id: new UniqueEntityID(row.id),
+      categoryId: new UniqueEntityID(row.categoryId),
+      name: row.name,
+      location: {
+        latitude: row.latitude,
+        longitude: row.longitude,
+      },
+    }));
+  }
+
+  async findAllCategories(): Promise<BusinessPointCategoriesInsertType[]> {
+    const result = await this.drizzle.database
+      .select({
+        id: businessPointCategories.id,
+        name: businessPointCategories.name,
+      })
+      .from(businessPointCategories);
+
+    return result;
   }
 }

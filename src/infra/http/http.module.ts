@@ -1,7 +1,10 @@
 import { GetBusinessPointsForMappingUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-points-for-mapping';
+import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-categories';
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
 import { GetBusinessPointsForMappingController } from './controllers/business-point/get-business-points-for-mapping.controller';
+import { SearchBusinessPointsUseCase } from 'src/domain/our-city/application/use-cases/business-point/search-business-points';
+import { GetBusinessPointCategoriesController } from './controllers/business-point/get-business-point-categories.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
 import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
@@ -9,6 +12,7 @@ import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-c
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
 import { RegisterBusinessPointController } from './controllers/business-point/register-business-point.controller';
 import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
+import { SearchBusinessPointsController } from './controllers/business-point/search-business-points.controller';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
@@ -38,8 +42,10 @@ import { AuthModule } from './middlewares/auth/auth.module';
   ],
   controllers: [
     GetBusinessPointsForMappingController,
+    GetBusinessPointCategoriesController,
     AuthenticateWidthOAuthController,
     RegisterBusinessPointController,
+    SearchBusinessPointsController,
     UpdateUserPasswordController,
     ForgotUserPasswordController,
     ResetUserPasswordController,
@@ -50,10 +56,12 @@ import { AuthModule } from './middlewares/auth/auth.module';
   ],
   providers: [
     GetBusinessPointsForMappingUseCase,
+    GetBusinessPointCategoriesUseCase,
     RegisterUserWithOAuthUseCase,
     RegisterBusinessPointUseCase,
     ValidateBusinessPointUseCase,
     PromoteUserToMerchantUseCase,
+    SearchBusinessPointsUseCase,
     UpdateUserPasswordUseCase,
     ForgotUserPasswordUseCase,
     ResetUserPasswordUseCase,
