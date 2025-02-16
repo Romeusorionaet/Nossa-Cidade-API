@@ -11,6 +11,7 @@ interface RegisterBusinessPointUseCaseRequest {
   ownerId: string;
   name: string;
   location: GeometryPoint;
+  tags: string[];
   openingHours: Record<string, any>;
 }
 
@@ -25,6 +26,7 @@ export class RegisterBusinessPointUseCase {
     ownerId,
     name,
     location,
+    tags,
     openingHours,
   }: RegisterBusinessPointUseCaseRequest): Promise<RegisterBusinessPointUseCaseResponse> {
     const businessPoint = BusinessPoint.create({
@@ -32,6 +34,7 @@ export class RegisterBusinessPointUseCase {
       ownerId: new UniqueEntityID(ownerId),
       name,
       location,
+      tags,
       status: BusinessPointStatus.ACTIVE,
       openingHours: openingHours,
       censorship: false,
