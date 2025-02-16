@@ -11,7 +11,7 @@ import {
   BusinessPointCategoriesInsertType,
   businessPoints,
 } from '../schemas';
-import { eq, sql, and, ilike } from 'drizzle-orm';
+import { eq, sql, and, ilike, or } from 'drizzle-orm';
 
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
@@ -74,7 +74,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     const removeAccents = (str: string) =>
       str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-    const normalizedQuery = removeAccents(query);
+    const normalizedQuery = removeAccents(query).toLowerCase();
 
     const result = await this.drizzle.database
       .select({
@@ -89,9 +89,14 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       .where(
         and(
           eq(businessPoints.awaitingApproval, false),
-          ilike(
-            sql<string>`unaccent(${businessPoints.name})`,
-            `%${normalizedQuery}%`,
+          or(
+            ilike(
+              sql<string>`unaccent(${businessPoints.name})`,
+              `%${normalizedQuery}%`,
+            ),
+            sql<boolean>`${normalizedQuery} ILIKE ANY(
+              SELECT unaccent(jsonb_array_elements_text(${businessPoints.tags}))
+            )`,
           ),
         ),
       );
