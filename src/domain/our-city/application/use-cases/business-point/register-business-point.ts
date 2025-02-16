@@ -11,7 +11,7 @@ interface RegisterBusinessPointUseCaseRequest {
   ownerId: string;
   name: string;
   location: GeometryPoint;
-  openingHours;
+  openingHours: Record<string, any>;
 }
 
 type RegisterBusinessPointUseCaseResponse = Either<null, object>;
@@ -33,7 +33,7 @@ export class RegisterBusinessPointUseCase {
       name,
       location,
       status: BusinessPointStatus.ACTIVE,
-      openingHours: openingHours ? JSON.parse(openingHours) : '',
+      openingHours: openingHours,
       censorship: false,
     });
 

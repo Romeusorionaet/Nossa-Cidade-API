@@ -51,6 +51,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
         id: businessPoints.id,
         name: businessPoints.name,
         categoryId: businessPoints.categoryId,
+        openingHours: businessPoints.openingHours,
         latitude: sql<number>`ST_Y(location)`,
         longitude: sql<number>`ST_X(location)`,
       })
@@ -61,6 +62,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       id: new UniqueEntityID(row.id),
       categoryId: new UniqueEntityID(row.categoryId),
       name: row.name,
+      openingHours: row.openingHours,
       location: {
         latitude: row.latitude,
         longitude: row.longitude,
@@ -77,8 +79,9 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     const result = await this.drizzle.database
       .select({
         id: businessPoints.id,
-        name: businessPoints.name,
         categoryId: businessPoints.categoryId,
+        name: businessPoints.name,
+        openingHours: businessPoints.openingHours,
         latitude: sql<number>`ST_Y(location)`,
         longitude: sql<number>`ST_X(location)`,
       })
@@ -97,6 +100,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       id: new UniqueEntityID(row.id),
       categoryId: new UniqueEntityID(row.categoryId),
       name: row.name,
+      openingHours: row.openingHours,
       location: {
         latitude: row.latitude,
         longitude: row.longitude,
