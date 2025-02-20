@@ -1,6 +1,9 @@
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
-import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
+import {
+  BusinessPoint,
+  BusinessPointProps,
+} from 'src/domain/our-city/enterprise/entities/business-point';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
@@ -122,5 +125,14 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       .from(businessPointCategories);
 
     return result;
+  }
+
+  async findById(id: string): Promise<BusinessPointProps> {
+    const [result] = await this.drizzle.database
+      .select()
+      .from(businessPoints)
+      .where(eq(businessPoints.id, id));
+
+    return DrizzleBusinessPointMapper.toDomain(result);
   }
 }

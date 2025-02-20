@@ -14,4 +14,5 @@ export abstract class BusinessPointRepository {
   abstract findAllForMapping(): Promise<BusinessPointForMappingType[]>;
   abstract findByQuery(query: string): Promise<BusinessPointForMappingType[]>;
   abstract findAllCategories(): Promise<BusinessPointCategoriesInsertType[]>;
+  abstract findById(id: string): Promise<BusinessPointProps>;
 }
