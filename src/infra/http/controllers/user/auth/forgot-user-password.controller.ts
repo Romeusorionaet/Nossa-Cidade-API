@@ -5,10 +5,10 @@ import {
   HttpCode,
   Post,
 } from '@nestjs/common';
-import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
+import type { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from 'src/infra/http/middlewares/auth/guards/access-token.guard';
-import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
+import type { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 
 @Controller('/auth/forgot-password')
 export class ForgotUserPasswordController {

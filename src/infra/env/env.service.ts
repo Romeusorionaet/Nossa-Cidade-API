@@ -1,12 +1,12 @@
-import { ConfigService } from '@nestjs/config';
-import { Injectable } from '@nestjs/common';
-import { Env } from './env';
+import type { ConfigService } from "@nestjs/config";
+import { Injectable } from "@nestjs/common";
+import type { Env } from "./env";
 
 @Injectable()
 export class EnvService {
-  constructor(private configService: ConfigService<Env, true>) {}
+	constructor(private configService: ConfigService<Env, true>) {}
 
-  get<T extends keyof Env>(key: T) {
-    return this.configService.get(key, { infer: true });
-  }
+	get<T extends keyof Env>(key: T) {
+		return this.configService.get(key, { infer: true });
+	}
 }

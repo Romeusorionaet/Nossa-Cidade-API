@@ -1,4 +1,4 @@
-import { GetBusinessPointDetailsUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-details';
+import type { GetBusinessPointDetailsUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-details';
 import {
   BadRequestException,
   Controller,
@@ -15,8 +15,8 @@ export class GetBusinessPointDetailsController {
     private getBusinessPointDetailsUseCase: GetBusinessPointDetailsUseCase,
   ) {}
 
-  @Get()
   @Public()
+  @Get()
   @HttpCode(200)
   async handle(@Param('id') id: string) {
     try {

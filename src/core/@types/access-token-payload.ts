@@ -1,5 +1,5 @@
-import { StaffStatus } from 'src/domain/our-city/enterprise/entities/enums/staff-status';
-import { UsersRole } from 'src/domain/our-city/enterprise/entities/enums/users-role';
+import type { StaffStatus } from 'src/domain/our-city/enterprise/entities/enums/staff-status';
+import type { UsersRole } from 'src/domain/our-city/enterprise/entities/enums/users-role';
 
 export type AccessTokenPayload = {
   sub: string;

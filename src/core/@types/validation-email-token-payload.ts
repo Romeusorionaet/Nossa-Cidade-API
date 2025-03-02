@@ -1,4 +1,4 @@
 export type ConfirmationEmailTokenPayload = {
-  email: string;
-  purpose: string;
+	email: string;
+	purpose: string;
 };

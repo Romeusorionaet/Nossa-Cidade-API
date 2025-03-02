@@ -1,23 +1,23 @@
-import { BusinessPointRepository } from '../../repositories/business-point.repository';
-import { BusinessPointCategoriesInsertType } from 'src/infra/database/schemas';
-import { Either, right } from 'src/core/either';
-import { Injectable } from '@nestjs/common';
+import type { BusinessPointRepository } from "../../repositories/business-point.repository";
+import type { BusinessPointCategoriesInsertType } from "src/infra/database/schemas";
+import { type Either, right } from "src/core/either";
+import { Injectable } from "@nestjs/common";
 
 type GetBusinessPointCategoriesUseCaseResponse = Either<
-  null,
-  {
-    businessPointCategories: BusinessPointCategoriesInsertType[];
-  }
+	null,
+	{
+		businessPointCategories: BusinessPointCategoriesInsertType[];
+	}
 >;
 
 @Injectable()
 export class GetBusinessPointCategoriesUseCase {
-  constructor(private businessPointRepository: BusinessPointRepository) {}
+	constructor(private businessPointRepository: BusinessPointRepository) {}
 
-  async execute(): Promise<GetBusinessPointCategoriesUseCaseResponse> {
-    const businessPointCategories =
-      await this.businessPointRepository.findAllCategories();
+	async execute(): Promise<GetBusinessPointCategoriesUseCaseResponse> {
+		const businessPointCategories =
+			await this.businessPointRepository.findAllCategories();
 
-    return right({ businessPointCategories });
-  }
+		return right({ businessPointCategories });
+	}
 }

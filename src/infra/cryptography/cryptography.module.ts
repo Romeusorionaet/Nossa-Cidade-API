@@ -1,16 +1,16 @@
-import { HashGeneratorRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-generator.repository';
-import { HashComparerRepository } from 'src/domain/our-city/application/repositories/cryptography/hash-comparer.repository';
-import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
-import { JwtEncrypt } from './jwt-encrypt.cryptography';
-import { BcryptHash } from './bcrypt-hash.cryptography';
-import { Module } from '@nestjs/common';
+import { HashGeneratorRepository } from "src/domain/our-city/application/repositories/cryptography/hash-generator.repository";
+import { HashComparerRepository } from "src/domain/our-city/application/repositories/cryptography/hash-comparer.repository";
+import { EncryptRepository } from "src/domain/our-city/application/repositories/cryptography/encrypt.repository";
+import { JwtEncrypt } from "./jwt-encrypt.cryptography";
+import { BcryptHash } from "./bcrypt-hash.cryptography";
+import { Module } from "@nestjs/common";
 
 @Module({
-  providers: [
-    { provide: EncryptRepository, useClass: JwtEncrypt },
-    { provide: HashComparerRepository, useClass: BcryptHash },
-    { provide: HashGeneratorRepository, useClass: BcryptHash },
-  ],
-  exports: [HashGeneratorRepository, HashComparerRepository],
+	providers: [
+		{ provide: EncryptRepository, useClass: JwtEncrypt },
+		{ provide: HashComparerRepository, useClass: BcryptHash },
+		{ provide: HashGeneratorRepository, useClass: BcryptHash },
+	],
+	exports: [HashGeneratorRepository, HashComparerRepository],
 })
 export class CryptographyModule {}

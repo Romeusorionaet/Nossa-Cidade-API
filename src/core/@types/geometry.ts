@@ -1,4 +1,4 @@
 export type GeometryPoint = {
-  type: 'Point';
-  coordinates: [number, number];
+	type: "Point";
+	coordinates: [number, number];
 };

@@ -1,17 +1,17 @@
-import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
-import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
-import {
+import type { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
+import type { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
+import type {
   BusinessPoint,
   BusinessPointProps,
 } from 'src/domain/our-city/enterprise/entities/business-point';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
-import { DatabaseClient } from '../database.client';
+import type { GeometryPoint } from 'src/core/@types/geometry';
+import type { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import {
   businessPointCategories,
-  BusinessPointCategoriesInsertType,
+  type BusinessPointCategoriesInsertType,
   businessPoints,
 } from '../schemas';
 import { eq, sql, and, ilike, or } from 'drizzle-orm';

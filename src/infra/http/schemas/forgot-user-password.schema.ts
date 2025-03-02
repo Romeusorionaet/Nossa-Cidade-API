@@ -1,14 +1,14 @@
-import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
-import { z } from 'zod';
+import { ZodValidationPipe } from "../pipes/zod-validation.pipe";
+import { z } from "zod";
 
 export const forgotUserPasswordSchema = z.object({
-  password: z.string().min(6, { message: 'No mínimo 6 digitos' }),
+	password: z.string().min(6, { message: "No mínimo 6 digitos" }),
 });
 
 export const forgotUserPasswordSchemaPipe = new ZodValidationPipe(
-  forgotUserPasswordSchema,
+	forgotUserPasswordSchema,
 );
 
 export type ForgotUserPasswordRequest = z.infer<
-  typeof forgotUserPasswordSchema
+	typeof forgotUserPasswordSchema
 >;

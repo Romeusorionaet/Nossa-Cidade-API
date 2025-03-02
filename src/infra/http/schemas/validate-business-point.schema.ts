@@ -1,15 +1,15 @@
-import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
-import { z } from 'zod';
+import { ZodValidationPipe } from "../pipes/zod-validation.pipe";
+import { z } from "zod";
 
 export const validateBusinessPointSchema = z.object({
-  params: z.object({
-    latitude: z.coerce.number().min(-90).max(90),
-    longitude: z.coerce.number().min(-180).max(180),
-  }),
+	params: z.object({
+		latitude: z.coerce.number().min(-90).max(90),
+		longitude: z.coerce.number().min(-180).max(180),
+	}),
 });
 
 export const validateBusinessPointSchemaValidationPipe = new ZodValidationPipe(
-  validateBusinessPointSchema,
+	validateBusinessPointSchema,
 );
 
 export type businessPointRequest = z.infer<typeof validateBusinessPointSchema>;

@@ -5,12 +5,12 @@ import {
   HttpCode,
   Get,
 } from '@nestjs/common';
-import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
+import type { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { CurrentUser } from '../../middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
 import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error';
 import { UserProfilePresenter } from '../../presenters/user-profile.presenter';
-import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
+import type { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 
 @Controller('/user/profile')
 export class GetUserProfileController {
@@ -38,7 +38,9 @@ export class GetUserProfileController {
         }
       }
 
-      return UserProfilePresenter.toHTTP(result.value.userProfile);
+      return {
+        userProfile: UserProfilePresenter.toHTTP(result.value.userProfile),
+      };
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }

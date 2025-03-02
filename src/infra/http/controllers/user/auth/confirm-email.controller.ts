@@ -7,9 +7,9 @@ import {
 } from '@nestjs/common';
 import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cases/errors/invalid-credentials-errors';
 import { ConfirmationTokenGuard } from 'src/infra/http/middlewares/auth/guards/confirmation-token.guard';
-import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
+import type { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
-import { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
+import type { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
 
 @Controller('/auth/confirm-email')
 export class ConfirmEmailController {

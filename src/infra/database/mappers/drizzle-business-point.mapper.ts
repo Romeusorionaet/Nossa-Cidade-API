@@ -1,8 +1,8 @@
-import { BusinessPointStatus } from 'src/domain/our-city/enterprise/entities/enums/business-point-status';
+import type { BusinessPointStatus } from 'src/domain/our-city/enterprise/entities/enums/business-point-status';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
-import { BusinessPointInsertType } from '../schemas';
+import type { GeometryPoint } from 'src/core/@types/geometry';
+import type { BusinessPointInsertType } from '../schemas';
 
 export class DrizzleBusinessPointMapper {
   static toDomain(raw: BusinessPointInsertType): BusinessPoint {

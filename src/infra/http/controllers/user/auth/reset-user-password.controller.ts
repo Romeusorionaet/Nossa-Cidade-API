@@ -5,17 +5,18 @@ import {
   HttpCode,
   Post,
   Body,
+  Param,
 } from '@nestjs/common';
 import {
   forgotUserPasswordSchemaPipe,
-  ForgotUserPasswordRequest,
+  type ForgotUserPasswordRequest,
 } from 'src/infra/http/schemas/forgot-user-password.schema';
-import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
+import type { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
 import { ForgotPasswordTokenGuard } from 'src/infra/http/middlewares/auth/guards/forgot-password-token.guard';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
-import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
+import type { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
 
-@Controller('/auth/reset/password')
+@Controller('/auth/reset-password')
 export class ResetUserPasswordController {
   constructor(private resetUserPasswordUseCase: ResetUserPasswordUseCase) {}
 

@@ -1,16 +1,16 @@
-import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
+import type { BusinessPointForMappingType } from "src/core/@types/business-point-for-mapping-type";
 
 export class BusinessPointForMappingPresenter {
-  static toHTTP(businessPoint: BusinessPointForMappingType) {
-    return {
-      id: businessPoint.id.toString(),
-      categoryId: businessPoint.categoryId.toString(),
-      name: businessPoint.name,
-      openingHours: businessPoint.openingHours,
-      location: {
-        latitude: businessPoint.location.latitude,
-        longitude: businessPoint.location.longitude,
-      },
-    };
-  }
+	static toHTTP(businessPoint: BusinessPointForMappingType) {
+		return {
+			id: businessPoint.id.toString(),
+			categoryId: businessPoint.categoryId.toString(),
+			name: businessPoint.name,
+			openingHours: businessPoint.openingHours,
+			location: {
+				latitude: businessPoint.location.latitude,
+				longitude: businessPoint.location.longitude,
+			},
+		};
+	}
 }

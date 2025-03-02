@@ -1,1170 +1,1046 @@
 {
-  "id": "b7898e09-67f7-4812-ad51-f88d4c03e616",
-  "prevId": "8cca989a-0c6e-4109-acf4-e1bdc7bd49ec",
-  "version": "7",
-  "dialect": "postgresql",
-  "tables": {
-    "public.business_point_to_accessibility_association": {
-      "name": "business_point_to_accessibility_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "accessibility_id": {
-          "name": "accessibility_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_accessibility_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_accessibility_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_accessibility_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_accessibility_association_accessibility_id_accessibility_id_fk": {
-          "name": "business_point_to_accessibility_association_accessibility_id_accessibility_id_fk",
-          "tableFrom": "business_point_to_accessibility_association",
-          "tableTo": "accessibility",
-          "columnsFrom": [
-            "accessibility_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_to_amenities_association": {
-      "name": "business_point_to_amenities_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "amenities_id": {
-          "name": "amenities_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_amenities_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_amenities_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_amenities_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_amenities_association_amenities_id_amenities_id_fk": {
-          "name": "business_point_to_amenities_association_amenities_id_amenities_id_fk",
-          "tableFrom": "business_point_to_amenities_association",
-          "tableTo": "amenities",
-          "columnsFrom": [
-            "amenities_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_to_audience_association": {
-      "name": "business_point_to_audience_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "audience_id": {
-          "name": "audience_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_audience_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_audience_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_audience_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_audience_association_audience_id_audience_id_fk": {
-          "name": "business_point_to_audience_association_audience_id_audience_id_fk",
-          "tableFrom": "business_point_to_audience_association",
-          "tableTo": "audience",
-          "columnsFrom": [
-            "audience_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_to_menu_association": {
-      "name": "business_point_to_menu_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "menu_id": {
-          "name": "menu_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_menu_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_menu_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_menu_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_menu_association_menu_id_menu_id_fk": {
-          "name": "business_point_to_menu_association_menu_id_menu_id_fk",
-          "tableFrom": "business_point_to_menu_association",
-          "tableTo": "menu",
-          "columnsFrom": [
-            "menu_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_to_parking_association": {
-      "name": "business_point_to_parking_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "parking_id": {
-          "name": "parking_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_parking_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_parking_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_parking_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_parking_association_parking_id_parking_id_fk": {
-          "name": "business_point_to_parking_association_parking_id_parking_id_fk",
-          "tableFrom": "business_point_to_parking_association",
-          "tableTo": "parking",
-          "columnsFrom": [
-            "parking_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_to_payment_association": {
-      "name": "business_point_to_payment_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "payments_id": {
-          "name": "payments_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_payment_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_payment_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_payment_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_payment_association_payments_id_payments_id_fk": {
-          "name": "business_point_to_payment_association_payments_id_payments_id_fk",
-          "tableFrom": "business_point_to_payment_association",
-          "tableTo": "payments",
-          "columnsFrom": [
-            "payments_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_to_pets_association": {
-      "name": "business_point_to_pets_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "pets_id": {
-          "name": "pets_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_pets_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_pets_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_pets_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_pets_association_pets_id_pets_id_fk": {
-          "name": "business_point_to_pets_association_pets_id_pets_id_fk",
-          "tableFrom": "business_point_to_pets_association",
-          "tableTo": "pets",
-          "columnsFrom": [
-            "pets_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_to_planning_association": {
-      "name": "business_point_to_planning_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "planning_id": {
-          "name": "planning_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_planning_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_planning_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_planning_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_planning_association_planning_id_planning_id_fk": {
-          "name": "business_point_to_planning_association_planning_id_planning_id_fk",
-          "tableFrom": "business_point_to_planning_association",
-          "tableTo": "planning",
-          "columnsFrom": [
-            "planning_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_to_service_option_association": {
-      "name": "business_point_to_service_option_association",
-      "schema": "",
-      "columns": {
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "service_option_id": {
-          "name": "service_option_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_to_service_option_association_business_point_id_business_points_id_fk": {
-          "name": "business_point_to_service_option_association_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_to_service_option_association",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_to_service_option_association_service_option_id_service_options_id_fk": {
-          "name": "business_point_to_service_option_association_service_option_id_service_options_id_fk",
-          "tableFrom": "business_point_to_service_option_association",
-          "tableTo": "service_options",
-          "columnsFrom": [
-            "service_option_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_categories": {
-      "name": "business_point_categories",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "business_point_categories_name_unique": {
-          "name": "business_point_categories_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_point_favorites": {
-      "name": "business_point_favorites",
-      "schema": "",
-      "columns": {
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "business_point_id": {
-          "name": "business_point_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_point_favorites_user_id_users_id_fk": {
-          "name": "business_point_favorites_user_id_users_id_fk",
-          "tableFrom": "business_point_favorites",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_point_favorites_business_point_id_business_points_id_fk": {
-          "name": "business_point_favorites_business_point_id_business_points_id_fk",
-          "tableFrom": "business_point_favorites",
-          "tableTo": "business_points",
-          "columnsFrom": [
-            "business_point_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.business_points": {
-      "name": "business_points",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "description": {
-          "name": "description",
-          "type": "varchar(250)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "category_id": {
-          "name": "category_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "location": {
-          "name": "location",
-          "type": "geometry(point)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "status": {
-          "name": "status",
-          "type": "staff_status",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "'ACTIVE'"
-        },
-        "opening_hours": {
-          "name": "opening_hours",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "images": {
-          "name": "images",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "website": {
-          "name": "website",
-          "type": "varchar(500)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "tags": {
-          "name": "tags",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "awaiting_approval": {
-          "name": "awaiting_approval",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
-        },
-        "censorship": {
-          "name": "censorship",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
-        },
-        "highlight": {
-          "name": "highlight",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "owner_id": {
-          "name": "owner_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "business_points_category_id_business_point_categories_id_fk": {
-          "name": "business_points_category_id_business_point_categories_id_fk",
-          "tableFrom": "business_points",
-          "tableTo": "business_point_categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "business_points_owner_id_users_id_fk": {
-          "name": "business_points_owner_id_users_id_fk",
-          "tableFrom": "business_points",
-          "tableTo": "users",
-          "columnsFrom": [
-            "owner_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "business_points_location_unique": {
-          "name": "business_points_location_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "location"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.staff": {
-      "name": "staff",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "role": {
-          "name": "role",
-          "type": "users_role",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "status": {
-          "name": "status",
-          "type": "staff_status",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "'ACTIVE'"
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "staff_user_id_users_id_fk": {
-          "name": "staff_user_id_users_id_fk",
-          "tableFrom": "staff",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.users": {
-      "name": "users",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "public_id": {
-          "name": "public_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "username": {
-          "name": "username",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "password_hash": {
-          "name": "password_hash",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "avatar": {
-          "name": "avatar",
-          "type": "varchar(500)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "email_verified": {
-          "name": "email_verified",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.accessibility": {
-      "name": "accessibility",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "accessibility_name_unique": {
-          "name": "accessibility_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.amenities": {
-      "name": "amenities",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "amenities_name_unique": {
-          "name": "amenities_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.audience": {
-      "name": "audience",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "audience_name_unique": {
-          "name": "audience_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.menu": {
-      "name": "menu",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "menu_name_unique": {
-          "name": "menu_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.parking": {
-      "name": "parking",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "parking_name_unique": {
-          "name": "parking_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.payments": {
-      "name": "payments",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "payments_name_unique": {
-          "name": "payments_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.pets": {
-      "name": "pets",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "pets_name_unique": {
-          "name": "pets_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.planning": {
-      "name": "planning",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "planning_name_unique": {
-          "name": "planning_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.service_options": {
-      "name": "service_options",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "service_options_name_unique": {
-          "name": "service_options_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    }
-  },
-  "enums": {
-    "public.staff_status": {
-      "name": "staff_status",
-      "schema": "public",
-      "values": [
-        "ACTIVE",
-        "INACTIVE",
-        "SUSPENDED"
-      ]
-    },
-    "public.users_role": {
-      "name": "users_role",
-      "schema": "public",
-      "values": [
-        "MEMBER",
-        "MERCHANT",
-        "ADMIN"
-      ]
-    }
-  },
-  "schemas": {},
-  "sequences": {},
-  "roles": {},
-  "policies": {},
-  "views": {},
-  "_meta": {
-    "columns": {},
-    "schemas": {},
-    "tables": {}
-  }
+	"id": "b7898e09-67f7-4812-ad51-f88d4c03e616",
+	"prevId": "8cca989a-0c6e-4109-acf4-e1bdc7bd49ec",
+	"version": "7",
+	"dialect": "postgresql",
+	"tables": {
+		"public.business_point_to_accessibility_association": {
+			"name": "business_point_to_accessibility_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"accessibility_id": {
+					"name": "accessibility_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_accessibility_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_accessibility_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_accessibility_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_accessibility_association_accessibility_id_accessibility_id_fk": {
+					"name": "business_point_to_accessibility_association_accessibility_id_accessibility_id_fk",
+					"tableFrom": "business_point_to_accessibility_association",
+					"tableTo": "accessibility",
+					"columnsFrom": ["accessibility_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_to_amenities_association": {
+			"name": "business_point_to_amenities_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"amenities_id": {
+					"name": "amenities_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_amenities_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_amenities_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_amenities_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_amenities_association_amenities_id_amenities_id_fk": {
+					"name": "business_point_to_amenities_association_amenities_id_amenities_id_fk",
+					"tableFrom": "business_point_to_amenities_association",
+					"tableTo": "amenities",
+					"columnsFrom": ["amenities_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_to_audience_association": {
+			"name": "business_point_to_audience_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"audience_id": {
+					"name": "audience_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_audience_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_audience_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_audience_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_audience_association_audience_id_audience_id_fk": {
+					"name": "business_point_to_audience_association_audience_id_audience_id_fk",
+					"tableFrom": "business_point_to_audience_association",
+					"tableTo": "audience",
+					"columnsFrom": ["audience_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_to_menu_association": {
+			"name": "business_point_to_menu_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"menu_id": {
+					"name": "menu_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_menu_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_menu_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_menu_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_menu_association_menu_id_menu_id_fk": {
+					"name": "business_point_to_menu_association_menu_id_menu_id_fk",
+					"tableFrom": "business_point_to_menu_association",
+					"tableTo": "menu",
+					"columnsFrom": ["menu_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_to_parking_association": {
+			"name": "business_point_to_parking_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"parking_id": {
+					"name": "parking_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_parking_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_parking_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_parking_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_parking_association_parking_id_parking_id_fk": {
+					"name": "business_point_to_parking_association_parking_id_parking_id_fk",
+					"tableFrom": "business_point_to_parking_association",
+					"tableTo": "parking",
+					"columnsFrom": ["parking_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_to_payment_association": {
+			"name": "business_point_to_payment_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"payments_id": {
+					"name": "payments_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_payment_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_payment_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_payment_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_payment_association_payments_id_payments_id_fk": {
+					"name": "business_point_to_payment_association_payments_id_payments_id_fk",
+					"tableFrom": "business_point_to_payment_association",
+					"tableTo": "payments",
+					"columnsFrom": ["payments_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_to_pets_association": {
+			"name": "business_point_to_pets_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"pets_id": {
+					"name": "pets_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_pets_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_pets_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_pets_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_pets_association_pets_id_pets_id_fk": {
+					"name": "business_point_to_pets_association_pets_id_pets_id_fk",
+					"tableFrom": "business_point_to_pets_association",
+					"tableTo": "pets",
+					"columnsFrom": ["pets_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_to_planning_association": {
+			"name": "business_point_to_planning_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"planning_id": {
+					"name": "planning_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_planning_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_planning_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_planning_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_planning_association_planning_id_planning_id_fk": {
+					"name": "business_point_to_planning_association_planning_id_planning_id_fk",
+					"tableFrom": "business_point_to_planning_association",
+					"tableTo": "planning",
+					"columnsFrom": ["planning_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_to_service_option_association": {
+			"name": "business_point_to_service_option_association",
+			"schema": "",
+			"columns": {
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"service_option_id": {
+					"name": "service_option_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_to_service_option_association_business_point_id_business_points_id_fk": {
+					"name": "business_point_to_service_option_association_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_to_service_option_association",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_to_service_option_association_service_option_id_service_options_id_fk": {
+					"name": "business_point_to_service_option_association_service_option_id_service_options_id_fk",
+					"tableFrom": "business_point_to_service_option_association",
+					"tableTo": "service_options",
+					"columnsFrom": ["service_option_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_categories": {
+			"name": "business_point_categories",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"business_point_categories_name_unique": {
+					"name": "business_point_categories_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_point_favorites": {
+			"name": "business_point_favorites",
+			"schema": "",
+			"columns": {
+				"user_id": {
+					"name": "user_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"business_point_id": {
+					"name": "business_point_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_point_favorites_user_id_users_id_fk": {
+					"name": "business_point_favorites_user_id_users_id_fk",
+					"tableFrom": "business_point_favorites",
+					"tableTo": "users",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_point_favorites_business_point_id_business_points_id_fk": {
+					"name": "business_point_favorites_business_point_id_business_points_id_fk",
+					"tableFrom": "business_point_favorites",
+					"tableTo": "business_points",
+					"columnsFrom": ["business_point_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.business_points": {
+			"name": "business_points",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar(250)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"category_id": {
+					"name": "category_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"location": {
+					"name": "location",
+					"type": "geometry(point)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"status": {
+					"name": "status",
+					"type": "staff_status",
+					"typeSchema": "public",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "'ACTIVE'"
+				},
+				"opening_hours": {
+					"name": "opening_hours",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"images": {
+					"name": "images",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"website": {
+					"name": "website",
+					"type": "varchar(500)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"tags": {
+					"name": "tags",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"awaiting_approval": {
+					"name": "awaiting_approval",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				},
+				"censorship": {
+					"name": "censorship",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				},
+				"highlight": {
+					"name": "highlight",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"owner_id": {
+					"name": "owner_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"business_points_category_id_business_point_categories_id_fk": {
+					"name": "business_points_category_id_business_point_categories_id_fk",
+					"tableFrom": "business_points",
+					"tableTo": "business_point_categories",
+					"columnsFrom": ["category_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				},
+				"business_points_owner_id_users_id_fk": {
+					"name": "business_points_owner_id_users_id_fk",
+					"tableFrom": "business_points",
+					"tableTo": "users",
+					"columnsFrom": ["owner_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"business_points_location_unique": {
+					"name": "business_points_location_unique",
+					"nullsNotDistinct": false,
+					"columns": ["location"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.staff": {
+			"name": "staff",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"role": {
+					"name": "role",
+					"type": "users_role",
+					"typeSchema": "public",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"status": {
+					"name": "status",
+					"type": "staff_status",
+					"typeSchema": "public",
+					"primaryKey": false,
+					"notNull": false,
+					"default": "'ACTIVE'"
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"staff_user_id_users_id_fk": {
+					"name": "staff_user_id_users_id_fk",
+					"tableFrom": "staff",
+					"tableTo": "users",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "no action",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.users": {
+			"name": "users",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"public_id": {
+					"name": "public_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"username": {
+					"name": "username",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"email": {
+					"name": "email",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"password_hash": {
+					"name": "password_hash",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"avatar": {
+					"name": "avatar",
+					"type": "varchar(500)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"email_verified": {
+					"name": "email_verified",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"default": false
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"users_email_unique": {
+					"name": "users_email_unique",
+					"nullsNotDistinct": false,
+					"columns": ["email"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.accessibility": {
+			"name": "accessibility",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"accessibility_name_unique": {
+					"name": "accessibility_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.amenities": {
+			"name": "amenities",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"amenities_name_unique": {
+					"name": "amenities_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.audience": {
+			"name": "audience",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"audience_name_unique": {
+					"name": "audience_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.menu": {
+			"name": "menu",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"menu_name_unique": {
+					"name": "menu_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.parking": {
+			"name": "parking",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"parking_name_unique": {
+					"name": "parking_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.payments": {
+			"name": "payments",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"payments_name_unique": {
+					"name": "payments_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.pets": {
+			"name": "pets",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"pets_name_unique": {
+					"name": "pets_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.planning": {
+			"name": "planning",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"planning_name_unique": {
+					"name": "planning_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		},
+		"public.service_options": {
+			"name": "service_options",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(100)",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {
+				"service_options_name_unique": {
+					"name": "service_options_name_unique",
+					"nullsNotDistinct": false,
+					"columns": ["name"]
+				}
+			},
+			"policies": {},
+			"checkConstraints": {},
+			"isRLSEnabled": false
+		}
+	},
+	"enums": {
+		"public.staff_status": {
+			"name": "staff_status",
+			"schema": "public",
+			"values": ["ACTIVE", "INACTIVE", "SUSPENDED"]
+		},
+		"public.users_role": {
+			"name": "users_role",
+			"schema": "public",
+			"values": ["MEMBER", "MERCHANT", "ADMIN"]
+		}
+	},
+	"schemas": {},
+	"sequences": {},
+	"roles": {},
+	"policies": {},
+	"views": {},
+	"_meta": {
+		"columns": {},
+		"schemas": {},
+		"tables": {}
+	}
 }

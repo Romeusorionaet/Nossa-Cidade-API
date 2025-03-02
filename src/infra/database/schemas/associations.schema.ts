@@ -1,166 +1,166 @@
 import {
-  sharedServiceOptions,
-  sharedAccessibility,
-  sharedAmenities,
-  sharedPayments,
-  sharedAudience,
-  sharedPlanning,
-  sharedParking,
-  sharedMenu,
-  sharedPets,
-} from './shared.schema';
-import { pgTable, primaryKey, text } from 'drizzle-orm/pg-core';
-import { businessPoints } from './essential.schema';
+	sharedServiceOptions,
+	sharedAccessibility,
+	sharedAmenities,
+	sharedPayments,
+	sharedAudience,
+	sharedPlanning,
+	sharedParking,
+	sharedMenu,
+	sharedPets,
+} from "./shared.schema";
+import { pgTable, primaryKey, text } from "drizzle-orm/pg-core";
+import { businessPoints } from "./essential.schema";
 
 export const businessPointToPetsAssociation = pgTable(
-  'business_point_to_pets_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    petsId: text('pets_id')
-      .references(() => sharedPets.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.petsId] }),
-    },
-  ],
+	"business_point_to_pets_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		petsId: text("pets_id")
+			.references(() => sharedPets.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.petsId] }),
+		},
+	],
 );
 
 export const businessPointToPlanningAssociation = pgTable(
-  'business_point_to_planning_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    planningId: text('planning_id')
-      .references(() => sharedPlanning.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.planningId] }),
-    },
-  ],
+	"business_point_to_planning_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		planningId: text("planning_id")
+			.references(() => sharedPlanning.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.planningId] }),
+		},
+	],
 );
 
 export const businessPointToAccessibilityAssociation = pgTable(
-  'business_point_to_accessibility_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    accessibilityId: text('accessibility_id')
-      .references(() => sharedAccessibility.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.accessibilityId] }),
-    },
-  ],
+	"business_point_to_accessibility_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		accessibilityId: text("accessibility_id")
+			.references(() => sharedAccessibility.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.accessibilityId] }),
+		},
+	],
 );
 
 export const businessPointToParkingAssociation = pgTable(
-  'business_point_to_parking_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    parkingId: text('parking_id')
-      .references(() => sharedParking.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.parkingId] }),
-    },
-  ],
+	"business_point_to_parking_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		parkingId: text("parking_id")
+			.references(() => sharedParking.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.parkingId] }),
+		},
+	],
 );
 
 export const businessPointToPaymentsAssociation = pgTable(
-  'business_point_to_payment_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    paymentsId: text('payments_id')
-      .references(() => sharedPayments.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.paymentsId] }),
-    },
-  ],
+	"business_point_to_payment_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		paymentsId: text("payments_id")
+			.references(() => sharedPayments.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.paymentsId] }),
+		},
+	],
 );
 
 export const businessPointToAudienceAssociation = pgTable(
-  'business_point_to_audience_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    audienceId: text('audience_id')
-      .references(() => sharedAudience.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.audienceId] }),
-    },
-  ],
+	"business_point_to_audience_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		audienceId: text("audience_id")
+			.references(() => sharedAudience.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.audienceId] }),
+		},
+	],
 );
 
 export const businessPointToAmenitiesAssociation = pgTable(
-  'business_point_to_amenities_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    amenitiesId: text('amenities_id')
-      .references(() => sharedAmenities.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.amenitiesId] }),
-    },
-  ],
+	"business_point_to_amenities_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		amenitiesId: text("amenities_id")
+			.references(() => sharedAmenities.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.amenitiesId] }),
+		},
+	],
 );
 
 export const businessPointToMenuAssociation = pgTable(
-  'business_point_to_menu_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    menuId: text('menu_id')
-      .references(() => sharedMenu.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.menuId] }),
-    },
-  ],
+	"business_point_to_menu_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		menuId: text("menu_id")
+			.references(() => sharedMenu.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.menuId] }),
+		},
+	],
 );
 
 export const businessPointToServiceOptionAssociation = pgTable(
-  'business_point_to_service_option_association',
-  {
-    businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
-      .notNull(),
-    serviceOptionId: text('service_option_id')
-      .references(() => sharedServiceOptions.id)
-      .notNull(),
-  },
-  (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.serviceOptionId] }),
-    },
-  ],
+	"business_point_to_service_option_association",
+	{
+		businessPointId: text("business_point_id")
+			.references(() => businessPoints.id)
+			.notNull(),
+		serviceOptionId: text("service_option_id")
+			.references(() => sharedServiceOptions.id)
+			.notNull(),
+	},
+	(t) => [
+		{
+			pk: primaryKey({ columns: [t.businessPointId, t.serviceOptionId] }),
+		},
+	],
 );

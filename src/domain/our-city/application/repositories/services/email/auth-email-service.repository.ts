@@ -1,4 +1,4 @@
 export abstract class AuthEmailServiceRepository {
-  abstract sendValidationEmail({ email }: { email: string }): Promise<void>;
-  abstract sendForgotPassword({ email }: { email: string }): Promise<void>;
+	abstract sendValidationEmail({ email }: { email: string }): Promise<void>;
+	abstract sendForgotPassword({ email }: { email: string }): Promise<void>;
 }
