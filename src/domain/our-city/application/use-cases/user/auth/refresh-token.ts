@@ -53,10 +53,7 @@ export class RefreshTokenUseCase {
       sub: userId,
       publicId,
       email,
-      staffId: staff?.id.toString() || null,
-      role: staff?.role || null,
-      status: staff?.status || null,
-      purpose: TokenPurposeEnum.ACCESS_TOKEN,
+      purpose: TokenPurposeEnum.REFRESH_TOKEN,
       permissions,
     });
 

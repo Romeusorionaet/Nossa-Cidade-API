@@ -4,6 +4,7 @@ import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-toke
 import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { RefreshTokenPayload } from 'src/core/@types/refresh-token-payload';
 
 @Injectable()
 export class JwtEncrypt implements EncryptRepository {
@@ -15,7 +16,7 @@ export class JwtEncrypt implements EncryptRepository {
     });
   }
 
-  async encryptRefreshToken(payload: AccessTokenPayload): Promise<string> {
+  async encryptRefreshToken(payload: RefreshTokenPayload): Promise<string> {
     return await this.jwtService.signAsync(payload, {
       expiresIn: '120m',
     });
