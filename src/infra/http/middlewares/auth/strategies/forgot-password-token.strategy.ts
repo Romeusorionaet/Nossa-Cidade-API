@@ -22,6 +22,10 @@ export class ForgotPasswordTokenStrategy extends PassportStrategy(
   }
 
   async validate(payload: ForgotPasswordTokenPayload) {
+    if (payload.purpose !== TokenPurposeEnum.FORGOT_PASSWORD_TOKEN) {
+      throw new BadRequestException('Invalid token purpose');
+    }
+
     try {
       return forgotPasswordTokenSchema.parse(payload);
     } catch (err: any) {

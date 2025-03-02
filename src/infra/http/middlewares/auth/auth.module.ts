@@ -28,9 +28,18 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   ],
   providers: [
-    ForgotPasswordTokenStrategy,
-    ConfirmationTokenStrategy,
-    AccessTokenStrategy,
+    {
+      provide: 'FORGOT_PASSWORD_TOKEN',
+      useClass: ForgotPasswordTokenStrategy,
+    },
+    {
+      provide: 'CONFIRMATION_TOKEN',
+      useClass: ConfirmationTokenStrategy,
+    },
+    {
+      provide: 'ACCESS_TOKEN',
+      useClass: AccessTokenStrategy,
+    },
     PermissionGuard,
     EnvService,
   ],
