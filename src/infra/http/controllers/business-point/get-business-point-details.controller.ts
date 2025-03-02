@@ -25,7 +25,6 @@ export class GetBusinessPointDetailsController {
           id,
         });
 
-      console.log(resultBusinessPoint.value.businessPoint, '===');
       return BusinessPointDetailsPresenter.toHTTP(
         resultBusinessPoint.value.businessPoint,
       );

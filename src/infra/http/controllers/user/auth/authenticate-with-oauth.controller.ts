@@ -21,12 +21,12 @@ export class AuthenticateWidthOAuthController {
   constructor(
     private registerUserWithOAuthUseCase: RegisterUserWithOAuthUseCase,
     private refreshTokenUseCase: RefreshTokenUseCase,
-    private envService: EnvService,
+    private envService: EnvService, //TODO remove
   ) {}
 
   @Public()
   @Post()
-  @HttpCode(302)
+  @HttpCode(200)
   async handle(
     @Body(userProfileFromAuthValidationPipe) body: UserProfileFromAuth,
     @Res() res: FastifyReply,
@@ -49,10 +49,10 @@ export class AuthenticateWidthOAuthController {
         email,
       });
 
-      const result = resultRefreshToken.value;
-      const redirectUrl = `${this.envService.get('NOSSA_CIDADE_HOST')}?access_token=${result.accessToken}&refresh_token=${result.refreshToken}`;
-
-      return res.redirect(redirectUrl);
+      return res.send({
+        accessToken: resultRefreshToken.value.accessToken,
+        refreshToken: resultRefreshToken.value.refreshToken,
+      });
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }
