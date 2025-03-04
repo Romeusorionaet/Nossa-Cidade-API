@@ -4,6 +4,7 @@ import { GetBusinessPointDetailsUseCase } from 'src/domain/our-city/application/
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
 import { GetBusinessPointsForMappingController } from './controllers/business-point/get-business-points-for-mapping.controller';
+import { ResendConfirmationEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/resend-confirmation-email';
 import { SearchBusinessPointsUseCase } from 'src/domain/our-city/application/use-cases/business-point/search-business-points';
 import { GetBusinessPointCategoriesController } from './controllers/business-point/get-business-point-categories.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
@@ -13,6 +14,7 @@ import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-c
 import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
 import { RegisterBusinessPointController } from './controllers/business-point/register-business-point.controller';
+import { ResendConfirmationEmailController } from './controllers/user/auth/resend-confirmation-email.controller';
 import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
 import { SearchBusinessPointsController } from './controllers/business-point/search-business-points.controller';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
@@ -27,6 +29,7 @@ import { AuthenticateUserController } from './controllers/user/auth/authenticate
 import { GetUserProfileController } from './controllers/user/get-user-profile.controller';
 import { RegisterUserController } from './controllers/user/auth/register-user.controller';
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
+import { RefreshTokenController } from './controllers/user/auth/refresh-token.controller';
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { EmailModule } from '../services/email/email.module';
 import { DatabaseModule } from '../database/database.module';
@@ -46,6 +49,7 @@ import { Module } from '@nestjs/common';
     GetBusinessPointsForMappingController,
     GetBusinessPointCategoriesController,
     GetBusinessPointDetailsController,
+    ResendConfirmationEmailController,
     AuthenticateWidthOAuthController,
     RegisterBusinessPointController,
     SearchBusinessPointsController,
@@ -56,11 +60,13 @@ import { Module } from '@nestjs/common';
     GetUserProfileController,
     RegisterUserController,
     ConfirmEmailController,
+    RefreshTokenController,
   ],
   providers: [
     GetBusinessPointsForMappingUseCase,
     GetBusinessPointCategoriesUseCase,
     GetBusinessPointDetailsUseCase,
+    ResendConfirmationEmailUseCase,
     RegisterUserWithOAuthUseCase,
     RegisterBusinessPointUseCase,
     ValidateBusinessPointUseCase,
@@ -74,6 +80,7 @@ import { Module } from '@nestjs/common';
     RefreshTokenUseCase,
     RegisterUserUseCase,
     ConfirmEmailUseCase,
+    RefreshTokenUseCase,
   ],
 })
 export class HttpModule {}

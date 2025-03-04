@@ -13,16 +13,22 @@ export class AuthEmailService implements AuthEmailServiceRepository {
     private encrypt: EncryptRepository,
   ) {}
 
-  async sendValidationEmail({ email }: { email: string }): Promise<void> {
+  async sendValidationEmail({ email }: { email: string }): Promise<boolean> {
     const token = await this.encrypt.encryptValidationEmailToken({
       email,
       purpose: TokenPurposeEnum.CONFIRMATION_TOKEN,
     });
 
-    const linkUrl = `${this.envService.get('CONFIRM_EMAIL_NOSSA_CIDADE_HOST')}?token=${token}`;
+    const linkUrl = `${this.envService.get('CONFIRM_EMAIL_NOSSA_CIDADE_HOST')}?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`;
     const html = `<p>Clique no link a seguir para verificar seu email:</p><a href="${linkUrl}">Verificar Email.</a>`;
 
-    await this.emailService.sendEmail(email, 'Verificação de Email.', html);
+    try {
+      await this.emailService.sendEmail(email, 'Verificação de Email.', html);
+
+      return true;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
   }
 
   async sendForgotPassword({ email }: { email: string }): Promise<void> {

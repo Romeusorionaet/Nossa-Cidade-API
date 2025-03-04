@@ -1,5 +1,6 @@
 import { ForgotPasswordTokenStrategy } from './strategies/forgot-password-token.strategy';
 import { ConfirmationTokenStrategy } from './strategies/confirmation-token.strategy';
+import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
 import { AccessTokenStrategy } from './strategies/access-token.strategy';
 import { PermissionGuard } from './guards/permission.guard';
 import { EnvService } from '../../../env/env.service';
@@ -39,6 +40,10 @@ import { JwtModule } from '@nestjs/jwt';
     {
       provide: 'ACCESS_TOKEN',
       useClass: AccessTokenStrategy,
+    },
+    {
+      provide: 'REFRESH_TOKEN',
+      useClass: RefreshTokenStrategy,
     },
     PermissionGuard,
     EnvService,

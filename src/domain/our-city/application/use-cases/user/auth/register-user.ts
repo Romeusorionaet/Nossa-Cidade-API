@@ -35,13 +35,17 @@ export class RegisterUserUseCase {
     password,
     avatar,
   }: RegisterUserUseCaseRequest): Promise<RegisterUserUseCaseResponse> {
-    const userWithSameEmail = await this.usersRepository.findByEmail(email);
+    const resultUser = await this.usersRepository.findByEmail(email);
 
-    if (userWithSameEmail) {
+    if (resultUser) {
       return left(new UserAlreadyExistsError());
     }
 
     const hashedPassword = await this.hashGenerator.hash(password);
+
+    await this.authEmailService.sendValidationEmail({
+      email,
+    });
 
     const user = User.create({
       username,
@@ -53,8 +57,6 @@ export class RegisterUserUseCase {
     });
 
     await this.usersRepository.create(user);
-
-    await this.authEmailService.sendValidationEmail({ email });
 
     return right({ user });
   }

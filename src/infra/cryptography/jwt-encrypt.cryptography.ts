@@ -26,7 +26,7 @@ export class JwtEncrypt implements EncryptRepository {
     payload: ConfirmationEmailTokenPayload,
   ): Promise<string> {
     return await this.jwtService.signAsync(payload, {
-      expiresIn: '5m',
+      expiresIn: '30m',
     });
   }
 
