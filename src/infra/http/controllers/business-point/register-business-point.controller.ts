@@ -8,16 +8,16 @@ import {
 } from '@nestjs/common';
 import {
   businessPointSchemaValidationPipe,
-  type businessPointRequest,
+  businessPointRequest,
 } from '../../schemas/business-point.schema';
 import { BusinessPointAlreadyExistsError } from 'src/domain/our-city/application/use-cases/errors/business-point-already-exists-error';
-import type { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
-import type { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
-import type { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
+import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
+import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
+import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
 import { CurrentUser } from '../../middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
-import type { AccessTokenPayload } from 'src/core/@types/access-token-payload';
-import type { GeometryPoint } from 'src/core/@types/geometry';
+import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
+import { GeometryPoint } from 'src/core/@types/geometry';
 
 @Controller('/business-point/register')
 export class RegisterBusinessPointController {

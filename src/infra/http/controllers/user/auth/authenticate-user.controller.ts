@@ -7,11 +7,11 @@ import {
 } from '@nestjs/common';
 import {
   authenticateSchemaValidationPipe,
-  type AuthenticationRequest,
+  AuthenticationRequest,
 } from 'src/infra/http/schemas/authenticate.schema';
 import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cases/errors/invalid-credentials-errors';
 import { EmailNotVerifiedError } from 'src/domain/our-city/application/use-cases/errors/email-not-verified-error';
-import type { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
+import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
 import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
 
 @Controller('/auth/authenticate')

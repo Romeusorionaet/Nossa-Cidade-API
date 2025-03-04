@@ -7,10 +7,10 @@ import {
 } from '@nestjs/common';
 import {
   userProfileValidationPipe,
-  type UserProfile,
+  UserProfile,
 } from 'src/infra/http/schemas/user-profile.schema';
 import { UserAlreadyExistsError } from 'src/domain/our-city/application/use-cases/errors/user-already-exists-error';
-import type { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
+import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
 import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
 
 @Controller('/auth/register')

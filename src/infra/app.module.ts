@@ -1,15 +1,7 @@
-import { HttpModule } from "./http/http.module";
-import { ConfigModule } from "@nestjs/config";
-import { Module } from "@nestjs/common";
-import { envSchema } from "./env/env";
+import { HttpModule } from './http/http.module';
+import { Module } from '@nestjs/common';
 
 @Module({
-	imports: [
-		ConfigModule.forRoot({
-			validate: (env) => envSchema.parse(env),
-			isGlobal: true,
-		}),
-		HttpModule,
-	],
+  imports: [HttpModule],
 })
 export class AppModule {}

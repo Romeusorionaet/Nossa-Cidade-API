@@ -1,32 +1,32 @@
-import { BusinessPointAlreadyExistsError } from "../errors/business-point-already-exists-error";
-import type { BusinessPointRepository } from "../../repositories/business-point.repository";
-import type { GeometryPoint } from "src/core/@types/geometry";
-import { type Either, left, right } from "src/core/either";
-import { Injectable } from "@nestjs/common";
+import { BusinessPointAlreadyExistsError } from '../errors/business-point-already-exists-error';
+import { BusinessPointRepository } from '../../repositories/business-point.repository';
+import { GeometryPoint } from 'src/core/@types/geometry';
+import { Either, left, right } from 'src/core/either';
+import { Injectable } from '@nestjs/common';
 
 interface ValidateBusinessPointUseCaseRequest {
-	location: GeometryPoint;
+  location: GeometryPoint;
 }
 
 type ValidateBusinessPointUseCaseResponse = Either<
-	BusinessPointAlreadyExistsError,
-	object
+  BusinessPointAlreadyExistsError,
+  object
 >;
 
 @Injectable()
 export class ValidateBusinessPointUseCase {
-	constructor(private businessPointRepository: BusinessPointRepository) {}
+  constructor(private businessPointRepository: BusinessPointRepository) {}
 
-	async execute({
-		location,
-	}: ValidateBusinessPointUseCaseRequest): Promise<ValidateBusinessPointUseCaseResponse> {
-		const existBusinessPoint =
-			await this.businessPointRepository.findByCoordinate(location);
+  async execute({
+    location,
+  }: ValidateBusinessPointUseCaseRequest): Promise<ValidateBusinessPointUseCaseResponse> {
+    const existBusinessPoint =
+      await this.businessPointRepository.findByCoordinate(location);
 
-		if (existBusinessPoint) {
-			return left(new BusinessPointAlreadyExistsError());
-		}
+    if (existBusinessPoint) {
+      return left(new BusinessPointAlreadyExistsError());
+    }
 
-		return right({});
-	}
+    return right({});
+  }
 }

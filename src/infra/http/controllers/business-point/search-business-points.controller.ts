@@ -7,7 +7,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { Public } from '../../middlewares/auth/decorators/public.decorator';
-import type { SearchBusinessPointsUseCase } from 'src/domain/our-city/application/use-cases/business-point/search-business-points';
+import { SearchBusinessPointsUseCase } from 'src/domain/our-city/application/use-cases/business-point/search-business-points';
 
 @Controller('/business-point/search/:query')
 export class SearchBusinessPointsController {

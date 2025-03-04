@@ -8,9 +8,9 @@ import {
 } from '@nestjs/common';
 import {
   updatePasswordSchemaValidationPipe,
-  type UpdatePasswordRequest,
+  UpdatePasswordRequest,
 } from '../../../schemas/update-password.schema';
-import type { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
+import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
 import { UserNotFoundError } from 'src/domain/our-city/application/use-cases/errors/user-not-found-error';
 import { AccessTokenGuard } from '../../../middlewares/auth/guards/access-token.guard';
 

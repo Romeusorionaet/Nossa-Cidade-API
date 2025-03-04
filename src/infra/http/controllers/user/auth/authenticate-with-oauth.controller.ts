@@ -8,13 +8,13 @@ import {
 } from '@nestjs/common';
 import {
   userProfileFromAuthValidationPipe,
-  type UserProfileFromAuth,
+  UserProfileFromAuth,
 } from 'src/infra/http/schemas/user-profile.schema';
-import type { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
-import type { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
+import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
+import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
-import type { EnvService } from 'src/infra/env/env.service';
-import type { FastifyReply } from 'fastify';
+import { EnvService } from 'src/infra/env/env.service';
+import { FastifyReply } from 'fastify';
 
 @Controller('/auth/authenticate/oauth/callback')
 export class AuthenticateWidthOAuthController {

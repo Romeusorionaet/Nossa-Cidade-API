@@ -7,7 +7,7 @@ import type {
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import type { GeometryPoint } from 'src/core/@types/geometry';
-import type { DatabaseClient } from '../database.client';
+import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import {
   businessPointCategories,

@@ -1,35 +1,35 @@
-import { TokenPurposeEnum } from "src/domain/our-city/application/shared/enums/token-purpose.enum";
-import { forgotPasswordTokenSchema } from "src/infra/http/schemas/forgot-password-token.schema";
-import type { ForgotPasswordTokenPayload } from "src/core/@types/forgot-password-token-payload";
-import { BadRequestException, Injectable } from "@nestjs/common";
-import type { EnvService } from "src/infra/env/env.service";
-import { PassportStrategy } from "@nestjs/passport";
-import { ExtractJwt, Strategy } from "passport-jwt";
+import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
+import { forgotPasswordTokenSchema } from 'src/infra/http/schemas/forgot-password-token.schema';
+import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { EnvService } from 'src/infra/env/env.service';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 
 @Injectable()
 export class ForgotPasswordTokenStrategy extends PassportStrategy(
-	Strategy,
-	TokenPurposeEnum.FORGOT_PASSWORD_TOKEN,
+  Strategy,
+  TokenPurposeEnum.FORGOT_PASSWORD_TOKEN,
 ) {
-	constructor(envService: EnvService) {
-		const publicKey = envService.get("JWT_PUBLIC_KEY");
+  constructor(envService: EnvService) {
+    const publicKey = envService.get('JWT_PUBLIC_KEY');
 
-		super({
-			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-			secretOrKey: Buffer.from(publicKey, "base64"),
-			algorithms: ["RS256"],
-		});
-	}
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: Buffer.from(publicKey, 'base64'),
+      algorithms: ['RS256'],
+    });
+  }
 
-	async validate(payload: ForgotPasswordTokenPayload) {
-		if (payload.purpose !== TokenPurposeEnum.FORGOT_PASSWORD_TOKEN) {
-			throw new BadRequestException("Invalid token purpose");
-		}
+  async validate(payload: ForgotPasswordTokenPayload) {
+    if (payload.purpose !== TokenPurposeEnum.FORGOT_PASSWORD_TOKEN) {
+      throw new BadRequestException('Invalid token purpose');
+    }
 
-		try {
-			return forgotPasswordTokenSchema.parse(payload);
-		} catch (err: any) {
-			throw new BadRequestException(err.err);
-		}
-	}
+    try {
+      return forgotPasswordTokenSchema.parse(payload);
+    } catch (err: any) {
+      throw new BadRequestException(err.err);
+    }
+  }
 }
