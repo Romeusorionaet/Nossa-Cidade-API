@@ -1,8 +1,8 @@
-import type { AuthRepository } from 'src/domain/our-city/application/repositories/auth.repository';
-import type { UpdatePasswordAuth } from 'src/core/@types/update-password-auth';
-import type { User } from 'src/domain/our-city/enterprise/entities/user';
+import { AuthRepository } from 'src/domain/our-city/application/repositories/auth.repository';
+import { UpdatePasswordAuth } from 'src/core/@types/update-password-auth';
+import { User } from 'src/domain/our-city/enterprise/entities/user';
 import { DrizzleUserMapper } from '../mappers/drizzle-user.mapper';
-import { users, type UsersInsertType } from '../schemas';
+import { users, UsersInsertType } from '../schemas';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';

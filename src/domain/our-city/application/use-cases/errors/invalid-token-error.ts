@@ -1,7 +1,7 @@
-import type { UseCaseError } from "src/core/errors/use-case-error";
+import { UseCaseError } from 'src/core/errors/use-case-error';
 
 export class InvalidTokenError extends Error implements UseCaseError {
-	constructor() {
-		super("Token inválido");
-	}
+  constructor() {
+    super('Token inválido');
+  }
 }

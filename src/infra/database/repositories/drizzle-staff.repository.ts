@@ -1,5 +1,5 @@
-import type { StaffRepository } from 'src/domain/our-city/application/repositories/staff.repository';
-import type { Staff } from 'src/domain/our-city/enterprise/entities/staff';
+import { StaffRepository } from 'src/domain/our-city/application/repositories/staff.repository';
+import { Staff } from 'src/domain/our-city/enterprise/entities/staff';
 import { DrizzleStaffMapper } from '../mappers/drizzle-staff.mapper';
 import { DatabaseClient } from '../database.client';
 import { staff, usersRoleEnum } from '../schemas';

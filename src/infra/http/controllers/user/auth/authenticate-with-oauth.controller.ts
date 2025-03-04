@@ -13,7 +13,6 @@ import {
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
-import { EnvService } from 'src/infra/env/env.service';
 import { FastifyReply } from 'fastify';
 
 @Controller('/auth/authenticate/oauth/callback')
@@ -21,7 +20,6 @@ export class AuthenticateWidthOAuthController {
   constructor(
     private registerUserWithOAuthUseCase: RegisterUserWithOAuthUseCase,
     private refreshTokenUseCase: RefreshTokenUseCase,
-    private envService: EnvService, //TODO remove
   ) {}
 
   @Public()

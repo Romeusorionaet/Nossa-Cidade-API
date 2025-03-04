@@ -1,6 +1,6 @@
-import type { Staff } from "../../enterprise/entities/staff";
+import { Staff } from '../../enterprise/entities/staff';
 
 export abstract class StaffRepository {
-	abstract findByUserId(id: string): Promise<Staff | null>;
-	abstract addUserToStaff(id: string): Promise<void>;
+  abstract findByUserId(id: string): Promise<Staff | null>;
+  abstract addUserToStaff(id: string): Promise<void>;
 }

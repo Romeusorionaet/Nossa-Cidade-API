@@ -1,10 +1,10 @@
-import type { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
-import type { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
-import type { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
-import type { AccessTokenPayload } from 'src/core/@types/access-token-payload';
+import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
+import { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
+import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
+import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import type { RefreshTokenPayload } from 'src/core/@types/refresh-token-payload';
+import { RefreshTokenPayload } from 'src/core/@types/refresh-token-payload';
 
 @Injectable()
 export class JwtEncrypt implements EncryptRepository {
