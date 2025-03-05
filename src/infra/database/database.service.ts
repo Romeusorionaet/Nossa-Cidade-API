@@ -1,4 +1,4 @@
-import { DatabaseClient } from './database.client';
+import type { DatabaseClient } from './database.client';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

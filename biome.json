@@ -20,15 +20,15 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"style": {
+				"useImportType": "off"
+			},
 			"suspicious": {
 				"noExplicitAny": "off",
 				"noMisleadingCharacterClass": "off"
 			},
 			"complexity": {
 				"noStaticOnlyClass": "off"
-			},
-			"style": {
-				"useImportType": "off"
 			}
 		}
 	},
