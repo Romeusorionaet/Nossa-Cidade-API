@@ -1,5 +1,10 @@
 CREATE TYPE "public"."staff_status" AS ENUM('ACTIVE', 'INACTIVE', 'SUSPENDED');--> statement-breakpoint
 CREATE TYPE "public"."users_role" AS ENUM('MEMBER', 'MERCHANT', 'ADMIN');--> statement-breakpoint
+CREATE TABLE "business_point_categories_association" (
+	"business_point_id" text NOT NULL,
+	"business_point_category_id" text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "business_point_to_accessibility_association" (
 	"business_point_id" text NOT NULL,
 	"accessibility_id" text NOT NULL
@@ -47,7 +52,7 @@ CREATE TABLE "business_point_to_service_option_association" (
 --> statement-breakpoint
 CREATE TABLE "business_point_categories" (
 	"id" text PRIMARY KEY NOT NULL,
-	"name" varchar(100) NOT NULL,
+	"name" varchar(25) NOT NULL,
 	CONSTRAINT "business_point_categories_name_unique" UNIQUE("name")
 );
 --> statement-breakpoint
@@ -59,15 +64,15 @@ CREATE TABLE "business_point_favorites" (
 CREATE TABLE "business_points" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" varchar(255) NOT NULL,
-	"description" varchar(250),
 	"category_id" text NOT NULL,
+	"description" varchar(500),
 	"location" geometry(point) NOT NULL,
 	"status" "staff_status" DEFAULT 'ACTIVE',
 	"opening_hours" jsonb NOT NULL,
 	"images" jsonb,
 	"website" varchar(500),
 	"tags" jsonb,
-	"awaiting_approval" boolean DEFAULT false,
+	"awaiting_approval" boolean DEFAULT true,
 	"censorship" boolean DEFAULT false,
 	"highlight" varchar(100),
 	"owner_id" text NOT NULL,
@@ -114,6 +119,13 @@ CREATE TABLE "audience" (
 	CONSTRAINT "audience_name_unique" UNIQUE("name")
 );
 --> statement-breakpoint
+CREATE TABLE "category_tags" (
+	"id" text PRIMARY KEY NOT NULL,
+	"business_point_category_id" text NOT NULL,
+	"tag" varchar(25) NOT NULL,
+	CONSTRAINT "category_tags_business_point_category_id_tag_unique" UNIQUE("business_point_category_id","tag")
+);
+--> statement-breakpoint
 CREATE TABLE "menu" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" varchar(100) NOT NULL,
@@ -150,6 +162,8 @@ CREATE TABLE "service_options" (
 	CONSTRAINT "service_options_name_unique" UNIQUE("name")
 );
 --> statement-breakpoint
+ALTER TABLE "business_point_categories_association" ADD CONSTRAINT "business_point_categories_association_business_point_id_business_points_id_fk" FOREIGN KEY ("business_point_id") REFERENCES "public"."business_points"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "business_point_categories_association" ADD CONSTRAINT "business_point_categories_association_business_point_category_id_business_point_categories_id_fk" FOREIGN KEY ("business_point_category_id") REFERENCES "public"."business_point_categories"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "business_point_to_accessibility_association" ADD CONSTRAINT "business_point_to_accessibility_association_business_point_id_business_points_id_fk" FOREIGN KEY ("business_point_id") REFERENCES "public"."business_points"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "business_point_to_accessibility_association" ADD CONSTRAINT "business_point_to_accessibility_association_accessibility_id_accessibility_id_fk" FOREIGN KEY ("accessibility_id") REFERENCES "public"."accessibility"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "business_point_to_amenities_association" ADD CONSTRAINT "business_point_to_amenities_association_business_point_id_business_points_id_fk" FOREIGN KEY ("business_point_id") REFERENCES "public"."business_points"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
@@ -172,4 +186,5 @@ ALTER TABLE "business_point_favorites" ADD CONSTRAINT "business_point_favorites_
 ALTER TABLE "business_point_favorites" ADD CONSTRAINT "business_point_favorites_business_point_id_business_points_id_fk" FOREIGN KEY ("business_point_id") REFERENCES "public"."business_points"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "business_points" ADD CONSTRAINT "business_points_category_id_business_point_categories_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."business_point_categories"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "business_points" ADD CONSTRAINT "business_points_owner_id_users_id_fk" FOREIGN KEY ("owner_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "staff" ADD CONSTRAINT "staff_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
+ALTER TABLE "staff" ADD CONSTRAINT "staff_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "category_tags" ADD CONSTRAINT "category_tags_business_point_category_id_business_point_categories_id_fk" FOREIGN KEY ("business_point_category_id") REFERENCES "public"."business_point_categories"("id") ON DELETE no action ON UPDATE no action;

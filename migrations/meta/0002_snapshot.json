@@ -1,6 +1,6 @@
 {
-  "id": "e2a30ad4-a1d2-4d4c-a11e-854a18b8d263",
-  "prevId": "5586fb98-d2dd-4827-b155-2be7e93ffb41",
+  "id": "3aea5942-89a7-45e8-a902-212202ff09a1",
+  "prevId": "e2a30ad4-a1d2-4d4c-a11e-854a18b8d263",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -637,6 +637,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "address": {
+          "name": "address",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
         "location": {
           "name": "location",
           "type": "geometry(point)",
@@ -666,12 +672,6 @@
         "website": {
           "name": "website",
           "type": "varchar(500)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "tags": {
-          "name": "tags",
-          "type": "jsonb",
           "primaryKey": false,
           "notNull": false
         },

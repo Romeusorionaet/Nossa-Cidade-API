@@ -11,8 +11,10 @@ import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import {
   businessPointCategories,
+  businessPointCategoriesAssociation,
   BusinessPointCategoriesInsertType,
   businessPoints,
+  sharedCategoryTags,
 } from '../schemas';
 import { eq, sql, and, ilike, or } from 'drizzle-orm';
 
@@ -53,6 +55,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       .select({
         id: businessPoints.id,
         name: businessPoints.name,
+        address: businessPoints.address,
         categoryId: businessPoints.categoryId,
         openingHours: businessPoints.openingHours,
         latitude: sql<number>`ST_Y(location)`,
@@ -65,6 +68,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       id: new UniqueEntityID(row.id),
       categoryId: new UniqueEntityID(row.categoryId),
       name: row.name,
+      address: row.address,
       openingHours: row.openingHours,
       location: {
         latitude: row.latitude,
@@ -84,11 +88,33 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
         id: businessPoints.id,
         categoryId: businessPoints.categoryId,
         name: businessPoints.name,
+        address: businessPoints.address,
         openingHours: businessPoints.openingHours,
         latitude: sql<number>`ST_Y(location)`,
         longitude: sql<number>`ST_X(location)`,
       })
       .from(businessPoints)
+      .leftJoin(
+        businessPointCategoriesAssociation,
+        eq(
+          businessPoints.id,
+          businessPointCategoriesAssociation.businessPointId,
+        ),
+      )
+      .leftJoin(
+        businessPointCategories,
+        eq(
+          businessPointCategoriesAssociation.businessPointCategoryId,
+          businessPointCategories.id,
+        ),
+      )
+      .leftJoin(
+        sharedCategoryTags,
+        eq(
+          businessPointCategories.id,
+          sharedCategoryTags.businessPointCategoryId,
+        ),
+      )
       .where(
         and(
           eq(businessPoints.awaitingApproval, false),
@@ -97,17 +123,24 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
               sql<string>`unaccent(${businessPoints.name})`,
               `%${normalizedQuery}%`,
             ),
-            sql<boolean>`${normalizedQuery} ILIKE ANY(
-              SELECT unaccent(jsonb_array_elements_text(${businessPoints.tags}))
-            )`,
+            ilike(
+              sql<string>`unaccent(${businessPointCategories.name})`,
+              `%${normalizedQuery}%`,
+            ),
+            ilike(
+              sql<string>`unaccent(${sharedCategoryTags.tag})`,
+              `%${normalizedQuery}%`,
+            ),
           ),
         ),
-      );
+      )
+      .groupBy(businessPoints.id);
 
     return result.map((row) => ({
       id: new UniqueEntityID(row.id),
       categoryId: new UniqueEntityID(row.categoryId),
       name: row.name,
+      address: row.address,
       openingHours: row.openingHours,
       location: {
         latitude: row.latitude,

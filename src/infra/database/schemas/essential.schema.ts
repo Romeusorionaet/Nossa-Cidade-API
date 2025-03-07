@@ -55,11 +55,11 @@ export const businessPoints = pgTable(
       .primaryKey()
       .$defaultFn(() => createId()),
     name: varchar('name', { length: 255 }).notNull(),
-    description: varchar('description', { length: 500 }), // updated
-    // address: varchar('address', { length: 100 }), // new
     categoryId: text('category_id')
       .references(() => businessPointCategories.id)
       .notNull(),
+    description: varchar('description', { length: 500 }),
+    address: varchar('address', { length: 200 }),
     location: geometry('location', {
       type: 'point',
       mode: 'xy',
@@ -71,7 +71,6 @@ export const businessPoints = pgTable(
     openingHours: jsonb('opening_hours').notNull(),
     images: jsonb('images'),
     website: varchar('website', { length: 500 }),
-    tags: jsonb('tags'),
     awaitingApproval: boolean('awaiting_approval').default(true),
     censorship: boolean('censorship').default(false),
     highlight: varchar('highlight', { length: 100 }),
@@ -97,7 +96,7 @@ export const businessPointCategories = pgTable('business_point_categories', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: varchar('name', { length: 100 }).notNull().unique(),
+  name: varchar('name', { length: 25 }).notNull().unique(),
 });
 export type BusinessPointCategoriesInsertType = InferSelectModel<
   typeof businessPointCategories
