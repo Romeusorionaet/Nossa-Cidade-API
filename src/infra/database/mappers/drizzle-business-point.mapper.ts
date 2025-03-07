@@ -16,13 +16,13 @@ export class DrizzleBusinessPointMapper {
       any
     >;
     const images: Record<string, any> = raw.images as Record<string, any>;
-    const tags: string[] = raw.tags as string[];
 
     return BusinessPoint.create(
       {
         categoryId: new UniqueEntityID(raw.categoryId),
         ownerId: new UniqueEntityID(raw.ownerId),
         name: raw.name,
+        address: raw.address,
         location: location,
         status,
         openingHours,
@@ -31,7 +31,6 @@ export class DrizzleBusinessPointMapper {
         description: raw.description || null,
         images: images || null,
         website: raw.website || null,
-        tags: tags || null,
         highlight: raw.highlight || null,
         updatedAt: raw.updatedAt,
         createdAt: raw.createdAt,
@@ -50,6 +49,7 @@ export class DrizzleBusinessPointMapper {
         x: businessPoint.location.coordinates[0],
         y: businessPoint.location.coordinates[1],
       },
+      address: businessPoint.address,
       status: businessPoint.status,
       openingHours: businessPoint.openingHours,
       censorship: businessPoint.censorship,
@@ -57,7 +57,6 @@ export class DrizzleBusinessPointMapper {
       description: businessPoint.description,
       images: businessPoint.images,
       website: businessPoint.website,
-      tags: businessPoint.tags,
       highlight: businessPoint.highlight,
       updatedAt: businessPoint.updatedAt,
       createdAt: businessPoint.createdAt,

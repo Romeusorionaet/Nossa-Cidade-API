@@ -4,6 +4,7 @@ export type BusinessPointForMappingType = {
   id: UniqueEntityID;
   categoryId: UniqueEntityID;
   name: string;
+  address: string;
   openingHours: Record<string, any>;
   location: {
     latitude: number;

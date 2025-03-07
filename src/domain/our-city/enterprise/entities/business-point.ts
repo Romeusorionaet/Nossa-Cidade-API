@@ -8,6 +8,7 @@ export interface BusinessPointProps {
   categoryId: UniqueEntityID;
   ownerId: UniqueEntityID;
   name: string;
+  address: string;
   location: GeometryPoint;
   status: BusinessPointStatus;
   openingHours: Record<string, any>;
@@ -16,7 +17,6 @@ export interface BusinessPointProps {
   description?: string | null;
   images?: Record<string, any> | null;
   website?: string | null;
-  tags?: string[] | null;
   highlight?: string | null;
   createdAt?: Date | null;
   updatedAt?: Date | null;
@@ -33,6 +33,10 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   get name() {
     return this.props.name;
+  }
+
+  get address() {
+    return this.props.address;
   }
 
   get description() {
@@ -71,15 +75,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   private set website(value: string) {
     this.props.website = value;
-    this.touch();
-  }
-
-  get tags() {
-    return this.props.tags;
-  }
-
-  private set tags(value: string[]) {
-    this.props.tags = value;
     this.touch();
   }
 

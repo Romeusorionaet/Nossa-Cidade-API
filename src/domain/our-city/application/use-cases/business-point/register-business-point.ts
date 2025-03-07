@@ -10,8 +10,8 @@ interface RegisterBusinessPointUseCaseRequest {
   categoryId: string;
   ownerId: string;
   name: string;
+  address: string;
   location: GeometryPoint;
-  tags: string[];
   openingHours: Record<string, any>;
 }
 
@@ -25,16 +25,16 @@ export class RegisterBusinessPointUseCase {
     categoryId,
     ownerId,
     name,
+    address,
     location,
-    tags,
     openingHours,
   }: RegisterBusinessPointUseCaseRequest): Promise<RegisterBusinessPointUseCaseResponse> {
     const businessPoint = BusinessPoint.create({
       categoryId: new UniqueEntityID(categoryId),
       ownerId: new UniqueEntityID(ownerId),
       name,
+      address,
       location,
-      tags,
       status: BusinessPointStatus.ACTIVE,
       openingHours: openingHours,
       censorship: false,

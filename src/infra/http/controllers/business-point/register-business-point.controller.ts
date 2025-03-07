@@ -65,7 +65,7 @@ export class RegisterBusinessPointController {
         categoryId: businessPoint.categoryId,
         location,
         name: businessPoint.name,
-        tags: businessPoint.tags,
+        address: businessPoint.address,
         openingHours: businessPoint.openingHours,
         ownerId: userId,
       });
