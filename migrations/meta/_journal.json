@@ -57,6 +57,13 @@
       "when": 1741532638163,
       "tag": "0007_solid_tarantula",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1741539951346,
+      "tag": "0008_unique_karma",
+      "breakpoints": true
     }
   ]
 }

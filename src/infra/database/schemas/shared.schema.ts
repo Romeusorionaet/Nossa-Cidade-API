@@ -65,6 +65,13 @@ export const sharedServiceOptions = pgTable('service_options', {
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
+export const sharedEnvironment = pgTable('environment', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  name: varchar('name', { length: 100 }).notNull().unique(),
+});
+
 export const sharedCategoryTags = pgTable(
   'category_tags',
   {

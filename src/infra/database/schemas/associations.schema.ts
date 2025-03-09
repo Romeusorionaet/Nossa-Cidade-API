@@ -1,6 +1,7 @@
 import {
   sharedServiceOptions,
   sharedAccessibility,
+  sharedEnvironment,
   sharedAmenities,
   sharedPayments,
   sharedAudience,
@@ -161,6 +162,23 @@ export const businessPointToServiceOptionAssociation = pgTable(
   (t) => [
     {
       pk: primaryKey({ columns: [t.businessPointId, t.serviceOptionId] }),
+    },
+  ],
+);
+
+export const businessPointToEnvironmentAssociation = pgTable(
+  'business_point_to_environment_association',
+  {
+    businessPointId: text('business_point_id')
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
+      .notNull(),
+    environmentId: text('environment_id')
+      .references(() => sharedEnvironment.id)
+      .notNull(),
+  },
+  (t) => [
+    {
+      pk: primaryKey({ columns: [t.businessPointId, t.environmentId] }),
     },
   ],
 );

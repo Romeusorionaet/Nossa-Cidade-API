@@ -1,14 +1,3 @@
-import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
-import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
-import {
-  BusinessPoint,
-  BusinessPointProps,
-} from 'src/domain/our-city/enterprise/entities/business-point';
-import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
-import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
-import { DatabaseClient } from '../database.client';
-import { Injectable } from '@nestjs/common';
 import {
   businessPointCategoriesAssociation,
   BusinessPointCategoriesInsertType,
@@ -17,7 +6,20 @@ import {
   sharedCategoryTags,
   businessPoints,
 } from '../schemas';
+import {
+  BusinessPoint,
+  BusinessPointProps,
+} from 'src/domain/our-city/enterprise/entities/business-point';
+import { BUSINESS_POINT_ASSOCIATIONS } from 'src/domain/our-city/application/shared/constants/business-point-associations';
+import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
+import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
+import { BusinessPointDetailsType } from 'src/core/@types/business-point-details-type';
+import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
+import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
+import { GeometryPoint } from 'src/core/@types/geometry';
 import { eq, sql, and, ilike, or } from 'drizzle-orm';
+import { DatabaseClient } from '../database.client';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
@@ -37,6 +39,28 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       businessPointId: data.id,
     });
   }
+
+  async addDetails(
+    businessPointDetails: BusinessPointDetailsType,
+  ): Promise<void> {
+    await this.drizzle.database.transaction(async (trx) => {
+      for (const { key, table, column } of BUSINESS_POINT_ASSOCIATIONS) {
+        const values = businessPointDetails[
+          key as keyof BusinessPointDetailsType
+        ] as string[];
+
+        if (values.length > 0) {
+          await trx.insert(table).values(
+            values.map((sharedId) => ({
+              businessPointId: businessPointDetails.businessPointId,
+              [column]: sharedId,
+            })),
+          );
+        }
+      }
+    });
+  }
+
   async findByCoordinate(
     location: GeometryPoint,
   ): Promise<BusinessPoint | null> {
