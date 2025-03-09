@@ -1,3 +1,4 @@
+import { BusinessPointCustomTagRepository } from '../../repositories/business-point-custom-tag.repository';
 import { BusinessPointStatus } from 'src/domain/our-city/enterprise/entities/enums/business-point-status';
 import { BusinessPointRepository } from '../../repositories/business-point.repository';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
@@ -11,6 +12,7 @@ interface RegisterBusinessPointUseCaseRequest {
   ownerId: string;
   name: string;
   address: string;
+  customTags: string[];
   location: GeometryPoint;
   openingHours: Record<string, any>;
 }
@@ -19,13 +21,17 @@ type RegisterBusinessPointUseCaseResponse = Either<null, object>;
 
 @Injectable()
 export class RegisterBusinessPointUseCase {
-  constructor(private businessPointRepository: BusinessPointRepository) {}
+  constructor(
+    private businessPointRepository: BusinessPointRepository,
+    private businessPointCustomTag: BusinessPointCustomTagRepository,
+  ) {}
 
   async execute({
     categoryId,
     ownerId,
     name,
     address,
+    customTags,
     location,
     openingHours,
   }: RegisterBusinessPointUseCaseRequest): Promise<RegisterBusinessPointUseCaseResponse> {
@@ -41,6 +47,10 @@ export class RegisterBusinessPointUseCase {
     });
 
     await this.businessPointRepository.create(businessPoint);
+    await this.businessPointCustomTag.create({
+      customTags,
+      businessPointId: businessPoint.id.toString(),
+    });
 
     return right({});
   }

@@ -1,5 +1,7 @@
+import { BusinessPointCustomTagRepository } from 'src/domain/our-city/application/repositories/business-point-custom-tag.repository';
 import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
+import { DrizzleBusinessPointCustomTagRepository } from './repositories/drizzle-business-point-custom-tag';
 import { DrizzleBusinessPointRepository } from './repositories/drizzle-business-point.repository';
 import { UsersRepository } from 'src/domain/our-city/application/repositories/users.repository';
 import { StaffRepository } from 'src/domain/our-city/application/repositories/staff.repository';
@@ -38,8 +40,13 @@ import { Module } from '@nestjs/common';
       provide: BusinessPointRepository,
       useClass: DrizzleBusinessPointRepository,
     },
+    {
+      provide: BusinessPointCustomTagRepository,
+      useClass: DrizzleBusinessPointCustomTagRepository,
+    },
   ],
   exports: [
+    BusinessPointCustomTagRepository,
     BusinessPointRepository,
     EncryptRepository,
     DatabaseClient,

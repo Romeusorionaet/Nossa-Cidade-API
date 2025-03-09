@@ -10,11 +10,12 @@ import { GeometryPoint } from 'src/core/@types/geometry';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import {
-  businessPointCategories,
   businessPointCategoriesAssociation,
   BusinessPointCategoriesInsertType,
-  businessPoints,
+  businessPointCategories,
+  businessPointCustomTags,
   sharedCategoryTags,
+  businessPoints,
 } from '../schemas';
 import { eq, sql, and, ilike, or } from 'drizzle-orm';
 
@@ -23,11 +24,17 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   constructor(private drizzle: DatabaseClient) {}
 
   async create(businessPoint: BusinessPoint): Promise<void> {
+    const db = this.drizzle.database;
     const data = DrizzleBusinessPointMapper.toDrizzle(businessPoint);
 
-    await this.drizzle.database.insert(businessPoints).values({
+    await db.insert(businessPoints).values({
       ...data,
       location: sql`ST_SetSRID(ST_MakePoint(${data.location.x}, ${data.location.y}), 4326)`,
+    });
+
+    await db.insert(businessPointCategoriesAssociation).values({
+      businessPointCategoryId: data.categoryId,
+      businessPointId: data.id,
     });
   }
   async findByCoordinate(
@@ -115,6 +122,10 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
           sharedCategoryTags.businessPointCategoryId,
         ),
       )
+      .leftJoin(
+        businessPointCustomTags,
+        eq(businessPoints.id, businessPointCustomTags.businessPointId),
+      )
       .where(
         and(
           eq(businessPoints.awaitingApproval, false),
@@ -129,6 +140,10 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
             ),
             ilike(
               sql<string>`unaccent(${sharedCategoryTags.tag})`,
+              `%${normalizedQuery}%`,
+            ),
+            ilike(
+              sql<string>`unaccent(${businessPointCustomTags.tag})`,
               `%${normalizedQuery}%`,
             ),
           ),

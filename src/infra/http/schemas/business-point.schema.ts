@@ -8,6 +8,7 @@ export const businessPointSchema = z.object({
     .min(6, { message: 'Nome muito curto.' })
     .max(255, { message: 'Nome muito longo.' }),
   address: z.string(),
+  customTags: z.array(z.string()),
   location: z.object({
     latitude: z.coerce.number().min(-90).max(90),
     longitude: z.coerce.number().min(-180).max(180),

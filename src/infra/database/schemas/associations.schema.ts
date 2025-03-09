@@ -9,14 +9,14 @@ import {
   sharedMenu,
   sharedPets,
 } from './shared.schema';
-import { pgTable, primaryKey, text, unique } from 'drizzle-orm/pg-core';
+import { pgTable, primaryKey, text } from 'drizzle-orm/pg-core';
 import { businessPointCategories, businessPoints } from './essential.schema';
 
 export const businessPointToPetsAssociation = pgTable(
   'business_point_to_pets_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     petsId: text('pets_id')
       .references(() => sharedPets.id)
@@ -33,7 +33,7 @@ export const businessPointToPlanningAssociation = pgTable(
   'business_point_to_planning_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     planningId: text('planning_id')
       .references(() => sharedPlanning.id)
@@ -50,7 +50,7 @@ export const businessPointToAccessibilityAssociation = pgTable(
   'business_point_to_accessibility_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     accessibilityId: text('accessibility_id')
       .references(() => sharedAccessibility.id)
@@ -67,7 +67,7 @@ export const businessPointToParkingAssociation = pgTable(
   'business_point_to_parking_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     parkingId: text('parking_id')
       .references(() => sharedParking.id)
@@ -84,7 +84,7 @@ export const businessPointToPaymentsAssociation = pgTable(
   'business_point_to_payment_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     paymentsId: text('payments_id')
       .references(() => sharedPayments.id)
@@ -101,7 +101,7 @@ export const businessPointToAudienceAssociation = pgTable(
   'business_point_to_audience_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     audienceId: text('audience_id')
       .references(() => sharedAudience.id)
@@ -118,7 +118,7 @@ export const businessPointToAmenitiesAssociation = pgTable(
   'business_point_to_amenities_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     amenitiesId: text('amenities_id')
       .references(() => sharedAmenities.id)
@@ -135,7 +135,7 @@ export const businessPointToMenuAssociation = pgTable(
   'business_point_to_menu_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     menuId: text('menu_id')
       .references(() => sharedMenu.id)
@@ -152,7 +152,7 @@ export const businessPointToServiceOptionAssociation = pgTable(
   'business_point_to_service_option_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     serviceOptionId: text('service_option_id')
       .references(() => sharedServiceOptions.id)
@@ -169,7 +169,7 @@ export const businessPointCategoriesAssociation = pgTable(
   'business_point_categories_association',
   {
     businessPointId: text('business_point_id')
-      .references(() => businessPoints.id)
+      .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     businessPointCategoryId: text('business_point_category_id')
       .references(() => businessPointCategories.id)

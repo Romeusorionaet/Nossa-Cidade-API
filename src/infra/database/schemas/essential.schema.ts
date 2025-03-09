@@ -102,6 +102,19 @@ export type BusinessPointCategoriesInsertType = InferSelectModel<
   typeof businessPointCategories
 >;
 
+export const businessPointCustomTags = pgTable('business_point_custom_tags', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  businessPointId: text('business_point_id')
+    .references(() => businessPoints.id, { onDelete: 'cascade' })
+    .notNull(),
+  tag: varchar('tag', { length: 25 }).notNull(),
+});
+export type BusinessPointCustomTagsInsertType = InferSelectModel<
+  typeof businessPointCustomTags
+>;
+
 export const businessPointFavorites = pgTable(
   'business_point_favorites',
   {
