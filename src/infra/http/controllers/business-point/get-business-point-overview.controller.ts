@@ -1,4 +1,3 @@
-import { GetBusinessPointDetailsUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-details';
 import {
   BadRequestException,
   Controller,
@@ -6,13 +5,14 @@ import {
   Param,
   Get,
 } from '@nestjs/common';
-import { Public } from '../../middlewares/auth/decorators/public.decorator';
+import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
 import { BusinessPointDetailsPresenter } from '../../presenters/business-point-details.presenter';
+import { Public } from '../../middlewares/auth/decorators/public.decorator';
 
-@Controller('/business-point/details/:id')
-export class GetBusinessPointDetailsController {
+@Controller('/business-point/overview/:id')
+export class GetBusinessPointOverviewController {
   constructor(
-    private getBusinessPointDetailsUseCase: GetBusinessPointDetailsUseCase,
+    private getBusinessPointOverviewUseCase: GetBusinessPointOverviewUseCase,
   ) {}
 
   @Public()
@@ -21,7 +21,7 @@ export class GetBusinessPointDetailsController {
   async handle(@Param('id') id: string) {
     try {
       const resultBusinessPoint =
-        await this.getBusinessPointDetailsUseCase.execute({
+        await this.getBusinessPointOverviewUseCase.execute({
           id,
         });
 

@@ -3,7 +3,7 @@ import { BusinessPointRepository } from '../../repositories/business-point.repos
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 
-interface GetBusinessPointDetailsUseCaseRequest {
+interface GetBusinessPointOverviewUseCaseRequest {
   id: string;
 }
 
@@ -15,12 +15,12 @@ type GetBusinessPointsForMappingUseCaseResponse = Either<
 >;
 
 @Injectable()
-export class GetBusinessPointDetailsUseCase {
+export class GetBusinessPointOverviewUseCase {
   constructor(private businessPointRepository: BusinessPointRepository) {}
 
   async execute({
     id,
-  }: GetBusinessPointDetailsUseCaseRequest): Promise<GetBusinessPointsForMappingUseCaseResponse> {
+  }: GetBusinessPointOverviewUseCaseRequest): Promise<GetBusinessPointsForMappingUseCaseResponse> {
     const businessPoint = await this.businessPointRepository.findById(id);
 
     return right({ businessPoint });
