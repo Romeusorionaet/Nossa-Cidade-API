@@ -21,6 +21,7 @@ import { RegisterBusinessPointController } from './controllers/business-point/re
 import { ResendConfirmationEmailController } from './controllers/user/auth/resend-confirmation-email.controller';
 import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
 import { SearchBusinessPointsController } from './controllers/business-point/search-business-points.controller';
+import { GetSharedItemsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
@@ -30,6 +31,7 @@ import { ForgotUserPasswordController } from './controllers/user/auth/forgot-use
 import { UpdateUserPasswordController } from './controllers/user/auth/update-user-password.controller';
 import { ResetUserPasswordController } from './controllers/user/auth/reset-user-password.controller';
 import { AuthenticateUserController } from './controllers/user/auth/authenticate-user.controller';
+import { SharedItemsController } from './controllers/shared-items/get-shared-items.controller';
 import { GetUserProfileController } from './controllers/user/get-user-profile.controller';
 import { RegisterUserController } from './controllers/user/auth/register-user.controller';
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
@@ -67,6 +69,7 @@ import { Module } from '@nestjs/common';
     RegisterUserController,
     ConfirmEmailController,
     RefreshTokenController,
+    SharedItemsController,
   ],
   providers: [
     GetBusinessPointsForMappingUseCase,
@@ -85,6 +88,7 @@ import { Module } from '@nestjs/common';
     ResetUserPasswordUseCase,
     AuthenticateUserUseCase,
     GetUserProfileUseCase,
+    GetSharedItemsUseCase,
     RefreshTokenUseCase,
     RegisterUserUseCase,
     ConfirmEmailUseCase,
