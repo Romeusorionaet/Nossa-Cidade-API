@@ -63,12 +63,14 @@ export class RegisterBusinessPointController {
 
       await this.registerBusinessPointUseCase.execute({
         categoryId: businessPoint.categoryId,
+        ownerId: userId,
         location,
         name: businessPoint.name,
-        address: businessPoint.address,
+        address: `${businessPoint.street} - ${businessPoint.neighborhood} - ${businessPoint.houseNumber}`,
         customTags: businessPoint.customTags,
         openingHours: businessPoint.openingHours,
-        ownerId: userId,
+        description: businessPoint.description,
+        highlight: businessPoint.highlight,
       });
 
       if (!staffId) {
@@ -77,7 +79,10 @@ export class RegisterBusinessPointController {
         return { message: 'Local registrado. Você se tornou um comerciante!' };
       }
 
-      return { message: 'Local registrado.' };
+      return {
+        message:
+          'Local registrado. Você receberá um email com algumas informações importantes.',
+      };
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }

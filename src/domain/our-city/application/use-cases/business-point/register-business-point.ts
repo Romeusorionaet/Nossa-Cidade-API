@@ -15,6 +15,8 @@ interface RegisterBusinessPointUseCaseRequest {
   customTags: string[];
   location: GeometryPoint;
   openingHours: Record<string, any>;
+  description: string;
+  highlight: string;
 }
 
 type RegisterBusinessPointUseCaseResponse = Either<null, object>;
@@ -34,6 +36,8 @@ export class RegisterBusinessPointUseCase {
     customTags,
     location,
     openingHours,
+    description,
+    highlight,
   }: RegisterBusinessPointUseCaseRequest): Promise<RegisterBusinessPointUseCaseResponse> {
     const businessPoint = BusinessPoint.create({
       categoryId: new UniqueEntityID(categoryId),
@@ -44,14 +48,18 @@ export class RegisterBusinessPointUseCase {
       status: BusinessPointStatus.ACTIVE,
       openingHours: openingHours,
       censorship: false,
+      description,
+      highlight,
     });
 
     await this.businessPointRepository.create(businessPoint);
-    await this.businessPointCustomTag.create({
-      customTags,
-      businessPointId: businessPoint.id.toString(),
-    });
 
+    if (customTags.length > 0) {
+      await this.businessPointCustomTag.create({
+        customTags,
+        businessPointId: businessPoint.id.toString(),
+      });
+    }
     return right({});
   }
 }
