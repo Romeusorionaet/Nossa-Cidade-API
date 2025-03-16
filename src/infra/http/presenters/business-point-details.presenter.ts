@@ -14,7 +14,6 @@ export class BusinessPointDetailsPresenter {
       status: businessPoint.status,
       openingHours: businessPoint.openingHours,
       censorship: businessPoint.censorship,
-      awaitingApproval: businessPoint.awaitingApproval,
       description: businessPoint.description,
       images: businessPoint.images,
       website: businessPoint.website,

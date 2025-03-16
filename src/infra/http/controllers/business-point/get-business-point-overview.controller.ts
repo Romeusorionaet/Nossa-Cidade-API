@@ -20,14 +20,11 @@ export class GetBusinessPointOverviewController {
   @HttpCode(200)
   async handle(@Param('id') id: string) {
     try {
-      const resultBusinessPoint =
-        await this.getBusinessPointOverviewUseCase.execute({
-          id,
-        });
+      const result = await this.getBusinessPointOverviewUseCase.execute({
+        id,
+      });
 
-      return BusinessPointDetailsPresenter.toHTTP(
-        resultBusinessPoint.value.businessPoint,
-      );
+      return BusinessPointDetailsPresenter.toHTTP(result.value.businessPoint);
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }

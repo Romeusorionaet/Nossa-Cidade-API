@@ -214,17 +214,17 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       sql`
          SELECT 
       DISTINCT ON (bp.id) 
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sp.name), NULL) AS pets,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT spl.name), NULL) AS planning,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sa.name), NULL) AS accessibility,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT spk.name), NULL) AS parking,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT spp.name), NULL) AS payments,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sau.name), NULL) AS audience,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sam.name), NULL) AS amenities,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sm.name), NULL) AS menu,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sso.name), NULL) AS serviceOptions,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT se.name), NULL) AS environment,
-      ARRAY_REMOVE(ARRAY_AGG(DISTINCT bpc.name), NULL) AS categories
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sp.name), NULL) AS "pets",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT spl.name), NULL) AS "planning",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sa.name), NULL) AS "accessibility",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT spk.name), NULL) AS "parking",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT spp.name), NULL) AS "payments",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sau.name), NULL) AS "audience",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sam.name), NULL) AS "amenities",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sm.name), NULL) AS "menu",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT sso.name), NULL) AS "serviceOptions",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT se.name), NULL) AS "environment",
+      ARRAY_REMOVE(ARRAY_AGG(DISTINCT bpc.name), NULL) AS "categories"
     FROM business_points bp
     LEFT JOIN business_point_to_pets_association bpa ON bp.id = bpa.business_point_id
     LEFT JOIN pets sp ON bpa.pets_id = sp.id
