@@ -1,8 +1,10 @@
 import { GetBusinessPointsForMappingUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-points-for-mapping';
+import { GetBusinessPointPreviewUserUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-preview-user';
 import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-categories';
 import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
 import { AddBusinessPointDetailsUseCase } from 'src/domain/our-city/application/use-cases/business-point/add-business-point-details';
 import { GetBusinessPointDetailsUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-details';
+import { GetBusinessPointPreviewUserController } from './controllers/business-point/get-business-points-preview-user.controller';
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
 import { GetBusinessPointsForMappingController } from './controllers/business-point/get-business-points-for-mapping.controller';
@@ -53,6 +55,7 @@ import { Module } from '@nestjs/common';
   ],
   controllers: [
     GetBusinessPointsForMappingController,
+    GetBusinessPointPreviewUserController,
     GetBusinessPointCategoriesController,
     GetBusinessPointOverviewController,
     AddBusinessPointDetailsController,
@@ -73,6 +76,7 @@ import { Module } from '@nestjs/common';
   ],
   providers: [
     GetBusinessPointsForMappingUseCase,
+    GetBusinessPointPreviewUserUseCase,
     GetBusinessPointCategoriesUseCase,
     GetBusinessPointOverviewUseCase,
     ResendConfirmationEmailUseCase,

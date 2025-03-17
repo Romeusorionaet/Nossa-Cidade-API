@@ -12,9 +12,11 @@ import {
 } from 'src/domain/our-city/enterprise/entities/business-point';
 import { BUSINESS_POINT_ASSOCIATIONS } from 'src/domain/our-city/application/shared/constants/business-point-associations';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
+import { DrizzleBusinessPointPreviewMapper } from '../mappers/drizzle-business-point-preview.mapper';
 import { GetBusinessPointDetailsType } from 'src/core/@types/get-business-point-details-type';
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
 import { BusinessPointDetailsType } from 'src/core/@types/business-point-details-type';
+import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
@@ -260,5 +262,16 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     });
 
     return formattedResult;
+  }
+
+  async findBusinessPointsByUser(
+    userId: string,
+  ): Promise<BusinessPointPreviewType[]> {
+    const data = await this.drizzle.database
+      .select()
+      .from(businessPoints)
+      .where(eq(businessPoints.ownerId, userId));
+
+    return data.map(DrizzleBusinessPointPreviewMapper.toDomain);
   }
 }

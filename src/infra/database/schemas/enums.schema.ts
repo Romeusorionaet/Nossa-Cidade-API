@@ -12,4 +12,3 @@ export const businessPointStatusEnum = pgEnum('staff_status', [
 ]);
 
 export const usersRoleEnum = pgEnum('users_role', ['MERCHANT', 'ADMIN']);
-export type UserRoleEnum = keyof typeof usersRoleEnum;

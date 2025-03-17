@@ -7,6 +7,7 @@ import { GetBusinessPointDetailsType } from 'src/core/@types/get-business-point-
 import { BusinessPointDetailsType } from 'src/core/@types/business-point-details-type';
 import { BusinessPointCategoriesInsertType } from 'src/infra/database/schemas';
 import { GeometryPoint } from 'src/core/@types/geometry';
+import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
 
 export abstract class BusinessPointRepository {
   abstract create(businessPoint: BusinessPointProps): Promise<void>;
@@ -21,4 +22,7 @@ export abstract class BusinessPointRepository {
   abstract findByQuery(query: string): Promise<BusinessPointForMappingType[]>;
   abstract findAllCategories(): Promise<BusinessPointCategoriesInsertType[]>;
   abstract findById(id: string): Promise<BusinessPointProps>;
+  abstract findBusinessPointsByUser(
+    userId: string,
+  ): Promise<BusinessPointPreviewType[]>;
 }
