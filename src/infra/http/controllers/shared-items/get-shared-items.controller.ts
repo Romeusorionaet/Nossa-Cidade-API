@@ -19,7 +19,7 @@ export class SharedItemsController {
     try {
       const result = await this.getSharedItemsUseCase.execute();
 
-      return { sharedItems: result.value.sharedItems };
+      return result.value.sharedItems;
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }

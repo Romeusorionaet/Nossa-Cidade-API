@@ -3,16 +3,16 @@ import { z } from 'zod';
 
 export const businessPointDetailsSchema = z.object({
   businessPointId: z.string().uuid(),
-  pets: z.array(z.string()),
-  planning: z.array(z.string()),
-  accessibility: z.array(z.string()),
-  parking: z.array(z.string()),
-  payments: z.array(z.string()),
-  audience: z.array(z.string()),
-  amenities: z.array(z.string()),
-  menu: z.array(z.string()),
-  serviceOptions: z.array(z.string()),
-  environments: z.array(z.string()),
+  payments: z.array(z.string()).optional(),
+  pets: z.array(z.string()).optional(),
+  planning: z.array(z.string()).optional(),
+  accessibility: z.array(z.string()).optional(),
+  parking: z.array(z.string()).optional(),
+  audience: z.array(z.string()).optional(),
+  amenities: z.array(z.string()).optional(),
+  menu: z.array(z.string()).optional(),
+  serviceOptions: z.array(z.string()).optional(),
+  environments: z.array(z.string()).optional(),
 });
 
 export const businessPointDetailsSchemaValidationPipe = new ZodValidationPipe(

@@ -24,9 +24,10 @@ export const businessPointToPetsAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.petsId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.petsId],
+      name: 'business_point_to_pets_association_pk',
+    }),
   ],
 );
 
@@ -41,9 +42,10 @@ export const businessPointToPlanningAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.planningId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.planningId],
+      name: 'business_point_to_planning_association_pk',
+    }),
   ],
 );
 
@@ -58,9 +60,10 @@ export const businessPointToAccessibilityAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.accessibilityId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.accessibilityId],
+      name: 'business_point_to_accessibility_association_pk',
+    }),
   ],
 );
 
@@ -75,9 +78,10 @@ export const businessPointToParkingAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.parkingId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.parkingId],
+      name: 'business_point_to_parking_association_pk',
+    }),
   ],
 );
 
@@ -92,9 +96,10 @@ export const businessPointToPaymentsAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.paymentsId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.paymentsId],
+      name: 'business_point_to_payment_association_pk',
+    }),
   ],
 );
 
@@ -109,9 +114,10 @@ export const businessPointToAudienceAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.audienceId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.audienceId],
+      name: 'business_point_to_audience_association_pk',
+    }),
   ],
 );
 
@@ -126,9 +132,10 @@ export const businessPointToAmenitiesAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.amenitiesId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.amenitiesId],
+      name: 'business_point_to_amenities_association_pk',
+    }),
   ],
 );
 
@@ -143,9 +150,10 @@ export const businessPointToMenuAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.menuId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.menuId],
+      name: 'business_point_to_menu_association_pk',
+    }),
   ],
 );
 
@@ -160,9 +168,10 @@ export const businessPointToServiceOptionAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.serviceOptionId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.serviceOptionId],
+      name: 'business_point_to_service_option_association_pk',
+    }),
   ],
 );
 
@@ -177,9 +186,10 @@ export const businessPointToEnvironmentAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({ columns: [t.businessPointId, t.environmentId] }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.environmentId],
+      name: 'business_point_to_environment_association_pk',
+    }),
   ],
 );
 
@@ -194,10 +204,9 @@ export const businessPointCategoriesAssociation = pgTable(
       .notNull(),
   },
   (t) => [
-    {
-      pk: primaryKey({
-        columns: [t.businessPointId, t.businessPointCategoryId],
-      }),
-    },
+    primaryKey({
+      columns: [t.businessPointId, t.businessPointCategoryId],
+      name: 'business_point_categories_association_pk',
+    }),
   ],
 );

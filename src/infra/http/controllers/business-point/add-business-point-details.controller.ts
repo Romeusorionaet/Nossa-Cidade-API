@@ -31,16 +31,16 @@ export class AddBusinessPointDetailsController {
 
       await this.addBusinessPointDetailsUseCase.execute({
         businessPointId: businessPointDetails.businessPointId,
-        pets: businessPointDetails.pets,
-        planning: businessPointDetails.planning,
-        accessibility: businessPointDetails.accessibility,
-        parking: businessPointDetails.parking,
-        payments: businessPointDetails.payments,
-        audience: businessPointDetails.audience,
-        amenities: businessPointDetails.amenities,
-        menu: businessPointDetails.menu,
-        serviceOptions: businessPointDetails.serviceOptions,
-        environments: businessPointDetails.environments,
+        payments: businessPointDetails.payments ?? [],
+        pets: businessPointDetails.pets ?? [],
+        planning: businessPointDetails.planning ?? [],
+        accessibility: businessPointDetails.accessibility ?? [],
+        parking: businessPointDetails.parking ?? [],
+        audience: businessPointDetails.audience ?? [],
+        amenities: businessPointDetails.amenities ?? [],
+        menu: businessPointDetails.menu ?? [],
+        serviceOptions: businessPointDetails.serviceOptions ?? [],
+        environments: businessPointDetails.environments ?? [],
       });
 
       return { message: 'Detalhes registrado.' };
