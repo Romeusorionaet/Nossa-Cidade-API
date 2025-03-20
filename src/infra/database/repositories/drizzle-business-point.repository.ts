@@ -10,11 +10,9 @@ import {
   BusinessPointProps,
   BusinessPoint,
 } from 'src/domain/our-city/enterprise/entities/business-point';
-import { BUSINESS_POINT_ASSOCIATIONS } from 'src/domain/our-city/application/shared/constants/business-point-associations';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
 import { DrizzleBusinessPointPreviewMapper } from '../mappers/drizzle-business-point-preview.mapper';
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
-import { BusinessPointDetailsType } from 'src/core/@types/business-point-details-type';
 import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
@@ -39,27 +37,6 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     await db.insert(businessPointCategoriesAssociation).values({
       businessPointCategoryId: data.categoryId,
       businessPointId: data.id,
-    });
-  }
-
-  async addDetails(
-    businessPointDetails: BusinessPointDetailsType,
-  ): Promise<void> {
-    await this.drizzle.database.transaction(async (trx) => {
-      for (const { key, table, column } of BUSINESS_POINT_ASSOCIATIONS) {
-        const values = businessPointDetails[
-          key as keyof BusinessPointDetailsType
-        ] as string[];
-
-        if (values.length > 0) {
-          await trx.insert(table).values(
-            values.map((sharedId) => ({
-              businessPointId: businessPointDetails.businessPointId,
-              [column]: sharedId,
-            })),
-          );
-        }
-      }
     });
   }
 
