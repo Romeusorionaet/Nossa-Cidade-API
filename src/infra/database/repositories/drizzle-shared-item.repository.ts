@@ -11,6 +11,8 @@ import {
   sharedMenu,
   sharedPets,
 } from '../schemas';
+import { SharedItemsAssociateKeysEnum } from 'src/domain/our-city/application/shared/enums/shared-items-associate-keys.enum';
+import { BUSINESS_POINT_ASSOCIATIONS } from 'src/domain/our-city/application/shared/constants/business-point-associations';
 import { SharedItemRepository } from 'src/domain/our-city/application/repositories/shared-item.repository';
 import { GetSharedItemsType } from 'src/core/@types/get-shared-items-type';
 import { DatabaseClient } from '../database.client';
@@ -20,13 +22,55 @@ import { sql } from 'drizzle-orm';
 @Injectable()
 export class DrizzleSharedItemRepository implements SharedItemRepository {
   constructor(private drizzle: DatabaseClient) {}
+  async removeAssociations(
+    removedListItems: Partial<Record<SharedItemsAssociateKeysEnum, string[]>>,
+    businessPointId: string,
+  ): Promise<void> {
+    await this.drizzle.database.transaction(async (trx) => {
+      for (const { key, table, column } of BUSINESS_POINT_ASSOCIATIONS) {
+        const values = removedListItems[key as keyof typeof removedListItems];
+
+        if (Array.isArray(values) && values.length > 0) {
+          for (const value of values) {
+            await trx
+              .delete(table)
+              .where(
+                sql`${table.businessPointId} = ${businessPointId} AND ${table[column]} = ${value}`,
+              );
+          }
+        }
+      }
+    });
+  }
+
+  async updateAssociations(
+    newListItems: Partial<Record<SharedItemsAssociateKeysEnum, string[]>>,
+    businessPointId: string,
+  ): Promise<void> {
+    await this.drizzle.database.transaction(async (trx) => {
+      for (const { key, table, column } of BUSINESS_POINT_ASSOCIATIONS) {
+        const values = newListItems[
+          key as keyof typeof newListItems
+        ] as string[];
+
+        if (Array.isArray(values) && values.length > 0) {
+          await trx.insert(table).values(
+            values.map((sharedId) => ({
+              businessPointId,
+              [column]: sharedId,
+            })),
+          );
+        }
+      }
+    });
+  }
 
   async findAllAssociated(id: string): Promise<GetSharedItemsType> {
     const result = await this.drizzle.database.execute(
       sql`
            SELECT 
         DISTINCT ON (bp.id) 
-        ARRAY_AGG(DISTINCT CAST(JSON_BUILD_OBJECT('id', se.id, 'name', se.name) AS TEXT))::JSON[] AS "environment",
+        ARRAY_AGG(DISTINCT CAST(JSON_BUILD_OBJECT('id', se.id, 'name', se.name) AS TEXT))::JSON[] AS "environments",
         ARRAY_AGG(DISTINCT CAST(JSON_BUILD_OBJECT('id', sa.id, 'name', sa.name) AS TEXT))::JSON[] AS "accessibility",
         ARRAY_AGG(DISTINCT CAST(JSON_BUILD_OBJECT('id', sp.id, 'name', sp.name) AS TEXT))::JSON[] AS "pets",
         ARRAY_AGG(DISTINCT CAST(JSON_BUILD_OBJECT('id', spl.id, 'name', spl.name) AS TEXT))::JSON[] AS "planning",

@@ -4,6 +4,7 @@ import {
   businessPointToEnvironmentAssociation,
   businessPointToAmenitiesAssociation,
   businessPointToAudienceAssociation,
+  businessPointCategoriesAssociation,
   businessPointToPaymentsAssociation,
   businessPointToPlanningAssociation,
   businessPointToParkingAssociation,
@@ -53,5 +54,10 @@ export const BUSINESS_POINT_ASSOCIATIONS = Object.freeze([
     key: 'environments',
     table: businessPointToEnvironmentAssociation,
     column: 'environmentId',
+  },
+  {
+    key: 'categories',
+    table: businessPointCategoriesAssociation,
+    column: 'businessPointCategoryId',
   },
 ]);

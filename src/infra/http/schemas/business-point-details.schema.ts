@@ -1,18 +1,13 @@
+import { SharedItemsAssociateKeysEnum } from 'src/domain/our-city/application/shared/enums/shared-items-associate-keys.enum';
 import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
 import { z } from 'zod';
 
+const allowedKeys = z.nativeEnum(SharedItemsAssociateKeysEnum);
+
 export const businessPointDetailsSchema = z.object({
   businessPointId: z.string().uuid(),
-  payments: z.array(z.string()).optional(),
-  pets: z.array(z.string()).optional(),
-  planning: z.array(z.string()).optional(),
-  accessibility: z.array(z.string()).optional(),
-  parking: z.array(z.string()).optional(),
-  audience: z.array(z.string()).optional(),
-  amenities: z.array(z.string()).optional(),
-  menu: z.array(z.string()).optional(),
-  serviceOptions: z.array(z.string()).optional(),
-  environments: z.array(z.string()).optional(),
+  newListItems: z.record(allowedKeys, z.array(z.string())),
+  removedListItems: z.record(allowedKeys, z.array(z.string())),
 });
 
 export const businessPointDetailsSchemaValidationPipe = new ZodValidationPipe(
