@@ -15,7 +15,6 @@ export class DrizzleBusinessPointMapper {
       string,
       any
     >;
-    const images: Record<string, any> = raw.images as Record<string, any>;
 
     return BusinessPoint.create(
       {
@@ -29,7 +28,6 @@ export class DrizzleBusinessPointMapper {
         censorship: raw.censorship,
         awaitingApproval: raw.awaitingApproval || null,
         description: raw.description || null,
-        images: images || null,
         website: raw.website || null,
         highlight: raw.highlight || null,
         updatedAt: raw.updatedAt,
@@ -55,7 +53,6 @@ export class DrizzleBusinessPointMapper {
       censorship: businessPoint.censorship,
       awaitingApproval: businessPoint.awaitingApproval,
       description: businessPoint.description,
-      images: businessPoint.images,
       website: businessPoint.website,
       highlight: businessPoint.highlight,
       updatedAt: businessPoint.updatedAt,

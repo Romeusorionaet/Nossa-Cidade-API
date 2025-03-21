@@ -15,7 +15,6 @@ export interface BusinessPointProps {
   censorship: boolean;
   awaitingApproval?: boolean | null;
   description?: string | null;
-  images?: Record<string, any> | null;
   website?: string | null;
   highlight?: string | null;
   createdAt?: Date | null;
@@ -58,15 +57,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   get openingHours() {
     return this.props.openingHours;
-  }
-
-  get images() {
-    return this.props.images;
-  }
-
-  private set images(value: Record<string, any>) {
-    this.props.images = value;
-    this.touch();
   }
 
   get website() {

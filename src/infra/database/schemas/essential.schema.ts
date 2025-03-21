@@ -70,7 +70,6 @@ export const businessPoints = pgTable(
       .unique(),
     status: businessPointStatusEnum('status').default('ACTIVE'),
     openingHours: jsonb('opening_hours').notNull(),
-    images: jsonb('images'),
     website: varchar('website', { length: 500 }),
     awaitingApproval: boolean('awaiting_approval').default(true),
     censorship: boolean('censorship').default(false),
