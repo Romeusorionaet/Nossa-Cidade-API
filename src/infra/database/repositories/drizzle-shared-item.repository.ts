@@ -102,7 +102,7 @@ export class DrizzleSharedItemRepository implements SharedItemRepository {
       LEFT JOIN service_options sso ON bps.service_option_id = sso.id
       LEFT JOIN business_point_to_environment_association bpe ON bp.id = bpe.business_point_id
       LEFT JOIN environment se ON bpe.environment_id = se.id
-      LEFT JOIN business_point_categories_association bpca ON bp.id = bpca.business_point_id
+      LEFT JOIN business_point_to_categories_association bpca ON bp.id = bpca.business_point_id
       LEFT JOIN business_point_categories bpc ON bpca.business_point_category_id = bpc.id
       WHERE bp.id = ${id}
       GROUP BY bp.id;
