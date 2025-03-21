@@ -14,7 +14,7 @@ import {
 import { SharedItemsAssociateKeysEnum } from 'src/domain/our-city/application/shared/enums/shared-items-associate-keys.enum';
 import { BUSINESS_POINT_ASSOCIATIONS } from 'src/domain/our-city/application/shared/constants/business-point-associations';
 import { SharedItemRepository } from 'src/domain/our-city/application/repositories/shared-item.repository';
-import { GetSharedItemsType } from 'src/core/@types/get-shared-items-type';
+import { SharedItemsType } from 'src/core/@types/get-shared-items-type';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
@@ -65,7 +65,7 @@ export class DrizzleSharedItemRepository implements SharedItemRepository {
     });
   }
 
-  async findAllAssociated(id: string): Promise<GetSharedItemsType> {
+  async findAllAssociated(id: string): Promise<SharedItemsType> {
     const result = await this.drizzle.database.execute(
       sql`
            SELECT 
@@ -109,16 +109,16 @@ export class DrizzleSharedItemRepository implements SharedItemRepository {
     `,
     );
 
-    const [formattedResult]: GetSharedItemsType[] = (
+    const [formattedResult]: SharedItemsType[] = (
       result as { [key: string]: unknown }[]
     ).map((item) => {
-      return item as GetSharedItemsType;
+      return item as SharedItemsType;
     });
 
     return formattedResult;
   }
 
-  async findAll(): Promise<GetSharedItemsType> {
+  async findAll(): Promise<SharedItemsType> {
     const tables = [
       { key: 'pets', table: sharedPets },
       { key: 'planning', table: sharedPlanning },
@@ -140,7 +140,7 @@ export class DrizzleSharedItemRepository implements SharedItemRepository {
     const allItems = tables.reduce((acc, { key }, index) => {
       acc[key] = results[index];
       return acc;
-    }, {} as GetSharedItemsType);
+    }, {} as SharedItemsType);
 
     return allItems;
   }

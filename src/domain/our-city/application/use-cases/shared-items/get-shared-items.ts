@@ -1,12 +1,12 @@
 import { SharedItemRepository } from '../../repositories/shared-item.repository';
+import { SharedItemsType } from 'src/core/@types/get-shared-items-type';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
-import { GetSharedItemsType } from 'src/core/@types/get-shared-items-type';
 
 type GetSharedItemsUseCaseResponse = Either<
   null,
   {
-    sharedItems: GetSharedItemsType;
+    sharedItems: SharedItemsType;
   }
 >;
 

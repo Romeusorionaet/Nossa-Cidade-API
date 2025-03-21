@@ -1,6 +1,6 @@
 import { SharedItemProps } from 'src/domain/our-city/enterprise/entities/shared-item';
-//TODO remove get
-export type GetSharedItemsType = {
+
+export type SharedItemsType = {
   serviceOptions: SharedItemProps[];
   accessibility: SharedItemProps[];
   environments: SharedItemProps[];

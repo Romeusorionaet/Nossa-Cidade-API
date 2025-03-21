@@ -1,7 +1,7 @@
 import { SharedItemRepository } from '../../repositories/shared-item.repository';
+import { SharedItemsType } from 'src/core/@types/get-shared-items-type';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
-import { GetSharedItemsType } from 'src/core/@types/get-shared-items-type';
 
 type GetSharedItemsAssociatedBusinessPointUseCaseRequest = {
   businessPointId: string;
@@ -10,7 +10,7 @@ type GetSharedItemsAssociatedBusinessPointUseCaseRequest = {
 type GetSharedItemsAssociatedBusinessPointUseCaseResponse = Either<
   null,
   {
-    sharedItemsAssociated: GetSharedItemsType;
+    sharedItemsAssociated: SharedItemsType;
   }
 >;
 
