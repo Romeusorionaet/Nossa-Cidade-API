@@ -3,6 +3,7 @@ import {
   BusinessPointCategoriesInsertType,
   businessPointCategories,
   businessPointCustomTags,
+  businessPointImages,
   sharedCategoryTags,
   businessPoints,
 } from '../schemas';
@@ -11,7 +12,9 @@ import {
   BusinessPoint,
 } from 'src/domain/our-city/enterprise/entities/business-point';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
+import { BusinessPointImage } from 'src/domain/our-city/enterprise/entities/business-point-image';
 import { DrizzleBusinessPointPreviewMapper } from '../mappers/drizzle-business-point-preview.mapper';
+import { DrizzleBusinessPointImageMapper } from '../mappers/drizzle-business-point-image.mapper';
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
 import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
@@ -24,6 +27,15 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   constructor(private drizzle: DatabaseClient) {}
+  async saveImageUrls(
+    businessPointImageUrls: BusinessPointImage[],
+  ): Promise<void> {
+    const values = businessPointImageUrls.map(
+      DrizzleBusinessPointImageMapper.toDrizzle,
+    );
+
+    await this.drizzle.database.insert(businessPointImages).values(values);
+  }
 
   async create(businessPoint: BusinessPoint): Promise<void> {
     const db = this.drizzle.database;

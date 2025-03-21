@@ -4,6 +4,7 @@ import { SharedItemsAssociatedBusinessPointController } from './controllers/shar
 import { GetBusinessPointsForMappingUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-points-for-mapping';
 import { GetBusinessPointPreviewUserUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-preview-user';
 import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-categories';
+import { SaveImagesBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
 import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
 import { UpdateSharedItemsBusinessPointController } from './controllers/shared-items/update-shared-items-business-point.controller';
 import { GetBusinessPointPreviewUserController } from './controllers/business-point/get-business-points-preview-user.controller';
@@ -16,6 +17,7 @@ import { GetBusinessPointCategoriesController } from './controllers/business-poi
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { GetBusinessPointOverviewController } from './controllers/business-point/get-business-point-overview.controller';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
+import { UploadImageToBusinessPointController } from './controllers/uploads/upload-image-to-business-point.controller';
 import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
 import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
@@ -32,6 +34,7 @@ import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/u
 import { ForgotUserPasswordController } from './controllers/user/auth/forgot-user-password.controller';
 import { UpdateUserPasswordController } from './controllers/user/auth/update-user-password.controller';
 import { ResetUserPasswordController } from './controllers/user/auth/reset-user-password.controller';
+import { UploadImageUseCase } from 'src/domain/our-city/application/use-cases/upload/upload-image';
 import { AuthenticateUserController } from './controllers/user/auth/authenticate-user.controller';
 import { SharedItemsController } from './controllers/shared-items/get-shared-items.controller';
 import { GetUserProfileController } from './controllers/user/get-user-profile.controller';
@@ -39,9 +42,9 @@ import { RegisterUserController } from './controllers/user/auth/register-user.co
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
 import { RefreshTokenController } from './controllers/user/auth/refresh-token.controller';
 import { CryptographyModule } from '../cryptography/cryptography.module';
-import { EmailModule } from '../services/email/email.module';
 import { DatabaseModule } from '../database/database.module';
 import { AuthModule } from './middlewares/auth/auth.module';
+import { ServiceModule } from '../services/service.module';
 import { EnvModule } from '../env/env.module';
 import { Module } from '@nestjs/common';
 
@@ -49,7 +52,7 @@ import { Module } from '@nestjs/common';
   imports: [
     CryptographyModule,
     DatabaseModule,
-    EmailModule,
+    ServiceModule,
     AuthModule,
     EnvModule,
   ],
@@ -59,6 +62,8 @@ import { Module } from '@nestjs/common';
     GetBusinessPointsForMappingController,
     GetBusinessPointPreviewUserController,
     GetBusinessPointCategoriesController,
+    UploadImageToBusinessPointController,
+    UploadImageToBusinessPointController,
     GetBusinessPointOverviewController,
     ResendConfirmationEmailController,
     AuthenticateWidthOAuthController,
@@ -77,6 +82,7 @@ import { Module } from '@nestjs/common';
   providers: [
     GetSharedItemsAssociatedBusinessPointUseCase,
     UpdateSharedItemsBusinessPointUseCase,
+    SaveImagesBusinessPointImageUseCase,
     GetBusinessPointsForMappingUseCase,
     GetBusinessPointPreviewUserUseCase,
     GetBusinessPointCategoriesUseCase,
@@ -97,6 +103,7 @@ import { Module } from '@nestjs/common';
     RegisterUserUseCase,
     ConfirmEmailUseCase,
     RefreshTokenUseCase,
+    UploadImageUseCase,
   ],
 })
 export class HttpModule {}
