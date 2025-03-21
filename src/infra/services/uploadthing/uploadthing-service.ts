@@ -28,7 +28,12 @@ export class UploadThingService implements UploadServiceRepository {
 
       const uploadResponses = await Promise.all(blobs);
 
-      return uploadResponses.map((response) => response[0].data.ufsUrl);
+      const result = uploadResponses.map((response) => {
+        const url = response[0].data.ufsUrl;
+        return url.split('https://totpi0dl7f.ufs.sh/f/')[1];
+      });
+
+      return result;
     } catch (error) {
       console.error('Erro inesperado no serviço de upload:', error);
       throw new InternalServerErrorException('Erro interno ao enviar imagem.');
