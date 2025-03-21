@@ -195,7 +195,7 @@ export const businessPointToEnvironmentAssociation = pgTable(
 );
 
 export const businessPointToCategoriesAssociation = pgTable(
-  'business_point_categories_association',
+  'business_point_to_categories_association',
   {
     businessPointId: text('business_point_id')
       .references(() => businessPoints.id, { onDelete: 'cascade' })

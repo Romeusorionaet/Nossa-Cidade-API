@@ -72,6 +72,7 @@ export const sharedEnvironment = pgTable('environment', {
   name: varchar('name', { length: 100 }).notNull().unique(),
 });
 
+//TODO verify the difference
 export const sharedCategoryTags = pgTable(
   'category_tags',
   {

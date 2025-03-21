@@ -15,6 +15,20 @@
       "when": 1742232565795,
       "tag": "0001_tranquil_weapon_omega",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1742569598257,
+      "tag": "0002_flowery_wallop",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1742570537034,
+      "tag": "0003_lyrical_dragon_man",
+      "breakpoints": true
     }
   ]
 }
