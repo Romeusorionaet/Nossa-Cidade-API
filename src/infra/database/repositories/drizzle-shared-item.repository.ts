@@ -1,5 +1,5 @@
 import {
-  businessPointCategories,
+  sharedBusinessPointCategories,
   sharedServiceOptions,
   sharedAccessibility,
   sharedEnvironment,
@@ -130,7 +130,7 @@ export class DrizzleSharedItemRepository implements SharedItemRepository {
       { key: 'menu', table: sharedMenu },
       { key: 'serviceOptions', table: sharedServiceOptions },
       { key: 'environments', table: sharedEnvironment },
-      { key: 'categories', table: businessPointCategories },
+      { key: 'categories', table: sharedBusinessPointCategories },
     ];
 
     const results = await Promise.all(

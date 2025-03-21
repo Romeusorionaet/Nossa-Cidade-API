@@ -1,12 +1,12 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { Entity } from 'src/core/entities/entity';
 
-export interface businessPointFavoritesProps {
+export interface BusinessPointFavoritesProps {
   userId: UniqueEntityID;
   businessPointId: UniqueEntityID;
 }
 
-export class businessPointFavorites extends Entity<businessPointFavoritesProps> {
+export class BusinessPointFavorites extends Entity<BusinessPointFavoritesProps> {
   get userId() {
     return this.props.userId;
   }
@@ -15,8 +15,8 @@ export class businessPointFavorites extends Entity<businessPointFavoritesProps> 
     return this.props.businessPointId;
   }
 
-  static create(props: businessPointFavoritesProps, id?: UniqueEntityID) {
-    return new businessPointFavorites(
+  static create(props: BusinessPointFavoritesProps, id?: UniqueEntityID) {
+    return new BusinessPointFavorites(
       {
         ...props,
       },

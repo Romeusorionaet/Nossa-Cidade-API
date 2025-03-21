@@ -3,9 +3,9 @@ import {
   BusinessPoint,
 } from '../../enterprise/entities/business-point';
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
-import { BusinessPointImage } from '../../enterprise/entities/business-point-image';
 import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
-import { BusinessPointCategoriesInsertType } from 'src/infra/database/schemas';
+import { BusinessPointImage } from '../../enterprise/entities/business-point-image';
+import { SharedBusinessPointCategoriesType } from 'src/infra/database/schemas';
 import { GeometryPoint } from 'src/core/@types/geometry';
 
 export abstract class BusinessPointRepository {
@@ -15,7 +15,7 @@ export abstract class BusinessPointRepository {
   ): Promise<BusinessPoint | null>;
   abstract findAllForMapping(): Promise<BusinessPointForMappingType[]>;
   abstract findByQuery(query: string): Promise<BusinessPointForMappingType[]>;
-  abstract findAllCategories(): Promise<BusinessPointCategoriesInsertType[]>;
+  abstract findAllCategories(): Promise<SharedBusinessPointCategoriesType[]>;
   abstract findById(id: string): Promise<BusinessPointProps>;
   abstract findBusinessPointsByUser(
     userId: string,

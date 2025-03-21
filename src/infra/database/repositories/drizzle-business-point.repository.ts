@@ -1,11 +1,11 @@
 import {
-  businessPointCategoriesAssociation,
-  BusinessPointCategoriesInsertType,
-  businessPointCategories,
   businessPointCustomTags,
   businessPointImages,
   sharedCategoryTags,
   businessPoints,
+  businessPointToCategoriesAssociation,
+  sharedBusinessPointCategories,
+  SharedBusinessPointCategoriesType,
 } from '../schemas';
 import {
   BusinessPointProps,
@@ -46,7 +46,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       location: sql`ST_SetSRID(ST_MakePoint(${data.location.x}, ${data.location.y}), 4326)`,
     });
 
-    await db.insert(businessPointCategoriesAssociation).values({
+    await db.insert(businessPointToCategoriesAssociation).values({
       businessPointCategoryId: data.categoryId,
       businessPointId: data.id,
     });
@@ -117,23 +117,23 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       })
       .from(businessPoints)
       .leftJoin(
-        businessPointCategoriesAssociation,
+        businessPointToCategoriesAssociation,
         eq(
           businessPoints.id,
-          businessPointCategoriesAssociation.businessPointId,
+          businessPointToCategoriesAssociation.businessPointId,
         ),
       )
       .leftJoin(
-        businessPointCategories,
+        sharedBusinessPointCategories,
         eq(
-          businessPointCategoriesAssociation.businessPointCategoryId,
-          businessPointCategories.id,
+          businessPointToCategoriesAssociation.businessPointCategoryId,
+          sharedBusinessPointCategories.id,
         ),
       )
       .leftJoin(
         sharedCategoryTags,
         eq(
-          businessPointCategories.id,
+          sharedBusinessPointCategories.id,
           sharedCategoryTags.businessPointCategoryId,
         ),
       )
@@ -150,7 +150,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
               `%${normalizedQuery}%`,
             ),
             ilike(
-              sql<string>`unaccent(${businessPointCategories.name})`,
+              sql<string>`unaccent(${sharedBusinessPointCategories.name})`,
               `%${normalizedQuery}%`,
             ),
             ilike(
@@ -179,13 +179,13 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     }));
   }
 
-  async findAllCategories(): Promise<BusinessPointCategoriesInsertType[]> {
+  async findAllCategories(): Promise<SharedBusinessPointCategoriesType[]> {
     const result = await this.drizzle.database
       .select({
-        id: businessPointCategories.id,
-        name: businessPointCategories.name,
+        id: sharedBusinessPointCategories.id,
+        name: sharedBusinessPointCategories.name,
       })
-      .from(businessPointCategories);
+      .from(sharedBusinessPointCategories);
 
     return result;
   }

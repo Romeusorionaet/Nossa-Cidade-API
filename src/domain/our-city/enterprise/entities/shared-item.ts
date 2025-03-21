@@ -5,13 +5,13 @@ export interface SharedItemProps {
   name: string;
 }
 
-export class sharedItem extends Entity<SharedItemProps> {
+export class SharedItem extends Entity<SharedItemProps> {
   get name() {
     return this.props.name;
   }
 
   static create(props: SharedItemProps, id?: UniqueEntityID) {
-    return new sharedItem(
+    return new SharedItem(
       {
         ...props,
       },

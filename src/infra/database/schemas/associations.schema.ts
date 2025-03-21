@@ -1,4 +1,5 @@
 import {
+  sharedBusinessPointCategories,
   sharedServiceOptions,
   sharedAccessibility,
   sharedEnvironment,
@@ -11,7 +12,7 @@ import {
   sharedPets,
 } from './shared.schema';
 import { pgTable, primaryKey, text } from 'drizzle-orm/pg-core';
-import { businessPointCategories, businessPoints } from './essential.schema';
+import { businessPoints } from './essential.schema';
 
 export const businessPointToPetsAssociation = pgTable(
   'business_point_to_pets_association',
@@ -193,14 +194,14 @@ export const businessPointToEnvironmentAssociation = pgTable(
   ],
 );
 
-export const businessPointCategoriesAssociation = pgTable(
+export const businessPointToCategoriesAssociation = pgTable(
   'business_point_categories_association',
   {
     businessPointId: text('business_point_id')
       .references(() => businessPoints.id, { onDelete: 'cascade' })
       .notNull(),
     businessPointCategoryId: text('business_point_category_id')
-      .references(() => businessPointCategories.id)
+      .references(() => sharedBusinessPointCategories.id)
       .notNull(),
   },
   (t) => [

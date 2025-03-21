@@ -14,6 +14,7 @@ import {
   staffStatusEnum,
   usersRoleEnum,
 } from './enums.schema';
+import { sharedBusinessPointCategories } from './shared.schema';
 import { createId } from '@paralleldrive/cuid2';
 import { InferSelectModel } from 'drizzle-orm';
 
@@ -56,7 +57,7 @@ export const businessPoints = pgTable(
       .$defaultFn(() => createId()),
     name: varchar('name', { length: 255 }).notNull(),
     categoryId: text('category_id')
-      .references(() => businessPointCategories.id)
+      .references(() => sharedBusinessPointCategories.id)
       .notNull(),
     description: varchar('description', { length: 500 }),
     address: varchar('address', { length: 200 }),
@@ -92,14 +93,17 @@ export const businessPoints = pgTable(
 );
 export type BusinessPointInsertType = InferSelectModel<typeof businessPoints>;
 
-export const businessPointCategories = pgTable('business_point_categories', {
+export const businessPointImages = pgTable('business_point_images', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: varchar('name', { length: 25 }).notNull().unique(),
+  url: text('url').notNull(),
+  businessPointId: text('business_point_id')
+    .references(() => businessPoints.id, { onDelete: 'cascade' })
+    .notNull(),
 });
-export type BusinessPointCategoriesInsertType = InferSelectModel<
-  typeof businessPointCategories
+export type BusinessPointImageInsertType = InferSelectModel<
+  typeof businessPointImages
 >;
 
 export const businessPointCustomTags = pgTable('business_point_custom_tags', {

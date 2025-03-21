@@ -1,6 +1,6 @@
 import { pgTable, text, unique, varchar } from 'drizzle-orm/pg-core';
-import { businessPointCategories } from './essential.schema';
 import { createId } from '@paralleldrive/cuid2';
+import { InferSelectModel } from 'drizzle-orm';
 
 export const sharedPets = pgTable('pets', {
   id: text('id')
@@ -79,9 +79,22 @@ export const sharedCategoryTags = pgTable(
       .primaryKey()
       .$defaultFn(() => createId()),
     businessPointCategoryId: text('business_point_category_id')
-      .references(() => businessPointCategories.id)
+      .references(() => sharedBusinessPointCategories.id)
       .notNull(),
     tag: varchar('tag', { length: 25 }).notNull(),
   },
   (t) => [unique().on(t.businessPointCategoryId, t.tag)],
 );
+
+export const sharedBusinessPointCategories = pgTable(
+  'business_point_categories',
+  {
+    id: text('id')
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    name: varchar('name', { length: 25 }).notNull().unique(),
+  },
+);
+export type SharedBusinessPointCategoriesType = InferSelectModel<
+  typeof sharedBusinessPointCategories
+>;
