@@ -1,7 +1,12 @@
+import { UploadThingMiddleware } from './http/middlewares/uploadthing.middleware';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { HttpModule } from './http/http.module';
-import { Module } from '@nestjs/common';
 
 @Module({
   imports: [HttpModule],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(UploadThingMiddleware).forRoutes('/api/uploadthing');
+  }
+}
