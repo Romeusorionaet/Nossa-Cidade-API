@@ -16,7 +16,6 @@ type UploadImageUseCaseResponse = Either<
 
 @Injectable()
 export class UploadImageUseCase {
-  //TODO apply readonly in others use case
   constructor(private readonly uploadThingService: UploadServiceRepository) {}
 
   async execute({

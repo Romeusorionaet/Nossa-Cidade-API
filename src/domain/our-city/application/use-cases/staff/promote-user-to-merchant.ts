@@ -10,7 +10,7 @@ type PromoteUserToMerchantUseCaseResponse = Either<null, object>;
 
 @Injectable()
 export class PromoteUserToMerchantUseCase {
-  constructor(private staffRepository: StaffRepository) {}
+  constructor(private readonly staffRepository: StaffRepository) {}
 
   async execute({
     id,

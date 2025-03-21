@@ -16,7 +16,7 @@ import { AccessTokenGuard } from '../../../middlewares/auth/guards/access-token.
 
 @Controller('/auth/update/password')
 export class UpdateUserPasswordController {
-  constructor(private updateUserPassword: UpdateUserPasswordUseCase) {}
+  constructor(private readonly updateUserPassword: UpdateUserPasswordUseCase) {}
   @Put()
   @UseGuards(AccessTokenGuard)
   @HttpCode(200)

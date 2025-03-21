@@ -15,7 +15,9 @@ type ValidateBusinessPointUseCaseResponse = Either<
 
 @Injectable()
 export class ValidateBusinessPointUseCase {
-  constructor(private businessPointRepository: BusinessPointRepository) {}
+  constructor(
+    private readonly businessPointRepository: BusinessPointRepository,
+  ) {}
 
   async execute({
     location,

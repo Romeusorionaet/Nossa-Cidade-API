@@ -17,7 +17,9 @@ import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-toke
 
 @Controller('/auth/reset-password')
 export class ResetUserPasswordController {
-  constructor(private resetUserPasswordUseCase: ResetUserPasswordUseCase) {}
+  constructor(
+    private readonly resetUserPasswordUseCase: ResetUserPasswordUseCase,
+  ) {}
 
   @Post()
   @UseGuards(ForgotPasswordTokenGuard)

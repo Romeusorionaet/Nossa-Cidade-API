@@ -12,7 +12,7 @@ import { SearchBusinessPointsUseCase } from 'src/domain/our-city/application/use
 @Controller('/business-point/search/:query')
 export class SearchBusinessPointsController {
   constructor(
-    private searchBusinessPointsUseCase: SearchBusinessPointsUseCase,
+    private readonly searchBusinessPointsUseCase: SearchBusinessPointsUseCase,
   ) {}
 
   @Get()

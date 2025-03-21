@@ -14,7 +14,7 @@ import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 
 @Controller('/user/profile')
 export class GetUserProfileController {
-  constructor(private getUserProfiler: GetUserProfileUseCase) {}
+  constructor(private readonly getUserProfiler: GetUserProfileUseCase) {}
 
   @Get()
   @UseGuards(AccessTokenGuard)

@@ -13,7 +13,9 @@ type SaveImagesBusinessPointImageUseCaseResponse = Either<null, object>;
 
 @Injectable()
 export class SaveImagesBusinessPointImageUseCase {
-  constructor(private businessPointRepository: BusinessPointRepository) {}
+  constructor(
+    private readonly businessPointRepository: BusinessPointRepository,
+  ) {}
 
   async execute({
     businessPointId,

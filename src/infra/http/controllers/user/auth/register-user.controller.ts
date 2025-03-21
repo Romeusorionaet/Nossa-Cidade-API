@@ -15,7 +15,7 @@ import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decora
 
 @Controller('/auth/register')
 export class RegisterUserController {
-  constructor(private registerUserUseCase: RegisterUserUseCase) {}
+  constructor(private readonly registerUserUseCase: RegisterUserUseCase) {}
 
   @Public()
   @Post()

@@ -24,8 +24,8 @@ type RegisterBusinessPointUseCaseResponse = Either<null, object>;
 @Injectable()
 export class RegisterBusinessPointUseCase {
   constructor(
-    private businessPointRepository: BusinessPointRepository,
-    private businessPointCustomTag: BusinessPointCustomTagRepository,
+    private readonly businessPointRepository: BusinessPointRepository,
+    private readonly businessPointCustomTag: BusinessPointCustomTagRepository,
   ) {}
 
   async execute({

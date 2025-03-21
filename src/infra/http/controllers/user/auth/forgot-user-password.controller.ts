@@ -12,7 +12,9 @@ import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 
 @Controller('/auth/forgot-password')
 export class ForgotUserPasswordController {
-  constructor(private forgotUserPasswordUseCase: ForgotUserPasswordUseCase) {}
+  constructor(
+    private readonly forgotUserPasswordUseCase: ForgotUserPasswordUseCase,
+  ) {}
 
   @Post()
   @UseGuards(AccessTokenGuard)

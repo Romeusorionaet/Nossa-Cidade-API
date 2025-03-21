@@ -16,7 +16,7 @@ import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.gua
 @Controller('/shared-items/associated/update-details')
 export class UpdateSharedItemsBusinessPointController {
   constructor(
-    private updateSharedItemsBusinessPointUseCase: UpdateSharedItemsBusinessPointUseCase,
+    private readonly updateSharedItemsBusinessPointUseCase: UpdateSharedItemsBusinessPointUseCase,
   ) {}
 
   @Put()

@@ -17,7 +17,7 @@ import { FastifyReply } from 'fastify';
 @Controller('/auth/resend-confirmation-email')
 export class ResendConfirmationEmailController {
   constructor(
-    private resendConfirmationEmailUseCase: ResendConfirmationEmailUseCase,
+    private readonly resendConfirmationEmailUseCase: ResendConfirmationEmailUseCase,
   ) {}
 
   @Post()

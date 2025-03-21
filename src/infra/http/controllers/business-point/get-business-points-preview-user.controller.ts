@@ -13,7 +13,7 @@ import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 @Controller('/business-point/preview/user')
 export class GetBusinessPointPreviewUserController {
   constructor(
-    private getBusinessPointPreviewUserUseCase: GetBusinessPointPreviewUserUseCase,
+    private readonly getBusinessPointPreviewUserUseCase: GetBusinessPointPreviewUserUseCase,
   ) {}
 
   @Get()

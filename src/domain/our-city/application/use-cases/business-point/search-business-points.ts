@@ -16,7 +16,9 @@ type SearchBusinessPointsUseCaseResponse = Either<
 
 @Injectable()
 export class SearchBusinessPointsUseCase {
-  constructor(private businessPointRepository: BusinessPointRepository) {}
+  constructor(
+    private readonly businessPointRepository: BusinessPointRepository,
+  ) {}
 
   async execute({
     query,

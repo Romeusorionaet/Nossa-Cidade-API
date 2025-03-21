@@ -16,7 +16,9 @@ import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decora
 
 @Controller('/auth/authenticate')
 export class AuthenticateUserController {
-  constructor(private authenticateUserUseCase: AuthenticateUserUseCase) {}
+  constructor(
+    private readonly authenticateUserUseCase: AuthenticateUserUseCase,
+  ) {}
 
   @Public()
   @Post()

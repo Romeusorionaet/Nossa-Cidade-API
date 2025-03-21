@@ -12,7 +12,7 @@ type GetSharedItemsUseCaseResponse = Either<
 
 @Injectable()
 export class GetSharedItemsUseCase {
-  constructor(private sharedItemsRepository: SharedItemRepository) {}
+  constructor(private readonly sharedItemsRepository: SharedItemRepository) {}
 
   async execute(): Promise<GetSharedItemsUseCaseResponse> {
     const sharedItems = await this.sharedItemsRepository.findAll();

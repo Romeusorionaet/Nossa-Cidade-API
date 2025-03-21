@@ -14,7 +14,7 @@ import { FastifyReply } from 'fastify';
 
 @Controller('/auth/refresh-token')
 export class RefreshTokenController {
-  constructor(private refreshTokenUseCase: RefreshTokenUseCase) {}
+  constructor(private readonly refreshTokenUseCase: RefreshTokenUseCase) {}
 
   @Get()
   @UseGuards(RefreshTokenGuard)

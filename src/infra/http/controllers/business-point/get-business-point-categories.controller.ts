@@ -5,7 +5,7 @@ import { Public } from '../../middlewares/auth/decorators/public.decorator';
 @Controller('/business-point/get-all-categories')
 export class GetBusinessPointCategoriesController {
   constructor(
-    private getBusinessPointCategoriesUseCase: GetBusinessPointCategoriesUseCase,
+    private readonly getBusinessPointCategoriesUseCase: GetBusinessPointCategoriesUseCase,
   ) {}
 
   @Get()

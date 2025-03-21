@@ -13,7 +13,7 @@ type UpdateSharedItemsBusinessPointUseCaseResponse = Either<null, object>;
 
 @Injectable()
 export class UpdateSharedItemsBusinessPointUseCase {
-  constructor(private sharedItemRepository: SharedItemRepository) {}
+  constructor(private readonly sharedItemRepository: SharedItemRepository) {}
 
   async execute({
     businessPointId,

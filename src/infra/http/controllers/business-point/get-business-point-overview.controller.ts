@@ -12,7 +12,7 @@ import { Public } from '../../middlewares/auth/decorators/public.decorator';
 @Controller('/business-point/overview/:id')
 export class GetBusinessPointOverviewController {
   constructor(
-    private getBusinessPointOverviewUseCase: GetBusinessPointOverviewUseCase,
+    private readonly getBusinessPointOverviewUseCase: GetBusinessPointOverviewUseCase,
   ) {}
 
   @Public()

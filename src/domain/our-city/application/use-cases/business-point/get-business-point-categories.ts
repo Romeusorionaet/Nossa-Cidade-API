@@ -12,7 +12,9 @@ type GetBusinessPointCategoriesUseCaseResponse = Either<
 
 @Injectable()
 export class GetBusinessPointCategoriesUseCase {
-  constructor(private businessPointRepository: BusinessPointRepository) {}
+  constructor(
+    private readonly businessPointRepository: BusinessPointRepository,
+  ) {}
 
   async execute(): Promise<GetBusinessPointCategoriesUseCaseResponse> {
     const businessPointCategories =

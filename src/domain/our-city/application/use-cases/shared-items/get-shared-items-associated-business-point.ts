@@ -16,7 +16,7 @@ type GetSharedItemsAssociatedBusinessPointUseCaseResponse = Either<
 
 @Injectable()
 export class GetSharedItemsAssociatedBusinessPointUseCase {
-  constructor(private sharedItemsRepository: SharedItemRepository) {}
+  constructor(private readonly sharedItemsRepository: SharedItemRepository) {}
 
   async execute({
     businessPointId,

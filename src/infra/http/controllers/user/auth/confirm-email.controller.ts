@@ -13,7 +13,7 @@ import { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-
 
 @Controller('/auth/confirm-email')
 export class ConfirmEmailController {
-  constructor(private confirmEmailUseCase: ConfirmEmailUseCase) {}
+  constructor(private readonly confirmEmailUseCase: ConfirmEmailUseCase) {}
 
   @Post()
   @UseGuards(ConfirmationTokenGuard)

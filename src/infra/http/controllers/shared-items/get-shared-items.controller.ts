@@ -10,7 +10,7 @@ import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.gua
 
 @Controller('/pick-list/shared-items')
 export class SharedItemsController {
-  constructor(private getSharedItemsUseCase: GetSharedItemsUseCase) {}
+  constructor(private readonly getSharedItemsUseCase: GetSharedItemsUseCase) {}
 
   @Get()
   @UseGuards(AccessTokenGuard)

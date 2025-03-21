@@ -1,6 +1,7 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { Entity } from 'src/core/entities/entity';
 
+//TODO turn 'b' to 'B
 export interface businessPointCategoriesProps {
   name: string;
 }

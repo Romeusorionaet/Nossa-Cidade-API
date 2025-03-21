@@ -16,7 +16,9 @@ type GetBusinessPointsForMappingUseCaseResponse = Either<
 
 @Injectable()
 export class GetBusinessPointOverviewUseCase {
-  constructor(private businessPointRepository: BusinessPointRepository) {}
+  constructor(
+    private readonly businessPointRepository: BusinessPointRepository,
+  ) {}
 
   async execute({
     id,

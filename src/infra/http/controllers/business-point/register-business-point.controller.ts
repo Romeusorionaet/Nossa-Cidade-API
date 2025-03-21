@@ -22,9 +22,9 @@ import { GeometryPoint } from 'src/core/@types/geometry';
 @Controller('/business-point/register')
 export class RegisterBusinessPointController {
   constructor(
-    private validateBusinessPointUseCase: ValidateBusinessPointUseCase,
-    private registerBusinessPointUseCase: RegisterBusinessPointUseCase,
-    private promoterUserToMerchantUseCase: PromoteUserToMerchantUseCase,
+    private readonly validateBusinessPointUseCase: ValidateBusinessPointUseCase,
+    private readonly registerBusinessPointUseCase: RegisterBusinessPointUseCase,
+    private readonly promoterUserToMerchantUseCase: PromoteUserToMerchantUseCase,
   ) {}
 
   @Post()

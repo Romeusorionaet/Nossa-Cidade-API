@@ -18,8 +18,8 @@ import { FastifyReply } from 'fastify';
 @Controller('/auth/authenticate/oauth/callback')
 export class AuthenticateWidthOAuthController {
   constructor(
-    private registerUserWithOAuthUseCase: RegisterUserWithOAuthUseCase,
-    private refreshTokenUseCase: RefreshTokenUseCase,
+    private readonly registerUserWithOAuthUseCase: RegisterUserWithOAuthUseCase,
+    private readonly refreshTokenUseCase: RefreshTokenUseCase,
   ) {}
 
   @Public()

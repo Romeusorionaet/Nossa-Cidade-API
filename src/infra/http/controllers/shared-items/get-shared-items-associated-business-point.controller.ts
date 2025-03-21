@@ -12,7 +12,7 @@ import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.gua
 @Controller('/pick-list/shared-items/associated/business-point/:id')
 export class SharedItemsAssociatedBusinessPointController {
   constructor(
-    private getSharedItemsAssociatedBusinessPointUseCase: GetSharedItemsAssociatedBusinessPointUseCase,
+    private readonly getSharedItemsAssociatedBusinessPointUseCase: GetSharedItemsAssociatedBusinessPointUseCase,
   ) {}
 
   @Get()
