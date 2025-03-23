@@ -7,6 +7,7 @@ import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/applicati
 import { SaveImagesBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
 import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
 import { UpdateSharedItemsBusinessPointController } from './controllers/shared-items/update-shared-items-business-point.controller';
+import { GetBusinessPointImagesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-images';
 import { GetBusinessPointPreviewUserController } from './controllers/business-point/get-business-points-preview-user.controller';
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
@@ -21,6 +22,7 @@ import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/us
 import { UploadImageToBusinessPointController } from './controllers/uploads/upload-image-to-business-point.controller';
 import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
 import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
+import { GetBusinessPointImagesController } from './controllers/business-point/get-business-point-images.controller';
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
 import { RegisterBusinessPointController } from './controllers/business-point/register-business-point.controller';
 import { ResendConfirmationEmailController } from './controllers/user/auth/resend-confirmation-email.controller';
@@ -68,6 +70,7 @@ import { Module } from '@nestjs/common';
     GetBusinessPointOverviewController,
     ResendConfirmationEmailController,
     AuthenticateWidthOAuthController,
+    GetBusinessPointImagesController,
     RegisterBusinessPointController,
     SearchBusinessPointsController,
     UpdateUserPasswordController,
@@ -90,6 +93,7 @@ import { Module } from '@nestjs/common';
     GetBusinessPointCategoriesUseCase,
     GetBusinessPointOverviewUseCase,
     ResendConfirmationEmailUseCase,
+    GetBusinessPointImagesUseCase,
     RegisterUserWithOAuthUseCase,
     RegisterBusinessPointUseCase,
     ValidateBusinessPointUseCase,
