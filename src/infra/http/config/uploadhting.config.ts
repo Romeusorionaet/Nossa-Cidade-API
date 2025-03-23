@@ -1,3 +1,4 @@
+import { BusinessPointImageQuota } from 'src/domain/our-city/application/shared/constants/business-point-image-quota';
 import { createUploadthing, type FileRouter } from 'uploadthing/express';
 
 const f = createUploadthing();
@@ -6,7 +7,7 @@ export const uploadRouter = {
   NC_BP: f({
     image: {
       maxFileSize: '512KB',
-      maxFileCount: 2,
+      maxFileCount: BusinessPointImageQuota,
     },
   }).onUploadComplete((data) => {
     console.log('Upload finalizado:', data);

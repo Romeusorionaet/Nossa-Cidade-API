@@ -13,6 +13,7 @@ import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/us
 import { GetBusinessPointsForMappingController } from './controllers/business-point/get-business-points-for-mapping.controller';
 import { ResendConfirmationEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/resend-confirmation-email';
 import { SearchBusinessPointsUseCase } from 'src/domain/our-city/application/use-cases/business-point/search-business-points';
+import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/upload/check-user-image-quota';
 import { GetBusinessPointCategoriesController } from './controllers/business-point/get-business-point-categories.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { GetBusinessPointOverviewController } from './controllers/business-point/get-business-point-overview.controller';
@@ -83,6 +84,7 @@ import { Module } from '@nestjs/common';
     GetSharedItemsAssociatedBusinessPointUseCase,
     UpdateSharedItemsBusinessPointUseCase,
     SaveImagesBusinessPointImageUseCase,
+    CheckBusinessPointImageQuotaUseCase,
     GetBusinessPointsForMappingUseCase,
     GetBusinessPointPreviewUserUseCase,
     GetBusinessPointCategoriesUseCase,
