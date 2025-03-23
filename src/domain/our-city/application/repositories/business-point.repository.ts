@@ -5,7 +5,6 @@ import {
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
 import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
 import { BusinessPointImage } from '../../enterprise/entities/business-point-image';
-import { BusinessPointImageType } from 'src/core/@types/business-point-image-type';
 import { SharedBusinessPointCategoriesType } from 'src/infra/database/schemas';
 import { GeometryPoint } from 'src/core/@types/geometry';
 
@@ -24,7 +23,4 @@ export abstract class BusinessPointRepository {
   abstract saveImageUrls(
     businessPointImagesUrls: BusinessPointImage[],
   ): Promise<void>;
-  abstract findImageUrlsById(
-    businessPointId: string,
-  ): Promise<BusinessPointImageType[] | null>;
 }

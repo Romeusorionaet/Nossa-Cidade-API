@@ -18,7 +18,6 @@ import { DrizzleBusinessPointImageMapper } from '../mappers/drizzle-business-poi
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
 import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
-import { BusinessPointImageType } from 'src/core/@types/business-point-image-type';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
 import { eq, sql, and, ilike, or } from 'drizzle-orm';
@@ -28,23 +27,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   constructor(private drizzle: DatabaseClient) {}
-  async findImageUrlsById(
-    businessPointId: string,
-  ): Promise<BusinessPointImageType[] | null> {
-    const imageUrls = await this.drizzle.database
-      .select({
-        id: businessPointImages.id,
-        url: businessPointImages.url,
-      })
-      .from(businessPointImages)
-      .where(eq(businessPointImages.businessPointId, businessPointId));
-
-    if (!imageUrls.length && imageUrls.length === 0) {
-      return null;
-    }
-
-    return imageUrls;
-  }
 
   async saveImageUrls(
     businessPointImageUrls: BusinessPointImage[],
