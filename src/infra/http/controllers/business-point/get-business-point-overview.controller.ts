@@ -24,7 +24,10 @@ export class GetBusinessPointOverviewController {
         id,
       });
 
-      return BusinessPointDetailsPresenter.toHTTP(result.value.businessPoint);
+      return {
+        ...BusinessPointDetailsPresenter.toHTTP(result.value.businessPoint),
+        imageUrls: result.value.imageUrls,
+      };
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }
