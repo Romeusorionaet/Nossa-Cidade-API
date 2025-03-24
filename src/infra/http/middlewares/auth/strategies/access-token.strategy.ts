@@ -22,10 +22,6 @@ export class AccessTokenStrategy extends PassportStrategy(
   }
 
   async validate(payload: AccessTokenPayload) {
-    if (payload.purpose !== TokenPurposeEnum.ACCESS_TOKEN) {
-      throw new BadRequestException('Invalid token purpose');
-    }
-
     try {
       return accessTokenSchema.parse(payload);
     } catch (err: any) {

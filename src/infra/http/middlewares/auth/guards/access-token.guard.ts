@@ -1,8 +1,14 @@
 import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
+import {
+  BadRequestException,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
-import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Reflector } from '@nestjs/core';
+import { PERMISSIONS_KEY } from '../decorators/permissions-decorator';
 
 @Injectable()
 export class AccessTokenGuard extends AuthGuard(TokenPurposeEnum.ACCESS_TOKEN) {
@@ -10,7 +16,7 @@ export class AccessTokenGuard extends AuthGuard(TokenPurposeEnum.ACCESS_TOKEN) {
     super();
   }
 
-  canActivate(context: ExecutionContext) {
+  async canActivate(context: ExecutionContext) {
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
@@ -20,6 +26,38 @@ export class AccessTokenGuard extends AuthGuard(TokenPurposeEnum.ACCESS_TOKEN) {
       return true;
     }
 
-    return super.canActivate(context);
+    const canActivate = await super.canActivate(context);
+
+    if (!canActivate) {
+      return false;
+    }
+
+    const request = context.switchToHttp().getRequest();
+    const user = request.user;
+
+    if (!user) {
+      throw new ForbiddenException('Usuário não autenticado.');
+    }
+
+    if (user.purpose !== TokenPurposeEnum.ACCESS_TOKEN) {
+      throw new BadRequestException('Invalid token purpose');
+    }
+
+    const requiredPermissions = this.reflector.getAllAndOverride<string[]>(
+      PERMISSIONS_KEY,
+      [context.getHandler(), context.getClass()],
+    );
+
+    if (requiredPermissions) {
+      const hasPermission = requiredPermissions.every((perm) =>
+        user.permissions.includes(perm),
+      );
+
+      if (!hasPermission) {
+        throw new ForbiddenException('Usuário sem permissão para essa ação.');
+      }
+    }
+
+    return true;
   }
 }
