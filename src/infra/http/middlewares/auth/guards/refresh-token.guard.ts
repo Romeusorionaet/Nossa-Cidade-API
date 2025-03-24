@@ -16,7 +16,7 @@ export class RefreshTokenGuard extends AuthGuard(
     super();
   }
 
-  canActivate(context: ExecutionContext) {
+  async canActivate(context: ExecutionContext) {
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
@@ -26,6 +26,12 @@ export class RefreshTokenGuard extends AuthGuard(
       return true;
     }
 
+    const canActivate = await super.canActivate(context);
+
+    if (!canActivate) {
+      return false;
+    }
+
     const request = context.switchToHttp().getRequest();
     const user = request.user;
 
@@ -33,6 +39,6 @@ export class RefreshTokenGuard extends AuthGuard(
       throw new BadRequestException('Invalid token purpose');
     }
 
-    return super.canActivate(context);
+    return true;
   }
 }
