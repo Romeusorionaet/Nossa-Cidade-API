@@ -1,3 +1,5 @@
+import { PermissionsMap } from '../shared/constants/permissions-map';
+
 export const calculatePermissions = (
   role: string | null,
   staffId: string | null,
@@ -6,10 +8,5 @@ export const calculatePermissions = (
     return ['read'];
   }
 
-  const permissionsMap: Record<string, string[]> = {
-    ADMIN: ['read', 'write', 'delete', 'restricted_read'],
-    MERCHANT: ['read', 'write', 'restricted_read'],
-  };
-
-  return permissionsMap[role || ''] || ['read'];
+  return PermissionsMap[role || ''] || ['read'];
 };
