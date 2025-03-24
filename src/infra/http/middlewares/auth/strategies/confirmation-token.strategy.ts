@@ -22,10 +22,6 @@ export class ConfirmationTokenStrategy extends PassportStrategy(
   }
 
   async validate(payload: ConfirmationEmailTokenPayload) {
-    if (payload.purpose !== TokenPurposeEnum.CONFIRMATION_TOKEN) {
-      throw new BadRequestException('Invalid token purpose');
-    }
-
     try {
       return confirmationEmailTokenSchema.parse(payload);
     } catch (err: any) {

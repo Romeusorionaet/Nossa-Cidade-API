@@ -22,10 +22,6 @@ export class RefreshTokenStrategy extends PassportStrategy(
   }
 
   async validate(payload: RefreshTokenPayload) {
-    if (payload.purpose !== TokenPurposeEnum.REFRESH_TOKEN) {
-      throw new BadRequestException('Invalid token purpose');
-    }
-
     try {
       return accessTokenSchema.parse(payload);
     } catch (err: any) {

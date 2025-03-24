@@ -1,6 +1,11 @@
 import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
-import { ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Reflector } from '@nestjs/core';
 
@@ -20,6 +25,13 @@ export class ForgotPasswordTokenGuard extends AuthGuard(
 
     if (isPublic) {
       return true;
+    }
+
+    const request = context.switchToHttp().getRequest();
+    const user = request.user;
+
+    if (user.purpose !== TokenPurposeEnum.FORGOT_PASSWORD_TOKEN) {
+      throw new BadRequestException('Invalid token purpose');
     }
 
     return super.canActivate(context);
