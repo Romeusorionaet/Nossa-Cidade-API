@@ -1,12 +1,15 @@
 import { ImageBusinessPointRepository } from '../../repositories/image-business-point.repository';
-import { Either, right } from 'src/core/either';
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { Either, left, right } from 'src/core/either';
 
 type DeleteBusinessPointImageUseCaseRequest = {
   urlId: string;
 };
 
-type DeleteBusinessPointImageUseCaseResponse = Either<null, object>;
+type DeleteBusinessPointImageUseCaseResponse = Either<
+  BadRequestException,
+  object
+>;
 
 @Injectable()
 export class DeleteBusinessPointImageUseCase {
@@ -17,7 +20,12 @@ export class DeleteBusinessPointImageUseCase {
   async execute({
     urlId,
   }: DeleteBusinessPointImageUseCaseRequest): Promise<DeleteBusinessPointImageUseCaseResponse> {
-    await this.imageBusinessPointRepository.findImageUrlsById(urlId);
+    const imageExists =
+      await this.imageBusinessPointRepository.existsByUrlId(urlId);
+
+    if (!imageExists) {
+      return left(new BadRequestException('Image não encontrada.'));
+    }
 
     await this.imageBusinessPointRepository.deleteByUrlId(urlId);
 

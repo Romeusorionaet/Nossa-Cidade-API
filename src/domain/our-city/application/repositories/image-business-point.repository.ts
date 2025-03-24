@@ -5,5 +5,6 @@ export abstract class ImageBusinessPointRepository {
   abstract findImageUrlsByBusinessPointId(
     businessPointId: string,
   ): Promise<BusinessPointImageType[] | null>;
+  abstract existsByUrlId(urlId: string): Promise<boolean>;
   abstract deleteByUrlId(urlId: string): Promise<void>;
 }

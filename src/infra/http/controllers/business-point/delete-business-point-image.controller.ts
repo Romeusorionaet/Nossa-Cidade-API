@@ -20,9 +20,20 @@ export class DeleteBusinessPointImageController {
   @HttpCode(200)
   async handle(@Param('id') id: string) {
     try {
-      await this.deleteBusinessPointImageUseCase.execute({
+      const result = await this.deleteBusinessPointImageUseCase.execute({
         urlId: id,
       });
+
+      if (result.isLeft()) {
+        const err = result.value;
+        switch (err.constructor) {
+          case BadRequestException:
+            throw new BadRequestException(err.message);
+
+          default:
+            throw new BadRequestException(err.message);
+        }
+      }
 
       return { message: 'A imagem foi deletado.' };
     } catch (err: any) {
