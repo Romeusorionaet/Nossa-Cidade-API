@@ -28,7 +28,7 @@ export class DrizzleImageBusinessPointRepository
     return result.count ?? 0;
   }
 
-  async findImageUrlsById(
+  async findImageUrlsByBusinessPointId(
     businessPointId: string,
   ): Promise<BusinessPointImageType[] | null> {
     const imageUrls = await this.drizzle.database

@@ -29,7 +29,9 @@ export class GetBusinessPointOverviewUseCase {
   }: GetBusinessPointOverviewUseCaseRequest): Promise<GetBusinessPointsForMappingUseCaseResponse> {
     const businessPoint = await this.businessPointRepository.findById(id);
     const imageUrls =
-      await this.imageBusinessPointRepository.findImageUrlsById(id);
+      await this.imageBusinessPointRepository.findImageUrlsByBusinessPointId(
+        id,
+      );
 
     return right({ businessPoint, imageUrls });
   }

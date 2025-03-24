@@ -2,7 +2,7 @@ import { BusinessPointImageType } from 'src/core/@types/business-point-image-typ
 
 export abstract class ImageBusinessPointRepository {
   abstract checkQuotaById(businessPointId: string): Promise<number>;
-  abstract findImageUrlsById(
+  abstract findImageUrlsByBusinessPointId(
     businessPointId: string,
   ): Promise<BusinessPointImageType[] | null>;
   abstract deleteByUrlId(urlId: string): Promise<void>;

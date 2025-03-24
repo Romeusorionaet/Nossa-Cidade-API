@@ -24,7 +24,7 @@ export class GetBusinessPointImagesUseCase {
     businessPointId,
   }: GetBusinessPointImagesUseCaseRequest): Promise<GetBusinessPointImagesUseCaseResponse> {
     const businessPointImages =
-      await this.imageBusinessPointRepository.findImageUrlsById(
+      await this.imageBusinessPointRepository.findImageUrlsByBusinessPointId(
         businessPointId,
       );
 
