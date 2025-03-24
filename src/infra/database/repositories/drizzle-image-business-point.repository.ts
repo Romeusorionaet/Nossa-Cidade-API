@@ -10,6 +10,12 @@ export class DrizzleImageBusinessPointRepository
   implements ImageBusinessPointRepository
 {
   constructor(private drizzle: DatabaseClient) {}
+  async deleteByUrlId(urlId: string): Promise<void> {
+    await this.drizzle.database
+      .delete(businessPointImages)
+      .where(eq(businessPointImages.id, urlId));
+  }
+
   async checkQuotaById(businessPointId: string): Promise<number> {
     const [result] = await this.drizzle.database
       .select({
