@@ -40,7 +40,7 @@ export class DrizzleImageBusinessPointRepository
 
   async findImageUrlsByBusinessPointId(
     businessPointId: string,
-  ): Promise<BusinessPointImageType[] | null> {
+  ): Promise<BusinessPointImageType[]> {
     const imageUrls = await this.drizzle.database
       .select({
         id: businessPointImages.id,
@@ -50,7 +50,7 @@ export class DrizzleImageBusinessPointRepository
       .where(eq(businessPointImages.businessPointId, businessPointId));
 
     if (!imageUrls.length && imageUrls.length === 0) {
-      return null;
+      return [];
     }
 
     return imageUrls;
