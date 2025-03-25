@@ -44,7 +44,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   private set description(value: string) {
     this.props.description = value;
-    this.touch();
   }
 
   get location() {
@@ -65,7 +64,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   private set website(value: string) {
     this.props.website = value;
-    this.touch();
   }
 
   get censorship() {
@@ -82,7 +80,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   private set highlight(value: string) {
     this.props.highlight = value;
-    this.touch();
   }
 
   get createdAt() {
@@ -91,10 +88,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   get updatedAt() {
     return this.props.updatedAt;
-  }
-
-  private touch() {
-    this.props.updatedAt = new Date();
   }
 
   static create(
