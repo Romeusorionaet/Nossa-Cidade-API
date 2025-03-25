@@ -9,14 +9,18 @@ import { SharedBusinessPointCategoriesType } from 'src/infra/database/schemas';
 import { GeometryPoint } from 'src/core/@types/geometry';
 
 export abstract class BusinessPointRepository {
-  abstract create(businessPoint: BusinessPointProps): Promise<void>;
+  abstract create(businessPoint: BusinessPoint): Promise<void>;
+  abstract update(
+    businessPointId: string,
+    businessPoint: Partial<BusinessPointProps>,
+  ): Promise<void>;
   abstract findByCoordinate(
     location: GeometryPoint,
   ): Promise<BusinessPoint | null>;
   abstract findAllForMapping(): Promise<BusinessPointForMappingType[]>;
   abstract findByQuery(query: string): Promise<BusinessPointForMappingType[]>;
   abstract findAllCategories(): Promise<SharedBusinessPointCategoriesType[]>;
-  abstract findById(id: string): Promise<BusinessPointProps>;
+  abstract findById(id: string): Promise<BusinessPoint>;
   abstract findBusinessPointsByUser(
     userId: string,
   ): Promise<BusinessPointPreviewType[]>;

@@ -1,0 +1,113 @@
+import {
+  BadRequestException,
+  Controller,
+  UseGuards,
+  HttpCode,
+  Param,
+  Body,
+  Put,
+} from '@nestjs/common';
+import {
+  updateBusinessPointSchemaValidationPipe,
+  UpdateBusinessPointRequest,
+} from '../../schemas/business-point-update.schema';
+import { VerifyBusinessPointOwnershipUseCase } from 'src/domain/our-city/application/use-cases/business-point/verify-business-point-owner-ship';
+import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
+import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
+import { CurrentUser } from '../../middlewares/auth/decorators/current-user.decorator';
+import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
+import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
+import { GeometryPoint } from 'src/core/@types/geometry';
+
+@Controller('/business-point/update/:id')
+export class UpdateBusinessPointController {
+  constructor(
+    private readonly verifyBusinessPointOwnershipUseCase: VerifyBusinessPointOwnershipUseCase,
+    private readonly validateBusinessPointUseCase: ValidateBusinessPointUseCase,
+    private readonly updateBusinessPointUseCase: UpdateBusinessPointUseCase,
+  ) {}
+
+  @Put()
+  @UseGuards(AccessTokenGuard)
+  @HttpCode(200)
+  async handle(
+    @Body(updateBusinessPointSchemaValidationPipe)
+    body: UpdateBusinessPointRequest,
+    @CurrentUser() user: AccessTokenPayload,
+    @Param('id') businessPointId: string,
+  ) {
+    try {
+      const businessPoint = body;
+      const { sub: userId } = user;
+
+      const hasAtLeastOneField = Object.values(body).some(
+        (value) => value !== undefined && value !== null,
+      );
+
+      if (!hasAtLeastOneField) {
+        throw new BadRequestException(
+          'Ao menos um campo deve ser fornecido para atualização.',
+        );
+      }
+
+      const resultValidationOwnerShip =
+        await this.verifyBusinessPointOwnershipUseCase.execute({
+          businessPointId,
+          userId,
+        });
+
+      if (resultValidationOwnerShip.isLeft()) {
+        const err = resultValidationOwnerShip.value;
+        throw new BadRequestException(err.message);
+      }
+
+      const lat = businessPoint?.location?.latitude;
+      const lng = businessPoint?.location?.longitude;
+
+      const location: GeometryPoint = {
+        type: 'Point',
+        coordinates: [lat, lng],
+      };
+
+      if (lat && lng) {
+        const resultValidation =
+          await this.validateBusinessPointUseCase.execute({
+            location,
+          });
+
+        if (resultValidation.isLeft()) {
+          const err = resultValidation.value;
+          throw new BadRequestException(err.message);
+        }
+      }
+
+      const result = await this.updateBusinessPointUseCase.execute({
+        businessPointId,
+        categoryId: businessPoint?.categoryId,
+        name: businessPoint?.name,
+        address: businessPoint.address?.street
+          ? `${businessPoint.address.street} - ${businessPoint.address.neighborhood} - ${businessPoint.address.houseNumber}`
+          : undefined,
+        customTags: businessPoint?.customTags,
+        location: location.coordinates[0] ? location : undefined,
+        openingHours: businessPoint?.openingHours,
+        description: businessPoint?.description,
+        highlight: businessPoint?.highlight,
+        categoriesAssociate: businessPoint?.categoriesAssociate,
+        website: businessPoint?.website,
+        censorship: businessPoint?.censorship,
+      });
+
+      if (result.isLeft()) {
+        const err = result.value;
+        throw new BadRequestException(err.message);
+      }
+
+      return {
+        message: 'Local atualizado.',
+      };
+    } catch (err: any) {
+      throw new BadRequestException(err.message);
+    }
+  }
+}

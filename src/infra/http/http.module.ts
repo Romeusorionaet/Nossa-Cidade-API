@@ -1,6 +1,7 @@
 import { GetSharedItemsAssociatedBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items-associated-business-point';
 import { UpdateSharedItemsBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/shared-items/update-shared-items-business-point';
 import { SharedItemsAssociatedBusinessPointController } from './controllers/shared-items/get-shared-items-associated-business-point.controller';
+import { VerifyBusinessPointOwnershipUseCase } from 'src/domain/our-city/application/use-cases/business-point/verify-business-point-owner-ship';
 import { GetBusinessPointsForMappingUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-points-for-mapping';
 import { GetBusinessPointPreviewUserUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-preview-user';
 import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-categories';
@@ -18,6 +19,7 @@ import { SearchBusinessPointsUseCase } from 'src/domain/our-city/application/use
 import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/upload/check-user-image-quota';
 import { GetBusinessPointCategoriesController } from './controllers/business-point/get-business-point-categories.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
+import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
 import { GetBusinessPointOverviewController } from './controllers/business-point/get-business-point-overview.controller';
 import { DeleteBusinessPointImageController } from './controllers/business-point/delete-business-point-image.controller';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
@@ -32,6 +34,7 @@ import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cas
 import { SearchBusinessPointsController } from './controllers/business-point/search-business-points.controller';
 import { GetSharedItemsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
+import { UpdateBusinessPointController } from './controllers/business-point/update-business-point.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
@@ -76,6 +79,7 @@ import { Module } from '@nestjs/common';
     GetBusinessPointImagesController,
     RegisterBusinessPointController,
     SearchBusinessPointsController,
+    UpdateBusinessPointController,
     UpdateUserPasswordController,
     ForgotUserPasswordController,
     ResetUserPasswordController,
@@ -91,6 +95,7 @@ import { Module } from '@nestjs/common';
     UpdateSharedItemsBusinessPointUseCase,
     SaveImagesBusinessPointImageUseCase,
     CheckBusinessPointImageQuotaUseCase,
+    VerifyBusinessPointOwnershipUseCase,
     GetBusinessPointsForMappingUseCase,
     GetBusinessPointPreviewUserUseCase,
     GetBusinessPointCategoriesUseCase,
@@ -103,6 +108,7 @@ import { Module } from '@nestjs/common';
     ValidateBusinessPointUseCase,
     PromoteUserToMerchantUseCase,
     SearchBusinessPointsUseCase,
+    UpdateBusinessPointUseCase,
     UpdateUserPasswordUseCase,
     ForgotUserPasswordUseCase,
     ResetUserPasswordUseCase,

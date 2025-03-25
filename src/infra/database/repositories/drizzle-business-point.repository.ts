@@ -28,6 +28,35 @@ import { Injectable } from '@nestjs/common';
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   constructor(private drizzle: DatabaseClient) {}
 
+  async update(
+    businessPointId: string,
+    businessPoint: Partial<BusinessPointProps>,
+  ): Promise<void> {
+    const convertedLocation = businessPoint.location
+      ? {
+          x: businessPoint.location.coordinates[0],
+          y: businessPoint.location.coordinates[1],
+        }
+      : undefined;
+
+    const data = {
+      categoryId: businessPoint.categoryId?.toString(),
+      name: businessPoint.name,
+      location: convertedLocation,
+      address: businessPoint.address,
+      openingHours: businessPoint.openingHours,
+      description: businessPoint.description,
+      highlight: businessPoint.highlight,
+      website: businessPoint.website,
+      censorship: businessPoint.censorship,
+    };
+
+    await this.drizzle.database
+      .update(businessPoints)
+      .set(data)
+      .where(eq(businessPoints.id, businessPointId));
+  }
+
   async saveImageUrls(
     businessPointImageUrls: BusinessPointImage[],
   ): Promise<void> {
@@ -191,7 +220,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     return result;
   }
 
-  async findById(id: string): Promise<BusinessPointProps> {
+  async findById(id: string): Promise<BusinessPoint> {
     const [result] = await this.drizzle.database
       .select()
       .from(businessPoints)
