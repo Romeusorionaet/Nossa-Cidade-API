@@ -66,7 +66,7 @@ export class RegisterBusinessPointController {
         ownerId: userId,
         location,
         name: businessPoint.name,
-        address: `${businessPoint.street} - ${businessPoint.neighborhood} - ${businessPoint.houseNumber}`,
+        address: `${businessPoint.address.street} - ${businessPoint.address.neighborhood} - ${businessPoint.address.houseNumber}`,
         customTags: businessPoint.customTags,
         openingHours: businessPoint.openingHours,
         description: businessPoint.description,
