@@ -61,8 +61,8 @@ export class UpdateBusinessPointController {
         throw new BadRequestException(err.message);
       }
 
-      const lat = businessPoint?.location?.latitude;
-      const lng = businessPoint?.location?.longitude;
+      const lat = businessPoint?.location?.x;
+      const lng = businessPoint?.location?.y;
 
       const location: GeometryPoint = {
         type: 'Point',
