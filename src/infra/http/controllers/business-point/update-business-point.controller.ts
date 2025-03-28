@@ -88,12 +88,10 @@ export class UpdateBusinessPointController {
         address: businessPoint.address?.street
           ? `${businessPoint.address.street} - ${businessPoint.address.neighborhood} - ${businessPoint.address.houseNumber}`
           : undefined,
-        customTags: businessPoint?.customTags,
         location: location.coordinates[0] ? location : undefined,
         openingHours: businessPoint?.openingHours,
         description: businessPoint?.description,
         highlight: businessPoint?.highlight,
-        categoriesAssociate: businessPoint?.categoriesAssociate,
         website: businessPoint?.website,
         censorship: businessPoint?.censorship,
       });

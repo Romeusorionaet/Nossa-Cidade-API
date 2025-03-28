@@ -42,10 +42,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
     return this.props.description;
   }
 
-  private set description(value: string) {
-    this.props.description = value;
-  }
-
   get location() {
     return this.props.location;
   }
@@ -62,10 +58,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
     return this.props.website;
   }
 
-  private set website(value: string) {
-    this.props.website = value;
-  }
-
   get censorship() {
     return this.props.censorship;
   }
@@ -76,10 +68,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   get highlight() {
     return this.props.highlight;
-  }
-
-  private set highlight(value: string) {
-    this.props.highlight = value;
   }
 
   get createdAt() {
