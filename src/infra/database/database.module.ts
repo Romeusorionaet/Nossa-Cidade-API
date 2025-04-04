@@ -1,8 +1,10 @@
 import { BusinessPointCustomTagRepository } from 'src/domain/our-city/application/repositories/business-point-custom-tag.repository';
 import { ImageBusinessPointRepository } from 'src/domain/our-city/application/repositories/image-business-point.repository';
+import { BusinessPointDraftRepository } from 'src/domain/our-city/application/repositories/business-point-draft.repository';
 import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
 import { DrizzleImageBusinessPointRepository } from './repositories/drizzle-image-business-point.repository';
+import { DrizzleBusinessPointDraftRepository } from './repositories/drizzle-business-point-draft.repository';
 import { DrizzleBusinessPointCustomTagRepository } from './repositories/drizzle-business-point-custom-tag';
 import { SharedItemRepository } from 'src/domain/our-city/application/repositories/shared-item.repository';
 import { DrizzleBusinessPointRepository } from './repositories/drizzle-business-point.repository';
@@ -56,10 +58,15 @@ import { Module } from '@nestjs/common';
       provide: ImageBusinessPointRepository,
       useClass: DrizzleImageBusinessPointRepository,
     },
+    {
+      provide: BusinessPointDraftRepository,
+      useClass: DrizzleBusinessPointDraftRepository,
+    },
   ],
   exports: [
     BusinessPointCustomTagRepository,
     ImageBusinessPointRepository,
+    BusinessPointDraftRepository,
     BusinessPointRepository,
     SharedItemRepository,
     EncryptRepository,

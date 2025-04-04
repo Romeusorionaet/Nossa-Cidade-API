@@ -1,6 +1,6 @@
 {
-  "id": "d5919bbe-dd76-4963-b951-f6fd386e4bdb",
-  "prevId": "ee843c6c-503b-46bd-b3e1-ca07aed75648",
+  "id": "a7f93403-640e-4023-82f8-ee8fe4be3f57",
+  "prevId": "023e5a93-b1d3-4a72-8984-be42cef8674b",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -834,12 +834,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "address": {
-          "name": "address",
-          "type": "varchar(200)",
-          "primaryKey": false,
-          "notNull": false
-        },
         "location": {
           "name": "location",
           "type": "geometry(point)",
@@ -1537,7 +1531,7 @@
           "name": "name",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "category_id": {
           "name": "category_id",
@@ -1573,7 +1567,7 @@
           "name": "location",
           "type": "geometry(point)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "status": {
           "name": "status",
@@ -1587,7 +1581,7 @@
           "name": "opening_hours",
           "type": "jsonb",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "website": {
           "name": "website",
@@ -1640,6 +1634,13 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
+        "business_point_drafts_business_point_id_unique": {
+          "name": "business_point_drafts_business_point_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "business_point_id"
+          ]
+        },
         "business_point_drafts_location_unique": {
           "name": "business_point_drafts_location_unique",
           "nullsNotDistinct": false,

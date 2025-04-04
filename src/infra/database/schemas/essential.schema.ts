@@ -8,6 +8,7 @@ import {
   jsonb,
   index,
   text,
+  integer,
 } from 'drizzle-orm/pg-core';
 import {
   businessPointStatusEnum,
@@ -60,7 +61,6 @@ export const businessPoints = pgTable(
       .references(() => sharedBusinessPointCategories.id)
       .notNull(),
     description: varchar('description', { length: 500 }),
-    address: varchar('address', { length: 200 }),
     location: geometry('location', {
       type: 'point',
       mode: 'xy',
@@ -74,6 +74,9 @@ export const businessPoints = pgTable(
     awaitingApproval: boolean('awaiting_approval').default(true),
     censorship: boolean('censorship').default(false),
     highlight: varchar('highlight', { length: 100 }),
+    neighborhood: varchar('neighborhood', { length: 50 }),
+    street: varchar('street', { length: 50 }),
+    houseNumber: integer('house_number'),
     ownerId: text('owner_id')
       .notNull()
       .references(() => users.id),

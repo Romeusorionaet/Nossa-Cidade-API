@@ -1,6 +1,6 @@
 {
-  "id": "37633ce2-9f11-47dc-a0f6-0bb77c73f80b",
-  "prevId": "dd0e7c50-87bc-447c-a672-b5b47900b564",
+  "id": "905a39e2-ef0d-44a3-b1e1-ec32664391d0",
+  "prevId": "d5919bbe-dd76-4963-b951-f6fd386e4bdb",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -834,12 +834,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "address": {
-          "name": "address",
-          "type": "varchar(200)",
-          "primaryKey": false,
-          "notNull": false
-        },
         "location": {
           "name": "location",
           "type": "geometry(point)",
@@ -848,7 +842,7 @@
         },
         "status": {
           "name": "status",
-          "type": "staff_status",
+          "type": "business_point_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": false,
@@ -883,6 +877,24 @@
         "highlight": {
           "name": "highlight",
           "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "neighborhood": {
+          "name": "neighborhood",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street": {
+          "name": "street",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "house_number": {
+          "name": "house_number",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
@@ -1498,9 +1510,161 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
+    },
+    "public.business_point_drafts": {
+      "name": "business_point_drafts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "business_point_id": {
+          "name": "business_point_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "neighborhood": {
+          "name": "neighborhood",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street": {
+          "name": "street",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "house_number": {
+          "name": "house_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location": {
+          "name": "location",
+          "type": "geometry(point)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "business_point_draft_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'PENDENT'"
+        },
+        "opening_hours": {
+          "name": "opening_hours",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "website": {
+          "name": "website",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "censorship": {
+          "name": "censorship",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "highlight": {
+          "name": "highlight",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "business_point_drafts_business_point_id_business_points_id_fk": {
+          "name": "business_point_drafts_business_point_id_business_points_id_fk",
+          "tableFrom": "business_point_drafts",
+          "tableTo": "business_points",
+          "columnsFrom": [
+            "business_point_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "business_point_drafts_category_id_business_point_categories_id_fk": {
+          "name": "business_point_drafts_category_id_business_point_categories_id_fk",
+          "tableFrom": "business_point_drafts",
+          "tableTo": "business_point_categories",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "business_point_drafts_location_unique": {
+          "name": "business_point_drafts_location_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "location"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
+    "public.business_point_draft_status": {
+      "name": "business_point_draft_status",
+      "schema": "public",
+      "values": [
+        "PENDENT",
+        "APPROVED",
+        "FAILED"
+      ]
+    },
+    "public.business_point_status": {
+      "name": "business_point_status",
+      "schema": "public",
+      "values": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
     "public.staff_status": {
       "name": "staff_status",
       "schema": "public",

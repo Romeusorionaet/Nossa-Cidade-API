@@ -11,13 +11,13 @@ export const businessPointSchema = z.object({
     .string()
     .min(10, { message: 'Descrição insuficiente.' })
     .max(400, { message: 'Descrição muito longo.' }),
-  address: z
-    .object({
-      street: z.string().min(1, { message: 'Rua obrigatório' }),
-      houseNumber: z.string().min(1, { message: 'Número da casa obrigatório' }),
-      neighborhood: z.string().min(1, { message: 'Nome da rua obrigatório' }),
-    })
-    .partial(),
+  address: z.object({
+    street: z.string().min(1, { message: 'Rua obrigatório' }),
+    houseNumber: z.coerce
+      .number()
+      .min(1, { message: 'Número da casa obrigatório' }),
+    neighborhood: z.string().min(1, { message: 'Nome da rua obrigatório' }),
+  }),
   highlight: z
     .string()
     .min(10, { message: 'Muito curto..' })
