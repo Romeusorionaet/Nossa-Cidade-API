@@ -4,6 +4,8 @@ import {
   HttpCode,
   Post,
   Body,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import {
   userProfileValidationPipe,
@@ -12,20 +14,52 @@ import {
 import { UserAlreadyExistsError } from 'src/domain/our-city/application/use-cases/errors/user-already-exists-error';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
 import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerConfig } from 'src/infra/http/config/multer.config';
+import { UploadImageUseCase } from 'src/domain/our-city/application/use-cases/upload/upload-image';
+import { UploadImageError } from 'src/domain/our-city/application/use-cases/errors/upload-image-error';
 
 @Controller('/auth/register')
 export class RegisterUserController {
-  constructor(private readonly registerUserUseCase: RegisterUserUseCase) {}
+  constructor(
+    private readonly registerUserUseCase: RegisterUserUseCase,
+    private readonly uploadImageUseCase: UploadImageUseCase,
+  ) {}
 
   @Public()
-  @Post()
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file', multerConfig))
   @HttpCode(200)
-  async handle(@Body(userProfileValidationPipe) body: UserProfile) {
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Body(userProfileValidationPipe) body: UserProfile,
+  ) {
     try {
-      const { email, picture, username, password } = body;
+      const { email, username, password } = body;
+
+      let avatar = '';
+
+      if (file) {
+        const resultUpload = await this.uploadImageUseCase.execute({
+          files: [file],
+        });
+
+        if (resultUpload.isLeft()) {
+          const err = resultUpload.value;
+          switch (err.constructor) {
+            case UploadImageError:
+              throw new BadRequestException(err.message);
+
+            default:
+              throw new BadRequestException(err.message);
+          }
+        }
+
+        avatar = resultUpload.value.imageUrls[0];
+      }
 
       const result = await this.registerUserUseCase.execute({
-        avatar: picture,
+        avatar,
         email,
         username,
         password,
