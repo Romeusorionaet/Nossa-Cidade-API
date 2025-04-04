@@ -7,7 +7,7 @@ export interface UserProps {
   username: string;
   email: string;
   passwordHash: string;
-  avatar: string;
+  avatar?: string;
   emailVerified: boolean;
   createdAt?: Date | null;
   updatedAt?: Date | null;

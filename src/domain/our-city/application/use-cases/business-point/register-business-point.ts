@@ -11,12 +11,14 @@ interface RegisterBusinessPointUseCaseRequest {
   categoryId: string;
   ownerId: string;
   name: string;
-  address: string;
   customTags: string[];
   location: GeometryPoint;
   openingHours: Record<string, any>;
   description: string;
   highlight: string;
+  neighborhood: string;
+  street: string;
+  houseNumber: number;
 }
 
 type RegisterBusinessPointUseCaseResponse = Either<null, object>;
@@ -32,18 +34,22 @@ export class RegisterBusinessPointUseCase {
     categoryId,
     ownerId,
     name,
-    address,
     customTags,
     location,
     openingHours,
     description,
     highlight,
+    neighborhood,
+    street,
+    houseNumber,
   }: RegisterBusinessPointUseCaseRequest): Promise<RegisterBusinessPointUseCaseResponse> {
     const businessPoint = BusinessPoint.create({
       categoryId: new UniqueEntityID(categoryId),
       ownerId: new UniqueEntityID(ownerId),
       name,
-      address,
+      neighborhood,
+      street,
+      houseNumber,
       location,
       status: BusinessPointStatus.ACTIVE,
       openingHours: openingHours,

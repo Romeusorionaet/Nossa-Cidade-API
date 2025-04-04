@@ -4,8 +4,8 @@ import { z } from 'zod';
 const addressSchema = z
   .object({
     street: z.string().min(1, { message: 'Campo obrigatório' }),
-    houseNumber: z.string().min(1, { message: 'Campo obrigatório' }),
     neighborhood: z.string().min(1, { message: 'Campo obrigatório' }),
+    houseNumber: z.coerce.number().min(1, { message: 'Campo obrigatório' }),
   })
   .partial();
 
@@ -39,8 +39,7 @@ export const businessPointUpdateSchema = z.object({
   highlight: z
     .string()
     .min(10, { message: 'Muito curto..' })
-    .max(100, { message: 'Muito longo. (max = 100 caracteres)' })
-    .optional(),
+    .max(100, { message: 'Muito longo. (max = 100 caracteres)' }),
   customTags: z.array(z.string()),
   categoriesAssociate: z.array(z.string()),
   location: locationSchema.refine(

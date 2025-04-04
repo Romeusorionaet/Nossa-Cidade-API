@@ -6,8 +6,10 @@ export class BusinessPointForMappingPresenter {
       id: businessPoint.id.toString(),
       categoryId: businessPoint.categoryId.toString(),
       name: businessPoint.name,
-      address: businessPoint.address,
       openingHours: businessPoint.openingHours,
+      neighborhood: businessPoint.neighborhood,
+      street: businessPoint.street,
+      houseNumber: businessPoint.houseNumber,
       location: {
         latitude: businessPoint.location.latitude,
         longitude: businessPoint.location.longitude,

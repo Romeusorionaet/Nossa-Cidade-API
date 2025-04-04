@@ -64,9 +64,11 @@ export class RegisterBusinessPointController {
       await this.registerBusinessPointUseCase.execute({
         categoryId: businessPoint.categoryId,
         ownerId: userId,
+        neighborhood: businessPoint.address.neighborhood,
+        street: businessPoint.address?.street,
+        houseNumber: businessPoint.address.houseNumber,
         location,
         name: businessPoint.name,
-        address: `${businessPoint.address.street} - ${businessPoint.address.neighborhood} - ${businessPoint.address.houseNumber}`,
         customTags: businessPoint.customTags,
         openingHours: businessPoint.openingHours,
         description: businessPoint.description,

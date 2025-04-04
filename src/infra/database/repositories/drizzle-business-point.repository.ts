@@ -43,12 +43,14 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       categoryId: businessPoint.categoryId?.toString(),
       name: businessPoint.name,
       location: convertedLocation,
-      address: businessPoint.address,
       openingHours: businessPoint.openingHours,
       description: businessPoint.description,
       highlight: businessPoint.highlight,
       website: businessPoint.website,
       censorship: businessPoint.censorship,
+      neighborhood: businessPoint.neighborhood,
+      street: businessPoint.street,
+      houseNumber: businessPoint.houseNumber,
     };
 
     await this.drizzle.database
@@ -107,9 +109,11 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       .select({
         id: businessPoints.id,
         name: businessPoints.name,
-        address: businessPoints.address,
         categoryId: businessPoints.categoryId,
         openingHours: businessPoints.openingHours,
+        neighborhood: businessPoints.neighborhood,
+        street: businessPoints.street,
+        houseNumber: businessPoints.houseNumber,
         latitude: sql<number>`ST_Y(location)`,
         longitude: sql<number>`ST_X(location)`,
       })
@@ -120,8 +124,10 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       id: new UniqueEntityID(row.id),
       categoryId: new UniqueEntityID(row.categoryId),
       name: row.name,
-      address: row.address,
       openingHours: row.openingHours,
+      neighborhood: row.neighborhood,
+      street: row.street,
+      houseNumber: row.houseNumber,
       location: {
         latitude: row.latitude,
         longitude: row.longitude,
@@ -140,8 +146,10 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
         id: businessPoints.id,
         categoryId: businessPoints.categoryId,
         name: businessPoints.name,
-        address: businessPoints.address,
         openingHours: businessPoints.openingHours,
+        neighborhood: businessPoints.neighborhood,
+        street: businessPoints.street,
+        houseNumber: businessPoints.houseNumber,
         latitude: sql<number>`ST_Y(location)`,
         longitude: sql<number>`ST_X(location)`,
       })
@@ -200,8 +208,10 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       id: new UniqueEntityID(row.id),
       categoryId: new UniqueEntityID(row.categoryId),
       name: row.name,
-      address: row.address,
       openingHours: row.openingHours,
+      neighborhood: row.neighborhood,
+      street: row.street,
+      houseNumber: row.houseNumber,
       location: {
         latitude: row.latitude,
         longitude: row.longitude,

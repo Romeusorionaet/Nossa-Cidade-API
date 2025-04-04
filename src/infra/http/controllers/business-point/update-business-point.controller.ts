@@ -12,7 +12,9 @@ import {
   UpdateBusinessPointRequest,
 } from '../../schemas/business-point-update.schema';
 import { VerifyBusinessPointOwnershipUseCase } from 'src/domain/our-city/application/use-cases/business-point/verify-business-point-owner-ship';
+import { BusinessPointUnderAnalysisError } from 'src/domain/our-city/application/use-cases/errors/business-point-under-analysis-error';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
+import { BusinessPointNotFoundError } from 'src/domain/our-city/application/use-cases/errors/business-point-not-found-error';
 import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
 import { CurrentUser } from '../../middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
@@ -85,9 +87,9 @@ export class UpdateBusinessPointController {
         businessPointId,
         categoryId: businessPoint?.categoryId,
         name: businessPoint?.name,
-        address: businessPoint.address?.street
-          ? `${businessPoint.address.street} - ${businessPoint.address.neighborhood} - ${businessPoint.address.houseNumber}`
-          : undefined,
+        neighborhood: businessPoint.address?.neighborhood,
+        street: businessPoint.address?.street,
+        houseNumber: businessPoint.address?.houseNumber,
         location: location.coordinates[0] ? location : undefined,
         openingHours: businessPoint?.openingHours,
         description: businessPoint?.description,
@@ -98,7 +100,14 @@ export class UpdateBusinessPointController {
 
       if (result.isLeft()) {
         const err = result.value;
-        throw new BadRequestException(err.message);
+        switch (err.constructor) {
+          case BusinessPointNotFoundError:
+          case BusinessPointUnderAnalysisError:
+            throw new BadRequestException(err.message);
+
+          default:
+            throw new BadRequestException(err.message);
+        }
       }
 
       return {

@@ -6,7 +6,6 @@ export class BusinessPointDetailsPresenter {
       categoryId: businessPoint.categoryId.toString(),
       ownerId: businessPoint.ownerId.toString(),
       name: businessPoint.name,
-      address: businessPoint.address,
       location: {
         x: businessPoint.location.coordinates[0],
         y: businessPoint.location.coordinates[1],
@@ -17,6 +16,9 @@ export class BusinessPointDetailsPresenter {
       description: businessPoint.description,
       website: businessPoint.website,
       highlight: businessPoint.highlight,
+      neighborhood: businessPoint.neighborhood,
+      street: businessPoint.street,
+      houseNumber: businessPoint.houseNumber,
       updatedAt: businessPoint.updatedAt,
       createdAt: businessPoint.createdAt,
     };

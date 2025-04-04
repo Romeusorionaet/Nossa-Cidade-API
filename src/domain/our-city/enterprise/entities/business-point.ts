@@ -8,11 +8,13 @@ export interface BusinessPointProps {
   categoryId: UniqueEntityID;
   ownerId: UniqueEntityID;
   name: string;
-  address: string;
   location: GeometryPoint;
   status: BusinessPointStatus;
   openingHours: Record<string, any>;
   censorship: boolean;
+  neighborhood: string;
+  street: string;
+  houseNumber: number;
   awaitingApproval?: boolean | null;
   description?: string | null;
   website?: string | null;
@@ -32,10 +34,6 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   get name() {
     return this.props.name;
-  }
-
-  get address() {
-    return this.props.address;
   }
 
   get description() {
@@ -60,6 +58,18 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
 
   get censorship() {
     return this.props.censorship;
+  }
+
+  get neighborhood() {
+    return this.props.neighborhood;
+  }
+
+  get street() {
+    return this.props.street;
+  }
+
+  get houseNumber() {
+    return this.props.houseNumber;
   }
 
   get awaitingApproval() {

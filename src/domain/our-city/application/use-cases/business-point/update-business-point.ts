@@ -1,3 +1,7 @@
+import { BusinessPointDraft } from 'src/domain/our-city/enterprise/entities/business-point-draft';
+import { BusinessPointDraftRepository } from '../../repositories/business-point-draft.repository';
+import { BusinessPointUnderAnalysisError } from '../errors/business-point-under-analysis-error';
+import { DraftStatus } from 'src/domain/our-city/enterprise/entities/enums/draft-status';
 import { BusinessPointRepository } from '../../repositories/business-point.repository';
 import { BusinessPointNotFoundError } from '../errors/business-point-not-found-error';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
@@ -9,23 +13,26 @@ interface UpdateBusinessPointUseCaseRequest {
   businessPointId: string;
   categoryId?: string;
   name?: string;
-  address?: string;
   location?: GeometryPoint;
   openingHours?: Record<string, any>;
   description?: string;
   highlight?: string;
   website?: string;
   censorship?: boolean;
+  neighborhood?: string;
+  street?: string;
+  houseNumber?: number;
 }
 
 type UpdateBusinessPointUseCaseResponse = Either<
-  BusinessPointNotFoundError,
+  BusinessPointUnderAnalysisError | BusinessPointNotFoundError,
   object
 >;
 
 @Injectable()
 export class UpdateBusinessPointUseCase {
   constructor(
+    private readonly businessPointDraftRepository: BusinessPointDraftRepository,
     private readonly businessPointRepository: BusinessPointRepository,
   ) {}
 
@@ -33,37 +40,49 @@ export class UpdateBusinessPointUseCase {
     businessPointId,
     categoryId,
     name,
-    address,
     location,
     openingHours,
     description,
     highlight,
     website,
     censorship,
+    neighborhood,
+    street,
+    houseNumber,
   }: UpdateBusinessPointUseCaseRequest): Promise<UpdateBusinessPointUseCaseResponse> {
     const businessPoint =
       await this.businessPointRepository.findById(businessPointId);
+
+    const existBusinessPointDraft =
+      await this.businessPointDraftRepository.findByBusinessPointId(
+        businessPointId,
+      );
 
     if (!businessPoint) {
       return left(new BusinessPointNotFoundError(businessPoint.name));
     }
 
-    const businessPointUpdated = businessPoint.update({
+    if (businessPoint.awaitingApproval || existBusinessPointDraft) {
+      return left(new BusinessPointUnderAnalysisError());
+    }
+
+    const businessPointDraft = BusinessPointDraft.create({
       categoryId: categoryId ? new UniqueEntityID(categoryId) : undefined,
+      businessPointId: businessPoint.id,
       name,
       location,
-      address,
       openingHours: openingHours,
       description,
       highlight,
       website,
       censorship,
+      status: DraftStatus.PENDENT,
+      neighborhood,
+      street,
+      houseNumber,
     });
 
-    await this.businessPointRepository.update(
-      businessPointId,
-      businessPointUpdated,
-    );
+    await this.businessPointDraftRepository.create(businessPointDraft);
 
     return right({});
   }
