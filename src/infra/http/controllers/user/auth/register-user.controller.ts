@@ -29,7 +29,7 @@ export class RegisterUserController {
   @Public()
   @Post('upload')
   @UseInterceptors(FileInterceptor('file', multerConfig))
-  @HttpCode(200)
+  @HttpCode(201)
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,
     @Body(userProfileValidationPipe) body: UserProfile,

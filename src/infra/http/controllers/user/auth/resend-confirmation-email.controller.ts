@@ -22,7 +22,7 @@ export class ResendConfirmationEmailController {
 
   @Post()
   @Public()
-  @HttpCode(200)
+  @HttpCode(201)
   async handle(
     @Body(resendConfirmationEmailSchemaValidationPipe)
     body: ResendConfirmationEmailRequest,

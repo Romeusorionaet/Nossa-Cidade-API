@@ -18,7 +18,7 @@ export class ForgotUserPasswordController {
 
   @Post()
   @UseGuards(AccessTokenGuard)
-  @HttpCode(200)
+  @HttpCode(201)
   async handle(@CurrentUser() user: AccessTokenPayload) {
     try {
       const { email } = user;

@@ -29,7 +29,7 @@ export class RegisterBusinessPointController {
 
   @Post()
   @UseGuards(AccessTokenGuard)
-  @HttpCode(200)
+  @HttpCode(201)
   async handle(
     @Body(businessPointSchemaValidationPipe) body: businessPointRequest,
     @CurrentUser() user: AccessTokenPayload,

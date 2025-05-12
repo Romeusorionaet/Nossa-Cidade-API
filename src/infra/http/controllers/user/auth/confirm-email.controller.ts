@@ -17,7 +17,7 @@ export class ConfirmEmailController {
 
   @Post()
   @UseGuards(ConfirmationTokenGuard)
-  @HttpCode(200)
+  @HttpCode(201)
   async handle(@CurrentUser() user: ConfirmationEmailTokenPayload) {
     try {
       const { email } = user;
