@@ -12,8 +12,8 @@ async function bootstrap() {
   const port = envService.get('PORT') || 4000;
 
   app.enableCors({
-    origin: 'http://localhost:3000',
-    // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: envService.get('NOSSA_CIDADE_HOST'),
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
 
