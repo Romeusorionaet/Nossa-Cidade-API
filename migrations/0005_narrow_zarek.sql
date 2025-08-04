@@ -1,1 +1,0 @@
-ALTER TABLE "business_point_drafts" ADD CONSTRAINT "business_point_drafts_business_point_id_unique" UNIQUE("business_point_id");

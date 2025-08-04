@@ -1,1 +1,0 @@
-ALTER TABLE "business_points" DROP COLUMN "address";
