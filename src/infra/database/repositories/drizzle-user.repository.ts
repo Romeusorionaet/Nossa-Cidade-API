@@ -3,12 +3,13 @@ import { User } from 'src/domain/our-city/enterprise/entities/user';
 import { DrizzleUserMapper } from '../mappers/drizzle-user.mapper';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
+import { eq, sql } from 'drizzle-orm';
 import { users } from '../schemas';
-import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class DrizzleUserRepository implements UsersRepository {
   constructor(private drizzle: DatabaseClient) {}
+
   async create(user: User): Promise<void> {
     const data = DrizzleUserMapper.toDrizzle(user);
 
@@ -48,5 +49,13 @@ export class DrizzleUserRepository implements UsersRepository {
       .update(users)
       .set(data)
       .where(eq(users.id, data.id));
+  }
+
+  async wakeUpDatabase(): Promise<string | null> {
+    try {
+      await this.drizzle.database.execute(sql`SELECT 1`);
+    } catch (err) {
+      return null;
+    }
   }
 }
