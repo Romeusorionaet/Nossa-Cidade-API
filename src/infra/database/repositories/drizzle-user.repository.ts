@@ -51,9 +51,10 @@ export class DrizzleUserRepository implements UsersRepository {
       .where(eq(users.id, data.id));
   }
 
-  async wakeUpDatabase(): Promise<string | null> {
+  async wakeUpDatabase(): Promise<number | null> {
     try {
-      await this.drizzle.database.execute(sql`SELECT 1`);
+      const result = await this.drizzle.database.execute(sql`SELECT 1`);
+      return result.count;
     } catch (err) {
       return null;
     }
