@@ -24,7 +24,7 @@ export class WakeUpApiController {
         }
       }
 
-      return {};
+      return { success: true };
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }
