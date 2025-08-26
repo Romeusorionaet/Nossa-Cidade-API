@@ -1,5 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const confirmationEmailTokenSchema = z.object({
-	email: z.string().email("Email inválido"),
+  email: z.string().email('Email inválido'),
+  purpose: z.string(),
 });
