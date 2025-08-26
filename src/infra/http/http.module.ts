@@ -10,6 +10,7 @@ import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application
 import { DeleteBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/delete-business-point-image';
 import { UpdateSharedItemsBusinessPointController } from './controllers/shared-items/update-shared-items-business-point.controller';
 import { GetBusinessPointImagesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-images';
+import { RegisterProductWithImagesUseCase } from 'src/domain/our-city/application/use-cases/product/register-product-with-images';
 import { GetBusinessPointPreviewUserController } from './controllers/business-point/get-business-points-preview-user.controller';
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
@@ -20,6 +21,7 @@ import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/applica
 import { GetBusinessPointCategoriesController } from './controllers/business-point/get-business-point-categories.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
+import { CheckProductImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/upload/check-product-image-quota';
 import { GetBusinessPointOverviewController } from './controllers/business-point/get-business-point-overview.controller';
 import { DeleteBusinessPointImageController } from './controllers/business-point/delete-business-point-image.controller';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
@@ -27,14 +29,17 @@ import { UploadImageToBusinessPointController } from './controllers/uploads/uplo
 import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
 import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
 import { GetBusinessPointImagesController } from './controllers/business-point/get-business-point-images.controller';
+import { RegisterProductWithImagesController } from './controllers/product/register-product-with-images.controller';
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
 import { RegisterBusinessPointController } from './controllers/business-point/register-business-point.controller';
 import { ResendConfirmationEmailController } from './controllers/user/auth/resend-confirmation-email.controller';
+import { SaveImagesProductUseCase } from 'src/domain/our-city/application/use-cases/product/save-images-product';
 import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
 import { SearchBusinessPointsController } from './controllers/business-point/search-business-points.controller';
 import { GetSharedItemsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { UpdateBusinessPointController } from './controllers/business-point/update-business-point.controller';
+import { RegisterProductUseCase } from 'src/domain/our-city/application/use-cases/product/register-product';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
@@ -73,7 +78,7 @@ import { Module } from '@nestjs/common';
     GetBusinessPointPreviewUserController,
     GetBusinessPointCategoriesController,
     UploadImageToBusinessPointController,
-    UploadImageToBusinessPointController,
+    RegisterProductWithImagesController,
     GetBusinessPointOverviewController,
     DeleteBusinessPointImageController,
     ResendConfirmationEmailController,
@@ -102,9 +107,11 @@ import { Module } from '@nestjs/common';
     GetBusinessPointsForMappingUseCase,
     GetBusinessPointPreviewUserUseCase,
     GetBusinessPointCategoriesUseCase,
+    RegisterProductWithImagesUseCase,
     GetBusinessPointOverviewUseCase,
     DeleteBusinessPointImageUseCase,
     ResendConfirmationEmailUseCase,
+    CheckProductImageQuotaUseCase,
     GetBusinessPointImagesUseCase,
     RegisterUserWithOAuthUseCase,
     RegisterBusinessPointUseCase,
@@ -114,8 +121,10 @@ import { Module } from '@nestjs/common';
     UpdateBusinessPointUseCase,
     UpdateUserPasswordUseCase,
     ForgotUserPasswordUseCase,
+    SaveImagesProductUseCase,
     ResetUserPasswordUseCase,
     AuthenticateUserUseCase,
+    RegisterProductUseCase,
     GetUserProfileUseCase,
     GetSharedItemsUseCase,
     WakeUpDatabaseUseCase,

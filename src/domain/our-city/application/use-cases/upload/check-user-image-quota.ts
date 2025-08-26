@@ -12,7 +12,7 @@ type CheckBusinessPointImageQuotaUseCaseResponse = Either<
   BusinessPointImageLimitExceededError,
   object
 >;
-
+//TODO rename this file to correct name
 @Injectable()
 export class CheckBusinessPointImageQuotaUseCase {
   constructor(

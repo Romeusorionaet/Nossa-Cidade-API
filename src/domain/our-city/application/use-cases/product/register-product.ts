@@ -4,33 +4,34 @@ import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 import { ProductRepository } from '../../repositories/product.repository';
 import { ProductCustomTagRepository } from '../../repositories/product-custom-tag.repository';
+import { CustomTag } from 'src/domain/our-city/enterprise/value-objects/custom-tag';
 
-interface RegisterProductPointUseCaseRequest {
-  categoryId: string;
+interface RegisterProductUseCaseRequest {
   businessPointId: string;
   title: string;
   price: number;
   customTags: string[];
 }
 
-type RegisterProductPointUseCaseResponse = Either<null, object>;
+type RegisterProductUseCaseResponse = Either<
+  null,
+  { productId: UniqueEntityID }
+>;
 
 @Injectable()
-export class RegisterProductPointUseCase {
+export class RegisterProductUseCase {
   constructor(
     private readonly productRepository: ProductRepository,
     private readonly productCustomTag: ProductCustomTagRepository,
   ) {}
 
   async execute({
-    categoryId,
     businessPointId,
     title,
     price,
     customTags,
-  }: RegisterProductPointUseCaseRequest): Promise<RegisterProductPointUseCaseResponse> {
+  }: RegisterProductUseCaseRequest): Promise<RegisterProductUseCaseResponse> {
     const product = Product.create({
-      categoryId: new UniqueEntityID(categoryId),
       businessPointId: new UniqueEntityID(businessPointId),
       title,
       price,
@@ -39,11 +40,13 @@ export class RegisterProductPointUseCase {
     await this.productRepository.create(product);
 
     if (customTags.length > 0) {
+      const tags = customTags.map((t) => CustomTag.create(t));
+
       await this.productCustomTag.create({
-        customTags,
+        customTags: tags,
         productId: product.id.toString(),
       });
     }
-    return right({});
+    return right({ productId: product.id });
   }
 }

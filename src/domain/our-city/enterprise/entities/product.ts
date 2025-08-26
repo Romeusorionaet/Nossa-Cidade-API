@@ -3,7 +3,6 @@ import { Optional } from 'src/core/@types/optional';
 import { Entity } from 'src/core/entities/entity';
 
 export interface ProductProps {
-  categoryId: UniqueEntityID;
   businessPointId: UniqueEntityID;
   title: string;
   price: number;
@@ -12,10 +11,6 @@ export interface ProductProps {
 }
 
 export class Product extends Entity<ProductProps> {
-  get categoryId() {
-    return this.props.categoryId;
-  }
-
   get businessPointId() {
     return this.props.businessPointId;
   }

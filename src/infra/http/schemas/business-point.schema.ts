@@ -12,11 +12,11 @@ export const businessPointSchema = z.object({
     .min(10, { message: 'Descrição insuficiente.' })
     .max(400, { message: 'Descrição muito longo.' }),
   address: z.object({
-    street: z.string().min(1, { message: 'Rua obrigatório' }),
+    street: z.string().min(1, { message: 'Nome da Rua obrigatório' }),
     houseNumber: z.coerce
       .number()
       .min(1, { message: 'Número da casa obrigatório' }),
-    neighborhood: z.string().min(1, { message: 'Nome da rua obrigatório' }),
+    neighborhood: z.string().min(1, { message: 'Nome do bairro obrigatório' }),
   }),
   highlight: z
     .string()
