@@ -1,8 +1,8 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
-import { ProductRepository } from '../../repositories/product.repository';
 import { ProductImage } from 'src/domain/our-city/enterprise/entities/product-image';
+import { ImageProductRepository } from '../../repositories/image-product.repository';
 
 interface SaveImagesProductUseCaseRequest {
   productId: string;
@@ -13,7 +13,9 @@ type SaveImagesProductUseCaseResponse = Either<null, object>;
 
 @Injectable()
 export class SaveImagesProductUseCase {
-  constructor(private readonly productRepository: ProductRepository) {}
+  constructor(
+    private readonly imageProductRepository: ImageProductRepository,
+  ) {}
 
   async execute({
     productId,
@@ -26,7 +28,7 @@ export class SaveImagesProductUseCase {
       }),
     );
 
-    await this.productRepository.saveImageUrls(productImages);
+    await this.imageProductRepository.saveImageUrls(productImages);
 
     return right({});
   }

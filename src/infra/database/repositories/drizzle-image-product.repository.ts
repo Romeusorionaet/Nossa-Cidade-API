@@ -4,6 +4,8 @@ import { ImageProductRepository } from 'src/domain/our-city/application/reposito
 import { ProductImageType } from 'src/core/@types/product-image-type';
 import { eq, sql } from 'drizzle-orm';
 import { productImages } from '../schemas';
+import { ProductImage } from 'src/domain/our-city/enterprise/entities/product-image';
+import { DrizzleProductImageMapper } from '../mappers/drizzle-product-image.mapper';
 
 @Injectable()
 export class DrizzleImageProductRepository implements ImageProductRepository {
@@ -48,5 +50,11 @@ export class DrizzleImageProductRepository implements ImageProductRepository {
     await this.drizzle.database
       .delete(productImages)
       .where(eq(productImages.id, urlId));
+  }
+
+  async saveImageUrls(productImagesUrls: ProductImage[]): Promise<void> {
+    const data = productImagesUrls.map(DrizzleProductImageMapper.toDrizzle);
+
+    await this.drizzle.database.insert(productImages).values(data);
   }
 }
