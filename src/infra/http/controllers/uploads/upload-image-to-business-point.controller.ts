@@ -9,7 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { BusinessPointImageLimitExceededError } from 'src/domain/our-city/application/use-cases/errors/business-point-image-limit-exceeded-error';
-import { SaveImagesBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
+import { SaveImagesBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
 import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/upload/check-user-image-quota';
 import { BusinessPointImageQuota } from 'src/domain/our-city/application/shared/constants/business-point-image-quota';
 import { UploadImageError } from 'src/domain/our-city/application/use-cases/errors/upload-image-error';
@@ -24,7 +24,7 @@ export class UploadImageToBusinessPointController {
   constructor(
     private readonly checkBusinessPointImageQuotaUseCase: CheckBusinessPointImageQuotaUseCase,
     private readonly uploadImageUseCase: UploadImageUseCase,
-    private readonly saveImagesBusinessPointImageUseCase: SaveImagesBusinessPointImageUseCase,
+    private readonly saveImagesBusinessPointUseCase: SaveImagesBusinessPointUseCase,
   ) {}
 
   @Post('upload')
@@ -68,7 +68,7 @@ export class UploadImageToBusinessPointController {
         }
       }
 
-      await this.saveImagesBusinessPointImageUseCase.execute({
+      await this.saveImagesBusinessPointUseCase.execute({
         businessPointId: id,
         imgUrls: resultUpload.value.imageUrls,
       });

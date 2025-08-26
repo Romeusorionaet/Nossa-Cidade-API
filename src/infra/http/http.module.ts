@@ -5,9 +5,9 @@ import { VerifyBusinessPointOwnershipUseCase } from 'src/domain/our-city/applica
 import { GetBusinessPointsForMappingUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-points-for-mapping';
 import { GetBusinessPointPreviewUserUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-preview-user';
 import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-categories';
-import { SaveImagesBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
-import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
 import { DeleteBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/delete-business-point-image';
+import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
+import { SaveImagesBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
 import { UpdateSharedItemsBusinessPointController } from './controllers/shared-items/update-shared-items-business-point.controller';
 import { GetBusinessPointImagesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-images';
 import { RegisterProductWithImagesUseCase } from 'src/domain/our-city/application/use-cases/product/register-product-with-images';
@@ -101,7 +101,7 @@ import { Module } from '@nestjs/common';
   providers: [
     GetSharedItemsAssociatedBusinessPointUseCase,
     UpdateSharedItemsBusinessPointUseCase,
-    SaveImagesBusinessPointImageUseCase,
+    SaveImagesBusinessPointUseCase,
     CheckBusinessPointImageQuotaUseCase,
     VerifyBusinessPointOwnershipUseCase,
     GetBusinessPointsForMappingUseCase,

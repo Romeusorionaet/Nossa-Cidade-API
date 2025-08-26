@@ -4,6 +4,8 @@ import { DatabaseClient } from '../database.client';
 import { businessPointImages } from '../schemas';
 import { Injectable } from '@nestjs/common';
 import { eq, sql } from 'drizzle-orm';
+import { BusinessPointImage } from 'src/domain/our-city/enterprise/entities/business-point-image';
+import { DrizzleBusinessPointImageMapper } from '../mappers/drizzle-business-point-image.mapper';
 
 @Injectable()
 export class DrizzleImageBusinessPointRepository
@@ -54,5 +56,15 @@ export class DrizzleImageBusinessPointRepository
     }
 
     return imageUrls;
+  }
+
+  async saveImageUrls(
+    businessPointImageUrls: BusinessPointImage[],
+  ): Promise<void> {
+    const data = businessPointImageUrls.map(
+      DrizzleBusinessPointImageMapper.toDrizzle,
+    );
+
+    await this.drizzle.database.insert(businessPointImages).values(data);
   }
 }

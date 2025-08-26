@@ -59,16 +59,6 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
       .where(eq(businessPoints.id, businessPointId));
   }
 
-  async saveImageUrls(
-    businessPointImageUrls: BusinessPointImage[],
-  ): Promise<void> {
-    const values = businessPointImageUrls.map(
-      DrizzleBusinessPointImageMapper.toDrizzle,
-    );
-
-    await this.drizzle.database.insert(businessPointImages).values(values);
-  }
-
   async create(businessPoint: BusinessPoint): Promise<void> {
     const db = this.drizzle.database;
     const data = DrizzleBusinessPointMapper.toDrizzle(businessPoint);
