@@ -1,5 +1,6 @@
 export * from './associations.schema';
 export * from './essential.schema';
+export * from './product.schema';
 export * from './shared.schema';
 export * from './drafts.schema';
 export * from './enums.schema';
