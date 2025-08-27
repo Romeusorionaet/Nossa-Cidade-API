@@ -45,6 +45,7 @@ import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/u
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
 import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
 import { WakeUpDatabaseUseCase } from 'src/domain/our-city/application/use-cases/user/wake-up-database';
+import { DeleteProductUseCase } from 'src/domain/our-city/application/use-cases/product/delete-product';
 import { ForgotUserPasswordController } from './controllers/user/auth/forgot-user-password.controller';
 import { UpdateUserPasswordController } from './controllers/user/auth/update-user-password.controller';
 import { ResetUserPasswordController } from './controllers/user/auth/reset-user-password.controller';
@@ -55,6 +56,7 @@ import { GetUserProfileController } from './controllers/user/get-user-profile.co
 import { RegisterUserController } from './controllers/user/auth/register-user.controller';
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
 import { RefreshTokenController } from './controllers/user/auth/refresh-token.controller';
+import { DeleteProductController } from './controllers/product/delete-product.controller';
 import { WakeUpApiController } from './controllers/wake-up-api.controller';
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { DatabaseModule } from '../database/database.module';
@@ -92,6 +94,7 @@ import { Module } from '@nestjs/common';
     ResetUserPasswordController,
     AuthenticateUserController,
     GetUserProfileController,
+    DeleteProductController,
     RegisterUserController,
     ConfirmEmailController,
     RefreshTokenController,
@@ -128,6 +131,7 @@ import { Module } from '@nestjs/common';
     GetUserProfileUseCase,
     GetSharedItemsUseCase,
     WakeUpDatabaseUseCase,
+    DeleteProductUseCase,
     RefreshTokenUseCase,
     RegisterUserUseCase,
     ConfirmEmailUseCase,
