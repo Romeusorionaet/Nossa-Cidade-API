@@ -27,10 +27,7 @@ export class DrizzleImageProductRepository implements ImageProductRepository {
     if (!productIds.length) return [];
 
     const imageUrls = await this.drizzle.database
-      .select({
-        productId: productImages.productId,
-        url: productImages.url,
-      })
+      .select()
       .from(productImages)
       .where(inArray(productImages.productId, productIds));
 

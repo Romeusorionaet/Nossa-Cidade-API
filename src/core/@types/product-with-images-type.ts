@@ -1,3 +1,5 @@
+import { ProductImageType } from './product-image-type';
+
 export type ProductWithImagesType = {
   id: string;
   businessPointId: string;
@@ -5,5 +7,5 @@ export type ProductWithImagesType = {
   price: number;
   createdAt: Date;
   updatedAt: Date;
-  imageUrls: string[];
+  imageUrls: ProductImageType[];
 };

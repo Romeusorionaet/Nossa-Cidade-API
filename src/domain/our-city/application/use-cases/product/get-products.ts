@@ -41,7 +41,11 @@ export class GetProductsUseCase {
         updatedAt: product.updatedAt,
         imageUrls: imagesProduct
           .filter((img) => img.productId === product.id.toString())
-          .map((img) => img.url),
+          .map((img) => ({
+            id: img.id,
+            url: img.url,
+            productId: img.productId,
+          })),
       }),
     );
 
