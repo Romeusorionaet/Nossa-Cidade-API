@@ -1,1 +1,1 @@
-export type ProductImageType = { id: string; url: string };
+export type ProductImageType = { productId: string; url: string };

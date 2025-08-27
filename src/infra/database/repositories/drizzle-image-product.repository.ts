@@ -2,7 +2,7 @@ import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { ImageProductRepository } from 'src/domain/our-city/application/repositories/image-product.repository';
 import { ProductImageType } from 'src/core/@types/product-image-type';
-import { eq, sql } from 'drizzle-orm';
+import { eq, inArray, sql } from 'drizzle-orm';
 import { productImages } from '../schemas';
 import { ProductImage } from 'src/domain/our-city/enterprise/entities/product-image';
 import { DrizzleProductImageMapper } from '../mappers/drizzle-product-image.mapper';
@@ -21,20 +21,18 @@ export class DrizzleImageProductRepository implements ImageProductRepository {
 
     return result.count ?? 0;
   }
-  async findImageUrlsByProductId(
-    productId: string,
+  async findImageUrlsByProductIds(
+    productIds: string[],
   ): Promise<ProductImageType[]> {
+    if (!productIds.length) return [];
+
     const imageUrls = await this.drizzle.database
       .select({
-        id: productImages.id,
+        productId: productImages.productId,
         url: productImages.url,
       })
       .from(productImages)
-      .where(eq(productImages.productId, productId));
-
-    if (!imageUrls.length && imageUrls.length === 0) {
-      return [];
-    }
+      .where(inArray(productImages.productId, productIds));
 
     return imageUrls;
   }

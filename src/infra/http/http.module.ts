@@ -49,6 +49,7 @@ import { DeleteProductUseCase } from 'src/domain/our-city/application/use-cases/
 import { ForgotUserPasswordController } from './controllers/user/auth/forgot-user-password.controller';
 import { UpdateUserPasswordController } from './controllers/user/auth/update-user-password.controller';
 import { ResetUserPasswordController } from './controllers/user/auth/reset-user-password.controller';
+import { GetProductsUseCase } from 'src/domain/our-city/application/use-cases/product/get-products';
 import { UploadImageUseCase } from 'src/domain/our-city/application/use-cases/upload/upload-image';
 import { AuthenticateUserController } from './controllers/user/auth/authenticate-user.controller';
 import { SharedItemsController } from './controllers/shared-items/get-shared-items.controller';
@@ -57,6 +58,7 @@ import { RegisterUserController } from './controllers/user/auth/register-user.co
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
 import { RefreshTokenController } from './controllers/user/auth/refresh-token.controller';
 import { DeleteProductController } from './controllers/product/delete-product.controller';
+import { GetProductsController } from './controllers/product/get-products.controller';
 import { WakeUpApiController } from './controllers/wake-up-api.controller';
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { DatabaseModule } from '../database/database.module';
@@ -99,6 +101,7 @@ import { Module } from '@nestjs/common';
     ConfirmEmailController,
     RefreshTokenController,
     SharedItemsController,
+    GetProductsController,
     WakeUpApiController,
   ],
   providers: [
@@ -136,6 +139,7 @@ import { Module } from '@nestjs/common';
     RegisterUserUseCase,
     ConfirmEmailUseCase,
     RefreshTokenUseCase,
+    GetProductsUseCase,
     UploadImageUseCase,
   ],
 })
