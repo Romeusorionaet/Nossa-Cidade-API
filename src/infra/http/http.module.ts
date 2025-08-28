@@ -48,6 +48,7 @@ import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/u
 import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
 import { WakeUpDatabaseUseCase } from 'src/domain/our-city/application/use-cases/user/wake-up-database';
 import { DeleteProductUseCase } from 'src/domain/our-city/application/use-cases/product/delete-product';
+import { UpdateProductUseCase } from 'src/domain/our-city/application/use-cases/product/update-product';
 import { ForgotUserPasswordController } from './controllers/user/auth/forgot-user-password.controller';
 import { UpdateUserPasswordController } from './controllers/user/auth/update-user-password.controller';
 import { ResetUserPasswordController } from './controllers/user/auth/reset-user-password.controller';
@@ -61,6 +62,7 @@ import { RegisterUserController } from './controllers/user/auth/register-user.co
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
 import { RefreshTokenController } from './controllers/user/auth/refresh-token.controller';
 import { DeleteProductController } from './controllers/product/delete-product.controller';
+import { UpdateProductController } from './controllers/product/update-product.controller';
 import { GetProductsController } from './controllers/product/get-products.controller';
 import { WakeUpApiController } from './controllers/wake-up-api.controller';
 import { CryptographyModule } from '../cryptography/cryptography.module';
@@ -102,6 +104,7 @@ import { Module } from '@nestjs/common';
     AuthenticateUserController,
     GetUserProfileController,
     DeleteProductController,
+    UpdateProductController,
     RegisterUserController,
     ConfirmEmailController,
     RefreshTokenController,
@@ -141,6 +144,7 @@ import { Module } from '@nestjs/common';
     GetSharedItemsUseCase,
     WakeUpDatabaseUseCase,
     DeleteProductUseCase,
+    UpdateProductUseCase,
     RefreshTokenUseCase,
     RegisterUserUseCase,
     ConfirmEmailUseCase,

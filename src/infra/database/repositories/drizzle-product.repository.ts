@@ -11,6 +11,14 @@ import { QUANTITY_OF_PRODUCTS } from 'src/core/constants/quantity-of-products';
 @Injectable()
 export class DrizzleProductRepository implements ProductRepository {
   constructor(private drizzle: DatabaseClient) {}
+  async update(product: Product): Promise<void> {
+    const data = DrizzleProductMapper.toDrizzle(product);
+
+    await this.drizzle.database
+      .update(products)
+      .set(data)
+      .where(eq(products.id, data.id));
+  }
   async findMany({ page }: PaginationParams): Promise<Product[]> {
     const offset = ((page || 1) - 1) * QUANTITY_OF_PRODUCTS.PER_PAGE;
 
@@ -24,17 +32,19 @@ export class DrizzleProductRepository implements ProductRepository {
 
     return data;
   }
-  async findById(productId: string): Promise<{ id: string } | null> {
-    const [resultProduct] = await this.drizzle.database
-      .select({ id: products.id })
+  async findById(productId: string): Promise<Product | null> {
+    const [product] = await this.drizzle.database
+      .select()
       .from(products)
       .where(eq(products.id, productId));
 
-    if (!resultProduct.id) {
+    if (!product) {
       return null;
     }
 
-    return { id: resultProduct.id };
+    const data = DrizzleProductMapper.toDomain(product);
+
+    return data;
   }
   async delete(productId: string): Promise<void> {
     await this.drizzle.database
