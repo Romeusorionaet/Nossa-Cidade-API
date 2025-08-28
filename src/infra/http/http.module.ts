@@ -21,7 +21,7 @@ import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/applica
 import { GetBusinessPointCategoriesController } from './controllers/business-point/get-business-point-categories.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
-import { CheckProductImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/upload/check-product-image-quota';
+import { CheckProductImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/product/check-product-image-quota';
 import { GetBusinessPointOverviewController } from './controllers/business-point/get-business-point-overview.controller';
 import { DeleteBusinessPointImageController } from './controllers/business-point/delete-business-point-image.controller';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
@@ -31,6 +31,7 @@ import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-c
 import { GetBusinessPointImagesController } from './controllers/business-point/get-business-point-images.controller';
 import { RegisterProductWithImagesController } from './controllers/product/register-product-with-images.controller';
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
+import { DeleteProductImageUseCase } from 'src/domain/our-city/application/use-cases/product/delete-product-image';
 import { RegisterBusinessPointController } from './controllers/business-point/register-business-point.controller';
 import { ResendConfirmationEmailController } from './controllers/user/auth/resend-confirmation-email.controller';
 import { SaveImagesProductUseCase } from 'src/domain/our-city/application/use-cases/product/save-images-product';
@@ -49,6 +50,7 @@ import { DeleteProductUseCase } from 'src/domain/our-city/application/use-cases/
 import { ForgotUserPasswordController } from './controllers/user/auth/forgot-user-password.controller';
 import { UpdateUserPasswordController } from './controllers/user/auth/update-user-password.controller';
 import { ResetUserPasswordController } from './controllers/user/auth/reset-user-password.controller';
+import { DeleteProductImageController } from './controllers/product/delete-product-image.controller';
 import { GetProductsUseCase } from 'src/domain/our-city/application/use-cases/product/get-products';
 import { UploadImageUseCase } from 'src/domain/our-city/application/use-cases/upload/upload-image';
 import { AuthenticateUserController } from './controllers/user/auth/authenticate-user.controller';
@@ -93,6 +95,7 @@ import { Module } from '@nestjs/common';
     UpdateBusinessPointController,
     UpdateUserPasswordController,
     ForgotUserPasswordController,
+    DeleteProductImageController,
     ResetUserPasswordController,
     AuthenticateUserController,
     GetUserProfileController,
@@ -127,6 +130,7 @@ import { Module } from '@nestjs/common';
     UpdateBusinessPointUseCase,
     UpdateUserPasswordUseCase,
     ForgotUserPasswordUseCase,
+    DeleteProductImageUseCase,
     SaveImagesProductUseCase,
     ResetUserPasswordUseCase,
     AuthenticateUserUseCase,
