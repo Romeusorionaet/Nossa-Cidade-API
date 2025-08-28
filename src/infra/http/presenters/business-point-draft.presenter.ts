@@ -5,6 +5,7 @@ export class BusinessPointDraftPresenter {
     return {
       id: businessPointDraft.id.toString(),
       categoryId: businessPointDraft.categoryId.toString(),
+      businessPointId: businessPointDraft.businessPointId.toString(),
       name: businessPointDraft.name,
       openingHours: businessPointDraft.openingHours,
       neighborhood: businessPointDraft.neighborhood,

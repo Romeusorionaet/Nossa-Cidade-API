@@ -15,11 +15,11 @@ import { VerifyBusinessPointOwnershipUseCase } from 'src/domain/our-city/applica
 import { BusinessPointUnderAnalysisError } from 'src/domain/our-city/application/use-cases/errors/business-point-under-analysis-error';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
 import { BusinessPointNotFoundError } from 'src/domain/our-city/application/use-cases/errors/business-point-not-found-error';
-import { RequestBusinessPointUpdateUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
 import { CurrentUser } from '../../middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
 import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 import { GeometryPoint } from 'src/core/@types/geometry';
+import { RequestBusinessPointUpdateUseCase } from 'src/domain/our-city/application/use-cases/business-point/request-business-point-update';
 
 @Controller('/business-point/request-update/:id')
 export class RequestBusinessPointUpdateController {
