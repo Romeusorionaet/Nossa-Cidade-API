@@ -1,0 +1,3 @@
+export enum QUANTITY_OF_BUSINESS_POINT_DRAFT {
+  PER_PAGE = 10,
+}

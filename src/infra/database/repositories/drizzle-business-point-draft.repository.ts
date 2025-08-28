@@ -5,12 +5,29 @@ import { Injectable } from '@nestjs/common';
 import { DrizzleBusinessPointDraftMapper } from '../mappers/drizzle-business-point-draft.mapper';
 import { businessPointDrafts } from '../schemas/drafts.schema';
 import { eq } from 'drizzle-orm';
+import { PaginationParams } from 'src/core/repositories/pagination-params';
+import { QUANTITY_OF_PRODUCTS } from 'src/core/constants/quantity-of-products';
+import { QUANTITY_OF_BUSINESS_POINT_DRAFT } from 'src/core/constants/quantity-of-business-point-draft';
 
 @Injectable()
 export class DrizzleBusinessPointDraftRepository
   implements BusinessPointDraftRepository
 {
   constructor(private drizzle: DatabaseClient) {}
+  async findMany({ page }: PaginationParams): Promise<BusinessPointDraft[]> {
+    const offset =
+      ((page || 1) - 1) * QUANTITY_OF_BUSINESS_POINT_DRAFT.PER_PAGE;
+
+    const result = await this.drizzle.database
+      .select()
+      .from(businessPointDrafts)
+      .limit(QUANTITY_OF_PRODUCTS.PER_PAGE)
+      .offset(offset);
+
+    const data = result.map(DrizzleBusinessPointDraftMapper.toDomain);
+
+    return data;
+  }
   async create(businessPointDraft: BusinessPointDraft): Promise<void> {
     const data = DrizzleBusinessPointDraftMapper.toDrizzle(businessPointDraft);
     await this.drizzle.database.insert(businessPointDrafts).values(data);
