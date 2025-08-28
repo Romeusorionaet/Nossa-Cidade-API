@@ -1,4 +1,3 @@
-import { BusinessPointImageLimitExceededError } from '../errors/business-point-image-limit-exceeded-error';
 import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 import { ProductImageQuota } from '../../shared/constants/product-image-quota';
@@ -7,10 +6,11 @@ import { ImageProductRepository } from '../../repositories/image-product.reposit
 
 interface CheckProductImageQuotaUseCaseRequest {
   productId: string;
+  filesLength: number;
 }
 
 type CheckProductImageQuotaUseCaseResponse = Either<
-  BusinessPointImageLimitExceededError,
+  ProductImageLimitExceededError,
   object
 >;
 
@@ -22,11 +22,12 @@ export class CheckProductImageQuotaUseCase {
 
   async execute({
     productId,
+    filesLength,
   }: CheckProductImageQuotaUseCaseRequest): Promise<CheckProductImageQuotaUseCaseResponse> {
     const currentQuota =
       await this.imageProductRepository.checkQuotaById(productId);
 
-    if (currentQuota >= ProductImageQuota) {
+    if (currentQuota + filesLength >= ProductImageQuota) {
       return left(new ProductImageLimitExceededError());
     }
 

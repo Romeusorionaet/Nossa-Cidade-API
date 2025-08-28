@@ -41,6 +41,7 @@ import { GetSharedItemsUseCase } from 'src/domain/our-city/application/use-cases
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { UpdateBusinessPointController } from './controllers/business-point/update-business-point.controller';
 import { RegisterProductUseCase } from 'src/domain/our-city/application/use-cases/product/register-product';
+import { UploadImageToProductController } from './controllers/uploads/upload-image-to-product.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
@@ -92,6 +93,7 @@ import { Module } from '@nestjs/common';
     GetBusinessPointImagesController,
     RegisterBusinessPointController,
     SearchBusinessPointsController,
+    UploadImageToProductController,
     UpdateBusinessPointController,
     UpdateUserPasswordController,
     ForgotUserPasswordController,
