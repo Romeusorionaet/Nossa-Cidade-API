@@ -11,7 +11,7 @@ import { Injectable } from '@nestjs/common';
 
 interface UpdateBusinessPointUseCaseRequest {
   businessPointId: string;
-  categoryId?: string;
+  categoryId: string;
   name?: string;
   location?: GeometryPoint;
   openingHours?: Record<string, any>;
@@ -62,12 +62,12 @@ export class UpdateBusinessPointUseCase {
       return left(new BusinessPointNotFoundError(businessPoint.name));
     }
 
-    if (businessPoint.awaitingApproval || existBusinessPointDraft) {
+    if (existBusinessPointDraft) {
       return left(new BusinessPointUnderAnalysisError());
     }
 
     const businessPointDraft = BusinessPointDraft.create({
-      categoryId: categoryId ? new UniqueEntityID(categoryId) : undefined,
+      categoryId: new UniqueEntityID(categoryId),
       businessPointId: businessPoint.id,
       name,
       location,

@@ -11,13 +11,13 @@ const addressSchema = z
 
 const locationSchema = z
   .object({
-    x: z.coerce.number().min(-90).max(90),
-    y: z.coerce.number().min(-180).max(180),
+    latitude: z.coerce.number().min(-90).max(90),
+    longitude: z.coerce.number().min(-180).max(180),
   })
   .partial();
 
 export const businessPointUpdateSchema = z.object({
-  categoryId: z.string(),
+  categoryId: z.string().min(1, { message: 'Id da Categoria obrigatório' }),
   name: z
     .string()
     .min(6, { message: 'Nome muito curto.' })

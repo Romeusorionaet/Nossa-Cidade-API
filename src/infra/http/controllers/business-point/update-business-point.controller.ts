@@ -63,8 +63,8 @@ export class UpdateBusinessPointController {
         throw new BadRequestException(err.message);
       }
 
-      const lat = businessPoint?.location?.x;
-      const lng = businessPoint?.location?.y;
+      const lat = businessPoint?.location?.latitude;
+      const lng = businessPoint?.location?.longitude;
 
       const location: GeometryPoint = {
         type: 'Point',
@@ -85,7 +85,7 @@ export class UpdateBusinessPointController {
 
       const result = await this.updateBusinessPointUseCase.execute({
         businessPointId,
-        categoryId: businessPoint?.categoryId,
+        categoryId: businessPoint.categoryId,
         name: businessPoint?.name,
         neighborhood: businessPoint.address?.neighborhood,
         street: businessPoint.address?.street,
