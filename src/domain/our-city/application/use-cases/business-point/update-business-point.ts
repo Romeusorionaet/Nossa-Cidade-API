@@ -9,7 +9,7 @@ import { GeometryPoint } from 'src/core/@types/geometry';
 import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 
-interface UpdateBusinessPointUseCaseRequest {
+interface RequestBusinessPointUpdateUseCaseRequest {
   businessPointId: string;
   categoryId: string;
   name?: string;
@@ -24,13 +24,13 @@ interface UpdateBusinessPointUseCaseRequest {
   houseNumber?: number;
 }
 
-type UpdateBusinessPointUseCaseResponse = Either<
+type RequestBusinessPointUpdateUseCaseResponse = Either<
   BusinessPointUnderAnalysisError | BusinessPointNotFoundError,
   object
 >;
 
 @Injectable()
-export class UpdateBusinessPointUseCase {
+export class RequestBusinessPointUpdateUseCase {
   constructor(
     private readonly businessPointDraftRepository: BusinessPointDraftRepository,
     private readonly businessPointRepository: BusinessPointRepository,
@@ -49,7 +49,7 @@ export class UpdateBusinessPointUseCase {
     neighborhood,
     street,
     houseNumber,
-  }: UpdateBusinessPointUseCaseRequest): Promise<UpdateBusinessPointUseCaseResponse> {
+  }: RequestBusinessPointUpdateUseCaseRequest): Promise<RequestBusinessPointUpdateUseCaseResponse> {
     const businessPoint =
       await this.businessPointRepository.findById(businessPointId);
 
