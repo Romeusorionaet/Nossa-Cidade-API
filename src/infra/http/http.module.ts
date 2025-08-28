@@ -2,6 +2,7 @@ import { GetSharedItemsAssociatedBusinessPointUseCase } from 'src/domain/our-cit
 import { UpdateSharedItemsBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/shared-items/update-shared-items-business-point';
 import { SharedItemsAssociatedBusinessPointController } from './controllers/shared-items/get-shared-items-associated-business-point.controller';
 import { VerifyBusinessPointOwnershipUseCase } from 'src/domain/our-city/application/use-cases/business-point/verify-business-point-owner-ship';
+import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/business-point/check-business-point-image-quota';
 import { GetBusinessPointsForMappingUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-points-for-mapping';
 import { GetBusinessPointPreviewUserUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-preview-user';
 import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-categories';
@@ -17,7 +18,6 @@ import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/us
 import { GetBusinessPointsForMappingController } from './controllers/business-point/get-business-points-for-mapping.controller';
 import { ResendConfirmationEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/resend-confirmation-email';
 import { SearchBusinessPointsUseCase } from 'src/domain/our-city/application/use-cases/business-point/search-business-points';
-import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/upload/check-user-image-quota';
 import { GetBusinessPointCategoriesController } from './controllers/business-point/get-business-point-categories.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';

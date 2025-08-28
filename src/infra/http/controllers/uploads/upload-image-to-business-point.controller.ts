@@ -9,8 +9,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { BusinessPointImageLimitExceededError } from 'src/domain/our-city/application/use-cases/errors/business-point-image-limit-exceeded-error';
+import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/business-point/check-business-point-image-quota';
 import { SaveImagesBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
-import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/upload/check-user-image-quota';
 import { BusinessPointImageQuota } from 'src/domain/our-city/application/shared/constants/business-point-image-quota';
 import { UploadImageError } from 'src/domain/our-city/application/use-cases/errors/upload-image-error';
 import { UploadImageUseCase } from 'src/domain/our-city/application/use-cases/upload/upload-image';
