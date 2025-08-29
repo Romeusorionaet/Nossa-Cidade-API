@@ -24,6 +24,7 @@ import { GetBusinessPointCategoriesController } from './controllers/business-poi
 import { RequestBusinessPointUpdateController } from './controllers/business-point/request-business-point-update.controller';
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { CheckProductImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/product/check-product-image-quota';
+import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
 import { GetBusinessPointDraftsController } from './controllers/business-point-draft/get-business-point-drafts.controller';
 import { GetBusinessPointOverviewController } from './controllers/business-point/get-business-point-overview.controller';
 import { DeleteBusinessPointImageController } from './controllers/business-point/delete-business-point-image.controller';
@@ -41,6 +42,7 @@ import { SaveImagesProductUseCase } from 'src/domain/our-city/application/use-ca
 import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
 import { SearchBusinessPointsController } from './controllers/business-point/search-business-points.controller';
 import { GetSharedItemsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items';
+import { UpdateBusinessPointController } from './controllers/business-point/update-business-point.controller';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { RegisterProductUseCase } from 'src/domain/our-city/application/use-cases/product/register-product';
 import { UploadImageToProductController } from './controllers/uploads/upload-image-to-product.controller';
@@ -100,6 +102,7 @@ import { Module } from '@nestjs/common';
     RegisterBusinessPointController,
     SearchBusinessPointsController,
     UploadImageToProductController,
+    UpdateBusinessPointController,
     UpdateUserPasswordController,
     ForgotUserPasswordController,
     DeleteProductImageController,
@@ -118,7 +121,6 @@ import { Module } from '@nestjs/common';
   providers: [
     GetSharedItemsAssociatedBusinessPointUseCase,
     UpdateSharedItemsBusinessPointUseCase,
-    SaveImagesBusinessPointUseCase,
     CheckBusinessPointImageQuotaUseCase,
     VerifyBusinessPointOwnershipUseCase,
     GetBusinessPointsForMappingUseCase,
@@ -128,6 +130,7 @@ import { Module } from '@nestjs/common';
     RegisterProductWithImagesUseCase,
     GetBusinessPointOverviewUseCase,
     DeleteBusinessPointImageUseCase,
+    SaveImagesBusinessPointUseCase,
     ResendConfirmationEmailUseCase,
     CheckProductImageQuotaUseCase,
     GetBusinessPointImagesUseCase,
@@ -137,6 +140,7 @@ import { Module } from '@nestjs/common';
     ValidateBusinessPointUseCase,
     PromoteUserToMerchantUseCase,
     SearchBusinessPointsUseCase,
+    UpdateBusinessPointUseCase,
     UpdateUserPasswordUseCase,
     ForgotUserPasswordUseCase,
     DeleteProductImageUseCase,

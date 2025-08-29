@@ -47,7 +47,9 @@ export class DrizzleBusinessPointDraftRepository
 
     return DrizzleBusinessPointDraftMapper.toDomain(businessPointDraft);
   }
-  delete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<void> {
+    await this.drizzle.database
+      .delete(businessPointDrafts)
+      .where(eq(businessPointDrafts.id, id));
   }
 }

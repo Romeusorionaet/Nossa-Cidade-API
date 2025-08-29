@@ -111,7 +111,7 @@ export class RequestBusinessPointUpdateController {
       }
 
       return {
-        message: 'Local atualizado.',
+        message: 'Pedido de atualização em análise.',
       };
     } catch (err: any) {
       throw new BadRequestException(err.message);

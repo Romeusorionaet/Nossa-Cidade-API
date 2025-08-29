@@ -1,20 +1,14 @@
 import {
   businessPointCustomTags,
-  businessPointImages,
   sharedCategoryTags,
   businessPoints,
   businessPointToCategoriesAssociation,
   sharedBusinessPointCategories,
   SharedBusinessPointCategoriesType,
 } from '../schemas';
-import {
-  BusinessPointProps,
-  BusinessPoint,
-} from 'src/domain/our-city/enterprise/entities/business-point';
+import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
-import { BusinessPointImage } from 'src/domain/our-city/enterprise/entities/business-point-image';
 import { DrizzleBusinessPointPreviewMapper } from '../mappers/drizzle-business-point-preview.mapper';
-import { DrizzleBusinessPointImageMapper } from '../mappers/drizzle-business-point-image.mapper';
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
 import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
@@ -28,35 +22,13 @@ import { Injectable } from '@nestjs/common';
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   constructor(private drizzle: DatabaseClient) {}
 
-  async update(
-    businessPointId: string,
-    businessPoint: Partial<BusinessPointProps>,
-  ): Promise<void> {
-    const convertedLocation = businessPoint.location
-      ? {
-          x: businessPoint.location.coordinates[0],
-          y: businessPoint.location.coordinates[1],
-        }
-      : undefined;
-
-    const data = {
-      categoryId: businessPoint.categoryId?.toString(),
-      name: businessPoint.name,
-      location: convertedLocation,
-      openingHours: businessPoint.openingHours,
-      description: businessPoint.description,
-      highlight: businessPoint.highlight,
-      website: businessPoint.website,
-      censorship: businessPoint.censorship,
-      neighborhood: businessPoint.neighborhood,
-      street: businessPoint.street,
-      houseNumber: businessPoint.houseNumber,
-    };
+  async update(businessPoint: BusinessPoint): Promise<void> {
+    const data = DrizzleBusinessPointMapper.toDrizzle(businessPoint);
 
     await this.drizzle.database
       .update(businessPoints)
       .set(data)
-      .where(eq(businessPoints.id, businessPointId));
+      .where(eq(businessPoints.id, data.id));
   }
 
   async create(businessPoint: BusinessPoint): Promise<void> {
