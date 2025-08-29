@@ -3,6 +3,7 @@ import { ProductImageType } from './product-image-type';
 export type ProductWithImagesType = {
   id: string;
   businessPointId: string;
+  businessPointName: string;
   title: string;
   price: number;
   createdAt: Date;

@@ -40,6 +40,7 @@ export class RegisterProductWithImagesController {
     try {
       const result = await this.registerProductWithImagesUseCase.execute({
         businessPointId: body.businessPointId,
+        businessPointName: body.businessPointName,
         customTags: body.customTags,
         price: Number(body.price),
         title: body.title,

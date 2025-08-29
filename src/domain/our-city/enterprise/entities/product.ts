@@ -4,6 +4,7 @@ import { Entity } from 'src/core/entities/entity';
 
 export interface ProductProps {
   businessPointId: UniqueEntityID;
+  businessPointName: string;
   title: string;
   price: number;
   createdAt?: Date | null;
@@ -13,6 +14,10 @@ export interface ProductProps {
 export class Product extends Entity<ProductProps> {
   get businessPointId() {
     return this.props.businessPointId;
+  }
+
+  get businessPointName() {
+    return this.props.businessPointName;
   }
 
   get title() {

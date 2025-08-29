@@ -3,7 +3,11 @@ import { z } from 'zod';
 
 export const productSchema = z.object({
   businessPointId: z.string(),
-  title: z.string(),
+  businessPointName: z.string(),
+  title: z
+    .string()
+    .min(3, { message: 'Título muito curto.' })
+    .max(80, { message: 'Título muito longo.' }),
   price: z.string(),
   customTags: z
     .array(z.string())

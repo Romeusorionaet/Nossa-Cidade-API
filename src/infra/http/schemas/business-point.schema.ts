@@ -5,8 +5,8 @@ export const businessPointSchema = z.object({
   categoryId: z.string(),
   name: z
     .string()
-    .min(6, { message: 'Nome muito curto.' })
-    .max(100, { message: 'Nome muito longo.' }),
+    .min(3, { message: 'Nome muito curto.' })
+    .max(45, { message: 'Nome muito longo.' }),
   description: z
     .string()
     .min(10, { message: 'Descrição insuficiente.' })

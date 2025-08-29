@@ -8,6 +8,7 @@ import { ProductRepository } from '../../repositories/product.repository';
 
 interface RegisterProductWithImagesUseCaseRequest {
   businessPointId: string;
+  businessPointName: string;
   title: string;
   price: number;
   customTags: string[];
@@ -30,6 +31,7 @@ export class RegisterProductWithImagesUseCase {
 
   async execute({
     businessPointId,
+    businessPointName,
     title,
     price,
     customTags,
@@ -37,6 +39,7 @@ export class RegisterProductWithImagesUseCase {
   }: RegisterProductWithImagesUseCaseRequest): Promise<RegisterProductWithImagesUseCaseResponse> {
     const result = await this.registerProductUseCase.execute({
       businessPointId,
+      businessPointName,
       customTags,
       price,
       title,

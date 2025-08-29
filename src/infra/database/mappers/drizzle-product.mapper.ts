@@ -7,6 +7,7 @@ export class DrizzleProductMapper {
     return Product.create(
       {
         businessPointId: new UniqueEntityID(raw.businessPointId),
+        businessPointName: raw.businessPointName,
         price: raw.price,
         title: raw.title,
         updatedAt: raw.updatedAt,
@@ -20,6 +21,7 @@ export class DrizzleProductMapper {
     return {
       id: product.id.toString(),
       businessPointId: product.businessPointId.toString(),
+      businessPointName: product.businessPointName,
       price: product.price,
       title: product.title,
       updatedAt: product.updatedAt,

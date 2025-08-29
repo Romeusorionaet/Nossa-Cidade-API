@@ -15,6 +15,13 @@
       "when": 1756229398099,
       "tag": "0001_medical_tyrannus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756495070358,
+      "tag": "0002_material_anita_blake",
+      "breakpoints": true
     }
   ]
 }

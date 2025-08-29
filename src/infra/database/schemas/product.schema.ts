@@ -16,7 +16,8 @@ export const products = pgTable('products', {
   businessPointId: text('business_point_id')
     .references(() => businessPoints.id, { onDelete: 'cascade' })
     .notNull(),
-  title: varchar('name', { length: 255 }).notNull(),
+  businessPointName: text('business_point_name'),
+  title: varchar('title', { length: 80 }).notNull(),
   price: integer(),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()

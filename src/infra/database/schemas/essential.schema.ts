@@ -56,7 +56,7 @@ export const businessPoints = pgTable(
     id: text('id')
       .primaryKey()
       .$defaultFn(() => createId()),
-    name: varchar('name', { length: 255 }).notNull(),
+    name: varchar('name', { length: 45 }).notNull(),
     categoryId: text('category_id')
       .references(() => sharedBusinessPointCategories.id)
       .notNull(),

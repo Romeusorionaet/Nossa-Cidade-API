@@ -35,6 +35,7 @@ export class GetProductsUseCase {
       (product) => ({
         id: product.id.toString(),
         businessPointId: product.businessPointId.toString(),
+        businessPointName: product.businessPointName,
         title: product.title,
         price: product.price,
         createdAt: product.createdAt,

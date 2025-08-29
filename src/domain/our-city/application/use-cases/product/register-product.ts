@@ -8,6 +8,7 @@ import { CustomTag } from 'src/domain/our-city/enterprise/value-objects/custom-t
 
 interface RegisterProductUseCaseRequest {
   businessPointId: string;
+  businessPointName: string;
   title: string;
   price: number;
   customTags: string[];
@@ -27,12 +28,14 @@ export class RegisterProductUseCase {
 
   async execute({
     businessPointId,
+    businessPointName,
     title,
     price,
     customTags,
   }: RegisterProductUseCaseRequest): Promise<RegisterProductUseCaseResponse> {
     const product = Product.create({
       businessPointId: new UniqueEntityID(businessPointId),
+      businessPointName,
       title,
       price,
     });
