@@ -27,7 +27,10 @@ export class CheckProductImageQuotaUseCase {
     const currentQuota =
       await this.imageProductRepository.checkQuotaById(productId);
 
-    if (currentQuota + filesLength >= ProductImageQuota) {
+    const isLimitExceeded =
+      Number(currentQuota) + Number(filesLength) > ProductImageQuota;
+
+    if (isLimitExceeded) {
       return left(new ProductImageLimitExceededError());
     }
 
