@@ -1,6 +1,6 @@
 {
-  "id": "5264a2c2-3c6b-46b9-93cf-a59550f8fa77",
-  "prevId": "54fa297d-1ac6-4c6f-b8f5-016e81ea2eab",
+  "id": "973b40cb-06a6-4937-8025-afcc1e8954f0",
+  "prevId": "9694ad58-acca-45bf-a94d-bd49298929b8",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -818,7 +818,7 @@
         },
         "name": {
           "name": "name",
-          "type": "varchar(255)",
+          "type": "varchar(45)",
           "primaryKey": false,
           "notNull": true
         },
@@ -1200,9 +1200,15 @@
           "primaryKey": false,
           "notNull": true
         },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
+        "business_point_name": {
+          "name": "business_point_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(80)",
           "primaryKey": false,
           "notNull": true
         },

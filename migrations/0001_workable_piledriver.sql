@@ -87,7 +87,7 @@ CREATE TABLE "business_point_images" (
 --> statement-breakpoint
 CREATE TABLE "business_points" (
 	"id" text PRIMARY KEY NOT NULL,
-	"name" varchar(255) NOT NULL,
+	"name" varchar(45) NOT NULL,
 	"category_id" text NOT NULL,
 	"description" varchar(500),
 	"location" geometry(point) NOT NULL,
@@ -141,7 +141,8 @@ CREATE TABLE "product_images" (
 CREATE TABLE "products" (
 	"id" text PRIMARY KEY NOT NULL,
 	"business_point_id" text NOT NULL,
-	"name" varchar(255) NOT NULL,
+	"business_point_name" text,
+	"title" varchar(80) NOT NULL,
 	"price" integer,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
