@@ -1,11 +1,13 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { Optional } from 'src/core/@types/optional';
 import { Entity } from 'src/core/entities/entity';
+import { SearchableText } from '../value-objects/search-title';
 
 export interface ProductProps {
   businessPointId: UniqueEntityID;
   businessPointName: string;
   title: string;
+  searchTitle: SearchableText;
   price: number;
   createdAt?: Date | null;
   updatedAt?: Date | null;
@@ -24,6 +26,10 @@ export class Product extends Entity<ProductProps> {
     return this.props.title;
   }
 
+  get searchTitle() {
+    return this.props.searchTitle;
+  }
+
   get price() {
     return this.props.price;
   }
@@ -36,13 +42,20 @@ export class Product extends Entity<ProductProps> {
     return this.props.updatedAt;
   }
 
+  set title(title: string) {
+    this.props.title = title;
+    this.props.searchTitle = SearchableText.createFromText(title);
+  }
+
   static create(
-    props: Optional<ProductProps, 'createdAt' | 'updatedAt'>,
+    props: Optional<ProductProps, 'createdAt' | 'updatedAt' | 'searchTitle'>,
     id?: UniqueEntityID,
   ) {
     return new Product(
       {
         ...props,
+        searchTitle:
+          props.searchTitle ?? SearchableText.createFromText(props.title),
         createdAt: props.createdAt ?? new Date(),
         updatedAt: props.updatedAt ?? new Date(),
       },
@@ -51,10 +64,14 @@ export class Product extends Entity<ProductProps> {
   }
 
   update(props: Partial<ProductProps>): Product {
+    const updatedTitle = props.title ?? this.props.title;
+
     return new Product(
       {
         ...this.props,
         ...props,
+        title: updatedTitle,
+        searchTitle: SearchableText.createFromText(updatedTitle),
         updatedAt: new Date(),
       },
       this.id,

@@ -15,6 +15,13 @@
       "when": 1756506178779,
       "tag": "0001_workable_piledriver",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756658253583,
+      "tag": "0002_jazzy_microbe",
+      "breakpoints": true
     }
   ]
 }

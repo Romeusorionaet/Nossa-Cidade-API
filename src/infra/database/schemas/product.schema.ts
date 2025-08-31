@@ -18,6 +18,7 @@ export const products = pgTable('products', {
     .notNull(),
   businessPointName: text('business_point_name'),
   title: varchar('title', { length: 80 }).notNull(),
+  searchTitle: text('search_title'),
   price: integer(),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()

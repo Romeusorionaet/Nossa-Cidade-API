@@ -5,6 +5,7 @@ import {
   businessPointToCategoriesAssociation,
   sharedBusinessPointCategories,
   SharedBusinessPointCategoriesType,
+  products,
 } from '../schemas';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
@@ -17,6 +18,7 @@ import { GeometryPoint } from 'src/core/@types/geometry';
 import { eq, sql, and, ilike, or } from 'drizzle-orm';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
+import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/search-title';
 
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
@@ -98,10 +100,8 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   }
 
   async findByQuery(query: string): Promise<BusinessPointForMappingType[]> {
-    const removeAccents = (str: string) =>
-      str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-    const normalizedQuery = removeAccents(query).toLowerCase();
+    const normalizedQuery = SearchableText.createFromText(query).value;
+    const likePattern = `%${normalizedQuery}%`;
 
     const result = await this.drizzle.database
       .select({
@@ -141,26 +141,28 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
         businessPointCustomTags,
         eq(businessPoints.id, businessPointCustomTags.businessPointId),
       )
+      .leftJoin(products, eq(products.businessPointId, businessPoints.id))
       .where(
         and(
           eq(businessPoints.awaitingApproval, false),
           or(
             ilike(
-              sql<string>`unaccent(${businessPoints.name})`,
-              `%${normalizedQuery}%`,
+              sql<string>`regexp_replace(lower(unaccent(${businessPoints.name})),'[^a-z0-9]+', '', 'g')`,
+              likePattern,
             ),
             ilike(
-              sql<string>`unaccent(${sharedBusinessPointCategories.name})`,
-              `%${normalizedQuery}%`,
+              sql<string>`regexp_replace(lower(unaccent(${sharedBusinessPointCategories.name})), '[^a-z0-9]+', '', 'g')`,
+              likePattern,
             ),
             ilike(
-              sql<string>`unaccent(${sharedCategoryTags.tag})`,
-              `%${normalizedQuery}%`,
+              sql<string>`regexp_replace(lower(unaccent(${sharedCategoryTags.tag})), '[^a-z0-9]+', '', 'g')`,
+              likePattern,
             ),
             ilike(
-              sql<string>`unaccent(${businessPointCustomTags.tag})`,
-              `%${normalizedQuery}%`,
+              sql<string>`regexp_replace(lower(unaccent(${businessPointCustomTags.tag})), '[^a-z0-9]+', '', 'g')`,
+              likePattern,
             ),
+            ilike(products.searchTitle, likePattern),
           ),
         ),
       )
