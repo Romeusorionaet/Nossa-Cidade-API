@@ -15,7 +15,7 @@ import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
-import { eq, sql, and, ilike, or } from 'drizzle-orm';
+import { eq, sql, and, ilike, or, like } from 'drizzle-orm';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/search-title';
@@ -146,22 +146,10 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
         and(
           eq(businessPoints.awaitingApproval, false),
           or(
-            ilike(
-              sql<string>`regexp_replace(lower(unaccent(${businessPoints.name})),'[^a-z0-9]+', '', 'g')`,
-              likePattern,
-            ),
-            ilike(
-              sql<string>`regexp_replace(lower(unaccent(${sharedBusinessPointCategories.name})), '[^a-z0-9]+', '', 'g')`,
-              likePattern,
-            ),
-            ilike(
-              sql<string>`regexp_replace(lower(unaccent(${sharedCategoryTags.tag})), '[^a-z0-9]+', '', 'g')`,
-              likePattern,
-            ),
-            ilike(
-              sql<string>`regexp_replace(lower(unaccent(${businessPointCustomTags.tag})), '[^a-z0-9]+', '', 'g')`,
-              likePattern,
-            ),
+            ilike(businessPoints.searchName, likePattern),
+            ilike(sharedBusinessPointCategories.searchName, likePattern),
+            ilike(sharedCategoryTags.tag, likePattern),
+            ilike(businessPointCustomTags.tag, likePattern),
             ilike(products.searchTitle, likePattern),
           ),
         ),
@@ -185,10 +173,7 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
 
   async findAllCategories(): Promise<SharedBusinessPointCategoriesType[]> {
     const result = await this.drizzle.database
-      .select({
-        id: sharedBusinessPointCategories.id,
-        name: sharedBusinessPointCategories.name,
-      })
+      .select()
       .from(sharedBusinessPointCategories);
 
     return result;

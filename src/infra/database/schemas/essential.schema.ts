@@ -57,6 +57,7 @@ export const businessPoints = pgTable(
       .primaryKey()
       .$defaultFn(() => createId()),
     name: varchar('name', { length: 45 }).notNull(),
+    searchName: text('search_name'),
     categoryId: text('category_id')
       .references(() => sharedBusinessPointCategories.id)
       .notNull(),

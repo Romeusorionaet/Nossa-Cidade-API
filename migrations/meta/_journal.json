@@ -22,6 +22,13 @@
       "when": 1756658253583,
       "tag": "0002_jazzy_microbe",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1756664402766,
+      "tag": "0003_flaky_mantis",
+      "breakpoints": true
     }
   ]
 }

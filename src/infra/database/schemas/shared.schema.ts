@@ -7,6 +7,7 @@ export const sharedPets = pgTable('pets', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedPlanning = pgTable('planning', {
@@ -14,6 +15,7 @@ export const sharedPlanning = pgTable('planning', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedAccessibility = pgTable('accessibility', {
@@ -21,6 +23,7 @@ export const sharedAccessibility = pgTable('accessibility', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedParking = pgTable('parking', {
@@ -28,6 +31,7 @@ export const sharedParking = pgTable('parking', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedPayments = pgTable('payments', {
@@ -35,6 +39,7 @@ export const sharedPayments = pgTable('payments', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedAudience = pgTable('audience', {
@@ -42,6 +47,7 @@ export const sharedAudience = pgTable('audience', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedAmenities = pgTable('amenities', {
@@ -49,6 +55,7 @@ export const sharedAmenities = pgTable('amenities', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedMenu = pgTable('menu', {
@@ -56,6 +63,7 @@ export const sharedMenu = pgTable('menu', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedServiceOptions = pgTable('service_options', {
@@ -63,6 +71,7 @@ export const sharedServiceOptions = pgTable('service_options', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
 
 export const sharedEnvironment = pgTable('environment', {
@@ -70,7 +79,22 @@ export const sharedEnvironment = pgTable('environment', {
     .primaryKey()
     .$defaultFn(() => createId()),
   name: varchar('name', { length: 100 }).notNull().unique(),
+  searchName: text('search_name'),
 });
+
+export const sharedBusinessPointCategories = pgTable(
+  'business_point_categories',
+  {
+    id: text('id')
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    name: varchar('name', { length: 100 }).notNull().unique(),
+    searchName: text('search_name'),
+  },
+);
+export type SharedBusinessPointCategoriesType = InferSelectModel<
+  typeof sharedBusinessPointCategories
+>;
 
 export const sharedCategoryTags = pgTable(
   'category_tags',
@@ -85,16 +109,3 @@ export const sharedCategoryTags = pgTable(
   },
   (t) => [unique().on(t.businessPointCategoryId, t.tag)],
 );
-
-export const sharedBusinessPointCategories = pgTable(
-  'business_point_categories',
-  {
-    id: text('id')
-      .primaryKey()
-      .$defaultFn(() => createId()),
-    name: varchar('name', { length: 25 }).notNull().unique(),
-  },
-);
-export type SharedBusinessPointCategoriesType = InferSelectModel<
-  typeof sharedBusinessPointCategories
->;

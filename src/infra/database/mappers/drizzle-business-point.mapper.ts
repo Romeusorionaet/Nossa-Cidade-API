@@ -3,6 +3,7 @@ import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
 import { BusinessPointInsertType } from '../schemas';
+import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/search-title';
 
 export class DrizzleBusinessPointMapper {
   static toDomain(raw: BusinessPointInsertType): BusinessPoint {
@@ -21,6 +22,7 @@ export class DrizzleBusinessPointMapper {
         categoryId: new UniqueEntityID(raw.categoryId),
         ownerId: new UniqueEntityID(raw.ownerId),
         name: raw.name,
+        searchName: SearchableText.createFromText(raw.searchName),
         location: location,
         status,
         openingHours,
@@ -45,6 +47,7 @@ export class DrizzleBusinessPointMapper {
       categoryId: businessPoint.categoryId.toString(),
       ownerId: businessPoint.ownerId.toString(),
       name: businessPoint.name,
+      searchName: businessPoint.searchName.value,
       location: {
         x: businessPoint.location.coordinates[0],
         y: businessPoint.location.coordinates[1],
