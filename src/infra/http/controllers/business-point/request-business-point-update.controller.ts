@@ -68,7 +68,7 @@ export class RequestBusinessPointUpdateController {
 
       const location: GeometryPoint = {
         type: 'Point',
-        coordinates: [lat, lng],
+        coordinates: [lng, lat],
       };
 
       if (lat && lng) {

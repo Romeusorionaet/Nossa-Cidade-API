@@ -41,8 +41,8 @@ export class RegisterBusinessPointController {
       const location: GeometryPoint = {
         type: 'Point',
         coordinates: [
-          businessPoint.location.latitude,
           businessPoint.location.longitude,
+          businessPoint.location.latitude,
         ],
       };
 
