@@ -8,6 +8,7 @@ import { GetBusinessPointPreviewUserUseCase } from 'src/domain/our-city/applicat
 import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-categories';
 import { RequestBusinessPointUpdateUseCase } from 'src/domain/our-city/application/use-cases/business-point/request-business-point-update';
 import { GetBusinessPointDraftsUseCase } from 'src/domain/our-city/application/use-cases/business-point-draft/get-business-point-drafts';
+import { ToggleBusinessPointActiveUseCase } from 'src/domain/our-city/application/use-cases/business-point/toggle-business-point-active';
 import { DeleteBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/delete-business-point-image';
 import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
 import { SaveImagesBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
@@ -26,6 +27,7 @@ import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/us
 import { CheckProductImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/product/check-product-image-quota';
 import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
 import { GetBusinessPointDraftsController } from './controllers/business-point-draft/get-business-point-drafts.controller';
+import { ToggleBusinessPointActiveController } from './controllers/business-point/toggle-business-point-active.controller';
 import { GetBusinessPointOverviewController } from './controllers/business-point/get-business-point-overview.controller';
 import { DeleteBusinessPointImageController } from './controllers/business-point/delete-business-point-image.controller';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
@@ -93,6 +95,7 @@ import { Module } from '@nestjs/common';
     UploadImageToBusinessPointController,
     RequestBusinessPointUpdateController,
     RegisterProductWithImagesController,
+    ToggleBusinessPointActiveController,
     GetBusinessPointOverviewController,
     DeleteBusinessPointImageController,
     ResendConfirmationEmailController,
@@ -128,6 +131,7 @@ import { Module } from '@nestjs/common';
     GetBusinessPointCategoriesUseCase,
     RequestBusinessPointUpdateUseCase,
     RegisterProductWithImagesUseCase,
+    ToggleBusinessPointActiveUseCase,
     GetBusinessPointOverviewUseCase,
     DeleteBusinessPointImageUseCase,
     SaveImagesBusinessPointUseCase,

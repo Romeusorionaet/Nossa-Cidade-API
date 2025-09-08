@@ -7,6 +7,7 @@ import {
   SharedBusinessPointCategoriesType,
   products,
   businessPointDrafts,
+  businessPointStatusEnum,
 } from '../schemas';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
@@ -24,6 +25,21 @@ import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/sea
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   constructor(private drizzle: DatabaseClient) {}
+  async toggleActive(businessPointId: string) {
+    await this.drizzle.database.execute(
+      sql`
+    UPDATE ${businessPoints}
+    SET
+      status = CASE
+        WHEN ${businessPoints.status} = ${sql`${businessPointStatusEnum.enumValues[0]}::business_point_status`} 
+        THEN ${sql`${businessPointStatusEnum.enumValues[1]}::business_point_status`}
+        ELSE ${sql`${businessPointStatusEnum.enumValues[0]}::business_point_status`}
+      END,
+      updated_at = now()
+    WHERE ${businessPoints.id} = ${businessPointId}
+  `,
+    );
+  }
 
   async update(businessPoint: BusinessPoint): Promise<void> {
     const data = DrizzleBusinessPointMapper.toDrizzle(businessPoint);
