@@ -7,8 +7,8 @@ export class BusinessPointDetailsPresenter {
       ownerId: businessPoint.ownerId.toString(),
       name: businessPoint.name,
       location: {
-        x: businessPoint.location.coordinates[0],
-        y: businessPoint.location.coordinates[1],
+        x: businessPoint.location.coordinates[0].toString(),
+        y: businessPoint.location.coordinates[1].toString(),
       },
       status: businessPoint.status,
       openingHours: businessPoint.openingHours,

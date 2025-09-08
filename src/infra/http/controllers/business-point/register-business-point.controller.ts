@@ -82,8 +82,7 @@ export class RegisterBusinessPointController {
       }
 
       return {
-        message:
-          'Local registrado. Você receberá um email com algumas informações importantes.',
+        message: 'Local registrado.',
       };
     } catch (err: any) {
       throw new BadRequestException(err.message);

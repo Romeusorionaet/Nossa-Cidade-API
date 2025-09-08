@@ -4,7 +4,8 @@ export type BusinessPointPreviewType = {
   id: string;
   name: string;
   status: BusinessPointStatus;
-  awaitingApproval: boolean;
+  awaitingApproval: Boolean;
+  hasPendingDraft: Boolean;
   createdAt: Date;
   updatedAt: Date;
 };

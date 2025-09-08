@@ -6,6 +6,7 @@ import {
   sharedBusinessPointCategories,
   SharedBusinessPointCategoriesType,
   products,
+  businessPointDrafts,
 } from '../schemas';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
@@ -15,7 +16,7 @@ import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
-import { eq, sql, and, ilike, or, like } from 'drizzle-orm';
+import { eq, sql, and, ilike, or, getTableColumns } from 'drizzle-orm';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/search-title';
@@ -192,8 +193,18 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     userId: string,
   ): Promise<BusinessPointPreviewType[]> {
     const data = await this.drizzle.database
-      .select()
+      .select({
+        ...getTableColumns(businessPoints),
+        hasPendingDraft: sql<boolean>`CASE 
+        WHEN ${businessPointDrafts.id} IS NOT NULL THEN true 
+        ELSE false 
+      END`,
+      })
       .from(businessPoints)
+      .leftJoin(
+        businessPointDrafts,
+        and(eq(businessPoints.id, businessPointDrafts.businessPointId)),
+      )
       .where(eq(businessPoints.ownerId, userId));
 
     return data.map(DrizzleBusinessPointPreviewMapper.toDomain);
