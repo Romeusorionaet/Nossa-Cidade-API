@@ -99,7 +99,12 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
         longitude: sql<number>`ST_X(location)`,
       })
       .from(businessPoints)
-      .where(eq(businessPoints.awaitingApproval, false));
+      .where(
+        and(
+          eq(businessPoints.awaitingApproval, false),
+          eq(businessPoints.status, businessPointStatusEnum.enumValues[0]),
+        ),
+      );
 
     return result.map((row) => ({
       id: new UniqueEntityID(row.id),
