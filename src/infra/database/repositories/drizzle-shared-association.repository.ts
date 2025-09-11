@@ -11,7 +11,7 @@ export class DrizzleSharedAssociationRepository
   implements SharedAssociationRepository
 {
   constructor(private drizzle: DatabaseClient) {}
-  async removeAssociations(
+  async remove(
     removedListItems: Partial<Record<SharedItemsAssociateKeysEnum, string[]>>,
     businessPointId: string,
   ): Promise<void> {
@@ -32,7 +32,7 @@ export class DrizzleSharedAssociationRepository
     });
   }
 
-  async updateAssociations(
+  async update(
     newListItems: Partial<Record<SharedItemsAssociateKeysEnum, string[]>>,
     businessPointId: string,
   ): Promise<void> {
@@ -54,7 +54,7 @@ export class DrizzleSharedAssociationRepository
     });
   }
 
-  async findAllAssociated(id: string): Promise<SharedItemsType> {
+  async findAll(id: string): Promise<SharedItemsType> {
     const result = await this.drizzle.database.execute(
       sql`
            SELECT 

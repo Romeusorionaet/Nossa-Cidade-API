@@ -23,17 +23,11 @@ export class UpdateSharedItemsBusinessPointUseCase {
     removedListItems,
   }: UpdateSharedItemsBusinessPointUseCaseRequest): Promise<UpdateSharedItemsBusinessPointUseCaseResponse> {
     if (removedListItems && Object.keys(removedListItems).length > 0) {
-      await this.sharedItemRepository.removeAssociations(
-        removedListItems,
-        businessPointId,
-      );
+      await this.sharedItemRepository.remove(removedListItems, businessPointId);
     }
 
     if (newListItems && Object.keys(newListItems).length > 0) {
-      await this.sharedItemRepository.updateAssociations(
-        newListItems,
-        businessPointId,
-      );
+      await this.sharedItemRepository.update(newListItems, businessPointId);
     }
 
     return right({});

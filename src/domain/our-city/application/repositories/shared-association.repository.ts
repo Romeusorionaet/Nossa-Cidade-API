@@ -2,12 +2,12 @@ import { SharedItemsAssociateKeysEnum } from '../shared/enums/shared-items-assoc
 import { SharedItemsType } from 'src/core/@types/get-shared-items-type';
 
 export abstract class SharedAssociationRepository {
-  abstract findAllAssociated(businessPointId: string): Promise<SharedItemsType>;
-  abstract updateAssociations(
+  abstract findAll(businessPointId: string): Promise<SharedItemsType>;
+  abstract update(
     newListItems: Partial<Record<SharedItemsAssociateKeysEnum, string[]>>,
     businessPointId: string,
   ): Promise<void>;
-  abstract removeAssociations(
+  abstract remove(
     removedListItems: Partial<Record<SharedItemsAssociateKeysEnum, string[]>>,
     businessPointId: string,
   ): Promise<void>;

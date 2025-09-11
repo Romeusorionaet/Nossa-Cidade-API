@@ -24,7 +24,7 @@ export class GetSharedItemsAssociatedBusinessPointUseCase {
     businessPointId,
   }: GetSharedItemsAssociatedBusinessPointUseCaseRequest): Promise<GetSharedItemsAssociatedBusinessPointUseCaseResponse> {
     const sharedItemsAssociated =
-      await this.sharedItemsRepository.findAllAssociated(businessPointId);
+      await this.sharedItemsRepository.findAll(businessPointId);
 
     return right({ sharedItemsAssociated });
   }
