@@ -1,16 +1,3 @@
-import {
-  sharedBusinessPointCategories,
-  sharedServiceOptions,
-  sharedAccessibility,
-  sharedEnvironment,
-  sharedAmenities,
-  sharedAudience,
-  sharedPayments,
-  sharedPlanning,
-  sharedParking,
-  sharedMenu,
-  sharedPets,
-} from '../schemas';
 import { SharedItemsAssociateKeysEnum } from 'src/domain/our-city/application/shared/enums/shared-items-associate-keys.enum';
 import { BUSINESS_POINT_ASSOCIATIONS } from 'src/domain/our-city/application/shared/constants/business-point-associations';
 import { SharedItemsType } from 'src/core/@types/get-shared-items-type';
@@ -118,32 +105,5 @@ export class DrizzleSharedAssociationRepository
     });
 
     return formattedResult;
-  }
-
-  async findAll(): Promise<SharedItemsType> {
-    const tables = [
-      { key: 'pets', table: sharedPets },
-      { key: 'planning', table: sharedPlanning },
-      { key: 'accessibility', table: sharedAccessibility },
-      { key: 'parking', table: sharedParking },
-      { key: 'payments', table: sharedPayments },
-      { key: 'audience', table: sharedAudience },
-      { key: 'amenities', table: sharedAmenities },
-      { key: 'menu', table: sharedMenu },
-      { key: 'serviceOptions', table: sharedServiceOptions },
-      { key: 'environments', table: sharedEnvironment },
-      { key: 'categories', table: sharedBusinessPointCategories },
-    ];
-
-    const results = await Promise.all(
-      tables.map(({ table }) => this.drizzle.database.select().from(table)),
-    );
-
-    const allItems = tables.reduce((acc, { key }, index) => {
-      acc[key] = results[index];
-      return acc;
-    }, {} as SharedItemsType);
-
-    return allItems;
   }
 }

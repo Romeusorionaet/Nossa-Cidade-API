@@ -8,11 +8,13 @@ import { BusinessPointRepository } from 'src/domain/our-city/application/reposit
 import { ImageProductRepository } from 'src/domain/our-city/application/repositories/image-product.repository';
 import { DrizzleImageBusinessPointRepository } from './repositories/drizzle-image-business-point.repository';
 import { DrizzleBusinessPointDraftRepository } from './repositories/drizzle-business-point-draft.repository';
+import { SharedItemsRepository } from 'src/domain/our-city/application/repositories/shared-items.repository';
 import { DrizzleBusinessPointCustomTagRepository } from './repositories/drizzle-business-point-custom-tag';
 import { DrizzleSharedAssociationRepository } from './repositories/drizzle-shared-association.repository';
 import { DrizzleProductCustomTagRepository } from './repositories/drizzle-product-custom-tag.repository';
 import { ProductRepository } from 'src/domain/our-city/application/repositories/product.repository';
 import { DrizzleBusinessPointRepository } from './repositories/drizzle-business-point.repository';
+import { DrizzleSharedItemsAssociationRepository } from './repositories/drizzle-items.repository';
 import { UsersRepository } from 'src/domain/our-city/application/repositories/users.repository';
 import { StaffRepository } from 'src/domain/our-city/application/repositories/staff.repository';
 import { DrizzleImageProductRepository } from './repositories/drizzle-image-product.repository';
@@ -80,6 +82,10 @@ import { Module } from '@nestjs/common';
       provide: ImageProductRepository,
       useClass: DrizzleImageProductRepository,
     },
+    {
+      provide: SharedItemsRepository,
+      useClass: DrizzleSharedItemsAssociationRepository,
+    },
   ],
   exports: [
     BusinessPointCustomTagRepository,
@@ -89,6 +95,7 @@ import { Module } from '@nestjs/common';
     ProductCustomTagRepository,
     BusinessPointRepository,
     ImageProductRepository,
+    SharedItemsRepository,
     EncryptRepository,
     ProductRepository,
     DatabaseClient,
