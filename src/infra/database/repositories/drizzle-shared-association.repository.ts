@@ -13,14 +13,16 @@ import {
 } from '../schemas';
 import { SharedItemsAssociateKeysEnum } from 'src/domain/our-city/application/shared/enums/shared-items-associate-keys.enum';
 import { BUSINESS_POINT_ASSOCIATIONS } from 'src/domain/our-city/application/shared/constants/business-point-associations';
-import { SharedItemRepository } from 'src/domain/our-city/application/repositories/shared-item.repository';
 import { SharedItemsType } from 'src/core/@types/get-shared-items-type';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
+import { SharedAssociationRepository } from 'src/domain/our-city/application/repositories/shared-association.repository';
 
 @Injectable()
-export class DrizzleSharedItemRepository implements SharedItemRepository {
+export class DrizzleSharedAssociationRepository
+  implements SharedAssociationRepository
+{
   constructor(private drizzle: DatabaseClient) {}
   async removeAssociations(
     removedListItems: Partial<Record<SharedItemsAssociateKeysEnum, string[]>>,

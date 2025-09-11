@@ -1,7 +1,7 @@
 import { SharedItemsAssociateKeysEnum } from '../../shared/enums/shared-items-associate-keys.enum';
-import { SharedItemRepository } from '../../repositories/shared-item.repository';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
+import { SharedAssociationRepository } from '../../repositories/shared-association.repository';
 
 interface UpdateSharedItemsBusinessPointUseCaseRequest {
   businessPointId: string;
@@ -13,7 +13,9 @@ type UpdateSharedItemsBusinessPointUseCaseResponse = Either<null, object>;
 
 @Injectable()
 export class UpdateSharedItemsBusinessPointUseCase {
-  constructor(private readonly sharedItemRepository: SharedItemRepository) {}
+  constructor(
+    private readonly sharedItemRepository: SharedAssociationRepository,
+  ) {}
 
   async execute({
     businessPointId,

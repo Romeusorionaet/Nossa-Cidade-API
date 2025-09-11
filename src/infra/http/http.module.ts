@@ -1,6 +1,6 @@
 import { GetSharedItemsAssociatedBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items-associated-business-point';
 import { UpdateSharedItemsBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/shared-items/update-shared-items-business-point';
-import { SharedItemsAssociatedBusinessPointController } from './controllers/shared-items/get-shared-items-associated-business-point.controller';
+import { SharedItemsAssociatedBusinessPointController } from './controllers/business-point/get-shared-items-associated-business-point.controller';
 import { VerifyBusinessPointOwnershipUseCase } from 'src/domain/our-city/application/use-cases/business-point/verify-business-point-owner-ship';
 import { CheckBusinessPointImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/business-point/check-business-point-image-quota';
 import { GetBusinessPointsForMappingUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-points-for-mapping';
@@ -11,8 +11,8 @@ import { GetBusinessPointDraftsUseCase } from 'src/domain/our-city/application/u
 import { ToggleBusinessPointActiveUseCase } from 'src/domain/our-city/application/use-cases/business-point/toggle-business-point-active';
 import { DeleteBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/delete-business-point-image';
 import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
+import { UpdateSharedItemsBusinessPointController } from './controllers/business-point/update-shared-items-business-point.controller';
 import { SaveImagesBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
-import { UpdateSharedItemsBusinessPointController } from './controllers/shared-items/update-shared-items-business-point.controller';
 import { GetBusinessPointImagesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-images';
 import { RegisterProductWithImagesUseCase } from 'src/domain/our-city/application/use-cases/product/register-product-with-images';
 import { GetBusinessPointPreviewUserController } from './controllers/business-point/get-business-points-preview-user.controller';
