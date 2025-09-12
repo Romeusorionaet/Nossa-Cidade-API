@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { GetSharedItemsAssociatedBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items-associated-business-point';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
+import { SharedItemPresenter } from '../../presenters/shared-item.presenter';
 
 @Controller('/pick-list/shared-items/associated/business-point/:id')
 export class SharedItemsAssociatedBusinessPointController {
@@ -25,7 +26,13 @@ export class SharedItemsAssociatedBusinessPointController {
           businessPointId: id,
         });
 
-      return result.value.sharedItemsAssociated;
+      const formatted = Object.fromEntries(
+        Object.entries(result.value.sharedItemsAssociated).map(
+          ([key, items]) => [key, items.map(SharedItemPresenter.toHTTP)],
+        ),
+      );
+
+      return formatted;
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }
