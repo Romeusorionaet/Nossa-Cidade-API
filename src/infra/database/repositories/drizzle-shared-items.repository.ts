@@ -6,9 +6,7 @@ import { DrizzleSharedItemsMapper } from '../mappers/drizzle-shared-items.mapper
 import { SharedItemsType } from 'src/core/@types/shared-items-type';
 
 @Injectable()
-export class DrizzleSharedItemsAssociationRepository
-  implements SharedItemsRepository
-{
+export class DrizzleSharedItemsRepository implements SharedItemsRepository {
   constructor(private drizzle: DatabaseClient) {}
   async create(data: Partial<SharedItemsType>): Promise<void> {
     for (const key of Object.keys(data) as (keyof SharedItemsType)[]) {

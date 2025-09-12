@@ -4,7 +4,7 @@ import {
   UseGuards,
   HttpCode,
   Body,
-  Put,
+  Patch,
 } from '@nestjs/common';
 import {
   businessPointDetailsSchemaValidationPipe,
@@ -19,7 +19,7 @@ export class UpdateSharedItemsBusinessPointController {
     private readonly updateSharedItemsBusinessPointUseCase: UpdateSharedItemsBusinessPointUseCase,
   ) {}
 
-  @Put()
+  @Patch()
   @UseGuards(AccessTokenGuard)
   @HttpCode(200)
   async handle(

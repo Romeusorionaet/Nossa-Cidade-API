@@ -14,11 +14,11 @@ import { DrizzleSharedAssociationRepository } from './repositories/drizzle-share
 import { DrizzleProductCustomTagRepository } from './repositories/drizzle-product-custom-tag.repository';
 import { ProductRepository } from 'src/domain/our-city/application/repositories/product.repository';
 import { DrizzleBusinessPointRepository } from './repositories/drizzle-business-point.repository';
-import { DrizzleSharedItemsAssociationRepository } from './repositories/drizzle-items.repository';
 import { UsersRepository } from 'src/domain/our-city/application/repositories/users.repository';
 import { StaffRepository } from 'src/domain/our-city/application/repositories/staff.repository';
 import { DrizzleImageProductRepository } from './repositories/drizzle-image-product.repository';
 import { AuthRepository } from 'src/domain/our-city/application/repositories/auth.repository';
+import { DrizzleSharedItemsRepository } from './repositories/drizzle-shared-items.repository';
 import { DrizzleProductRepository } from './repositories/drizzle-product.repository';
 import { DrizzleStaffRepository } from './repositories/drizzle-staff.repository';
 import { DrizzleUserRepository } from './repositories/drizzle-user.repository';
@@ -84,7 +84,7 @@ import { Module } from '@nestjs/common';
     },
     {
       provide: SharedItemsRepository,
-      useClass: DrizzleSharedItemsAssociationRepository,
+      useClass: DrizzleSharedItemsRepository,
     },
   ],
   exports: [
