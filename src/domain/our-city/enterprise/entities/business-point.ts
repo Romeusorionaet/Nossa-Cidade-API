@@ -3,7 +3,7 @@ import { BusinessPointStatus } from './enums/business-point-status';
 import { GeometryPoint } from 'src/core/@types/geometry';
 import { Optional } from 'src/core/@types/optional';
 import { Entity } from 'src/core/entities/entity';
-import { SearchableText } from '../value-objects/search-title';
+import { SearchableText } from '../value-objects/searchable-text';
 
 export interface BusinessPointProps {
   categoryId: UniqueEntityID;

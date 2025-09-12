@@ -3,7 +3,7 @@ import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
 import { BusinessPointInsertType } from '../schemas';
-import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/search-title';
+import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
 
 export class DrizzleBusinessPointMapper {
   static toDomain(raw: BusinessPointInsertType): BusinessPoint {

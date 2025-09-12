@@ -20,7 +20,7 @@ import { GeometryPoint } from 'src/core/@types/geometry';
 import { eq, sql, and, ilike, or, getTableColumns } from 'drizzle-orm';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
-import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/search-title';
+import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
 
 @Injectable()
 export class DrizzleBusinessPointRepository implements BusinessPointRepository {

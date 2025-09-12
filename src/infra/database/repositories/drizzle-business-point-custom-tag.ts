@@ -3,7 +3,7 @@ import { BusinessPointCustomTagType } from 'src/core/@types/business-point-custo
 import { businessPointCustomTags } from '../schemas';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
-import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/search-title';
+import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
 
 @Injectable()
 export class DrizzleBusinessPointCustomTagRepository

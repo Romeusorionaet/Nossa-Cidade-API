@@ -1,7 +1,7 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { Optional } from 'src/core/@types/optional';
 import { Entity } from 'src/core/entities/entity';
-import { SearchableText } from '../value-objects/search-title';
+import { SearchableText } from '../value-objects/searchable-text';
 
 export interface ProductProps {
   businessPointId: UniqueEntityID;

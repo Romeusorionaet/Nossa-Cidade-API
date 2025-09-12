@@ -1,7 +1,7 @@
 import { Product } from 'src/domain/our-city/enterprise/entities/product';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { ProductsInsertType } from '../schemas';
-import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/search-title';
+import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
 
 export class DrizzleProductMapper {
   static toDomain(raw: ProductsInsertType): Product {
