@@ -81,6 +81,7 @@ export const sharedEnvironment = pgTable('environment', {
   name: varchar('name', { length: 100 }).notNull().unique(),
   searchName: text('search_name'),
 });
+export type SharedItemInsertType = InferSelectModel<typeof sharedEnvironment>;
 
 export const sharedBusinessPointCategories = pgTable(
   'business_point_categories',
