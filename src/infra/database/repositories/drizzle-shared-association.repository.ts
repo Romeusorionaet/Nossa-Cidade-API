@@ -1,10 +1,10 @@
 import { SharedItemsAssociateKeysEnum } from 'src/domain/our-city/application/shared/enums/shared-items-associate-keys.enum';
 import { BUSINESS_POINT_ASSOCIATIONS } from 'src/domain/our-city/application/shared/constants/business-point-associations';
-import { SharedItemsType } from 'src/core/@types/get-shared-items-type';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
 import { SharedAssociationRepository } from 'src/domain/our-city/application/repositories/shared-association.repository';
+import { SharedItemsType } from 'src/core/@types/shared-items-type';
 
 @Injectable()
 export class DrizzleSharedAssociationRepository

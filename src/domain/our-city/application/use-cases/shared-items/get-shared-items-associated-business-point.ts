@@ -1,7 +1,7 @@
-import { SharedItemsType } from 'src/core/@types/get-shared-items-type';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 import { SharedAssociationRepository } from '../../repositories/shared-association.repository';
+import { SharedItemsType } from 'src/core/@types/shared-items-type';
 
 type GetSharedItemsAssociatedBusinessPointUseCaseRequest = {
   businessPointId: string;
