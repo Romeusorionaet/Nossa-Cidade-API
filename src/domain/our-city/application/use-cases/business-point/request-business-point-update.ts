@@ -59,7 +59,7 @@ export class RequestBusinessPointUpdateUseCase {
       );
 
     if (!businessPoint) {
-      return left(new BusinessPointNotFoundError(businessPoint.name));
+      return left(new BusinessPointNotFoundError());
     }
 
     if (existBusinessPointDraft) {

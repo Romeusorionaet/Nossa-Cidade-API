@@ -194,11 +194,15 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     return result;
   }
 
-  async findById(id: string): Promise<BusinessPoint> {
+  async findById(id: string): Promise<BusinessPoint | null> {
     const [result] = await this.drizzle.database
       .select()
       .from(businessPoints)
       .where(eq(businessPoints.id, id));
+
+    if (!result) {
+      return null;
+    }
 
     return DrizzleBusinessPointMapper.toDomain(result);
   }
