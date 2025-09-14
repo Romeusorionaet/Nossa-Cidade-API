@@ -54,6 +54,12 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
     return this.props.status;
   }
 
+  set status(status: BusinessPointStatus) {
+    this.props.status = status;
+
+    this.touch();
+  }
+
   get openingHours() {
     return this.props.openingHours;
   }
@@ -94,9 +100,15 @@ export class BusinessPoint extends Entity<BusinessPointProps> {
     return this.props.updatedAt;
   }
 
-  set title(name: string) {
+  set name(name: string) {
     this.props.name = name;
     this.props.searchName = SearchableText.createFromText(name);
+
+    this.touch();
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date();
   }
 
   static create(

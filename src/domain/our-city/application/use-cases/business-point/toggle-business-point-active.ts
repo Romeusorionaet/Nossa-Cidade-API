@@ -3,6 +3,7 @@ import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 import { BusinessPointNotFoundError } from '../errors/business-point-not-found-error';
 import { BusinessPointStatusCoolDownError } from '../errors/business-point-status-cool-down-error';
+import { BusinessPointStatus } from 'src/domain/our-city/enterprise/entities/enums/business-point-status';
 
 type ToggleBusinessPointActiveUseCaseRequest = {
   businessPointId: string;
@@ -38,7 +39,12 @@ export class ToggleBusinessPointActiveUseCase {
       return left(new BusinessPointStatusCoolDownError());
     }
 
-    await this.businessPointRepository.toggleActive(businessPointId);
+    businessPoint.status =
+      businessPoint.status === BusinessPointStatus.ACTIVE
+        ? BusinessPointStatus.INACTIVE
+        : BusinessPointStatus.ACTIVE;
+
+    await this.businessPointRepository.toggleActive(businessPoint);
 
     return right({});
   }

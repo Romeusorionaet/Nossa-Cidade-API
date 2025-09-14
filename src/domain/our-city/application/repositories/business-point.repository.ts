@@ -17,5 +17,5 @@ export abstract class BusinessPointRepository {
   abstract findBusinessPointsByUser(
     userId: string,
   ): Promise<BusinessPointPreviewType[]>;
-  abstract toggleActive(businessPointId: string): Promise<void>;
+  abstract toggleActive(businessPoint: BusinessPoint): Promise<void>;
 }

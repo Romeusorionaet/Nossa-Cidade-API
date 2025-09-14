@@ -19,7 +19,7 @@ export class ToggleBusinessPointActiveController {
 
   @Patch()
   @UseGuards(AccessTokenGuard)
-  @HttpCode(204)
+  @HttpCode(200)
   async handle(@Param('id') businessPointId: string) {
     try {
       const result = await this.toggleBusinessPointActiveUseCase.execute({
@@ -38,7 +38,7 @@ export class ToggleBusinessPointActiveController {
         }
       }
 
-      return {};
+      return { message: 'Alteração realizada' };
     } catch (err: any) {
       throw new BadRequestException(err.message);
     }
