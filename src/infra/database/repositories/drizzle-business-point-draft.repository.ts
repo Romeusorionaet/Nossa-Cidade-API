@@ -4,7 +4,7 @@ import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { DrizzleBusinessPointDraftMapper } from '../mappers/drizzle-business-point-draft.mapper';
 import { businessPointDrafts } from '../schemas/drafts.schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { PaginationParams } from 'src/core/repositories/pagination-params';
 import { QUANTITY_OF_PRODUCTS } from 'src/core/constants/quantity-of-products';
 import { QUANTITY_OF_BUSINESS_POINT_DRAFT } from 'src/core/constants/quantity-of-business-point-draft';
@@ -30,7 +30,15 @@ export class DrizzleBusinessPointDraftRepository
   }
   async create(businessPointDraft: BusinessPointDraft): Promise<void> {
     const data = DrizzleBusinessPointDraftMapper.toDrizzle(businessPointDraft);
-    await this.drizzle.database.insert(businessPointDrafts).values(data);
+
+    const insertData = {
+      ...data,
+      location: data.location
+        ? sql`ST_SetSRID(ST_MakePoint(${data.location.x}, ${data.location.y}), 4326)`
+        : null,
+    };
+
+    await this.drizzle.database.insert(businessPointDrafts).values(insertData);
   }
 
   async findByBusinessPointId(

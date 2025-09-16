@@ -1,11 +1,11 @@
 import { BusinessPointDraft } from 'src/domain/our-city/enterprise/entities/business-point-draft';
 import { DraftStatus } from 'src/domain/our-city/enterprise/entities/enums/draft-status';
-import { BusinessPointDraftInsertType } from '../schemas/drafts.schema';
+import { BusinessPointDraftSelectType } from '../schemas/drafts.schema';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
 
 export class DrizzleBusinessPointDraftMapper {
-  static toDomain(raw: BusinessPointDraftInsertType): BusinessPointDraft {
+  static toDomain(raw: BusinessPointDraftSelectType): BusinessPointDraft {
     const location: GeometryPoint = {
       type: 'Point',
       coordinates: [raw.location?.x, raw.location?.y],
@@ -38,7 +38,7 @@ export class DrizzleBusinessPointDraftMapper {
 
   static toDrizzle(
     businessPointDraft: BusinessPointDraft,
-  ): BusinessPointDraftInsertType {
+  ): BusinessPointDraftSelectType {
     return {
       id: businessPointDraft.id.toString(),
       categoryId: businessPointDraft.categoryId.toString(),
