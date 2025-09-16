@@ -3,7 +3,6 @@ import { BusinessPointCustomTagType } from 'src/core/@types/business-point-custo
 import { businessPointCustomTags } from '../schemas';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
-import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
 
 @Injectable()
 export class DrizzleBusinessPointCustomTagRepository
@@ -17,7 +16,7 @@ export class DrizzleBusinessPointCustomTagRepository
     await this.drizzle.database.insert(businessPointCustomTags).values(
       customTags.map((tag) => ({
         businessPointId,
-        tag: SearchableText.createFromText(tag).value,
+        tag,
       })),
     );
   }

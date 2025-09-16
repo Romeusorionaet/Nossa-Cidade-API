@@ -6,6 +6,7 @@ import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
+import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
 
 interface RegisterBusinessPointUseCaseRequest {
   categoryId: string;
@@ -61,11 +62,16 @@ export class RegisterBusinessPointUseCase {
     await this.businessPointRepository.create(businessPoint);
 
     if (customTags.length > 0) {
+      const customTagsNormalized = customTags.map(
+        (tag) => SearchableText.createFromText(tag).value,
+      );
+
       await this.businessPointCustomTag.create({
-        customTags,
+        customTags: customTagsNormalized,
         businessPointId: businessPoint.id.toString(),
       });
     }
+
     return right({});
   }
 }
