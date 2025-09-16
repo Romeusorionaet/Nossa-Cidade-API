@@ -30,7 +30,7 @@ export class DrizzleBusinessPointMapper {
         neighborhood: raw.neighborhood,
         street: raw.street,
         houseNumber: raw.houseNumber,
-        awaitingApproval: raw.awaitingApproval || null,
+        awaitingApproval: raw.awaitingApproval,
         description: raw.description || null,
         website: raw.website || null,
         highlight: raw.highlight || null,

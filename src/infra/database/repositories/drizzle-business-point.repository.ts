@@ -35,12 +35,22 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
   }
 
   async update(businessPoint: BusinessPoint): Promise<void> {
+    const db = this.drizzle.database;
     const data = DrizzleBusinessPointMapper.toDrizzle(businessPoint);
 
-    await this.drizzle.database
+    await db
       .update(businessPoints)
-      .set(data)
+      .set({
+        ...data,
+        location: sql`ST_SetSRID(ST_MakePoint(${data.location.x}, ${data.location.y}), 4326)`,
+      })
       .where(eq(businessPoints.id, data.id));
+    await db
+      .update(businessPointToCategoriesAssociation)
+      .set({
+        businessPointCategoryId: data.categoryId,
+      })
+      .where(eq(businessPointToCategoriesAssociation.businessPointId, data.id));
   }
 
   async create(businessPoint: BusinessPoint): Promise<void> {

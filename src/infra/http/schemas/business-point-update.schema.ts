@@ -11,8 +11,8 @@ const addressSchema = z
 
 const locationSchema = z
   .object({
-    latitude: z.coerce.number().min(-90).max(90),
     longitude: z.coerce.number().min(-180).max(180),
+    latitude: z.coerce.number().min(-90).max(90),
   })
   .partial();
 

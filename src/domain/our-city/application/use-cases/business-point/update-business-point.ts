@@ -40,9 +40,19 @@ export class UpdateBusinessPointUseCase {
       return left(new BusinessPointNotFoundError());
     }
 
+    const locationToUpdate =
+      businessPointDraft?.location &&
+      Array.isArray(businessPointDraft.location.coordinates) &&
+      businessPointDraft.location.coordinates.every(
+        (coord) => typeof coord === 'number',
+      )
+        ? businessPointDraft.location
+        : businessPoint.location;
+
     const businessPointUpdated = businessPoint.update({
       name: businessPointDraft?.name ?? businessPoint.name,
-      location: businessPointDraft?.location ?? businessPoint.location,
+      categoryId: businessPointDraft?.categoryId ?? businessPoint.categoryId,
+      location: locationToUpdate,
       openingHours:
         businessPointDraft?.openingHours ?? businessPoint.openingHours,
       censorship: businessPointDraft?.censorship ?? businessPoint.censorship,
@@ -53,8 +63,6 @@ export class UpdateBusinessPointUseCase {
       description: businessPointDraft?.description ?? businessPoint.description,
       website: businessPointDraft?.website ?? businessPoint.website,
       highlight: businessPointDraft?.highlight ?? businessPoint.highlight,
-      status: businessPoint.status,
-      awaitingApproval: businessPoint.awaitingApproval,
     });
 
     await this.businessPointRepository.update(businessPointUpdated);
