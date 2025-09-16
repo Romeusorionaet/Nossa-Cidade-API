@@ -1,5 +1,4 @@
 export class SearchableText {
-  //TODO rename file
   public value: string;
 
   private constructor(value: string) {
@@ -13,7 +12,7 @@ export class SearchableText {
   /**
    * Receive a string and normalize it as a search title
    *
-   * Example: "An example title" and "An example title" => "anexampletitle"
+   * Example: "An example title" or "AnExampleTitle" => "an-example-title"
    *
    * @param text (string)
    */
@@ -22,6 +21,7 @@ export class SearchableText {
     const normalizedForSearch = text
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
       .toLowerCase();
