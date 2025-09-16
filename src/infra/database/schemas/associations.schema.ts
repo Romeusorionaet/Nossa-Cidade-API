@@ -1,3 +1,4 @@
+import { businessPoints } from './business-point.schema';
 import {
   sharedBusinessPointCategories,
   sharedServiceOptions,
@@ -12,7 +13,6 @@ import {
   sharedPets,
 } from './shared.schema';
 import { pgTable, primaryKey, text } from 'drizzle-orm/pg-core';
-import { businessPoints } from './essential.schema';
 
 export const businessPointToPetsAssociation = pgTable(
   'business_point_to_pets_association',

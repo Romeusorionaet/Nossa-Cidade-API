@@ -1,12 +1,12 @@
 import { BusinessPointRepository } from '../../repositories/business-point.repository';
-import { SharedBusinessPointCategoriesType } from 'src/infra/database/schemas';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
+import { SharedBusinessPointCategoriesSelectModelType } from 'src/infra/database/schemas';
 
 type GetBusinessPointCategoriesUseCaseResponse = Either<
   null,
   {
-    businessPointCategories: SharedBusinessPointCategoriesType[];
+    businessPointCategories: SharedBusinessPointCategoriesSelectModelType[];
   }
 >;
 

@@ -2,7 +2,7 @@ import { AuthRepository } from 'src/domain/our-city/application/repositories/aut
 import { UpdatePasswordAuth } from 'src/core/@types/update-password-auth';
 import { User } from 'src/domain/our-city/enterprise/entities/user';
 import { DrizzleUserMapper } from '../mappers/drizzle-user.mapper';
-import { users, UsersInsertType } from '../schemas';
+import { users, UsersSelectModelType } from '../schemas';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
@@ -36,7 +36,7 @@ export class DrizzleAuthRepository implements AuthRepository {
 
     await this.drizzle.database
       .update(users)
-      .set({ emailVerified: true } as Partial<UsersInsertType>)
+      .set({ emailVerified: true } as Partial<UsersSelectModelType>)
       .where(eq(users.email, email));
 
     return {};
@@ -48,7 +48,7 @@ export class DrizzleAuthRepository implements AuthRepository {
   }: UpdatePasswordAuth): Promise<void> {
     await this.drizzle.database
       .update(users)
-      .set({ passwordHash: hashedNewPassword } as Partial<UsersInsertType>)
+      .set({ passwordHash: hashedNewPassword } as Partial<UsersSelectModelType>)
       .where(eq(users.email, email));
   }
 }

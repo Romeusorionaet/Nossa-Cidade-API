@@ -1,9 +1,9 @@
 import { BusinessPointImage } from 'src/domain/our-city/enterprise/entities/business-point-image';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { BusinessPointImageInsertType } from '../schemas';
+import { BusinessPointImageSelectModelType } from '../schemas';
 
 export class DrizzleBusinessPointImageMapper {
-  static toDomain(raw: BusinessPointImageInsertType): BusinessPointImage {
+  static toDomain(raw: BusinessPointImageSelectModelType): BusinessPointImage {
     return BusinessPointImage.create(
       {
         businessPointId: new UniqueEntityID(raw.businessPointId),
@@ -15,7 +15,7 @@ export class DrizzleBusinessPointImageMapper {
 
   static toDrizzle(
     businessPointImage: BusinessPointImage,
-  ): BusinessPointImageInsertType {
+  ): BusinessPointImageSelectModelType {
     return {
       id: businessPointImage.id.toString(),
       businessPointId: businessPointImage.businessPointId.toString(),

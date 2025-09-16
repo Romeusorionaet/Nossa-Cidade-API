@@ -2,10 +2,10 @@ import { StaffStatus } from 'src/domain/our-city/enterprise/entities/enums/staff
 import { UsersRole } from 'src/domain/our-city/enterprise/entities/enums/users-role';
 import { Staff } from 'src/domain/our-city/enterprise/entities/staff';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { StaffInsertType } from '../schemas';
+import { StaffSelectModelType } from '../schemas';
 
 export class DrizzleStaffMapper {
-  static toDomain(raw: StaffInsertType): Staff {
+  static toDomain(raw: StaffSelectModelType): Staff {
     const status: StaffStatus = raw.status as StaffStatus;
     const role: UsersRole = raw.role as UsersRole;
 
@@ -19,7 +19,7 @@ export class DrizzleStaffMapper {
     );
   }
 
-  static toDrizzle(staff: Staff): StaffInsertType {
+  static toDrizzle(staff: Staff): StaffSelectModelType {
     return {
       id: staff.id.toString(),
       userId: staff.userId.toString(),

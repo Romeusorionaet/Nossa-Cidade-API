@@ -10,45 +10,11 @@ import {
   text,
   integer,
 } from 'drizzle-orm/pg-core';
-import {
-  businessPointStatusEnum,
-  staffStatusEnum,
-  usersRoleEnum,
-} from './enums.schema';
+import { businessPointStatusEnum } from './enums.schema';
 import { sharedBusinessPointCategories } from './shared.schema';
 import { createId } from '@paralleldrive/cuid2';
 import { InferSelectModel } from 'drizzle-orm';
-
-export const users = pgTable('users', {
-  id: text('id')
-    .primaryKey()
-    .$defaultFn(() => createId()),
-  publicId: text('public_id').$defaultFn(() => createId()),
-  username: varchar('username', { length: 100 }).notNull(),
-  email: varchar('email', { length: 255 }).notNull().unique(),
-  passwordHash: varchar('password_hash', { length: 255 }),
-  avatar: varchar('avatar', { length: 500 }),
-  emailVerified: boolean('email_verified').default(false),
-  createdAt: timestamp('created_at', { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-  updatedAt: timestamp('updated_at', { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-});
-export type UsersInsertType = InferSelectModel<typeof users>;
-
-export const staff = pgTable('staff', {
-  id: text('id')
-    .primaryKey()
-    .$defaultFn(() => createId()),
-  role: usersRoleEnum('role').notNull(),
-  status: staffStatusEnum('status').default('ACTIVE'),
-  userId: text('user_id')
-    .notNull()
-    .references(() => users.id),
-});
-export type StaffInsertType = InferSelectModel<typeof staff>;
+import { users } from './user.schema';
 
 export const businessPoints = pgTable(
   'business_points',
@@ -94,7 +60,9 @@ export const businessPoints = pgTable(
     },
   ],
 );
-export type BusinessPointInsertType = InferSelectModel<typeof businessPoints>;
+export type BusinessPointSelectModelType = InferSelectModel<
+  typeof businessPoints
+>;
 
 export const businessPointImages = pgTable('business_point_images', {
   id: text('id')
@@ -105,7 +73,7 @@ export const businessPointImages = pgTable('business_point_images', {
     .references(() => businessPoints.id, { onDelete: 'cascade' })
     .notNull(),
 });
-export type BusinessPointImageInsertType = InferSelectModel<
+export type BusinessPointImageSelectModelType = InferSelectModel<
   typeof businessPointImages
 >;
 
@@ -118,7 +86,7 @@ export const businessPointCustomTags = pgTable('business_point_custom_tags', {
     .notNull(),
   tag: varchar('tag', { length: 25 }).notNull(),
 });
-export type BusinessPointCustomTagsInsertType = InferSelectModel<
+export type BusinessPointCustomTagsSelectModelType = InferSelectModel<
   typeof businessPointCustomTags
 >;
 
@@ -138,6 +106,6 @@ export const businessPointFavorites = pgTable(
     },
   ],
 );
-export type BusinessPointFavorites = InferSelectModel<
+export type BusinessPointFavoritesSelectModelType = InferSelectModel<
   typeof businessPointFavorites
 >;

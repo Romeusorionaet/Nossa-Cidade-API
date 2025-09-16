@@ -2,11 +2,11 @@ import { BusinessPointStatus } from 'src/domain/our-city/enterprise/entities/enu
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { GeometryPoint } from 'src/core/@types/geometry';
-import { BusinessPointInsertType } from '../schemas';
 import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
+import { BusinessPointSelectModelType } from '../schemas';
 
 export class DrizzleBusinessPointMapper {
-  static toDomain(raw: BusinessPointInsertType): BusinessPoint {
+  static toDomain(raw: BusinessPointSelectModelType): BusinessPoint {
     const location: GeometryPoint = {
       type: 'Point',
       coordinates: [raw.location.x, raw.location.y],
@@ -41,7 +41,7 @@ export class DrizzleBusinessPointMapper {
     );
   }
 
-  static toDrizzle(businessPoint: BusinessPoint): BusinessPointInsertType {
+  static toDrizzle(businessPoint: BusinessPoint): BusinessPointSelectModelType {
     return {
       id: businessPoint.id.toString(),
       categoryId: businessPoint.categoryId.toString(),

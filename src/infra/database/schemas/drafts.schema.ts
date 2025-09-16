@@ -10,9 +10,9 @@ import {
 } from 'drizzle-orm/pg-core';
 import { sharedBusinessPointCategories } from './shared.schema';
 import { businessPointDraftStatusEnum } from './enums.schema';
-import { businessPoints } from './essential.schema';
 import { createId } from '@paralleldrive/cuid2';
 import { InferSelectModel } from 'drizzle-orm';
+import { businessPoints } from './business-point.schema';
 
 export const businessPointDrafts = pgTable(
   'business_point_drafts',
@@ -26,7 +26,9 @@ export const businessPointDrafts = pgTable(
       .unique(),
     name: varchar('name', { length: 255 }),
     categoryId: text('category_id')
-      .references(() => sharedBusinessPointCategories.id)
+      .references(() => sharedBusinessPointCategories.id, {
+        onDelete: 'cascade',
+      })
       .notNull(),
     description: varchar('description', { length: 500 }),
     neighborhood: varchar('neighborhood', { length: 50 }),
@@ -49,6 +51,6 @@ export const businessPointDrafts = pgTable(
     },
   ],
 );
-export type BusinessPointDraftInsertType = InferSelectModel<
+export type BusinessPointDraftSelectType = InferSelectModel<
   typeof businessPointDrafts
 >;

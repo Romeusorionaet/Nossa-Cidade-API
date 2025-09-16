@@ -1,9 +1,9 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { ProductImageInsertType } from '../schemas';
 import { ProductImage } from 'src/domain/our-city/enterprise/entities/product-image';
+import { ProductImageSelectModelType } from '../schemas';
 
 export class DrizzleProductImageMapper {
-  static toDomain(raw: ProductImageInsertType): ProductImage {
+  static toDomain(raw: ProductImageSelectModelType): ProductImage {
     return ProductImage.create(
       {
         productId: new UniqueEntityID(raw.productId),
@@ -13,7 +13,7 @@ export class DrizzleProductImageMapper {
     );
   }
 
-  static toDrizzle(productImage: ProductImage): ProductImageInsertType {
+  static toDrizzle(productImage: ProductImage): ProductImageSelectModelType {
     return {
       id: productImage.id.toString(),
       productId: productImage.productId.toString(),

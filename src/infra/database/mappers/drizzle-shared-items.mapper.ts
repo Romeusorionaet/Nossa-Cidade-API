@@ -1,9 +1,9 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { SharedItemInsertType } from '../schemas';
 import { SharedItem } from 'src/domain/our-city/enterprise/entities/shared-item';
+import { SharedItemSelectModelType } from '../schemas';
 
 export class DrizzleSharedItemsMapper {
-  static toDomain(raw: Partial<SharedItemInsertType>): SharedItem {
+  static toDomain(raw: Partial<SharedItemSelectModelType>): SharedItem {
     return SharedItem.create(
       {
         name: raw.name,
@@ -12,7 +12,7 @@ export class DrizzleSharedItemsMapper {
     );
   }
 
-  static toDrizzle(sharedItem: SharedItem): SharedItemInsertType {
+  static toDrizzle(sharedItem: SharedItem): SharedItemSelectModelType {
     return {
       id: sharedItem.id.toString(),
       name: sharedItem.name,

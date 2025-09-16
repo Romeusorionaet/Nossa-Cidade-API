@@ -6,8 +6,8 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { businessPoints } from './essential.schema';
 import { InferSelectModel } from 'drizzle-orm';
+import { businessPoints } from './business-point.schema';
 
 export const products = pgTable('products', {
   id: text('id')
@@ -27,7 +27,7 @@ export const products = pgTable('products', {
     .notNull()
     .defaultNow(),
 });
-export type ProductsInsertType = InferSelectModel<typeof products>;
+export type ProductsSelectModelType = InferSelectModel<typeof products>;
 
 export const productCustomTags = pgTable('product_custom_tags', {
   id: text('id')
@@ -38,7 +38,7 @@ export const productCustomTags = pgTable('product_custom_tags', {
     .notNull(),
   tag: varchar('tag', { length: 25 }).notNull(),
 });
-export type productCustomTagsInsertType = InferSelectModel<
+export type productCustomTagsSelectModelType = InferSelectModel<
   typeof productCustomTags
 >;
 
@@ -51,4 +51,6 @@ export const productImages = pgTable('product_images', {
     .references(() => products.id, { onDelete: 'cascade' })
     .notNull(),
 });
-export type ProductImageInsertType = InferSelectModel<typeof productImages>;
+export type ProductImageSelectModelType = InferSelectModel<
+  typeof productImages
+>;

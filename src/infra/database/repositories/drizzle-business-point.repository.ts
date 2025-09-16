@@ -4,10 +4,10 @@ import {
   businessPoints,
   businessPointToCategoriesAssociation,
   sharedBusinessPointCategories,
-  SharedBusinessPointCategoriesType,
   products,
   businessPointDrafts,
   businessPointStatusEnum,
+  SharedBusinessPointCategoriesSelectModelType,
 } from '../schemas';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
@@ -196,7 +196,9 @@ export class DrizzleBusinessPointRepository implements BusinessPointRepository {
     }));
   }
 
-  async findAllCategories(): Promise<SharedBusinessPointCategoriesType[]> {
+  async findAllCategories(): Promise<
+    SharedBusinessPointCategoriesSelectModelType[]
+  > {
     const result = await this.drizzle.database
       .select()
       .from(sharedBusinessPointCategories);

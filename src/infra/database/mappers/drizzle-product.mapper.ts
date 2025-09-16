@@ -1,10 +1,10 @@
 import { Product } from 'src/domain/our-city/enterprise/entities/product';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { ProductsInsertType } from '../schemas';
 import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
+import { ProductsSelectModelType } from '../schemas';
 
 export class DrizzleProductMapper {
-  static toDomain(raw: ProductsInsertType): Product {
+  static toDomain(raw: ProductsSelectModelType): Product {
     return Product.create(
       {
         businessPointId: new UniqueEntityID(raw.businessPointId),
@@ -19,7 +19,7 @@ export class DrizzleProductMapper {
     );
   }
 
-  static toDrizzle(product: Product): ProductsInsertType {
+  static toDrizzle(product: Product): ProductsSelectModelType {
     return {
       id: product.id.toString(),
       businessPointId: product.businessPointId.toString(),

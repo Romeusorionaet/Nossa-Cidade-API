@@ -1,7 +1,7 @@
-import { SharedBusinessPointCategoriesType } from 'src/infra/database/schemas';
+import { SharedBusinessPointCategoriesSelectModelType } from 'src/infra/database/schemas';
 
 export class CategoryPresenter {
-  static toHTTP(sharedItem: SharedBusinessPointCategoriesType) {
+  static toHTTP(sharedItem: SharedBusinessPointCategoriesSelectModelType) {
     return {
       id: sharedItem.id.toString(),
       name: sharedItem.name,

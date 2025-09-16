@@ -1,9 +1,9 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
 import { User } from 'src/domain/our-city/enterprise/entities/user';
-import { UsersInsertType } from '../schemas';
+import { UsersSelectModelType } from '../schemas';
 
 export class DrizzleUserMapper {
-  static toDomain(raw: UsersInsertType): User {
+  static toDomain(raw: UsersSelectModelType): User {
     return User.create(
       {
         publicId: new UniqueEntityID(raw.publicId),
@@ -19,7 +19,7 @@ export class DrizzleUserMapper {
     );
   }
 
-  static toDrizzle(user: User): UsersInsertType {
+  static toDrizzle(user: User): UsersSelectModelType {
     return {
       id: user.id.toString(),
       publicId: user.publicId.toString(),

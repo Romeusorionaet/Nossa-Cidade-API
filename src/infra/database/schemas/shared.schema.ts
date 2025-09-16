@@ -81,7 +81,9 @@ export const sharedEnvironment = pgTable('environment', {
   name: varchar('name', { length: 100 }).notNull().unique(),
   searchName: text('search_name'),
 });
-export type SharedItemInsertType = InferSelectModel<typeof sharedEnvironment>;
+export type SharedItemSelectModelType = InferSelectModel<
+  typeof sharedEnvironment
+>;
 
 export const sharedBusinessPointCategories = pgTable(
   'business_point_categories',
@@ -93,7 +95,7 @@ export const sharedBusinessPointCategories = pgTable(
     searchName: text('search_name'),
   },
 );
-export type SharedBusinessPointCategoriesType = InferSelectModel<
+export type SharedBusinessPointCategoriesSelectModelType = InferSelectModel<
   typeof sharedBusinessPointCategories
 >;
 
@@ -104,7 +106,9 @@ export const sharedCategoryTags = pgTable(
       .primaryKey()
       .$defaultFn(() => createId()),
     businessPointCategoryId: text('business_point_category_id')
-      .references(() => sharedBusinessPointCategories.id)
+      .references(() => sharedBusinessPointCategories.id, {
+        onDelete: 'cascade',
+      })
       .notNull(),
     tag: varchar('tag', { length: 25 }).notNull(),
   },
