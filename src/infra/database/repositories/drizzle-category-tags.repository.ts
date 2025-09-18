@@ -3,10 +3,12 @@ import { DatabaseClient } from '../database.client';
 import { CategoryTagsRepository } from 'src/domain/our-city/application/repositories/category-tags.repository';
 import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
 import { sharedCategoryTags } from '../schemas';
+import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class DrizzleCategoryTagsRepository implements CategoryTagsRepository {
   constructor(private drizzle: DatabaseClient) {}
+
   async create({
     categoryTags,
     categoryId,
@@ -22,7 +24,15 @@ export class DrizzleCategoryTagsRepository implements CategoryTagsRepository {
     );
   }
 
-  async deleteAll(categoryId: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async deleteAllFromCategory(categoryId: string): Promise<void> {
+    await this.drizzle.database
+      .delete(sharedCategoryTags)
+      .where(eq(sharedCategoryTags.businessPointCategoryId, categoryId));
+  }
+
+  async delete(tagId: string): Promise<void> {
+    await this.drizzle.database
+      .delete(sharedCategoryTags)
+      .where(eq(sharedCategoryTags.id, tagId));
   }
 }

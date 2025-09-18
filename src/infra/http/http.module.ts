@@ -81,6 +81,8 @@ import { AuthModule } from './middlewares/auth/auth.module';
 import { ServiceModule } from '../services/service.module';
 import { EnvModule } from '../env/env.module';
 import { Module } from '@nestjs/common';
+import { DeleteAllTagsFromCategoryController } from './controllers/shared-items/delete-all-tags-from-category.controller';
+import { DeleteAllTagsFromCategoryUseCase } from 'src/domain/our-city/application/use-cases/shared-items/delete-all-tags-from-category';
 
 @Module({
   imports: [
@@ -100,6 +102,7 @@ import { Module } from '@nestjs/common';
     RequestBusinessPointUpdateController,
     RegisterProductWithImagesController,
     ToggleBusinessPointActiveController,
+    DeleteAllTagsFromCategoryController,
     GetBusinessPointOverviewController,
     DeleteBusinessPointImageController,
     ResendConfirmationEmailController,
@@ -139,6 +142,7 @@ import { Module } from '@nestjs/common';
     RequestBusinessPointUpdateUseCase,
     RegisterProductWithImagesUseCase,
     ToggleBusinessPointActiveUseCase,
+    DeleteAllTagsFromCategoryUseCase,
     GetBusinessPointOverviewUseCase,
     DeleteBusinessPointImageUseCase,
     SaveImagesBusinessPointUseCase,

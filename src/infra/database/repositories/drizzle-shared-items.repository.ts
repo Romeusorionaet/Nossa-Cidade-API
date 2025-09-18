@@ -4,10 +4,27 @@ import { Injectable } from '@nestjs/common';
 import { SHARED_ITEM_TABLES_MAPPING } from '../mappings/shared-item-tables.mapping';
 import { DrizzleSharedItemsMapper } from '../mappers/drizzle-shared-items.mapper';
 import { SharedItemsType } from 'src/core/@types/shared-items-type';
+import { SharedItem } from 'src/domain/our-city/enterprise/entities/shared-item';
+import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class DrizzleSharedItemsRepository implements SharedItemsRepository {
   constructor(private drizzle: DatabaseClient) {}
+
+  async findUnique(sharedId: string): Promise<SharedItem | null> {
+    for (const [_, table] of Object.entries(SHARED_ITEM_TABLES_MAPPING)) {
+      const results = await this.drizzle.database
+        .select({ id: table.id, name: table.name })
+        .from(table)
+        .where(eq(table.id, sharedId));
+
+      const item = results.map(DrizzleSharedItemsMapper.toDomain)[0];
+      if (item) return item;
+    }
+
+    return null;
+  }
+
   async create(data: Partial<SharedItemsType>): Promise<void> {
     for (const key of Object.keys(data) as (keyof SharedItemsType)[]) {
       const items = data[key];
