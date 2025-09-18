@@ -16,6 +16,7 @@ import { SaveImagesBusinessPointUseCase } from 'src/domain/our-city/application/
 import { UpdateSharedItemsBusinessPointController } from './controllers/shared-items/update-shared-items-business-point.controller';
 import { GetBusinessPointImagesUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-images';
 import { RegisterProductWithImagesUseCase } from 'src/domain/our-city/application/use-cases/product/register-product-with-images';
+import { GetAllTagsFromCategoryUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-all-tags-from-category';
 import { GetBusinessPointPreviewUserController } from './controllers/business-point/get-business-points-preview-user.controller';
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
@@ -49,6 +50,7 @@ import { SaveImagesProductUseCase } from 'src/domain/our-city/application/use-ca
 import { AuthenticateUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/authenticate-user';
 import { SearchBusinessPointsController } from './controllers/business-point/search-business-points.controller';
 import { GetSharedItemsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items';
+import { GetAllTagsFromCategoryController } from './controllers/shared-items/get-all-category-tags.controller';
 import { UpdateBusinessPointController } from './controllers/business-point/update-business-point.controller';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
 import { RegisterCategoryTagsController } from './controllers/shared-items/register-category-tags.controller';
@@ -111,6 +113,7 @@ import { Module } from '@nestjs/common';
     AuthenticateWidthOAuthController,
     GetBusinessPointImagesController,
     GetBusinessPointDraftsController,
+    GetAllTagsFromCategoryController,
     RegisterBusinessPointController,
     SearchBusinessPointsController,
     UploadImageToProductController,
@@ -151,6 +154,7 @@ import { Module } from '@nestjs/common';
     SaveImagesBusinessPointUseCase,
     ResendConfirmationEmailUseCase,
     CheckProductImageQuotaUseCase,
+    GetAllTagsFromCategoryUseCase,
     GetBusinessPointImagesUseCase,
     GetBusinessPointDraftsUseCase,
     RegisterUserWithOAuthUseCase,

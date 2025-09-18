@@ -8,11 +8,16 @@ import { eq } from 'drizzle-orm';
 @Injectable()
 export class DrizzleCategoryTagsRepository implements CategoryTagsRepository {
   constructor(private drizzle: DatabaseClient) {}
-  async findById(tagId: string): Promise<{
-    id: string;
-    tag: string;
-    businessPointCategoryId: string;
-  } | null> {
+  async findAllFromCategory(categoryId: string): Promise<CategoryTag[]> {
+    const tags = await this.drizzle.database
+      .select()
+      .from(sharedCategoryTags)
+      .where(eq(sharedCategoryTags.businessPointCategoryId, categoryId));
+
+    return tags;
+  }
+
+  async findById(tagId: string): Promise<CategoryTag | null> {
     const [tag] = await this.drizzle.database
       .select()
       .from(sharedCategoryTags)
