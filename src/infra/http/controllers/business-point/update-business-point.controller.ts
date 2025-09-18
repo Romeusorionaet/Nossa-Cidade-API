@@ -4,7 +4,7 @@ import {
   UseGuards,
   HttpCode,
   Param,
-  Put,
+  Patch,
 } from '@nestjs/common';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
 import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
@@ -17,7 +17,7 @@ export class UpdateBusinessPointController {
     private readonly updateBusinessPointUseCase: UpdateBusinessPointUseCase,
   ) {}
 
-  @Put()
+  @Patch()
   @UseGuards(AccessTokenGuard)
   @HttpCode(200)
   async handle(@Param('id') businessPointId: string) {

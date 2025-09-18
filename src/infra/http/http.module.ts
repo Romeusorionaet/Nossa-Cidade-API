@@ -26,6 +26,7 @@ import { RequestBusinessPointUpdateController } from './controllers/business-poi
 import { RegisterUserWithOAuthUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user-with-oauth';
 import { CheckProductImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/product/check-product-image-quota';
 import { UpdateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/update-business-point';
+import { RegisterCategoryTagsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/register-category-tags';
 import { GetBusinessPointDraftsController } from './controllers/business-point-draft/get-business-point-drafts.controller';
 import { ToggleBusinessPointActiveController } from './controllers/business-point/toggle-business-point-active.controller';
 import { RegisterSharedItemsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/register-shared-items';
@@ -47,6 +48,7 @@ import { SearchBusinessPointsController } from './controllers/business-point/sea
 import { GetSharedItemsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items';
 import { UpdateBusinessPointController } from './controllers/business-point/update-business-point.controller';
 import { AuthenticateWidthOAuthController } from './controllers/user/auth/authenticate-with-oauth.controller';
+import { RegisterCategoryTagsController } from './controllers/shared-items/register-category-tags.controller';
 import { RegisterProductUseCase } from 'src/domain/our-city/application/use-cases/product/register-product';
 import { RegisterSharedItemsController } from './controllers/shared-items/register-shared-items.controller';
 import { UploadImageToProductController } from './controllers/uploads/upload-image-to-product.controller';
@@ -107,6 +109,7 @@ import { Module } from '@nestjs/common';
     RegisterBusinessPointController,
     SearchBusinessPointsController,
     UploadImageToProductController,
+    RegisterCategoryTagsController,
     UpdateBusinessPointController,
     RegisterSharedItemsController,
     UpdateUserPasswordController,
@@ -147,6 +150,7 @@ import { Module } from '@nestjs/common';
     RegisterBusinessPointUseCase,
     ValidateBusinessPointUseCase,
     PromoteUserToMerchantUseCase,
+    RegisterCategoryTagsUseCase,
     SearchBusinessPointsUseCase,
     UpdateBusinessPointUseCase,
     RegisterSharedItemsUseCase,

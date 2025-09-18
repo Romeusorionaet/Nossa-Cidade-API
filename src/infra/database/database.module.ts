@@ -6,6 +6,7 @@ import { ProductCustomTagRepository } from 'src/domain/our-city/application/repo
 import { EncryptRepository } from 'src/domain/our-city/application/repositories/cryptography/encrypt.repository';
 import { BusinessPointRepository } from 'src/domain/our-city/application/repositories/business-point.repository';
 import { ImageProductRepository } from 'src/domain/our-city/application/repositories/image-product.repository';
+import { CategoryTagsRepository } from 'src/domain/our-city/application/repositories/category-tags.repository';
 import { DrizzleImageBusinessPointRepository } from './repositories/drizzle-image-business-point.repository';
 import { DrizzleBusinessPointDraftRepository } from './repositories/drizzle-business-point-draft.repository';
 import { SharedItemsRepository } from 'src/domain/our-city/application/repositories/shared-items.repository';
@@ -17,6 +18,7 @@ import { DrizzleBusinessPointRepository } from './repositories/drizzle-business-
 import { UsersRepository } from 'src/domain/our-city/application/repositories/users.repository';
 import { StaffRepository } from 'src/domain/our-city/application/repositories/staff.repository';
 import { DrizzleImageProductRepository } from './repositories/drizzle-image-product.repository';
+import { DrizzleCategoryTagsRepository } from './repositories/drizzle-category-tags.repository';
 import { AuthRepository } from 'src/domain/our-city/application/repositories/auth.repository';
 import { DrizzleSharedItemsRepository } from './repositories/drizzle-shared-items.repository';
 import { DrizzleProductRepository } from './repositories/drizzle-product.repository';
@@ -86,6 +88,10 @@ import { Module } from '@nestjs/common';
       provide: SharedItemsRepository,
       useClass: DrizzleSharedItemsRepository,
     },
+    {
+      provide: CategoryTagsRepository,
+      useClass: DrizzleCategoryTagsRepository,
+    },
   ],
   exports: [
     BusinessPointCustomTagRepository,
@@ -95,13 +101,14 @@ import { Module } from '@nestjs/common';
     ProductCustomTagRepository,
     BusinessPointRepository,
     ImageProductRepository,
+    CategoryTagsRepository,
     SharedItemsRepository,
     EncryptRepository,
     ProductRepository,
-    DatabaseClient,
     DatabaseService,
     UsersRepository,
     StaffRepository,
+    DatabaseClient,
     AuthRepository,
   ],
 })
