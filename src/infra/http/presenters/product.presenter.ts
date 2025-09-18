@@ -1,5 +1,3 @@
-import { ProductWithImagesType } from 'src/core/@types/product-with-images-type';
-
 export class ProductPresenter {
   static toHTTP(product: ProductWithImagesType) {
     return {

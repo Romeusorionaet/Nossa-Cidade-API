@@ -1,6 +1,5 @@
 import { DraftStatus } from 'src/domain/our-city/enterprise/entities/enums/draft-status';
 import { UniqueEntityID } from '../entities/unique-entity-id';
-import { GeometryPoint } from './geometry';
 
 export type BusinessPointDraftType = {
   id: UniqueEntityID;

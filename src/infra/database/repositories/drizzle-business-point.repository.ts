@@ -16,7 +16,6 @@ import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-
 import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
 import { DrizzleBusinessPointMapper } from '../mappers/drizzle-business-point.mapper';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
 import { eq, sql, and, ilike, or, getTableColumns } from 'drizzle-orm';
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';

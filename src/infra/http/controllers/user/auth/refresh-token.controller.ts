@@ -9,7 +9,6 @@ import {
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
 import { RefreshTokenGuard } from 'src/infra/http/middlewares/auth/guards/refresh-token.guard';
-import { RefreshTokenPayload } from 'src/core/@types/refresh-token-payload';
 import { FastifyReply } from 'fastify';
 
 @Controller('/auth/refresh-token')

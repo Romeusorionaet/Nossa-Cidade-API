@@ -13,7 +13,6 @@ import {
 import { ResetUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/reset-user-password';
 import { ForgotPasswordTokenGuard } from 'src/infra/http/middlewares/auth/guards/forgot-password-token.guard';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
-import { ForgotPasswordTokenPayload } from 'src/core/@types/forgot-password-token-payload';
 
 @Controller('/auth/reset-password')
 export class ResetUserPasswordController {

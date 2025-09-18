@@ -1,4 +1,3 @@
-import { ProductImageType } from 'src/core/@types/product-image-type';
 import { ProductImage } from '../../enterprise/entities/product-image';
 
 export abstract class ImageProductRepository {

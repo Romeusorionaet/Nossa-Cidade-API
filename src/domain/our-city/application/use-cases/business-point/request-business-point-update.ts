@@ -5,7 +5,6 @@ import { DraftStatus } from 'src/domain/our-city/enterprise/entities/enums/draft
 import { BusinessPointRepository } from '../../repositories/business-point.repository';
 import { BusinessPointNotFoundError } from '../errors/business-point-not-found-error';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
 import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 

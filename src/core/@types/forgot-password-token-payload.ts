@@ -1,4 +1,4 @@
-export type ForgotPasswordTokenPayload = {
+type ForgotPasswordTokenPayload = {
   email: string;
   purpose: string;
 };

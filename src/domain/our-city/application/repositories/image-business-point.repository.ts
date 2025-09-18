@@ -1,4 +1,3 @@
-import { BusinessPointImageType } from 'src/core/@types/business-point-image-type';
 import { BusinessPointImage } from '../../enterprise/entities/business-point-image';
 
 export abstract class ImageBusinessPointRepository {

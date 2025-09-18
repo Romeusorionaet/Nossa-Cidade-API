@@ -1,7 +1,6 @@
 import { BusinessPoint } from '../../enterprise/entities/business-point';
 import { BusinessPointForMappingType } from 'src/core/@types/business-point-for-mapping-type';
 import { BusinessPointPreviewType } from 'src/core/@types/business-point-preview-type';
-import { GeometryPoint } from 'src/core/@types/geometry';
 import { SharedBusinessPointCategoriesSelectModelType } from 'src/infra/database/schemas';
 
 export abstract class BusinessPointRepository {

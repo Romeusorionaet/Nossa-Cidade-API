@@ -1,4 +1,4 @@
-export type ConfirmationEmailTokenPayload = {
-	email: string;
-	purpose: string;
+type ConfirmationEmailTokenPayload = {
+  email: string;
+  purpose: string;
 };

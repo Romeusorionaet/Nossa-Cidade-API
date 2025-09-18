@@ -1,7 +1,6 @@
 import { DatabaseClient } from '../database.client';
 import { Injectable } from '@nestjs/common';
 import { ImageProductRepository } from 'src/domain/our-city/application/repositories/image-product.repository';
-import { ProductImageType } from 'src/core/@types/product-image-type';
 import { eq, inArray, sql } from 'drizzle-orm';
 import { productImages } from '../schemas';
 import { ProductImage } from 'src/domain/our-city/enterprise/entities/product-image';

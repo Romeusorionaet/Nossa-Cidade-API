@@ -1,4 +1,3 @@
-import { UpdatePasswordAuth } from 'src/core/@types/update-password-auth';
 import { User } from '../../enterprise/entities/user';
 
 export abstract class AuthRepository {

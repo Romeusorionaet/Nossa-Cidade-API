@@ -1,5 +1,4 @@
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
 import { DraftStatus } from './enums/draft-status';
 import { Entity } from 'src/core/entities/entity';
 

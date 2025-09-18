@@ -1,7 +1,6 @@
 import { ImageBusinessPointRepository } from '../../repositories/image-business-point.repository';
 import { BusinessPointProps } from 'src/domain/our-city/enterprise/entities/business-point';
 import { BusinessPointRepository } from '../../repositories/business-point.repository';
-import { BusinessPointImageType } from 'src/core/@types/business-point-image-type';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 

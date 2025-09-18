@@ -1,5 +1,4 @@
 import { ImageBusinessPointRepository } from 'src/domain/our-city/application/repositories/image-business-point.repository';
-import { BusinessPointImageType } from 'src/core/@types/business-point-image-type';
 import { DatabaseClient } from '../database.client';
 import { businessPointImages } from '../schemas';
 import { Injectable } from '@nestjs/common';

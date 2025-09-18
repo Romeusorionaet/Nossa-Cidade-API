@@ -1,4 +1,4 @@
-export type GetBusinessPointDetailsType = {
+type GetBusinessPointDetailsType = {
   pets: string[];
   planning: string[];
   accessibility: string[];

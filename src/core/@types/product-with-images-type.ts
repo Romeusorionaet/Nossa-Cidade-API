@@ -1,6 +1,4 @@
-import { ProductImageType } from './product-image-type';
-
-export type ProductWithImagesType = {
+type ProductWithImagesType = {
   id: string;
   businessPointId: string;
   businessPointName: string;

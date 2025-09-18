@@ -2,7 +2,6 @@ import { BusinessPointDraft } from 'src/domain/our-city/enterprise/entities/busi
 import { DraftStatus } from 'src/domain/our-city/enterprise/entities/enums/draft-status';
 import { BusinessPointDraftSelectType } from '../schemas/drafts.schema';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
 
 export class DrizzleBusinessPointDraftMapper {
   static toDomain(raw: BusinessPointDraftSelectType): BusinessPointDraft {

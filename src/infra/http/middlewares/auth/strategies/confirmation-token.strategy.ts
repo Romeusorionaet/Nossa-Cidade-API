@@ -1,6 +1,5 @@
 import { TokenPurposeEnum } from 'src/domain/our-city/application/shared/enums/token-purpose.enum';
 import { confirmationEmailTokenSchema } from 'src/infra/http/schemas/confirmation-token.schema';
-import { ConfirmationEmailTokenPayload } from 'src/core/@types/validation-email-token-payload';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { EnvService } from 'src/infra/env/env.service';
 import { PassportStrategy } from '@nestjs/passport';

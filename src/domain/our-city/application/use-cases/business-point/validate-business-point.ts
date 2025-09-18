@@ -1,6 +1,5 @@
 import { BusinessPointAlreadyExistsError } from '../errors/business-point-already-exists-error';
 import { BusinessPointRepository } from '../../repositories/business-point.repository';
-import { GeometryPoint } from 'src/core/@types/geometry';
 import { Either, left, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 

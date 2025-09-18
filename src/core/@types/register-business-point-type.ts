@@ -1,5 +1,4 @@
 import { BusinessPointStatus } from 'src/domain/our-city/enterprise/entities/enums/business-point-status';
-import { GeometryPoint } from './geometry';
 
 export type RegisterBusinessPointType = {
   categoryId: string;

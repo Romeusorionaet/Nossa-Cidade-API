@@ -1,7 +1,6 @@
 import { BusinessPointStatus } from 'src/domain/our-city/enterprise/entities/enums/business-point-status';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
 import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';
 import { BusinessPointSelectModelType } from '../schemas';
 

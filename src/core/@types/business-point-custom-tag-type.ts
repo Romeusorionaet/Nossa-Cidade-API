@@ -1,4 +1,4 @@
-export type BusinessPointCustomTagType = {
+type BusinessPointCustomTagType = {
   customTags: string[];
   businessPointId: string;
 };

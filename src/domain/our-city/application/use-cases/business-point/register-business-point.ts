@@ -3,7 +3,6 @@ import { BusinessPointStatus } from 'src/domain/our-city/enterprise/entities/enu
 import { BusinessPointRepository } from '../../repositories/business-point.repository';
 import { BusinessPoint } from 'src/domain/our-city/enterprise/entities/business-point';
 import { UniqueEntityID } from 'src/core/entities/unique-entity-id';
-import { GeometryPoint } from 'src/core/@types/geometry';
 import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 import { SearchableText } from 'src/domain/our-city/enterprise/value-objects/searchable-text';

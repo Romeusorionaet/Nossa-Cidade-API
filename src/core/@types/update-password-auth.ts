@@ -1,4 +1,4 @@
-export type UpdatePasswordAuth = {
-	hashedNewPassword: string;
-	email: string;
+type UpdatePasswordAuth = {
+  hashedNewPassword: string;
+  email: string;
 };

@@ -17,7 +17,6 @@ import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/us
 import { CurrentUser } from '../../middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
 import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
-import { GeometryPoint } from 'src/core/@types/geometry';
 
 @Controller('/business-point/register')
 export class RegisterBusinessPointController {

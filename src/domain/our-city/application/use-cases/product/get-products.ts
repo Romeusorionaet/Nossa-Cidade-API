@@ -2,7 +2,6 @@ import { Either, right } from 'src/core/either';
 import { Injectable } from '@nestjs/common';
 import { ProductRepository } from '../../repositories/product.repository';
 import { ImageProductRepository } from '../../repositories/image-product.repository';
-import { ProductWithImagesType } from 'src/core/@types/product-with-images-type';
 
 interface GetProductsUseCaseRequest {
   page: number;
