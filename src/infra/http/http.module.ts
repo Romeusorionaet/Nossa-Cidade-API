@@ -9,6 +9,7 @@ import { GetBusinessPointCategoriesUseCase } from 'src/domain/our-city/applicati
 import { RequestBusinessPointUpdateUseCase } from 'src/domain/our-city/application/use-cases/business-point/request-business-point-update';
 import { GetBusinessPointDraftsUseCase } from 'src/domain/our-city/application/use-cases/business-point-draft/get-business-point-drafts';
 import { ToggleBusinessPointActiveUseCase } from 'src/domain/our-city/application/use-cases/business-point/toggle-business-point-active';
+import { DeleteAllTagsFromCategoryUseCase } from 'src/domain/our-city/application/use-cases/shared-items/delete-all-tags-from-category';
 import { DeleteBusinessPointImageUseCase } from 'src/domain/our-city/application/use-cases/business-point/delete-business-point-image';
 import { GetBusinessPointOverviewUseCase } from 'src/domain/our-city/application/use-cases/business-point/get-business-point-overview';
 import { SaveImagesBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/save-images-business-point';
@@ -30,10 +31,12 @@ import { RegisterCategoryTagsUseCase } from 'src/domain/our-city/application/use
 import { GetBusinessPointDraftsController } from './controllers/business-point-draft/get-business-point-drafts.controller';
 import { ToggleBusinessPointActiveController } from './controllers/business-point/toggle-business-point-active.controller';
 import { RegisterSharedItemsUseCase } from 'src/domain/our-city/application/use-cases/shared-items/register-shared-items';
+import { DeleteAllTagsFromCategoryController } from './controllers/shared-items/delete-all-tags-from-category.controller';
 import { GetBusinessPointOverviewController } from './controllers/business-point/get-business-point-overview.controller';
 import { DeleteBusinessPointImageController } from './controllers/business-point/delete-business-point-image.controller';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
 import { UploadImageToBusinessPointController } from './controllers/uploads/upload-image-to-business-point.controller';
+import { DeleteCategoryTagUseCase } from 'src/domain/our-city/application/use-cases/shared-items/delete-category-tag';
 import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
 import { ForgotUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/forgot-user-password';
 import { GetBusinessPointImagesController } from './controllers/business-point/get-business-point-images.controller';
@@ -59,6 +62,7 @@ import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/u
 import { WakeUpDatabaseUseCase } from 'src/domain/our-city/application/use-cases/user/wake-up-database';
 import { DeleteProductUseCase } from 'src/domain/our-city/application/use-cases/product/delete-product';
 import { UpdateProductUseCase } from 'src/domain/our-city/application/use-cases/product/update-product';
+import { DeleteCategoryTagController } from './controllers/shared-items/delete-category-tag.controller';
 import { ForgotUserPasswordController } from './controllers/user/auth/forgot-user-password.controller';
 import { UpdateUserPasswordController } from './controllers/user/auth/update-user-password.controller';
 import { ResetUserPasswordController } from './controllers/user/auth/reset-user-password.controller';
@@ -81,8 +85,6 @@ import { AuthModule } from './middlewares/auth/auth.module';
 import { ServiceModule } from '../services/service.module';
 import { EnvModule } from '../env/env.module';
 import { Module } from '@nestjs/common';
-import { DeleteAllTagsFromCategoryController } from './controllers/shared-items/delete-all-tags-from-category.controller';
-import { DeleteAllTagsFromCategoryUseCase } from 'src/domain/our-city/application/use-cases/shared-items/delete-all-tags-from-category';
 
 @Module({
   imports: [
@@ -119,6 +121,7 @@ import { DeleteAllTagsFromCategoryUseCase } from 'src/domain/our-city/applicatio
     ForgotUserPasswordController,
     DeleteProductImageController,
     ResetUserPasswordController,
+    DeleteCategoryTagController,
     AuthenticateUserController,
     GetUserProfileController,
     DeleteProductController,
@@ -163,6 +166,7 @@ import { DeleteAllTagsFromCategoryUseCase } from 'src/domain/our-city/applicatio
     DeleteProductImageUseCase,
     SaveImagesProductUseCase,
     ResetUserPasswordUseCase,
+    DeleteCategoryTagUseCase,
     AuthenticateUserUseCase,
     RegisterProductUseCase,
     GetUserProfileUseCase,
