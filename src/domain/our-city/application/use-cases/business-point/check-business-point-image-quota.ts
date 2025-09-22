@@ -25,7 +25,9 @@ export class CheckBusinessPointImageQuotaUseCase {
     const currentQuota =
       await this.imageBusinessPointRepository.checkQuotaById(businessPointId);
 
-    if (currentQuota >= BusinessPointImageQuota) {
+    const maximumSizeQuota = Number(currentQuota + BusinessPointImageQuota);
+
+    if (maximumSizeQuota >= currentQuota) {
       return left(new BusinessPointImageLimitExceededError());
     }
 
