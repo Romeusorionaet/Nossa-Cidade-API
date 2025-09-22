@@ -9,7 +9,6 @@ import {
 import { GetSharedItemsAssociatedBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/shared-items/get-shared-items-associated-business-point';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
 import { SharedItemPresenter } from '../../presenters/shared-item.presenter';
-import { BusinessPointNotFoundError } from 'src/domain/our-city/application/use-cases/errors/business-point-not-found-error';
 
 @Controller('/pick-list/shared-items/associated/business-point/:id')
 export class SharedItemsAssociatedBusinessPointController {
@@ -28,14 +27,7 @@ export class SharedItemsAssociatedBusinessPointController {
         });
 
       if (result.isLeft()) {
-        const err = result.value;
-        switch (err.constructor) {
-          case BusinessPointNotFoundError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(result.value.message);
       }
 
       const formatted = Object.fromEntries(

@@ -25,14 +25,7 @@ export class DeleteBusinessPointImageController {
       });
 
       if (result.isLeft()) {
-        const err = result.value;
-        switch (err.constructor) {
-          case BadRequestException:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(result.value.message);
       }
 
       return { message: 'A imagem foi deletado.' };

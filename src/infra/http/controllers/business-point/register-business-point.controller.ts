@@ -10,7 +10,6 @@ import {
   businessPointSchemaValidationPipe,
   businessPointRequest,
 } from '../../schemas/business-point.schema';
-import { BusinessPointAlreadyExistsError } from 'src/domain/our-city/application/use-cases/errors/business-point-already-exists-error';
 import { RegisterBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/register-business-point';
 import { ValidateBusinessPointUseCase } from 'src/domain/our-city/application/use-cases/business-point/validate-business-point';
 import { PromoteUserToMerchantUseCase } from 'src/domain/our-city/application/use-cases/staff/promote-user-to-merchant';
@@ -50,14 +49,7 @@ export class RegisterBusinessPointController {
       });
 
       if (resultValidation.isLeft()) {
-        const err = resultValidation.value;
-        switch (err.constructor) {
-          case BusinessPointAlreadyExistsError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(resultValidation.value.message);
       }
 
       await this.registerBusinessPointUseCase.execute({

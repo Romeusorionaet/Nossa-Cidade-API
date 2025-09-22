@@ -8,7 +8,6 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import { UploadImageError } from 'src/domain/our-city/application/use-cases/errors/upload-image-error';
 import { UploadImageUseCase } from 'src/domain/our-city/application/use-cases/upload/upload-image';
 import { ValidateFilesInterceptor } from '../../interceptors/validate-files.interceptor';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
@@ -17,7 +16,6 @@ import { multerConfig } from '../../config/multer.config';
 import { SaveImagesProductUseCase } from 'src/domain/our-city/application/use-cases/product/save-images-product';
 import { CheckProductImageQuotaUseCase } from 'src/domain/our-city/application/use-cases/product/check-product-image-quota';
 import { ProductImageQuota } from 'src/domain/our-city/application/shared/constants/product-image-quota';
-import { ProductImageLimitExceededError } from 'src/domain/our-city/application/use-cases/errors/product-image-limit-exceeded-error';
 
 @Controller('/product/register-image/:id')
 export class UploadImageToProductController {
@@ -45,27 +43,13 @@ export class UploadImageToProductController {
       });
 
       if (resultCheck.isLeft()) {
-        const err = resultCheck.value;
-        switch (err.constructor) {
-          case ProductImageLimitExceededError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(resultCheck.value.message);
       }
 
       const resultUpload = await this.uploadImageUseCase.execute({ files });
 
       if (resultUpload.isLeft()) {
-        const err = resultUpload.value;
-        switch (err.constructor) {
-          case UploadImageError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(resultUpload.value.message);
       }
 
       await this.saveImagesProductUseCase.execute({

@@ -11,7 +11,6 @@ import {
   UpdatePasswordRequest,
 } from '../../../schemas/update-password.schema';
 import { UpdateUserPasswordUseCase } from 'src/domain/our-city/application/use-cases/user/auth/update-user-password';
-import { UserNotFoundError } from 'src/domain/our-city/application/use-cases/errors/user-not-found-error';
 import { AccessTokenGuard } from '../../../middlewares/auth/guards/access-token.guard';
 
 @Controller('/auth/update/password')
@@ -33,14 +32,7 @@ export class UpdateUserPasswordController {
       });
 
       if (result.isLeft()) {
-        const err = result.value;
-        switch (err.constructor) {
-          case UserNotFoundError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(result.value.message);
       }
 
       return { message: 'Senha atualizada.' };

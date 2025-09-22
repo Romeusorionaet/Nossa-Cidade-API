@@ -12,7 +12,6 @@ import {
   updateProductRequest,
   updateProductSchemaValidationPipe,
 } from '../../schemas/update-product.schema';
-import { ProductNotFoundError } from 'src/domain/our-city/application/use-cases/errors/product-not-found-error';
 
 @Controller('/update-product')
 export class UpdateProductController {
@@ -36,14 +35,7 @@ export class UpdateProductController {
       });
 
       if (result.isLeft()) {
-        const err = result.value;
-        switch (err.constructor) {
-          case ProductNotFoundError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(result.value.message);
       }
 
       return { message: 'Produto atualizado.' };

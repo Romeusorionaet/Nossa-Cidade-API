@@ -8,7 +8,6 @@ import {
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { CurrentUser } from '../../middlewares/auth/decorators/current-user.decorator';
 import { AccessTokenGuard } from '../../middlewares/auth/guards/access-token.guard';
-import { ResourceNotFoundError } from 'src/core/errors/resource-not-found-error';
 import { UserProfilePresenter } from '../../presenters/user-profile.presenter';
 import { AccessTokenPayload } from 'src/core/@types/access-token-payload';
 
@@ -28,14 +27,7 @@ export class GetUserProfileController {
       });
 
       if (result.isLeft()) {
-        const err = result.value;
-        switch (err.constructor) {
-          case ResourceNotFoundError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(result.value.message);
       }
 
       return {

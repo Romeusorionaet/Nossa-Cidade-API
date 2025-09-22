@@ -5,7 +5,6 @@ import {
   HttpCode,
   Post,
 } from '@nestjs/common';
-import { InvalidCredentialsError } from 'src/domain/our-city/application/use-cases/errors/invalid-credentials-errors';
 import { ConfirmationTokenGuard } from 'src/infra/http/middlewares/auth/guards/confirmation-token.guard';
 import { ConfirmEmailUseCase } from 'src/domain/our-city/application/use-cases/user/auth/confirm-email';
 import { CurrentUser } from 'src/infra/http/middlewares/auth/decorators/current-user.decorator';
@@ -24,14 +23,7 @@ export class ConfirmEmailController {
       const result = await this.confirmEmailUseCase.execute({ email });
 
       if (result.isLeft()) {
-        const err = result.value;
-        switch (err.constructor) {
-          case InvalidCredentialsError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(result.value.message);
       }
 
       return { message: 'Email confirmado!' };

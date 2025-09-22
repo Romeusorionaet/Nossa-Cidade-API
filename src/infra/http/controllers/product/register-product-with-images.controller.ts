@@ -18,7 +18,6 @@ import {
   productSchemaValidationPipe,
 } from '../../schemas/product.schema';
 import { RegisterProductWithImagesUseCase } from 'src/domain/our-city/application/use-cases/product/register-product-with-images';
-import { UploadImageError } from 'src/domain/our-city/application/use-cases/errors/upload-image-error';
 
 @Controller('/product/register')
 export class RegisterProductWithImagesController {
@@ -48,14 +47,7 @@ export class RegisterProductWithImagesController {
       });
 
       if (result.isLeft()) {
-        const err = result.value;
-        switch (err.constructor) {
-          case UploadImageError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(result.value.message);
       }
 
       return {

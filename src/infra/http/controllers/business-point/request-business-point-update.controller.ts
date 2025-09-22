@@ -58,8 +58,7 @@ export class RequestBusinessPointUpdateController {
         });
 
       if (resultValidationOwnerShip.isLeft()) {
-        const err = resultValidationOwnerShip.value;
-        throw new BadRequestException(err.message);
+        throw new BadRequestException(resultValidationOwnerShip.value.message);
       }
 
       const lat = businessPoint?.location?.latitude;
@@ -77,8 +76,7 @@ export class RequestBusinessPointUpdateController {
           });
 
         if (resultValidation.isLeft()) {
-          const err = resultValidation.value;
-          throw new BadRequestException(err.message);
+          throw new BadRequestException(resultValidation.value.message);
         }
       }
 

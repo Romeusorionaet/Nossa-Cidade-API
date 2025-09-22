@@ -11,13 +11,11 @@ import {
   userProfileValidationPipe,
   UserProfile,
 } from 'src/infra/http/schemas/user-profile.schema';
-import { UserAlreadyExistsError } from 'src/domain/our-city/application/use-cases/errors/user-already-exists-error';
 import { RegisterUserUseCase } from 'src/domain/our-city/application/use-cases/user/auth/register-user';
 import { Public } from 'src/infra/http/middlewares/auth/decorators/public.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerConfig } from 'src/infra/http/config/multer.config';
 import { UploadImageUseCase } from 'src/domain/our-city/application/use-cases/upload/upload-image';
-import { UploadImageError } from 'src/domain/our-city/application/use-cases/errors/upload-image-error';
 
 @Controller('/auth/register')
 export class RegisterUserController {
@@ -45,14 +43,7 @@ export class RegisterUserController {
         });
 
         if (resultUpload.isLeft()) {
-          const err = resultUpload.value;
-          switch (err.constructor) {
-            case UploadImageError:
-              throw new BadRequestException(err.message);
-
-            default:
-              throw new BadRequestException(err.message);
-          }
+          throw new BadRequestException(resultUpload.value.message);
         }
 
         avatar = resultUpload.value.imageUrls[0];
@@ -66,14 +57,7 @@ export class RegisterUserController {
       });
 
       if (result.isLeft()) {
-        const err = result.value;
-        switch (err.constructor) {
-          case UserAlreadyExistsError:
-            throw new BadRequestException(err.message);
-
-          default:
-            throw new BadRequestException(err.message);
-        }
+        throw new BadRequestException(result.value.message);
       }
 
       return {
