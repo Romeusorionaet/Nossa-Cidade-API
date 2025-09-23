@@ -17,3 +17,13 @@ export const businessPointDraftStatusEnum = pgEnum(
 );
 
 export const usersRoleEnum = pgEnum('users_role', ['MERCHANT', 'ADMIN']);
+
+export const plansNameEnum = pgEnum('plans-name', ['PROFESSIONAL', 'PREMIUM']);
+
+export const billingCycleEnum = pgEnum('billing-cycle', ['MONTHLY', 'ANNUAL']);
+
+export const statusPlanEnum = pgEnum('status-plan', [
+  'ACTIVE',
+  'CANCELLED',
+  'EXPIRED',
+]);

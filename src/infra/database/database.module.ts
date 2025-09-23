@@ -13,16 +13,20 @@ import { SharedItemsRepository } from 'src/domain/our-city/application/repositor
 import { DrizzleBusinessPointCustomTagRepository } from './repositories/drizzle-business-point-custom-tag';
 import { DrizzleSharedAssociationRepository } from './repositories/drizzle-shared-association.repository';
 import { DrizzleProductCustomTagRepository } from './repositories/drizzle-product-custom-tag.repository';
+import { UserPlansRepository } from 'src/domain/our-city/application/repositories/user-plans.repository';
 import { ProductRepository } from 'src/domain/our-city/application/repositories/product.repository';
 import { DrizzleBusinessPointRepository } from './repositories/drizzle-business-point.repository';
 import { UsersRepository } from 'src/domain/our-city/application/repositories/users.repository';
 import { StaffRepository } from 'src/domain/our-city/application/repositories/staff.repository';
 import { DrizzleImageProductRepository } from './repositories/drizzle-image-product.repository';
 import { DrizzleCategoryTagsRepository } from './repositories/drizzle-category-tags.repository';
+import { PlansRepository } from 'src/domain/our-city/application/repositories/plans.repository';
 import { AuthRepository } from 'src/domain/our-city/application/repositories/auth.repository';
 import { DrizzleSharedItemsRepository } from './repositories/drizzle-shared-items.repository';
+import { DrizzleUserPlansRepository } from './repositories/drizzle-user-plans.repository';
 import { DrizzleProductRepository } from './repositories/drizzle-product.repository';
 import { DrizzleStaffRepository } from './repositories/drizzle-staff.repository';
+import { DrizzlePlansRepository } from './repositories/drizzle-plans.repository';
 import { DrizzleUserRepository } from './repositories/drizzle-user.repository';
 import { DrizzleAuthRepository } from './repositories/drizzle-auth.repository';
 import { JwtEncrypt } from '../cryptography/jwt-encrypt.cryptography';
@@ -92,6 +96,14 @@ import { Module } from '@nestjs/common';
       provide: CategoryTagsRepository,
       useClass: DrizzleCategoryTagsRepository,
     },
+    {
+      provide: UserPlansRepository,
+      useClass: DrizzleUserPlansRepository,
+    },
+    {
+      provide: PlansRepository,
+      useClass: DrizzlePlansRepository,
+    },
   ],
   exports: [
     BusinessPointCustomTagRepository,
@@ -103,11 +115,13 @@ import { Module } from '@nestjs/common';
     ImageProductRepository,
     CategoryTagsRepository,
     SharedItemsRepository,
+    UserPlansRepository,
     EncryptRepository,
     ProductRepository,
     DatabaseService,
     UsersRepository,
     StaffRepository,
+    PlansRepository,
     DatabaseClient,
     AuthRepository,
   ],

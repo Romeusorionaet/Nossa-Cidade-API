@@ -4,5 +4,6 @@ export * from './product.schema';
 export * from './shared.schema';
 export * from './drafts.schema';
 export * from './enums.schema';
+export * from './plans.schema';
 export * from './user.schema';
 export * from './indexes.sql';

@@ -2,12 +2,19 @@ import { createId } from '@paralleldrive/cuid2';
 import { InferSelectModel } from 'drizzle-orm';
 import {
   boolean,
+  integer,
   pgTable,
   text,
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { staffStatusEnum, usersRoleEnum } from './enums.schema';
+import {
+  billingCycleEnum,
+  staffStatusEnum,
+  statusPlanEnum,
+  usersRoleEnum,
+} from './enums.schema';
+import { plans } from './plans.schema';
 
 export const users = pgTable('users', {
   id: text('id')
@@ -39,3 +46,24 @@ export const staff = pgTable('staff', {
     .references(() => users.id),
 });
 export type StaffSelectModelType = InferSelectModel<typeof staff>;
+
+export const userPlans = pgTable('user_plans', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  userId: text('user_id')
+    .notNull()
+    .references(() => users.id),
+  planId: text('plan_id')
+    .notNull()
+    .references(() => plans.id),
+  status: statusPlanEnum('status').default('ACTIVE').notNull(),
+  billingCycle: billingCycleEnum('billing-cycle'),
+  priceAtPurchase: integer('price_at_purchase').notNull(),
+  startDate: timestamp('start_date', { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  endDate: timestamp('end_date', { withTimezone: true }).notNull(),
+  paymentReference: text('payment_reference'),
+});
+export type UserPlansSelectModelType = InferSelectModel<typeof userPlans>;

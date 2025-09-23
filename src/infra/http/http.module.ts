@@ -56,6 +56,7 @@ import { AuthenticateWidthOAuthController } from './controllers/user/auth/authen
 import { RegisterCategoryTagsController } from './controllers/shared-items/register-category-tags.controller';
 import { RegisterProductUseCase } from 'src/domain/our-city/application/use-cases/product/register-product';
 import { RegisterSharedItemsController } from './controllers/shared-items/register-shared-items.controller';
+import { RegisterUserPlanUseCase } from 'src/domain/our-city/application/use-cases/plan/register-user-plan';
 import { UploadImageToProductController } from './controllers/uploads/upload-image-to-product.controller';
 import { GetUserProfileUseCase } from 'src/domain/our-city/application/use-cases/user/get-user-profile';
 import { RefreshTokenUseCase } from 'src/domain/our-city/application/use-cases/user/auth/refresh-token';
@@ -73,6 +74,7 @@ import { GetProductsUseCase } from 'src/domain/our-city/application/use-cases/pr
 import { UploadImageUseCase } from 'src/domain/our-city/application/use-cases/upload/upload-image';
 import { AuthenticateUserController } from './controllers/user/auth/authenticate-user.controller';
 import { SharedItemsController } from './controllers/shared-items/get-shared-items.controller';
+import { RegisterUserPlanController } from './controllers/plan/register-user-plan.controller';
 import { GetUserProfileController } from './controllers/user/get-user-profile.controller';
 import { RegisterUserController } from './controllers/user/auth/register-user.controller';
 import { ConfirmEmailController } from './controllers/user/auth/confirm-email.controller';
@@ -126,6 +128,7 @@ import { Module } from '@nestjs/common';
     ResetUserPasswordController,
     DeleteCategoryTagController,
     AuthenticateUserController,
+    RegisterUserPlanController,
     GetUserProfileController,
     DeleteProductController,
     UpdateProductController,
@@ -172,6 +175,7 @@ import { Module } from '@nestjs/common';
     ResetUserPasswordUseCase,
     DeleteCategoryTagUseCase,
     AuthenticateUserUseCase,
+    RegisterUserPlanUseCase,
     RegisterProductUseCase,
     GetUserProfileUseCase,
     GetSharedItemsUseCase,
